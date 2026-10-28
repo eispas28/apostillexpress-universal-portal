@@ -335,7 +335,7 @@ class Component extends DCLogic {
     this.state = {
       state: props.tableState || 'loaded',
       accountType: props.accountType || 'business',
-      tab: (() => { try { return /[?&]tab=drafts/.test(location.search) && window.AXFlags && window.AXFlags.get().saveDrafts ? 'drafts' : 'orders'; } catch (e) { return 'orders'; } })(),
+      tab: (() => { try { return /[?&]tab=drafts/.test(location.search) && true ? 'drafts' : 'orders'; } catch (e) { return 'orders'; } })(),
       flag: !!props.customerNameFlag || (() => { try { return /[?&]customerName=1/.test(location.search) || localStorage.getItem('ax_ff_customer_name') === '1'; } catch (e) { return false; } })(),
       menuOpen: false,
       page: 1,
@@ -381,11 +381,11 @@ class Component extends DCLogic {
       };
     });
 
-    let drafts = []; const draftsOn = !!(window.AXFlags && window.AXFlags.get().saveDrafts); try { if (!draftsOn) throw 0; drafts = JSON.parse(localStorage.getItem('ax_drafts') || '[]'); if (drafts.some((x) => !/^DM-\d{7}-\d{6}$/.test(x.id))) { drafts.forEach((x) => { if (!/^DM-\d{7}-\d{6}$/.test(x.id)) x.id = 'DM-' + Math.floor(1000000 + Math.random() * 9000000) + '-' + Math.floor(100000 + Math.random() * 900000); }); localStorage.setItem('ax_drafts', JSON.stringify(drafts)); } } catch (e) {}
+    let drafts = []; const draftsOn = true; try { if (!draftsOn) throw 0; drafts = JSON.parse(localStorage.getItem('ax_drafts') || '[]'); if (drafts.some((x) => !/^DM-\d{7}-\d{6}$/.test(x.id))) { drafts.forEach((x) => { if (!/^DM-\d{7}-\d{6}$/.test(x.id)) x.id = 'DM-' + Math.floor(1000000 + Math.random() * 9000000) + '-' + Math.floor(100000 + Math.random() * 900000); }); localStorage.setItem('ax_drafts', JSON.stringify(drafts)); } } catch (e) {}
     const draftRows = drafts.map((dr) => ({ id: dr.id, docs: dr.docs || 1, date: dr.savedOn, by: 'Maria Rodriguez', dateNum: dr.savedAt || 0, costNum: 0, cost: '—', status: 'Draft', statusClass: 'draft', open: () => { if (this.state.openingDraft) return; this.setState({ openingDraft: dr.id }); setTimeout(() => { window.location.href = 'CreateOrder.html?draft=' + encodeURIComponent(dr.id); }, 900); } }));
     if (s.tab === 'drafts' && draftsOn) rows.length = 0;
     if (s.tab === 'drafts') rows.unshift(...draftRows);
-    const flagOn = !!(window.AXFlags && window.AXFlags.get().customerName) || s.flag;
+    const flagOn = true;
     const aposOn = flagOn && s.tab === 'apostilles';
     if (aposOn) {
       rows.length = 0;
