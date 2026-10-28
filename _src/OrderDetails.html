@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Order Details — ApostilleXpress</title>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="_ds/apostillexpress-design-system-141fbe0d-4b05-4a81-8430-4a44c41ebc9b/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/apostillexpress-design-system-141fbe0d-4b05-4a81-8430-4a44c41ebc9b/tokens/colors.css">
+<link rel="stylesheet" href="_ds/apostillexpress-design-system-141fbe0d-4b05-4a81-8430-4a44c41ebc9b/tokens/typography.css">
+<link rel="stylesheet" href="_ds/apostillexpress-design-system-141fbe0d-4b05-4a81-8430-4a44c41ebc9b/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/apostillexpress-design-system-141fbe0d-4b05-4a81-8430-4a44c41ebc9b/tokens/shadows.css">
+<link rel="stylesheet" href="_ds/apostillexpress-design-system-141fbe0d-4b05-4a81-8430-4a44c41ebc9b/tokens/base.css">
+<link rel="stylesheet" href="_ds/apostillexpress-design-system-141fbe0d-4b05-4a81-8430-4a44c41ebc9b/components.css">
+<link rel="stylesheet" href="_ds/apostillexpress-design-system-141fbe0d-4b05-4a81-8430-4a44c41ebc9b/styles.css">
+<script src="_ds/apostillexpress-design-system-141fbe0d-4b05-4a81-8430-4a44c41ebc9b/_ds_bundle.js"></script>
+<script src="./orderData.js"></script>
+<script src="./geoData.js"></script>
+<link rel="stylesheet" href="ax-overlays.css">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:var(--ax-font-base);color:var(--ax-text-primary);background:var(--ax-surface-page);min-height:100vh}
+/* ---- Top bar ---- */
+.topbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:36px;height:72px;padding:0 40px;background:var(--ax-surface-card);border-bottom:1px solid var(--ax-border-subtle)}
+.tb-logo{display:flex;align-items:center;flex-shrink:0}
+.tb-nav{display:flex;align-items:center;gap:28px;flex:1}
+.tb-link{display:inline-flex;align-items:center;gap:8px;font-size:16px;font-weight:500;color:var(--ax-text-tertiary);text-decoration:none;background:none;border:none;font-family:inherit;cursor:pointer;padding:0;transition:color .15s ease}
+.tb-link i{font-size:18px}
+.tb-link:hover,.tb-link.active{color:var(--ax-gray-700,#414651)}.tb-link.active{font-weight:600}.tb-link,.tb-link:focus,.tb-link:focus-visible,.tb-link.active{outline:none;box-shadow:none;border:none}
+.tb-profile-wrap{position:relative;flex-shrink:0}
+.tb-profile-btn{display:inline-flex;align-items:center;gap:10px;font-size:16px;font-weight:500;color:var(--ax-text-primary);background:none;border:none;font-family:inherit;cursor:pointer;padding:6px 8px;border-radius:8px;transition:background .12s ease}
+.tb-profile-btn:hover{background:var(--ax-gray-100)}
+.tb-profile-btn i.bi-person-circle{font-size:22px;color:var(--ax-text-tertiary)}
+.tb-profile-btn i.bi-chevron-down{font-size:14px;color:var(--ax-text-tertiary);transition:transform .15s ease}
+.tb-profile-btn[aria-expanded="true"] i.bi-chevron-down{transform:rotate(180deg)}
+.tb-menu{position:absolute;top:calc(100% + 10px);right:0;min-width:240px;background:var(--ax-surface-card);border:1px solid var(--ax-border-subtle);border-radius:12px;box-shadow:0 12px 24px -8px rgba(10,13,18,.18);padding:8px;z-index:40}
+.tb-menu-item{display:flex;align-items:center;gap:13px;width:100%;padding:12px 14px;border-radius:8px;font-size:16px;font-weight:500;color:var(--ax-text-primary);text-decoration:none;background:none;border:none;font-family:inherit;cursor:pointer;text-align:left;transition:background .12s ease}
+.tb-menu-item:hover{background:var(--ax-gray-100)}
+.tb-menu-item i{font-size:18px;color:var(--ax-text-tertiary);width:20px;flex-shrink:0}
+.tb-menu-sep{border:none;border-top:1px solid var(--ax-border-subtle);margin:6px 6px}
+/* ---- Page ---- */
+.page{max-width:none;margin:0 165px;padding:30px 40px 64px}
+/* ---- Demo switcher (prototype tool) — collapsible, docked to the right ---- */
+.demo-dock{position:fixed;top:50%;right:-258px;transform:translateY(-50%);z-index:55;width:258px;background:var(--ax-midnight-blue,#0b1f3a);color:#fff;border-radius:10px 0 0 10px;font-family:inherit}
+.demo-dock.open{right:0;box-shadow:-10px 0 28px -10px rgba(10,13,18,.45)}
+.demo-handle{position:absolute;right:100%;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:9px;background:var(--ax-midnight-blue,#0b1f3a);color:#fff;border:none;cursor:pointer;border-radius:10px 0 0 10px;padding:15px 9px;box-shadow:-5px 0 18px -7px rgba(10,13,18,.4)}
+.demo-handle i{font-size:15px}
+.demo-handle .vtxt{writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.demo-inner{padding:16px 18px 20px;display:flex;flex-direction:column;gap:16px}
+.demo-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.demo-head .tag{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.7}
+.demo-close{background:none;border:none;color:#fff;opacity:.6;cursor:pointer;font-size:16px;line-height:1;padding:2px;display:inline-flex}
+.demo-close:hover{opacity:1}
+.demo-field{display:flex;flex-direction:column;gap:7px;font-size:13px}
+.demo-field label{opacity:.85;font-weight:500}
+.demo-field select{width:100%;font-family:inherit;font-size:14px;font-weight:600;color:#fff;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:7px;padding:9px 30px 9px 11px;cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 16 16' fill='none' stroke='white' stroke-width='2'><path d='M4 6l4 4 4-4'/></svg>");background-repeat:no-repeat;background-position:right 9px center}
+.demo-field select option{color:#111}
+@media print{.demo-dock{display:none}}
+/* ---- Breadcrumb ---- */
+.crumbs{display:flex;align-items:center;gap:8px;font-size:15px;margin-bottom:20px;flex-wrap:wrap}
+.crumb{color:var(--ax-text-tertiary);text-decoration:none;padding:5px 12px;border-radius:7px;font-weight:600;transition:background .12s ease,color .12s ease}
+a.crumb:hover{color:var(--ax-text-primary);background:var(--ax-gray-100)}
+.crumb.active{background:var(--ax-gray-100);color:var(--ax-text-primary)}
+.crumb-sep{color:var(--ax-text-tertiary);font-size:13px}
+/* ---- Title block ---- */
+.od-title{font-size:24px;font-weight:700;line-height:1.15;margin:0;letter-spacing:-.01em}
+.od-meta{display:flex;align-items:center;gap:16px;margin-top:12px}
+.od-meta .sep{width:1px;height:18px;background:var(--ax-border)}
+.placed{font-size:16px;color:var(--ax-text-tertiary)}
+.placed b{color:var(--ax-text-primary);font-weight:600}
+.sbadge{display:inline-flex;align-items:center;padding:5px 13px;border-radius:6px;font-size:14px;font-weight:600;line-height:1.2;white-space:nowrap}
+.sbadge.new{background:var(--ax-info-50);color:var(--ax-info-700)}
+.sbadge.draft{background:var(--ax-gray-100);color:var(--ax-gray-700)}
+.sbadge.pending{background:var(--ax-warning-50);color:var(--ax-warning-700)}
+.sbadge.issued{background:var(--ax-success-50);color:var(--ax-success-700)}
+.sbadge.cancelled,.sbadge.rejected,.sbadge.revoked{background:var(--ax-danger-50);color:var(--ax-danger-700)}
+/* ---- Banner ---- */
+.banner{border-radius:12px;margin:24px 0 0;overflow:hidden}
+.banner-main{display:flex;align-items:flex-start;gap:14px;padding:20px 24px}
+.banner-main .bic{font-size:20px;flex-shrink:0;margin-top:1px}
+.banner-txt{flex:1;min-width:0}
+.banner-title{font-size:17px;font-weight:700;margin:0 0 3px}
+.banner-body{font-size:15px;line-height:1.5;margin:0}
+.banner.warn{background:var(--ax-warning-50)}
+.banner.warn .bic,.banner.warn .banner-title{color:var(--ax-warning-700)}
+.banner.warn .banner-body{color:#7a5b14}
+.banner.success{background:var(--ax-success-50)}
+.banner.success .bic,.banner.success .banner-title{color:var(--ax-success-700)}
+.banner.success .banner-body{color:#225c3f}
+.banner.info{background:var(--ax-info-50);border:1px solid rgba(0,116,194,.28)}.banner.info .banner-main{align-items:center;gap:16px;padding:18px 24px}.banner.info .bic{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:#fff;border:1px solid rgba(0,116,194,.25);font-size:20px;margin:0;color:var(--ax-info-700)}.banner.info .banner-title{font-size:18px;color:var(--ax-info-700);margin:0 0 4px}.banner.info .banner-body{color:#0B3A5E;max-width:80ch;text-wrap:pretty}
+.banner.danger{background:var(--ax-danger-50)}
+.banner.danger .bic,.banner.danger .banner-title{color:var(--ax-danger-700)}
+.banner.danger .banner-body{color:var(--ax-danger-700)}
+.banner-lines{margin:8px 0 0;font-size:15px;line-height:1.6;color:var(--ax-danger-700)}
+.banner-lines b{font-weight:700}
+.reason-box{border:1px solid rgba(227,59,50,.35);border-radius:10px;padding:16px 18px;margin-top:14px;font-size:15px;line-height:1.55;color:var(--ax-danger-700)}
+.reason-box .rl{font-weight:700;margin-top:10px}
+.reason-box .rl:first-child{margin-top:0}
+.banner-action{flex-shrink:0}
+.btn-teal{display:inline-flex;align-items:center;gap:9px;background:var(--ax-sea-depths);color:#fff;border:none;border-radius:8px;padding:12px 20px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;box-shadow:var(--ax-shadow-xs);transition:background .12s ease;white-space:nowrap}
+.btn-teal:hover{background:var(--ax-teal-700)}
+.btn-teal:active{transform:translateY(.5px)}
+.btn-teal:focus-visible{outline:none;box-shadow:var(--ax-focus-ring)}
+.btn-teal i{font-size:17px}
+.btn-teal:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+.banner-sub{display:flex;align-items:center;gap:22px;flex-wrap:wrap;padding:13px 24px;background:rgba(31,148,92,.08);border-top:1px solid rgba(31,148,92,.18);font-size:14px;color:#225c3f}
+.banner-sub .skey{font-weight:700;color:var(--ax-text-primary)}
+.banner-sub .schip{display:inline-flex;align-items:center;gap:7px}
+.banner-sub .schip i{font-size:15px;color:var(--ax-success-700)}
+.banner-sub b{font-weight:700}
+.banner-sub .dot{width:1px;height:16px;background:rgba(31,148,92,.3);overflow:hidden;text-indent:-99px}
+.banner.dl .banner-sub .dot{width:auto;height:auto;background:none;text-indent:0;color:rgba(28,74,53,.5)}
+.banner.dl{background:#EAF5EF;border:1px solid rgba(31,148,92,.35)}
+.banner.dl .banner-main{align-items:flex-start;gap:12px;padding:18px 22px 20px}
+.banner.dl .bic{font-size:22px;margin-top:0;line-height:1.25}
+.banner.dl .banner-title{font-size:19px;font-weight:700;color:var(--ax-success-700);margin:0 0 6px}
+.banner.dl .banner-txt{color:#0A3622}
+.banner.dl .banner-action{align-self:center;margin-left:24px}
+.adobe-note{font-size:15px;line-height:1.6;margin:0;color:#1c4a35;max-width:82ch;text-wrap:pretty}
+.adobe-note b{font-weight:700;color:#123d2b}
+.adobe-link{font-weight:700;color:#123d2b;text-decoration:underline;text-underline-offset:2px}
+.adobe-link:hover{color:var(--ax-success-700)}
+.pdf-ico{font-size:15px;color:#E33B32;vertical-align:-2px;margin-left:5px}
+.banner.dl .banner-sub{background:#F1FAF4;border-top:1px solid rgba(31,148,92,.28);padding:12px 22px;font-size:15px;color:#0A3622;gap:12px}
+.banner.dl .banner-sub .skey{color:#0A3622}
+.banner.dl .banner-sub .schip{gap:8px}
+.banner.dl .banner-sub .schip i{font-size:16px}
+.banner.dl .banner-sub .dot{margin:0 4px}
+.btn-teal .spin{width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;animation:btnspin .7s linear infinite;flex-shrink:0}
+@keyframes btnspin{to{transform:rotate(360deg)}}
+/* ---- Cards ---- */
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;margin-top:24px}
+.card{background:var(--ax-surface-card);border:1px solid var(--ax-border-subtle);border-radius:14px;box-shadow:var(--ax-shadow-xs)}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:24px 28px;border-bottom:1px solid var(--ax-border-subtle)}
+.card-head h2{font-size:22px;font-weight:700;margin:0}
+.card-head .sub{font-size:15px;color:var(--ax-text-tertiary);margin:6px 0 0;font-weight:400}
+.field .lbl{font-size:15px;color:var(--ax-text-tertiary);margin-bottom:7px}
+.field .val{font-size:17px;font-weight:600;color:var(--ax-text-primary);line-height:1.45}
+.field .val .muted{font-weight:500;color:var(--ax-text-secondary)}
+.doc-body{display:grid;grid-template-columns:1fr 1fr;gap:24px 28px;padding:24px 28px}
+.doc-body .full{grid-column:1 / -1}
+.cust-body{display:grid;grid-template-columns:1.4fr 1fr;gap:24px 28px;padding:24px 28px}
+.cust-main{display:flex;flex-direction:column;gap:22px}
+.ppill{display:inline-flex;align-items:center;padding:4px 10px;border-radius:5px;font-size:12px;font-weight:700;letter-spacing:.03em;text-transform:uppercase}
+.ppill.digital{background:var(--ax-info-50);color:var(--ax-info-700)}
+.ppill.paper{background:#EFE7FB;color:#6941C6}
+.icon-btn{width:40px;height:40px;border:1px solid var(--ax-border);border-radius:8px;background:var(--ax-surface-card);display:inline-flex;align-items:center;justify-content:center;color:var(--ax-text-secondary);font-size:17px;cursor:pointer;box-shadow:var(--ax-shadow-xs);transition:background .12s ease;flex-shrink:0}
+.icon-btn:hover:not(:disabled){background:var(--ax-gray-100);color:var(--ax-text-primary)}
+.icon-btn:focus-visible{outline:none;box-shadow:var(--ax-focus-ring)}
+.icon-btn:disabled{opacity:.4;cursor:not-allowed;box-shadow:none;background:var(--ax-gray-100)}
+.dlbtn{display:inline-flex;align-items:center;gap:10px;background:var(--ax-surface-card);color:var(--ax-text-primary);border:1px solid var(--ax-border);border-radius:8px;padding:11px 18px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;box-shadow:var(--ax-shadow-xs);transition:background .12s ease}
+.dlbtn:hover{background:var(--ax-gray-100)}
+.dlbtn:focus-visible{outline:none;box-shadow:var(--ax-focus-ring)}
+.dlbtn i{font-size:17px;color:var(--ax-text-secondary)}
+.copy-ic{background:none;border:none;cursor:pointer;color:var(--ax-text-tertiary);font-size:15px;padding:2px 4px;border-radius:5px;transition:color .12s,background .12s}
+.copy-ic:hover{color:var(--ax-text-primary);background:var(--ax-gray-100)}
+/* ---- Return card ---- */
+.return-card{margin-top:24px}
+.return-body{display:grid;grid-template-columns:1fr 1fr;gap:24px 28px;padding:24px 28px}
+/* ---- Secure Send ---- */
+.ss-card{margin-top:24px}.ss-modal{width:min(600px,calc(100vw - 32px));max-width:none;max-height:calc(100vh - 48px);display:flex;flex-direction:column}.ss-body{overflow-y:auto;display:flex;flex-direction:column;gap:16px}
+.ss-nofee{display:inline-flex;align-items:center;padding:3px 10px;border-radius:999px;background:var(--ax-success-50);color:var(--ax-success-700);font-size:12px;font-weight:600}
+.ss-intro{padding:20px 28px 0;font-size:15px;color:var(--ax-text-secondary);line-height:1.5;margin:0}
+.ss-hist{padding:20px 28px 24px;display:flex;flex-direction:column;gap:14px}
+.ss-empty{display:flex;align-items:center;gap:12px;color:var(--ax-text-tertiary);font-size:14px;padding:6px 0}
+.ss-send{border:1px solid var(--ax-border-subtle);border-radius:10px;overflow:hidden}
+.ss-send-h{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;background:var(--ax-gray-100);padding:12px 18px;font-size:14px;border-bottom:1px solid var(--ax-border-subtle)}
+.ss-send-h b{font-weight:600}.ss-send-h span{color:var(--ax-text-tertiary)}
+.ss-r{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) auto;gap:8px 16px;align-items:center;padding:12px 18px;border-top:1px solid var(--ax-border-subtle);font-size:14px}
+.ss-r:first-of-type{border-top:none}
+.ss-r .n{font-weight:600}.ss-r .m{color:var(--ax-text-tertiary);font-size:13px;overflow-wrap:anywhere}
+.ss-st{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:6px;font-size:13px;font-weight:600;white-space:nowrap}
+.ss-st.dl{background:var(--ax-success-50);color:var(--ax-success-700)}.ss-st.nd{background:var(--ax-gray-100);color:var(--ax-gray-700)}
+.ss-sim{background:none;border:none;padding:0;margin-top:4px;font:inherit;font-size:12px;color:var(--ax-sea-depths);cursor:pointer;text-decoration:underline;display:block}
+.ss-drop{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;border:1.5px dashed var(--ax-border);border-radius:10px;padding:26px 18px;cursor:pointer;background:var(--ax-surface-card)}
+.ss-drop:hover{background:var(--ax-gray-100)}.ss-drop i{font-size:24px;color:var(--ax-sea-depths)}
+.ss-drop input{display:none}
+.ss-file{display:flex;align-items:center;gap:10px;border:1px solid var(--ax-border);border-radius:10px;padding:12px 14px;font-size:14px;word-break:break-all}
+.ss-file i{font-size:20px;color:var(--ax-danger-700)}
+.ss-msg{display:flex;gap:10px;align-items:flex-start;border-radius:10px;padding:14px 16px;font-size:14px;line-height:1.45}
+.ss-msg i{flex:none;margin-top:2px}.ss-msg b{display:block;font-weight:600;margin-bottom:2px}
+.ss-msg.err{background:var(--ax-danger-50);color:var(--ax-danger-700)}.ss-msg.ok{background:var(--ax-success-50);color:var(--ax-success-700)}.ss-msg.info{background:var(--ax-info-50);color:var(--ax-info-700)}
+.ss-rec{border:1px solid var(--ax-border-subtle);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:14px;background:var(--ax-gray-100)}
+.ss-rec-h{display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:600}
+.ss-spin{flex:none;width:18px;height:18px;margin-top:1px;border-radius:50%;border:2px solid currentColor;border-top-color:transparent;animation:btnspin .7s linear infinite}.ss-hint{font-size:13px;color:var(--ax-text-tertiary);margin:0}
+@media (max-width:560px){.ss-r{grid-template-columns:1fr}}
+/* ---- Recipient card ---- */
+.recip-card{margin-top:24px}
+.recip-head .acts{display:flex;align-items:center;gap:12px}
+.btn-secondary{display:inline-flex;align-items:center;gap:9px;background:var(--ax-surface-card);color:var(--ax-text-primary);border:1px solid var(--ax-border);border-radius:8px;padding:11px 18px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;box-shadow:var(--ax-shadow-xs);transition:background .12s ease;white-space:nowrap}
+.btn-secondary:hover:not(:disabled){background:var(--ax-gray-100)}
+.btn-secondary:focus-visible{outline:none;box-shadow:var(--ax-focus-ring)}
+.btn-secondary:disabled{opacity:.45;cursor:not-allowed;box-shadow:none;background:var(--ax-gray-100)}
+.btn-secondary i{font-size:16px;color:var(--ax-text-secondary)}
+.selectall-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 28px;border-bottom:1px solid var(--ax-border-subtle)}
+.selectall{display:flex;align-items:center;gap:11px;font-size:15px;font-weight:600;color:var(--ax-text-primary);cursor:pointer}
+.selectall-row .btn-teal{padding:10px 18px}
+.recip-list{padding:22px 28px;display:flex;flex-direction:column;gap:14px}
+.recip{display:flex;align-items:flex-start;gap:16px;background:var(--ax-gray-100);border:1px solid var(--ax-border-subtle);border-radius:10px;padding:20px 22px}
+.recip-body{flex:1;min-width:0}
+.recip-name{font-size:17px;font-weight:700}
+.recip-lines{font-size:15px;color:var(--ax-text-tertiary);margin-top:6px;line-height:1.6}
+.recip-actions{display:flex;gap:10px;flex-shrink:0}
+.chk{width:19px;height:19px;margin-top:3px;accent-color:var(--ax-sea-depths);cursor:pointer;flex-shrink:0}
+.paper-recip{display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px;padding:24px 28px}
+.paper-recip .val{font-weight:600;line-height:1.55}
+.track{display:inline-flex;align-items:center;gap:8px;font-weight:600}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@keyframes tin{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+
+
+@keyframes cin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+
+
+
+
+
+.confirm-list{margin:16px 0 0;border:1px solid var(--ax-border-subtle);border-radius:10px;overflow:hidden;max-height:200px;overflow-y:auto}
+.confirm-list .ci{padding:12px 16px;border-bottom:1px solid var(--ax-border-subtle);font-size:14px}
+.confirm-list .ci:last-child{border-bottom:none}
+.confirm-list .ci b{font-weight:600}
+.confirm-list .ci span{color:var(--ax-text-tertiary)}
+
+.btn-ghost{background:none;border:1px solid var(--ax-border);border-radius:8px;padding:11px 18px;font-family:inherit;font-size:15px;font-weight:600;color:var(--ax-text-primary);cursor:pointer;transition:background .12s}
+.btn-ghost:hover{background:var(--ax-gray-100)}
+.btn-danger{background:var(--ax-danger-600,#E33B32);color:#fff;border:none;border-radius:8px;padding:11px 18px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;transition:background .12s}
+.btn-danger:hover{background:var(--ax-danger-700)}
+/* ---- Slide-in panel ---- */
+.panel-scrim{position:fixed;inset:0;background:rgba(11,31,58,.45);z-index:70;animation:fade .15s ease}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.panel{position:fixed;top:0;right:0;height:100%;width:min(480px,100%);background:var(--ax-surface-card);box-shadow:-12px 0 32px -8px rgba(10,13,18,.25);z-index:71;display:flex;flex-direction:column;animation:slidein .22s cubic-bezier(.2,.7,.3,1)}
+@keyframes slidein{from{transform:translateX(100%)}to{transform:none}}
+.panel-head{display:flex;align-items:center;justify-content:space-between;padding:22px 26px;border-bottom:1px solid var(--ax-border-subtle);flex-shrink:0}
+.panel-head h2{font-size:20px;font-weight:700;margin:0}
+.panel-x{width:38px;height:38px;border:none;background:none;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--ax-text-tertiary);cursor:pointer;transition:background .12s}
+.panel-x:hover{background:var(--ax-gray-100);color:var(--ax-text-primary)}
+.panel-body{flex:1;overflow-y:auto;padding:24px 26px;display:flex;flex-direction:column;gap:18px}
+.panel-sec{font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ax-text-tertiary);margin:6px 0 -4px}
+.panel-foot{display:flex;justify-content:flex-end;gap:12px;padding:18px 26px;border-top:1px solid var(--ax-border-subtle);flex-shrink:0}
+.pf{display:flex;flex-direction:column;gap:7px}
+.pf.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pf>label{font-size:14px;font-weight:600;color:var(--ax-text-primary)}
+.pf input,.pf textarea,.pf select{font-family:inherit;font-size:15px;color:var(--ax-text-primary);border:1px solid var(--ax-border);border-radius:8px;padding:11px 13px;background:var(--ax-surface-card);width:100%;transition:border-color .12s,box-shadow .12s}
+.pf input:focus,.pf textarea:focus,.pf select:focus{outline:none;border-color:var(--ax-aqua);box-shadow:var(--ax-focus-ring)}
+.pf textarea{resize:vertical;min-height:84px}
+.pf select{cursor:pointer}
+.pf input:focus,.pf textarea:focus,.pf select:focus{outline:none;border-color:var(--ax-aqua);box-shadow:var(--ax-focus-ring)}
+.pf input::placeholder,.pf textarea::placeholder{color:var(--ax-text-placeholder)}
+.pf .req{color:var(--ax-danger-600);font-weight:700}
+.pf .opt{color:var(--ax-text-tertiary);font-weight:400}
+.pf input.bad,.pf textarea.bad,.pf select.bad{border-color:var(--ax-border-error);background:var(--ax-danger-50)}
+.pf input.bad:focus,.pf select.bad:focus{box-shadow:0 0 0 4px rgba(227,59,50,.18)}
+.pf-err{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:var(--ax-text-error);margin-top:1px}
+.pf-err i{font-size:13px}
+.pf-selwrap{position:relative}
+.pf-selwrap select{-webkit-appearance:none;appearance:none;padding-right:38px}
+.pf-selwrap select.ph{color:var(--ax-text-placeholder)}
+.pf-selwrap>i{position:absolute;right:14px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--ax-text-tertiary);font-size:13px}
+.panel-foot .btn-teal:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+.panel-foot .btn-teal:disabled:hover{background:var(--ax-sea-depths)}
+/* ---- Prepaid shipping label ---- */
+.add-prepaid{display:inline-flex;align-items:center;gap:9px;align-self:flex-start;background:var(--ax-surface-card);border:1px solid var(--ax-border);border-radius:8px;padding:11px 16px;font-family:inherit;font-size:15px;font-weight:600;color:var(--ax-text-primary);cursor:pointer;transition:background .12s,border-color .12s}
+.add-prepaid:hover{border-color:var(--ax-border-strong);background:var(--ax-gray-100)}
+.add-prepaid i{color:var(--ax-sea-depths)}
+.prepaid-card{border:1px solid var(--ax-border-subtle);border-radius:10px;padding:16px 18px;background:var(--ax-gray-100);display:flex;flex-direction:column;gap:12px}
+.prepaid-head{display:flex;align-items:center;justify-content:space-between;font-size:15px;font-weight:700;color:var(--ax-text-primary)}
+.remove-link{background:none;border:none;font-family:inherit;font-size:14px;font-weight:600;color:var(--ax-danger-600);cursor:pointer;padding:2px 4px;border-radius:5px;transition:color .12s}
+.remove-link:hover{color:var(--ax-danger-700)}
+/* ---- Resend modal ---- */
+.resend-list{margin:16px 0 0;border:1px solid var(--ax-border-subtle);border-radius:10px;overflow:hidden;max-height:230px;overflow-y:auto}
+.resend-row{display:flex;align-items:center;gap:13px;padding:13px 16px;border-bottom:1px solid var(--ax-border-subtle)}
+.resend-row:last-child{border-bottom:none}
+.avatar{width:38px;height:38px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:var(--ax-sea-depths);background:var(--ax-teal-100);letter-spacing:.02em}
+.resend-meta{display:flex;flex-direction:column;min-width:0}
+.resend-meta b{font-size:15px;font-weight:600;color:var(--ax-text-primary);line-height:1.3}
+.resend-meta span{font-size:14px;color:var(--ax-text-tertiary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media (max-width:860px){
+  .cols2{grid-template-columns:1fr}
+  .doc-body,.cust-body,.return-body,.paper-recip{grid-template-columns:1fr}
+  .banner-main{flex-wrap:wrap}
+  .banner-action{width:100%}
+  .btn-teal{width:100%;justify-content:center}
+}
+@media (max-width:560px){
+  .panel{width:100%}
+  .pf.row2{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .topbar{padding:0 18px;gap:18px}
+  .tb-nav{gap:16px}
+  .tb-link span{display:none}
+  .page{padding:22px 18px 48px}
+  .od-title{font-size:24px}
+}
+@media(max-width:1280px){.page{margin-left:auto;margin-right:auto;max-width:1180px}}
+/* DS badge */
+.spill,.sbadge,.ppill,.docpill,.ind-badge{display:inline-flex;align-items:center;justify-content:center;gap:2px;padding:2px 10px;height:auto;min-width:0;font-size:14px;font-weight:var(--ax-fw-medium);letter-spacing:0;text-transform:none;line-height:20px;border:none;border-radius:9999px;white-space:nowrap;background:#FAFAFA;color:#414651;box-shadow:inset 0 0 0 1px #E9EAEB}
+.spill.new,.sbadge.new,.ppill.digital,.docpill,.spill.perm-manager{background:#F0F9FF;color:#026AA2;box-shadow:inset 0 0 0 1px #B9E6FE}
+.spill.draft,.sbadge.draft,.spill.perm-standard,.spill.perm-viewer,.spill.ro{background:#FAFAFA;color:#414651;box-shadow:inset 0 0 0 1px #E9EAEB}
+.spill.pending,.sbadge.pending,.ppill.paper,.spill.seat,.ind-badge{background:#FFFAEB;color:#B54708;box-shadow:inset 0 0 0 1px #FEDF89}
+.spill.issued,.sbadge.issued{background:#ECFDF3;color:#067647;box-shadow:inset 0 0 0 1px #ABEFC6}
+.spill.rejected,.spill.revoked,.spill.cancelled,.spill.inactive,.sbadge.rejected,.sbadge.revoked{background:#FEF3F2;color:#B42318;box-shadow:inset 0 0 0 1px #FECDCA}
+.spill.perm-admin{background:var(--ax-teal-50);color:var(--ax-sea-depths);box-shadow:inset 0 0 0 1px var(--ax-teal-100)}
+/* DS fields */
+.flabel,.flabel2{font-size:16px;font-weight:var(--ax-fw-regular);color:var(--ax-gray-700);margin-bottom:6px;line-height:20px}
+.flabel2 .opt{color:var(--ax-gray-600)}
+.field-err{font-size:14px;line-height:20px;color:var(--ax-danger);margin-top:6px}
+.tinput,.tselect,.tsearch input,.searchbox input,.selwrap select,.pf-selwrap select,.tarea,.permsel-btn{border:1px solid #CED4DA;border-radius:8px;background-color:#fff;box-shadow:0 1px 2px rgba(10,13,18,.05);font-family:var(--ax-font-base);font-size:16px;line-height:20px;color:var(--ax-text-primary);padding-top:10px;padding-bottom:10px;transition:border-color .12s ease,box-shadow .12s ease}
+.tinput,.tselect,.tarea{padding-left:14px}
+.tinput:focus,.tselect:focus,.tsearch input:focus,.searchbox input:focus,.selwrap select:focus,.pf-selwrap select:focus,.permsel-btn:focus-visible{outline:none;border-color:var(--ax-focus-control);box-shadow:var(--ax-focus-ring-control)}
+.tinput:hover,.tselect:hover,.tsearch input:hover,.searchbox input:hover,.selwrap select:hover,.pf-selwrap select:hover,.permsel-btn:hover{border-color:#CED4DA}
+.tinput.err,.tselect.err,.tarea.err{border-color:#F1AEB5}
+.tinput.err:focus,.tselect.err:focus{border-color:#F04438;box-shadow:0 0 0 4px rgba(240,68,56,.25)}
+.tinput::placeholder,.tsearch input::placeholder,.searchbox input::placeholder{color:var(--ax-gray-600)}
+.tinput:disabled,.tselect:disabled{background:var(--ax-surface-disabled);cursor:not-allowed}
+</style>
+<link rel="stylesheet" href="ax-responsive.css">
+<script src="./ax-mobile-nav.js" defer></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+const { useState, useEffect, useRef, useCallback } = React;
+
+const GEO = window.AX_GEO || { "United States": [] };
+const COUNTRIES = ["United States", ...Object.keys(GEO).filter((n) => n !== "United States")];
+// Legacy demo states (seed orders) stay recognised alongside the JSON list.
+const LEGACY_STATES = ["Aldenmoor", "Arvencrest", "Briarcliff", "Cedarmont", "Delmarva", "Everwood", "Granite Bay", "Havenport", "Oldfoundland", "Westmarch"];
+const statesFor = (country, cur) => {
+  const list = GEO[country] || [];
+  return list;
+};
+const DEST_COUNTRIES = COUNTRIES.filter((n) => n !== "United States").sort();
+
+// Two-letter abbreviations used in the compact "City, ST Zip" display strings.
+const STATE_ABBR = { "Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "District of Columbia":"DC", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "Maine":"ME", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "Nebraska":"NE", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY", "Puerto Rico":"PR", "Guam":"GU", "American Samoa":"AS", "United States Virgin Islands":"VI", "Northern Mariana Islands":"MP", "Aldenmoor": "AM", "Arvencrest": "AV", "Briarcliff": "BC", "Cedarmont": "CD", "Delmarva": "DM", "Everwood": "EW", "Granite Bay": "GB", "Havenport": "HP", "Oldfoundland": "OF", "Westmarch": "WM" };
+const ABBR_STATE = Object.fromEntries(Object.entries(STATE_ABBR).map(([k, v]) => [v, k]));
+
+// ---- Address string <-> structured fields -------------------------------
+// Display cards store one "City, ST Zip" string; edit panels work on
+// structured {city, state, zip} so we can validate each part. Parse on open,
+// recompose on save — orderData.js stays untouched.
+function parseCSZ(str) {
+  const out = { city: "", state: "", zip: "" };
+  if (!str) return out;
+  const zipM = str.match(/(\d{5}(?:-\d{4})?)\s*$/);
+  if (zipM) out.zip = zipM[1];
+  let rest = str.replace(/(\d{5}(?:-\d{4})?)\s*$/, "").trim().replace(/,\s*$/, "");
+  const parts = rest.split(",").map((s) => s.trim()).filter(Boolean);
+  if (parts.length) out.city = parts[0];
+  // state token may be an abbreviation or a full name
+  let stateTok = parts.length > 1 ? parts[parts.length - 1] : "";
+  if (!stateTok && parts[0]) { const m = parts[0].match(/^(.*?)\s+([A-Za-z]{2})$/); if (m) { out.city = m[1]; stateTok = m[2]; } }
+  if (ABBR_STATE[stateTok]) out.state = ABBR_STATE[stateTok];
+  else if (stateTok) out.state = stateTok;
+  return out;
+}
+function composeCSZ(city, state, zip) {
+  const ab = STATE_ABBR[state] || state || "";
+  return [city, [ab, zip].filter(Boolean).join(" ")].filter(Boolean).join(", ");
+}
+function splitName(full) {
+  const p = (full || "").trim().split(/\s+/);
+  return { firstName: p[0] || "", lastName: p.slice(1).join(" ") || "" };
+}
+function splitTitleOrg(s) {
+  const i = (s || "").indexOf(",");
+  if (i === -1) return { title: "", org: (s || "").trim() };
+  return { title: s.slice(0, i).trim(), org: s.slice(i + 1).trim() };
+}
+function joinTitleOrg(title, org) { return [title, org].filter((x) => x && x.trim()).join(", "); }
+
+// ---- Validators ----------------------------------------------------------
+const nameOk = (v) => /^[A-Za-z][A-Za-z .'-]{0,}$/.test((v || "").trim());
+const emailOk = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((v || "").trim());
+const zipOk = (v) => /^\d{5}(-\d{4})?$/.test((v || "").trim());
+
+function addrErrors(a, e, requireLine1) {
+  if (requireLine1 && !(a.line1 || "").trim()) e.line1 = "Address line 1 is required";
+  if (!a.country) e.country = "Country is required";
+  const stList = GEO[a.country] || [];
+  if (!(a.state || "").trim()) e.state = stList.length ? "Select a state from the list" : "State / region is required";
+  else if (stList.length && stList.indexOf(a.state) === -1) e.state = "Select a state from the list";
+  if (!(a.city || "").trim()) e.city = "City is required";
+  if (a.country === "United States" || !a.country ? !zipOk(a.zip) : !(a.zip || "").trim()) e.zip = a.country === "United States" || !a.country ? "Enter a valid zip code" : "Postal code is required";
+  return e;
+}
+function validatePanel(p) {
+  const d = p.draft, e = {};
+  if (p.type === "customer") {
+    if (!nameOk(d.firstName)) e.firstName = "Enter a valid first name";
+    if (!nameOk(d.lastName)) e.lastName = "Enter a valid last name";
+    if (!emailOk(d.email)) e.email = "Enter a valid email address";
+    addrErrors(d.address, e);
+  } else if (p.type === "recipient") {
+    if (!nameOk(d.firstName)) e.firstName = "Enter a valid first name";
+    if (!nameOk(d.lastName)) e.lastName = "Enter a valid last name";
+    if (!emailOk(d.email)) e.email = "Enter a valid email address";
+    if (!emailOk(d.confirmEmail)) e.confirmEmail = "Enter a valid email address";
+    else if ((d.email || "").trim().toLowerCase() !== (d.confirmEmail || "").trim().toLowerCase()) e.confirmEmail = "Emails do not match";
+    if (!p.primary && !d.destCountry) e.destCountry = "Destination country is required";
+  } else if (p.type === "paperRecipient") {
+    if (!nameOk(d.contactName)) e.contactName = "Enter a valid name";
+    if (!emailOk(d.email)) e.email = "Enter a valid email address";
+    addrErrors(d.address, e, true);
+  } else if (p.type === "return") {
+    if (!nameOk(d.name)) e.name = "Enter a valid name";
+    addrErrors(d.address, e);
+  }
+  return e;
+}
+
+function TopBar() {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+  useEffect(() => {
+    const onDoc = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
+    const onEsc = (e) => { if (e.key === "Escape") setOpen(false); };
+    document.addEventListener("click", onDoc, true);
+    document.addEventListener("keydown", onEsc);
+    return () => { document.removeEventListener("click", onDoc, true); document.removeEventListener("keydown", onEsc); };
+  }, []);
+  return (
+    <header className="topbar">
+      <div className="tb-logo"><a className="tb-logo-link" href="Orders.dc.html" aria-label="ApostilleXpress — go to Orders"><img src="assets/logos/ax-wordmark.png" alt="ApostilleXpress" style={{ height: 30, width: "auto", display: "block" }} /></a></div>
+      <nav className="tb-nav">
+        <a className="tb-link" href="Orders.dc.html"><svg width="18" height="18" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M8.75 0.0822153C9.55813 0.0822152 10.1947 0.0814831 10.7061 0.123231C11.2231 0.165475 11.6567 0.253635 12.0508 0.454286C12.6935 0.781749 13.2164 1.30484 13.5439 1.94745C13.7447 2.34148 13.8327 2.77518 13.875 3.29218C13.9168 3.80356 13.916 4.44085 13.916 5.24921V8.74921C13.916 9.55741 13.9168 10.1939 13.875 10.7053C13.8327 11.2225 13.7448 11.6558 13.5439 12.05C13.2164 12.6929 12.6937 13.2156 12.0508 13.5432C11.6566 13.7439 11.2233 13.832 10.7061 13.8742C10.1947 13.916 9.55817 13.9152 8.75 13.9152H5.25C4.44168 13.9152 3.80434 13.916 3.29297 13.8742C2.776 13.8319 2.34225 13.7439 1.94824 13.5432C1.30565 13.2156 0.782539 12.6927 0.455079 12.05C0.25442 11.6559 0.166269 11.2223 0.124024 10.7053C0.082272 10.1939 0.0830087 9.55736 0.0830088 8.74921V5.24921C0.0830086 4.44085 0.0822428 3.80356 0.124024 3.29218C0.166306 2.77514 0.254302 2.3415 0.455079 1.94745C0.782607 1.30474 1.30554 0.781829 1.94824 0.454286C2.34227 0.253517 2.77596 0.165514 3.29297 0.123231C3.80434 0.0814504 4.44168 0.0822151 5.25 0.0822153H8.75ZM5.25 1.08222C4.42535 1.08222 3.83617 1.08264 3.375 1.1203C2.91975 1.15752 2.63201 1.22887 2.40234 1.34589C1.94793 1.57754 1.57831 1.94713 1.34668 2.40155C1.22965 2.63123 1.15831 2.91892 1.12109 3.37421C1.08343 3.83539 1.08301 4.42453 1.08301 5.24921V8.74921C1.08301 9.57384 1.08344 10.163 1.12109 10.6242C1.15829 11.0792 1.22978 11.3663 1.34668 11.5959C1.57831 12.0505 1.9478 12.4208 2.40234 12.6525C2.632 12.7695 2.91978 12.8399 3.375 12.8771C3.83618 12.9148 4.42534 12.9152 5.25 12.9152H8.75C9.57463 12.9152 10.1638 12.9148 10.625 12.8771C11.0799 12.8399 11.3671 12.7694 11.5967 12.6525C12.0514 12.4208 12.4216 12.0506 12.6533 11.5959C12.7702 11.3663 12.8407 11.0792 12.8779 10.6242C12.9156 10.163 12.916 9.57387 12.916 8.74921V5.24921C12.916 4.42451 12.9156 3.83539 12.8779 3.37421C12.8407 2.91896 12.7703 2.63122 12.6533 2.40155C12.4216 1.947 12.0513 1.57752 11.5967 1.34589C11.3671 1.22899 11.08 1.1575 10.625 1.1203C10.1638 1.08265 9.5746 1.08222 8.75 1.08222H5.25ZM9.33301 8.83222C9.60905 8.83222 9.83285 9.05621 9.83301 9.33222C9.83301 9.60836 9.60915 9.83222 9.33301 9.83222H4.66602C4.39019 9.83185 4.16602 9.60813 4.16602 9.33222C4.16617 9.05643 4.39028 8.83258 4.66602 8.83222H9.33301ZM9.33301 6.49921C9.60905 6.49921 9.83285 6.7232 9.83301 6.99921C9.83283 7.2752 9.60904 7.49921 9.33301 7.49921H4.66602C4.39029 7.49884 4.16619 7.27497 4.16602 6.99921C4.16617 6.72342 4.39028 6.49957 4.66602 6.49921H9.33301ZM9.33301 4.16522C9.60895 4.16522 9.83268 4.38936 9.83301 4.66522C9.83301 4.94137 9.60915 5.16522 9.33301 5.16522H4.66602C4.39019 5.16486 4.16602 4.94114 4.16602 4.66522C4.16635 4.38959 4.39039 4.16559 4.66602 4.16522H9.33301Z" fill="currentColor"></path></svg><span>Orders</span></a>
+        <a className="tb-link" href="CreateOrder.html"><i className="bi bi-plus-square"></i><span>Create New Order</span></a>
+        <a className="tb-link" href="TeamManagement.html"><i className="bi bi-people"></i><span>Team</span></a>
+      </nav>
+      <div className="tb-profile-wrap" ref={ref}>
+        <button className="tb-profile-btn" aria-haspopup="true" aria-expanded={open ? "true" : "false"} onClick={() => setOpen((o) => !o)}>
+          <i className="bi bi-person-circle"></i><span>Maria Rodriguez</span><i className="bi bi-chevron-down"></i>
+        </button>
+        {open ? (
+          <div className="tb-menu" role="menu">
+            <a className="tb-menu-item" role="menuitem" href="Profile.html"><i className="bi bi-person"></i>My Profile</a>
+            <a className="tb-menu-item" role="menuitem" href="https://www.gov-secure.com/apostille-xpress/" target="_blank" rel="noopener"><i className="bi bi-question-circle"></i>FAQ</a>
+            <hr className="tb-menu-sep" />
+            <a className="tb-menu-item" role="menuitem" href="CustomerAuth.dc.html"><i className="bi bi-box-arrow-right"></i>Log Out</a>
+          </div>
+        ) : null}
+      </div>
+    </header>
+  );
+}
+
+function Field({ label, children, className }) {
+  return (
+    <div className={"field " + (className || "")}>
+      <div className="lbl">{label}</div>
+      <div className="val">{children}</div>
+    </div>
+  );
+}
+
+function PField({ label, value, onChange, type, textarea }) {
+  return (
+    <div className="pf">
+      <label>{label}</label>
+      {textarea
+        ? <textarea value={value || ""} onChange={(e) => onChange(e.target.value)} />
+        : <input type={type || "text"} value={value || ""} onChange={(e) => onChange(e.target.value)} />}
+    </div>
+  );
+}
+
+function PSelect({ label, value, onChange, options }) {
+  return (
+    <div className="pf">
+      <label>{label}</label>
+      <select value={value || ""} onChange={(e) => onChange(e.target.value)}>
+        {options.map((o) => <option key={o} value={o}>{o}</option>)}
+      </select>
+    </div>
+  );
+}
+
+// Validating text field for edit panels: shows asterisk on required, error
+// border + helper text once the field has been touched (blurred) or submitted.
+function VField({ label, value, onChange, onBlur, type, textarea, required, optional, error, show, placeholder }) {
+  const bad = show && error;
+  return (
+    <div className="pf">
+      <label>{label}{required ? <span className="req"> *</span> : null}{optional ? <span className="opt"> (optional)</span> : null}</label>
+      {textarea
+        ? <textarea className={bad ? "bad" : ""} value={value || ""} placeholder={placeholder} onChange={(e) => onChange(e.target.value)} onBlur={onBlur} />
+        : <input className={bad ? "bad" : ""} type={type || "text"} value={value || ""} placeholder={placeholder} onChange={(e) => onChange(e.target.value)} onBlur={onBlur} />}
+      {bad ? <div className="pf-err"><i className="bi bi-exclamation-circle-fill"></i>{error}</div> : null}
+    </div>
+  );
+}
+
+function VSelect({ label, value, onChange, onBlur, options, placeholder, required, error, show }) {
+  const bad = show && error;
+  return (
+    <div className="pf">
+      <label>{label}{required ? <span className="req"> *</span> : null}</label>
+      <div className="pf-selwrap">
+        <select className={(value ? "" : "ph") + (bad ? " bad" : "")} value={value || ""} onChange={(e) => onChange(e.target.value)} onBlur={onBlur}>
+          <option value="">{placeholder || "Select…"}</option>
+          {options.map((o) => <option key={o} value={o}>{o}</option>)}
+        </select>
+        <i className="bi bi-chevron-down"></i>
+      </div>
+      {bad ? <div className="pf-err"><i className="bi bi-exclamation-circle-fill"></i>{error}</div> : null}
+    </div>
+  );
+}
+
+function initials(name) {
+  const p = (name || "").trim().split(/\s+/).filter(Boolean);
+  if (!p.length) return "?";
+  return ((p[0][0] || "") + (p.length > 1 ? p[p.length - 1][0] : "")).toUpperCase();
+}
+
+function ResendModal({ recipients, onClose, onConfirm }) {
+  const single = recipients.length === 1;
+  useEffect(() => {
+    const onEsc = (e) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", onEsc);
+    return () => document.removeEventListener("keydown", onEsc);
+  }, []);
+  return (
+    <div className="scrim" onClick={onClose}>
+      <div className="confirm" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-label="Resend e-Apostille">
+        <div className="modal-head">
+          <h2 className="modal-title">{single ? "Resend e-Apostille?" : "Resend to " + recipients.length + " recipients?"}</h2>
+          <button className="modal-x" aria-label="Close" onClick={onClose}><i className="bi bi-x-lg"></i></button>
+        </div>
+        <div className="modal-body">
+        <p>{single
+          ? "We'll email a fresh, secure download link to the recipient below."
+          : "We'll email a fresh, secure download link to each of the " + recipients.length + " recipients below."}</p>
+        <div className="resend-list">
+          {recipients.map((r) => (
+            <div className="resend-row" key={r.id}>
+              <span className="avatar">{initials(r.name)}</span>
+              <span className="resend-meta"><b>{r.name}</b><span>{r.email || "—"}</span></span>
+            </div>
+          ))}
+        </div>
+        </div>
+        <div className="confirm-foot">
+          <button className="btn-ghost" onClick={onClose}>Cancel</button>
+          <button className="btn-teal" onClick={() => { onConfirm(); onClose(); }}><i className="bi bi-send"></i>{single ? "Resend e-Apostille" : "Resend to " + recipients.length + " Recipients"}</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Banner({ child, onDownload, downloading, fileGone, onSecureSend }) {
+  let b = AXOrders.banner(child);
+  if (b && b.showDownload && fileGone) b = { kind: "warn", icon: "bi-info-circle-fill", title: "Your e-Apostille file is no longer available", body: "The file was removed under our data retention policy and can\u2019t be downloaded. If you still have your Apostille, you can send it securely to other recipients.", secure: true };
+  if (!b || child.status === "Draft") return null;
+  return (
+    <div className={"banner " + b.kind + (b.adobeNotice ? " dl" : "")}>
+      <div className="banner-main">
+        <i className={"bi " + b.icon + " bic"} style={b.adobeNotice ? { color: "#0F5132" } : null}></i>
+        <div className="banner-txt">
+          {b.title ? <p className="banner-title" style={b.adobeNotice ? { color: "#0F5132" } : null}>{b.title}</p> : null}
+          {b.adobeNotice ? (
+            <React.Fragment><b>Adobe Digital Signature Verification Notice:</b> This document is encrypted and digitally signed. Store it securely and maintain backups. Browser-based PDF viewers may not display full signature validation. For complete certificate verification, download and open the file in Adobe Acrobat. <a className="adobe-link" href="https://get.adobe.com/reader/" target="_blank" rel="noopener noreferrer">Download Adobe Reader</a><i className="bi bi-file-earmark-pdf-fill pdf-ico" aria-hidden="true"></i></React.Fragment>
+          ) : null}
+          {b.body ? (
+            <p className="banner-body">
+              {b.emphasis
+                ? (() => { const parts = b.body.split(b.emphasis); return [parts[0], <b key="e">{b.emphasis}</b>, parts[1]]; })()
+                : b.body}
+            </p>
+          ) : null}
+          {b.lines ? (
+            <div className="banner-lines">
+              {b.lines.map((ln, i) => <div key={i}><b>{ln[0]}</b> {ln[1]}</div>)}
+            </div>
+          ) : null}
+          {b.reasonBlock ? (
+            <div className="reason-box">
+              <div className="rl">{b.reasonBlock.reasonLabel}</div>
+              <div>{b.reasonBlock.reason}</div>
+              <div className="rl">{b.reasonBlock.nextLabel}</div>
+              <div>{b.reasonBlock.next}</div>
+              <div className="rl">{b.reasonBlock.refundLabel}</div>
+              <div>{b.reasonBlock.refund}</div>
+            </div>
+          ) : null}
+        </div>
+        {b.secure ? (
+          <div className="banner-action"><button className="btn-teal" onClick={onSecureSend}><i className="bi bi-send"></i>Secure Send Apostille</button></div>
+        ) : null}
+        {b.showDownload ? (
+          <div className="banner-action">
+            <button className="btn-teal" onClick={onDownload} disabled={downloading} aria-busy={downloading ? "true" : "false"}>
+              {downloading ? <span className="spin" aria-hidden="true"></span> : <i className="bi bi-download"></i>}
+              {downloading ? "Preparing Download\u2026" : "Download Apostille"}
+            </button>
+          </div>
+        ) : null}
+      </div>
+      {b.deletion ? (
+        <div className="banner-sub">
+          <span className="skey">File will be deleted:</span>
+          <span className="schip"><i className="bi bi-clock"></i><b>48 hours</b> after all the recipients have downloaded</span>
+          <span className="dot">|</span>
+          <span className="schip"><i className="bi bi-calendar3"></i><b>60 days</b> from issue date</span>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+function ConfirmModal({ data, onClose }) {
+  useEffect(() => {
+    const onEsc = (e) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", onEsc);
+    return () => document.removeEventListener("keydown", onEsc);
+  }, []);
+  return (
+    <div className="scrim" onClick={onClose}>
+      <div className="confirm" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-label={data.title}>
+        <div className="modal-head">
+          <h2 className="modal-title">{data.title}</h2>
+          <button className="modal-x" aria-label="Close" onClick={onClose}><i className="bi bi-x-lg"></i></button>
+        </div>
+        <div className="modal-body">
+        {data.body ? <p>{data.body}</p> : null}
+        {data.list && data.list.length ? (
+          <div className="confirm-list">
+            {data.list.map((r) => <div className="ci" key={r.id}><b>{r.name}</b> <span>· {r.email}</span></div>)}
+          </div>
+        ) : null}
+        </div>
+        <div className="confirm-foot">
+          <button className="btn-ghost" onClick={onClose}>Cancel</button>
+          <button className={data.confirmKind === "danger" ? "btn-danger" : "btn-teal"} onClick={() => { data.onConfirm(); onClose(); }}>{data.confirmLabel}</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SlidePanel({ title, onClose, onSave, saveLabel, saveDisabled, children }) {
+  useEffect(() => {
+    const onEsc = (e) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", onEsc);
+    return () => document.removeEventListener("keydown", onEsc);
+  }, []);
+  return (
+    <React.Fragment>
+      <div className="panel-scrim" onClick={onClose}></div>
+      <aside className="panel" role="dialog" aria-modal="true" aria-label={title}>
+        <div className="panel-head"><h2>{title}</h2><button className="panel-x" aria-label="Close" onClick={onClose}><i className="bi bi-x-lg"></i></button></div>
+        <div className="panel-body">{children}</div>
+        <div className="panel-foot">
+          <button className="btn-ghost" onClick={onClose}>Cancel</button>
+          <button className="btn-teal" disabled={saveDisabled} onClick={onSave}>{saveLabel || "Save"}</button>
+        </div>
+      </aside>
+    </React.Fragment>
+  );
+}
+
+// Per-child edit persistence. Any edits a user saves on an order are written to
+// localStorage keyed by child number and merged back on load, so revisiting the
+// order (even after a reload) shows the updated info instead of reverting.
+function loadOrderEdits(num) {
+  try { return (JSON.parse(localStorage.getItem("ax_order_edits") || "{}"))[num] || {}; } catch (e) { return {}; }
+}
+function saveOrderEdits(num, patch) {
+  try {
+    const all = JSON.parse(localStorage.getItem("ax_order_edits") || "{}");
+    all[num] = Object.assign({}, all[num] || {}, patch);
+    localStorage.setItem("ax_order_edits", JSON.stringify(all));
+  } catch (e) {}
+}
+
+const SS_KEY = "ax_secure_send";
+function loadSS(n) { try { return JSON.parse(localStorage.getItem(SS_KEY) || "{}")[n] || []; } catch (e) { return []; } }
+function saveSS(n, v) { try { const a = JSON.parse(localStorage.getItem(SS_KEY) || "{}"); a[n] = v; localStorage.setItem(SS_KEY, JSON.stringify(a)); } catch (e) {} }
+const ssDT = (t) => new Date(t).toLocaleString("en-US", { month: "short", day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit" });
+const SS_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// Prototype validation: failure cases are triggered by words in the file name.
+function checkApostillePdf(f) {
+  const n = f.name.toLowerCase();
+  if (!/\.pdf$/.test(n) || !f.size || /unreadable|corrupt/.test(n)) return { title: "We couldn\u2019t read this file", body: "Upload the digital Apostille as a readable PDF." };
+  if (/unsigned|invalid/.test(n)) return { title: "Signature not valid", body: "This file doesn\u2019t bear a valid @Gov Adobe Signature. Upload the digital Apostille PDF issued by the Competent Authority." };
+  if (/tamper|altered|modified/.test(n)) return { title: "File integrity compromised", body: "This file was changed after it was signed, so it can\u2019t be uploaded." };
+  if (/expired/.test(n)) return { title: "@Gov Adobe Signature expired", body: "The signature on this Apostille has expired. Please order a new Apostille." };
+  if (/nonumber|no-number/.test(n)) return { title: "Apostille Number not found", body: "We couldn\u2019t read an Apostille Number in this file, so it can\u2019t be uploaded." };
+  if (/rescind/.test(n)) return { title: "Apostille rescinded", body: "The Competent Authority has rescinded this Apostille, so it can\u2019t be sent." };
+  return null;
+}
+function SecureSendModal({ onClose, onSend }) {
+  const MAX = 10;
+  const [step, setStep] = useState(1);
+  const [file, setFile] = useState(null);
+  const [fail, setFail] = useState(null);
+  const [checking, setChecking] = useState(null);
+  const tRef = useRef(null);
+  useEffect(() => () => clearTimeout(tRef.current), []);
+  const mk = () => ({ id: "s" + Date.now() + Math.random(), firstName: "", lastName: "", email: "", country: "" });
+  const [recs, setRecs] = useState(() => [mk()]);
+  const [shown, setShown] = useState(false);
+  const [touched, setTouched] = useState({});
+  useEffect(() => {
+    const onEsc = (e) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", onEsc);
+    return () => document.removeEventListener("keydown", onEsc);
+  }, []);
+  const onFile = (f) => { if (!f) return; setFail(null); setFile(null); setChecking(f.name); clearTimeout(tRef.current); tRef.current = setTimeout(() => { const bad = checkApostillePdf(f); setFail(bad); setFile(bad ? null : { name: f.name, size: f.size }); setChecking(null); }, 2200); };
+  const upd = (id, p) => setRecs((r) => r.map((x) => x.id === id ? { ...x, ...p } : x));
+  const touch = (id, k) => setTouched((t) => ({ ...t, [id + k]: true }));
+  const dupes = (x) => recs.some((y) => y.id !== x.id && y.email.trim() && y.email.trim().toLowerCase() === x.email.trim().toLowerCase());
+  const errs = (x) => ({
+    firstName: x.firstName.trim() ? "" : "First name is required",
+    lastName: x.lastName.trim() ? "" : "Last name is required",
+    email: !x.email.trim() ? "Email is required" : !SS_EMAIL.test(x.email.trim()) ? "Enter a valid email address" : dupes(x) ? "This email is already in the list" : "",
+    country: x.country ? "" : "Destination country is required",
+  });
+  const allOk = recs.every((x) => !Object.values(errs(x)).some(Boolean));
+  const show = (x, k) => (shown || touched[x.id + k]) && errs(x)[k];
+  const send = () => { setShown(true); if (allOk) onSend(file.name, recs); };
+  const primaryDisabled = step === 1 ? !file || !!checking : shown && !allOk;
+  return (
+    <div className="scrim" onClick={onClose}>
+      <div className="confirm ss-modal" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-label="Secure Send Apostille">
+        <div className="modal-head">
+          <h2 className="modal-title">Secure Send Apostille</h2>
+          <button className="modal-x" aria-label="Close" onClick={onClose}><i className="bi bi-x-lg"></i></button>
+        </div>
+        <div className="modal-body ss-body">
+          {step === 1 ? (
+            <React.Fragment>
+              <div className="ss-msg info"><i className="bi bi-info-circle-fill"></i><span>Upload the digital Apostille PDF you already have. We check the @Gov Adobe Signature and that the Apostille hasn\u2019t been rescinded before you can add recipients.</span></div>
+              {checking ? (
+                <React.Fragment>
+                  <div className="ss-file"><i className="bi bi-file-earmark-pdf-fill"></i><span style={{ flex: 1 }}>{checking}</span></div>
+                  <div className="ss-msg info" role="status" aria-live="polite"><span className="ss-spin" aria-hidden="true"></span><span><b>Verifying your file\u2026</b>Checking the @Gov Adobe Signature, document integrity, and Apostille status.</span></div>
+                </React.Fragment>
+              ) : file ? (
+                <React.Fragment>
+                  <div className="ss-file"><i className="bi bi-file-earmark-pdf-fill"></i><span style={{ flex: 1 }}>{file.name}</span><button className="icon-btn" aria-label="Remove file" onClick={() => { setFile(null); setFail(null); }}><i className="bi bi-x-lg"></i></button></div>
+                  <div className="ss-msg ok"><i className="bi bi-check-circle-fill"></i><span><b>File verified</b>Valid @Gov Adobe Signature, document intact, Apostille not rescinded.</span></div>
+                </React.Fragment>
+              ) : (
+                <React.Fragment>
+                  <label className="ss-drop" onDragOver={(e) => e.preventDefault()} onDrop={(e) => { e.preventDefault(); onFile(e.dataTransfer.files[0]); }}>
+                    <i className="bi bi-cloud-arrow-up"></i><b>Upload digital Apostille</b><span className="ss-hint">PDF only. Drag and drop or click to browse.</span>
+                    <input type="file" accept="application/pdf,.pdf" onChange={(e) => { onFile(e.target.files[0]); e.target.value = ""; }} />
+                  </label>
+                  {fail ? <div className="ss-msg err" role="alert"><i className="bi bi-x-circle-fill"></i><span><b>{fail.title}</b>{fail.body} No recipients were notified.</span></div> : null}
+                  <p className="ss-hint">Prototype: include \u201Cexpired\u201D, \u201Crescinded\u201D, \u201Ctampered\u201D, \u201Cunsigned\u201D, or \u201Cnonumber\u201D in a file name to simulate each rejection.</p>
+                </React.Fragment>
+              )}
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              <div className="ss-file"><i className="bi bi-file-earmark-pdf-fill"></i><span style={{ flex: 1 }}>{file.name}</span><button className="icon-btn" aria-label="Remove file and upload a different one" title="Remove and upload a different file" onClick={() => { setFile(null); setFail(null); setStep(1); }}><i className="bi bi-x-lg"></i></button></div>
+              <div className="panel-sec">Recipients ({recs.length} of {MAX})</div>
+              {recs.map((x, i) => (
+                <div className="ss-rec" key={x.id}>
+                  <div className="ss-rec-h"><span>Recipient {i + 1}</span>{recs.length > 1 ? <button className="icon-btn" aria-label={"Remove recipient " + (i + 1)} onClick={() => setRecs((r) => r.filter((y) => y.id !== x.id))}><i className="bi bi-trash"></i></button> : null}</div>
+                  <div className="pf row2">
+                    <VField label="First Name" required placeholder="Enter first name" value={x.firstName} onChange={(v) => upd(x.id, { firstName: v })} onBlur={() => touch(x.id, "firstName")} error={errs(x).firstName} show={show(x, "firstName")} />
+                    <VField label="Last Name" required placeholder="Enter last name" value={x.lastName} onChange={(v) => upd(x.id, { lastName: v })} onBlur={() => touch(x.id, "lastName")} error={errs(x).lastName} show={show(x, "lastName")} />
+                  </div>
+                  <VField label="Email" required type="email" placeholder="Enter email" value={x.email} onChange={(v) => upd(x.id, { email: v })} onBlur={() => touch(x.id, "email")} error={errs(x).email} show={show(x, "email")} />
+                  <VSelect label="Destination Country" required placeholder="Select destination country" options={DEST_COUNTRIES} value={x.country} onChange={(v) => upd(x.id, { country: v })} onBlur={() => touch(x.id, "country")} error={errs(x).country} show={show(x, "country")} />
+                </div>
+              ))}
+              <button className="btn-secondary" style={{ alignSelf: "flex-start" }} disabled={recs.length >= MAX} onClick={() => setRecs((r) => r.concat(mk()))}><i className="bi bi-person-plus"></i>Add Recipient</button>
+              {recs.length >= MAX ? <p className="ss-hint">You can send to up to {MAX} recipients at a time.</p> : null}
+            </React.Fragment>
+          )}
+        </div>
+        <div className="confirm-foot">
+          <button className="btn-ghost" onClick={step === 1 ? onClose : () => setStep(1)}>{step === 1 ? "Cancel" : "Back"}</button>
+          <button className="btn-teal" disabled={primaryDisabled} onClick={() => step === 1 ? setStep(2) : send()}>{step === 1 ? "Continue" : <React.Fragment><i className="bi bi-send"></i>Send Apostille</React.Fragment>}</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+function SecureSendHistory({ hist, onSimulate }) {
+  return (
+    <div className="card ss-card" data-screen-label="Secure Send History">
+      <div className="card-head recip-head"><div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}><h2>Secure Send History</h2></div></div>
+      <div className="ss-hist">
+        {hist.map((s) => (
+          <div className="ss-send" key={s.id}>
+            <div className="ss-send-h"><b>Secure Send \u00B7 {ssDT(s.sentAt)}</b><span>Sent by {s.by} \u00B7 {s.file}</span></div>
+            {s.recipients.map((r) => (
+              <div className="ss-r" key={r.id}>
+                <div><div className="n">{r.name}</div><div className="m">{r.email}</div></div>
+                <div className="m">{r.country}</div>
+                <div>{r.downloadedAt ? <span className="ss-st dl"><i className="bi bi-check-circle-fill"></i>Downloaded</span> : <span className="ss-st nd">Not downloaded</span>}
+                  {r.downloadedAt ? <div className="m" style={{ marginTop: 4 }}>{ssDT(r.downloadedAt)}</div> : <button className="ss-sim" onClick={() => onSimulate(s.id, r.id)}>Simulate download (prototype)</button>}</div>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  const params = new URLSearchParams(window.location.search);
+  const found = AXOrders.findChildAny(params.get("order"));
+  const order = found ? found.parent : AXOrders.getOrder();
+  const initial = found ? found.child : order.children[0];
+  const EDITS = loadOrderEdits(initial.number);
+
+  const [deliveryFlow, setDeliveryFlow] = useState(initial.deliveryFlow);
+  const [status, setStatus] = useState(initial.status);
+  const [demoOpen, setDemoOpen] = useState(false);
+  const [recipients, setRecipients] = useState(EDITS.recipients || initial.recipients);
+  const [customer, setCustomer] = useState(EDITS.customer || initial.customer);
+  const [returnAddr, setReturnAddr] = useState(EDITS.returnAddr || initial.returnAddress || AXOrders.defaultOrder().children[0].returnAddress);
+  const [paperRecipient, setPaperRecipient] = useState(EDITS.paperRecipient || initial.paperRecipient);
+
+  // Persist edits (but not the prototype delivery/status preview toggles) so
+  // they survive navigation and reloads.
+  const didMountRef = useRef(false);
+  useEffect(() => {
+    if (!didMountRef.current) { didMountRef.current = true; return; }
+    saveOrderEdits(initial.number, { customer, recipients, returnAddr, paperRecipient });
+  }, [customer, recipients, returnAddr, paperRecipient]);
+  const [selected, setSelected] = useState({});
+  const [toasts, setToasts] = useState([]);
+  const [downloading, setDownloading] = useState(false);
+  const [panel, setPanel] = useState(null);   // { type, draft, recipientId, title, saveLabel }
+  const [confirm, setConfirm] = useState(null);
+
+  const pushToast = useCallback((opts) => {
+    const o = typeof opts === "string" ? { title: opts } : opts;
+    const id = Date.now() + Math.random();
+    setToasts((t) => [...t, { id, kind: "success", ...o }]);
+    if (!o.onRetry) setTimeout(() => setToasts((t) => t.filter((x) => x.id !== id)), 6000);
+  }, []);
+  const dismissToast = useCallback((id) => setToasts((t) => t.filter((x) => x.id !== id)), []);
+
+  const group = AXOrders.matrixGroup(deliveryFlow);
+  const baseStatuses = group === "paper" ? AXOrders.STATUSES_PAPER : AXOrders.STATUSES_DIGITAL;
+  const validStatuses = order.orderOption === "walkin" ? ["Draft"].concat(baseStatuses) : baseStatuses;
+  useEffect(() => {
+    if (validStatuses.indexOf(status) === -1) setStatus(validStatuses[0]);
+  }, [deliveryFlow]);
+
+  const productLabel = deliveryFlow === "paper-to-paper" ? "Paper" : (deliveryFlow === "digital-upload" ? "Digital" : "Digital");
+  const child = {
+    number: initial.number,
+    status,
+    deliveryFlow,
+    placedOn: initial.placedOn,
+    document: Object.assign({}, initial.document, { productLabel }),
+  };
+  const isPickup = !!initial.pickup;
+  const showReturn = !isPickup && AXOrders.showReturnCard({ deliveryFlow });
+  const isPaperBlock = group === "paper";
+  const prepaidLabel = !initial.shippingMethod || /label/i.test(initial.shippingMethod);
+  const perm = AXOrders.permissions(status, deliveryFlow);
+  const reason = AXOrders.disabledReason(status);
+  const tip = (allowed) => (allowed ? undefined : reason);
+  const c = customer;
+  const ra = returnAddr;
+
+  const [ssHist, setSsHist] = useState(() => loadSS(initial.number));
+  const [ssOpen, setSsOpen] = useState(false);
+  const [fileOv, setFileOv] = useState("auto");
+  const canSS = !isPaperBlock && !isPickup && perm.resend;
+  const aged = (() => { const t = Date.parse(initial.placedOn); return !isNaN(t) && Date.now() - t > 60 * 864e5; })();
+  const fileGone = canSS && (fileOv === "auto" ? aged : fileOv === "deleted");
+  const ssPersist = (v) => { setSsHist(v); saveSS(initial.number, v); };
+  const ssSimulate = (sid, rid) => ssPersist(ssHist.map((s) => s.id !== sid ? s : { ...s, recipients: s.recipients.map((r) => r.id === rid ? { ...r, downloadedAt: Date.now() } : r) }));
+  const ssSend = (file, recs) => {
+    const now = Date.now();
+    const rec = { id: "ss" + now, sentAt: now, file, by: "You", recipients: recs.map((x) => ({ id: x.id, name: (x.firstName + " " + x.lastName).trim(), email: x.email.trim(), country: x.country, downloadedAt: null })) };
+    ssPersist([rec].concat(ssHist));
+    setSsOpen(false);
+    pushToast({ title: "Apostille sent", body: rec.recipients.length === 1 ? "A notification was sent to " + rec.recipients[0].name + "." : "Notifications were sent to " + rec.recipients.length + " recipients." });
+  };
+  const [resend, setResend] = useState(null); // recipients[] being resent
+
+  // ---- Recipient actions ----
+  const askDelete = (r) => {
+    if (!perm.deleteRecipient) return;
+    if (recipients.length <= 1) { pushToast({ kind: "error", title: "Can't delete recipient", body: "At least one recipient is required for this order." }); return; }
+    setConfirm({
+      kind: "danger", icon: "bi-trash3", title: "Are you sure you want to delete " + r.name + "?",
+      body: "This action cannot be undone.", confirmLabel: "Delete", confirmKind: "danger",
+      onConfirm: () => {
+        setRecipients((rs) => rs.filter((x) => x.id !== r.id));
+        setSelected((s) => { const n = Object.assign({}, s); delete n[r.id]; return n; });
+        pushToast({ title: "Recipient deleted", body: r.name + " was removed from this order." });
+      },
+    });
+  };
+  const addRecipient = () => {
+    if (!perm.addRecipient) return;
+    const r = { id: "r" + Date.now(), name: "", titleOrg: "", email: "", country: "" };
+    openRecipientPanel(r, true);
+  };
+  const toggleSel = (id) => setSelected((s) => Object.assign({}, s, { [id]: !s[id] }));
+  const allSelected = recipients.length > 0 && recipients.every((r) => selected[r.id]);
+  const toggleAll = () => {
+    if (allSelected) setSelected({});
+    else { const n = {}; recipients.forEach((r) => { n[r.id] = true; }); setSelected(n); }
+  };
+  const selectedRecipients = recipients.filter((r) => selected[r.id]);
+  const selCount = selectedRecipients.length;
+  const askResend = () => {
+    if (!perm.resend || selCount === 0) return;
+    setResend(selectedRecipients);
+  };
+  const doResend = () => {
+    pushToast({ title: "e-Apostille resent successfully", body: resend.length === 1 ? "A new download link was sent to " + resend[0].name + "." : "New download links were sent to " + resend.length + " recipients." });
+  };
+  const downloadApostille = () => {
+    if (downloading) return;                 // guard against double clicks
+    setDownloading(true);
+    setTimeout(() => {
+      try {
+        const a = document.createElement("a");
+        a.href = "data:application/pdf;base64,JVBERi0xLjQKJcOkw7zDtsOfCjEgMCBvYmoKPDwvVHlwZS9DYXRhbG9nL1BhZ2VzIDIgMCBSPj4KZW5kb2JqCjIgMCBvYmoKPDwvVHlwZS9QYWdlcy9LaWRzWzMgMCBSXS9Db3VudCAxPj4KZW5kb2JqCjMgMCBvYmoKPDwvVHlwZS9QYWdlL1BhcmVudCAyIDAgUi9NZWRpYUJveFswIDAgNjEyIDc5Ml0+PgplbmRvYmoKdHJhaWxlcgo8PC9Sb290IDEgMCBSPj4K";
+        a.download = "Apostille.pdf";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        pushToast({ title: "Apostille downloaded successfully.", body: "Apostille.pdf has been saved to your downloads folder. Best viewed in Adobe Acrobat." });
+      } catch (err) {
+        pushToast({ kind: "error", title: "Download failed", body: "We couldn't download your Apostille. Please try again.", onRetry: downloadApostille });
+      }
+      setDownloading(false);
+    }, 900);
+  };
+  const copyTrack = (val) => {
+    const text = String(val == null ? "" : val);
+    const fallback = () => {
+      try {
+        const ta = document.createElement("textarea");
+        ta.value = text; ta.setAttribute("readonly", "");
+        ta.style.position = "absolute"; ta.style.left = "-9999px";
+        document.body.appendChild(ta); ta.select();
+        document.execCommand("copy"); document.body.removeChild(ta);
+      } catch (e) {}
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).catch(fallback);
+    } else { fallback(); }
+    pushToast({ title: "Tracking number copied", body: "\u201C" + text + "\u201D is ready to paste." });
+  };
+
+  // Preview Controls are hidden from the UI entirely — they open/close only via
+  // the "P" keyboard shortcut, and never while the user is typing in a field.
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key !== "p" && e.key !== "P") return;
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      const t = e.target;
+      const tag = t && t.tagName ? t.tagName.toLowerCase() : "";
+      if (tag === "input" || tag === "textarea" || tag === "select" || (t && t.isContentEditable)) return;
+      e.preventDefault();
+      setDemoOpen((o) => !o);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, []);
+
+  // ---- Edit panels ----
+  const set = (patch) => setPanel((p) => ({ ...p, draft: { ...p.draft, ...patch } }));
+  const setAddr = (patch) => setPanel((p) => ({ ...p, draft: { ...p.draft, address: { ...p.draft.address, ...patch } } }));
+  const markTouched = (field) => setPanel((p) => (p ? { ...p, touched: { ...p.touched, [field]: true } } : p));
+
+  const openCustomerPanel = () => {
+    if (!perm.editCustomer) return;
+    const src = JSON.parse(JSON.stringify(customer));
+    const csz = parseCSZ(src.address.cityStateZip);
+    src.address = { ...src.address, city: csz.city, state: csz.state, zip: csz.zip };
+    setPanel({ type: "customer", title: "Edit Customer Information", saveLabel: "Save Changes", touched: {}, submitted: false, draft: src });
+  };
+  const openReturnPanel = () => {
+    if (!perm.editReturnAddress) return;
+    const src = JSON.parse(JSON.stringify(ra));
+    const csz = parseCSZ(src.cityStateZip);
+    const draft = { name: src.name, address: { line1: src.line1, country: src.country, city: csz.city, state: csz.state, zip: csz.zip }, prepaidOpen: !!src.tracking, tracking: src.tracking || "" };
+    setPanel({ type: "return", title: "Edit Return Address", saveLabel: "Save Changes", touched: {}, submitted: false, draft });
+  };
+  const openRecipientPanel = (r, isNew, primary) => {
+    if (!perm.editRecipient && !isNew) return;
+    const nm = splitName(r.name);
+    const to = splitTitleOrg(r.titleOrg);
+    const draft = { id: r.id, firstName: nm.firstName, lastName: nm.lastName, email: r.email || "", confirmEmail: isNew ? "" : (r.email || ""), title: to.title, org: to.org, destCountry: (r.country && r.country !== "USA") ? r.country : (r.country === "USA" ? "" : "") };
+    if (r.country && DEST_COUNTRIES.indexOf(r.country) !== -1) draft.destCountry = r.country;
+    setPanel({ type: "recipient", recipientId: r.id, isNew: !!isNew, primary: !!primary, title: isNew ? "Add Recipient" : "Edit Recipient", saveLabel: isNew ? "Add Recipient" : "Save Changes", touched: {}, submitted: false, draft });
+  };
+  const openPaperRecipientPanel = () => {
+    if (!perm.editRecipient) return;
+    const src = JSON.parse(JSON.stringify(paperRecipient));
+    const csz = parseCSZ(src.addrCityState);
+    const draft = { contactName: src.contactName, titleOrg: src.titleOrg, email: src.email, phone: src.phone, sentTo: src.sentTo, tracking: src.tracking, address: { line1: src.addrLine1, country: "United States", city: csz.city, state: csz.state, zip: csz.zip } };
+    setPanel({ type: "paperRecipient", title: "Edit Recipient Information", saveLabel: "Save Changes", touched: {}, submitted: false, draft });
+  };
+
+  const panelErrors = panel ? validatePanel(panel) : {};
+  const panelValid = Object.keys(panelErrors).length === 0;
+  const showErr = (field) => panel && (panel.submitted || panel.touched[field]);
+
+  const savePanel = () => {
+    if (!panel) return;
+    if (!panelValid) { setPanel((p) => ({ ...p, submitted: true })); return; }
+    const p = panel, d = p.draft;
+    // Simulate the occasional save failure so the error-toast + retry pattern is demonstrable.
+    if (Math.random() < 0.08) {
+      pushToast({ kind: "error", title: "We couldn't save your changes", body: "Something went wrong. Please try again.", onRetry: savePanel });
+      return;
+    }
+    if (p.type === "customer") {
+      const next = { ...d, address: { ...d.address, cityStateZip: composeCSZ(d.address.city, d.address.state, d.address.zip) } };
+      delete next.address.city; delete next.address.state; delete next.address.zip;
+      setCustomer(next);
+    } else if (p.type === "return") {
+      setReturnAddr({ name: d.name, line1: d.address.line1, cityStateZip: composeCSZ(d.address.city, d.address.state, d.address.zip), country: d.address.country, tracking: d.prepaidOpen ? d.tracking : "" });
+    } else if (p.type === "recipient") {
+      const rec = { id: p.recipientId, name: [d.firstName, d.lastName].filter(Boolean).join(" "), titleOrg: joinTitleOrg(d.title, d.org), email: d.email, country: p.primary ? "" : d.destCountry };
+      setRecipients((rs) => (p.isNew ? [...rs, rec] : rs.map((r) => (r.id === p.recipientId ? rec : r))));
+    } else if (p.type === "paperRecipient") {
+      setPaperRecipient({ ...paperRecipient, contactName: d.contactName, titleOrg: d.titleOrg, email: d.email, phone: d.phone, sentTo: d.sentTo, tracking: d.tracking, addrLine1: d.address.line1, addrCityState: composeCSZ(d.address.city, d.address.state, d.address.zip) });
+    }
+    pushToast({ title: "Successfully updated information", body: "Your changes have been saved." });
+    setPanel(null);
+  };
+  const cancelPanel = () => setPanel(null);
+
+  const FLOWS = [
+    { id: "digital-upload", label: "Digital (uploaded)" },
+    { id: "paper-to-digital", label: "Paper → Digital" },
+    { id: "paper-to-paper", label: "Paper → Paper" },
+  ];
+
+  const d = panel ? panel.draft : null;
+
+  return (
+    <div>
+      <TopBar />
+      <main className="page" data-screen-label="Order Details">
+        {/* Prototype-only preview controls — no visible trigger; toggle with the "P" key. */}
+        <div className={"demo-dock" + (demoOpen ? " open" : "")} aria-hidden={!demoOpen}>
+          <div className="demo-inner">
+            <div className="demo-head">
+              <span className="tag">Preview Controls</span>
+              <button className="demo-close" aria-label="Collapse" onClick={() => setDemoOpen(false)}><i className="bi bi-x-lg"></i></button>
+            </div>
+            <span className="demo-field">
+              <label htmlFor="flow">Delivery</label>
+              <select id="flow" value={deliveryFlow} onChange={(e) => setDeliveryFlow(e.target.value)}>
+                {FLOWS.map((f) => <option key={f.id} value={f.id}>{f.label}</option>)}
+              </select>
+            </span>
+            <span className="demo-field">
+              <label htmlFor="fl">File</label>
+              <select id="fl" value={fileOv} onChange={(e) => setFileOv(e.target.value)}>
+                <option value="auto">Auto (60 days)</option><option value="available">Available</option><option value="deleted">Deleted</option>
+              </select>
+            </span>
+            <span className="demo-field">
+              <label htmlFor="st">Status</label>
+              <select id="st" value={status} onChange={(e) => setStatus(e.target.value)}>
+                {validStatuses.map((s) => <option key={s} value={s}>{s}</option>)}
+              </select>
+            </span>
+          </div>
+        </div>
+
+        <nav className="crumbs" aria-label="Breadcrumb">
+          <a className="crumb" href="Orders.dc.html">Orders</a>
+          <i className="bi bi-chevron-right crumb-sep"></i>
+          <a className="crumb" href={"OrderOverview.html?order=" + encodeURIComponent(order.number)}>Order Overview</a>
+          <i className="bi bi-chevron-right crumb-sep"></i>
+          <span className="crumb active" aria-current="page">Order Details</span>
+        </nav>
+
+        <h1 className="od-title">Order Details #{child.number}</h1>
+        <div className="od-meta">
+          <span className={"sbadge " + AXOrders.universalClass(status)}>{AXOrders.universalLabel(status)}</span>
+          <span className="sep"></span>
+          <span className="placed">Placed on <b>{child.placedOn}</b></span>
+        </div>
+
+        <Banner child={child} onDownload={downloadApostille} downloading={downloading} fileGone={fileGone} onSecureSend={() => setSsOpen(true)} />
+
+        <div className="cols2">
+          {/* Document Information */}
+          <div className="card">
+            <div className="card-head"><h2>Document Information</h2></div>
+            <div className="doc-body">
+              <Field label="Name on Document">{child.document.name}</Field>
+              <Field label="Product Type"><span className={"ppill " + AXOrders.productPillClass(child.document.productLabel)}>{child.document.productLabel}</span></Field>
+              {child.document.description ? <Field label="Document Description">{child.document.description}</Field> : null}
+              {child.document.type ? <Field label="Document Type">{child.document.type}</Field> : null}
+              {child.document.adoptionAgency ? <Field label="Adoption Agency">{child.document.adoptionAgency}</Field> : null}
+              <Field label="Issuing State">{child.document.issuingState}</Field>
+              {isPaperBlock && prepaidLabel && paperRecipient ? (
+                <Field label="Tracking Number" className="full">{paperRecipient.tracking ? <span className="track">{paperRecipient.tracking}<button className="copy-ic" aria-label="Copy tracking number" onClick={() => copyTrack(paperRecipient.tracking)}><i className="bi bi-clipboard"></i></button></span> : "N/A"}</Field>
+              ) : null}
+              <Field label="Destination Country">{child.document.destCountry || "—"}</Field>
+              {deliveryFlow !== "digital-upload" ? <Field label="Delivery Form" className="full">
+                <button className="dlbtn" onClick={() => pushToast("Downloading delivery form…")}><i className="bi bi-download"></i>Download Delivery Form</button>
+              </Field> : null}
+            </div>
+          </div>
+
+          {/* Customer Information */}
+          <div className="card">
+            <div className="card-head">
+              <h2>Customer Information</h2>
+              <button className="icon-btn" disabled={!perm.editCustomer} title={tip(perm.editCustomer)} aria-label="Edit customer information" onClick={openCustomerPanel}><i className="bi bi-pencil-square"></i></button>
+            </div>
+            <div className="cust-body">
+              <div className="cust-main">
+                <Field label="First and Last Name">{c.firstName} {c.lastName}{[c.title, c.company].filter(Boolean).length ? <div className="muted">{[c.title, c.company].filter(Boolean).join(", ")}</div> : null}</Field>
+                <Field label="Email">{c.email}</Field>
+                <Field label="Address">{(c.address && (c.address.line1 || c.address.cityStateZip || c.address.country)) ? <React.Fragment>{c.address.line1}{c.address.line2 ? <div>{c.address.line2}</div> : null}{c.address.cityStateZip ? <div>{c.address.cityStateZip}</div> : null}{c.address.country ? <div>{c.address.country}</div> : null}</React.Fragment> : "N/A"}</Field>
+                <Field label="Notes">{c.notes && c.notes.trim() ? c.notes : "N/A"}</Field>
+              </div>
+              <Field label="Phone Number">{c.phone && c.phone.trim() ? c.phone : "N/A"}</Field>
+            </div>
+          </div>
+        </div>
+
+        {/* Return Original Documents (conditional) */}
+        {showReturn && ra ? (
+          <div className="card return-card">
+            <div className="card-head" style={{ display: "block" }}>
+              <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16 }}>
+                <div>
+                  <h2>Return Original Documents</h2>
+                  <p className="sub">The state retains your return address in case your documents need to be returned.</p>
+                </div>
+                <button className="icon-btn" disabled={!perm.editReturnAddress} title={tip(perm.editReturnAddress)} aria-label="Edit return address" onClick={openReturnPanel}><i className="bi bi-pencil-square"></i></button>
+              </div>
+            </div>
+            <div className="return-body">
+              <Field label="Return Address">{ra.name ? <div>{ra.name}</div> : null}{ra.line1 ? <div>{ra.line1}</div> : null}{ra.cityStateZip ? <div>{ra.cityStateZip}</div> : null}{ra.country ? <div>{ra.country}</div> : null}</Field>
+              {ra.tracking ? (
+                <Field label="Return Tracking"><span className="track">{ra.tracking}<button className="copy-ic" aria-label="Copy tracking number" onClick={() => copyTrack(ra.tracking)}><i className="bi bi-clipboard"></i></button></span></Field>
+              ) : null}
+            </div>
+          </div>
+        ) : null}
+
+        {/* Recipient Information — omitted for pick-up-in-person orders */}
+        {isPickup ? null : (
+        <div className="card recip-card">
+          <div className="card-head recip-head">
+            <h2>Recipient Information{isPaperBlock ? "" : " (" + recipients.length + ")"}</h2>
+            <div className="acts">
+              {!isPaperBlock ? (
+                <button className="btn-secondary" disabled={!perm.addRecipient} title={tip(perm.addRecipient)} onClick={addRecipient}><i className="bi bi-person-plus"></i>Add Recipient</button>
+              ) : (
+                <button className="icon-btn" disabled={!perm.editRecipient} title={tip(perm.editRecipient)} aria-label="Edit recipient" onClick={openPaperRecipientPanel}><i className="bi bi-pencil-square"></i></button>
+              )}
+            </div>
+          </div>
+
+          {!isPaperBlock && perm.resend ? (
+            <div className="selectall-row">
+              <label className="selectall"><input type="checkbox" className="chk" checked={allSelected} onChange={toggleAll} />Select All Recipients</label>
+              {selCount > 0 ? (
+                <button className="btn-teal" onClick={askResend}><i className="bi bi-send"></i>Resend ({selCount})</button>
+              ) : null}
+            </div>
+          ) : null}
+
+          {isPaperBlock ? (
+            <div className="paper-recip">
+              <Field label="Contact">{paperRecipient.contactName}{paperRecipient.titleOrg ? <div className="muted">{paperRecipient.titleOrg}</div> : null}{paperRecipient.email ? <div className="muted">{paperRecipient.email}</div> : null}{paperRecipient.phone ? <div className="muted">{paperRecipient.phone}</div> : null}</Field>
+              <Field label="Address">{paperRecipient.addrLine1}{paperRecipient.addrCityState ? <div>{paperRecipient.addrCityState}</div> : null}</Field>
+            </div>
+          ) : (
+            <div className="recip-list">
+              {recipients.length === 0 ? (
+                <div style={{ display: "flex", alignItems: "center", gap: 12, padding: "28px 20px", color: "var(--ax-text-tertiary)" }}>
+                  <i className="bi bi-people" style={{ fontSize: 22 }}></i>
+                  <div>
+                    <div style={{ fontSize: 15, fontWeight: 600, color: "var(--ax-text-primary)" }}>No recipients yet</div>
+                    <div style={{ fontSize: 14, marginTop: 2 }}>Add a recipient to deliver this apostille.</div>
+                  </div>
+                </div>
+              ) : recipients.map((r, ri) => (
+                <div className="recip" key={r.id}>
+                  {perm.resend ? <input type="checkbox" className="chk" checked={!!selected[r.id]} onChange={() => toggleSel(r.id)} aria-label={"Select " + r.name} /> : null}
+                  <div className="recip-body">
+                    <div className="recip-name">{r.name}</div>
+                    <div className="recip-lines">{r.titleOrg || "—"}<br />{r.email || "—"}<br />{(ri === 0 ? (r.country || (child.document && child.document.destCountry)) : r.country) || "—"}</div>
+                  </div>
+                  <div className="recip-actions">
+                    <button className="icon-btn" disabled={!perm.deleteRecipient} title={tip(perm.deleteRecipient)} aria-label={"Delete " + r.name} onClick={() => askDelete(r)}><i className="bi bi-trash"></i></button>
+                    <button className="icon-btn" disabled={!perm.editRecipient} title={tip(perm.editRecipient)} aria-label={"Edit " + r.name} onClick={() => openRecipientPanel(r, false, ri === 0)}><i className="bi bi-pencil-square"></i></button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+        )}
+        {canSS && ssHist.length ? <SecureSendHistory hist={ssHist} onSimulate={ssSimulate} /> : null}
+      </main>
+
+      {ssOpen ? <SecureSendModal onClose={() => setSsOpen(false)} onSend={ssSend} /> : null}
+      {/* ---- Slide-in edit panel ---- */}
+      {panel ? (
+        <SlidePanel title={panel.title} saveLabel={panel.saveLabel} saveDisabled={panel.submitted && !panelValid} onClose={cancelPanel} onSave={savePanel}>
+          {panel.type === "customer" ? (
+            <React.Fragment>
+              <div className="pf row2">
+                <VField label="First Name" required placeholder="Enter first name" value={d.firstName} onChange={(v) => set({ firstName: v })} onBlur={() => markTouched("firstName")} error={panelErrors.firstName} show={showErr("firstName")} />
+                <VField label="Last Name" required placeholder="Enter last name" value={d.lastName} onChange={(v) => set({ lastName: v })} onBlur={() => markTouched("lastName")} error={panelErrors.lastName} show={showErr("lastName")} />
+              </div>
+              <VField label="Email" required type="email" placeholder="Enter email" value={d.email} onChange={(v) => set({ email: v })} onBlur={() => markTouched("email")} error={panelErrors.email} show={showErr("email")} />
+              <VField label="Phone Number" optional type="tel" placeholder="Enter phone number" value={d.phone} onChange={(v) => set({ phone: v })} />
+              <div className="pf row2">
+                <VField label="Organization" optional placeholder="Enter organization" value={d.company} onChange={(v) => set({ company: v })} />
+                <VField label="Title" optional placeholder="Enter title" value={d.title} onChange={(v) => set({ title: v })} />
+              </div>
+              <div className="panel-sec">Address</div>
+              <VField label="Address Line 1" optional placeholder="Enter address" value={d.address.line1} onChange={(v) => setAddr({ line1: v })} />
+              <VField label="Address Line 2" optional placeholder="Apt, suite, unit (optional)" value={d.address.line2} onChange={(v) => setAddr({ line2: v })} />
+              <div className="pf row2">
+                <VSelect label="Country" required placeholder="Select country" options={COUNTRIES} value={d.address.country} onChange={(v) => setAddr({ country: v, state: "" })} onBlur={() => markTouched("country")} error={panelErrors.country} show={showErr("country")} />
+                {d.address.country && !statesFor(d.address.country).length ?
+                <VField label="State / Region" required placeholder="Enter state or region" value={d.address.state} onChange={(v) => setAddr({ state: v })} onBlur={() => markTouched("state")} error={panelErrors.state} show={showErr("state")} /> :
+                <VSelect label="State" required placeholder={d.address.country ? "Select state" : "Select country first"} options={statesFor(d.address.country, d.address.state)} value={d.address.state} onChange={(v) => setAddr({ state: v })} onBlur={() => markTouched("state")} error={panelErrors.state} show={showErr("state")} />}
+              </div>
+              <div className="pf row2">
+                <VField label="City" required placeholder="Enter city" value={d.address.city} onChange={(v) => setAddr({ city: v })} onBlur={() => markTouched("city")} error={panelErrors.city} show={showErr("city")} />
+                <VField label="Zip Code" required placeholder="Enter zip code" value={d.address.zip} onChange={(v) => setAddr({ zip: v })} onBlur={() => markTouched("zip")} error={panelErrors.zip} show={showErr("zip")} />
+              </div>
+              <VField label="Notes" optional textarea placeholder="Write a note" value={d.notes} onChange={(v) => set({ notes: v })} />
+            </React.Fragment>
+          ) : null}
+
+          {panel.type === "recipient" ? (
+            <React.Fragment>
+              <div className="pf row2">
+                <VField label="First Name" required placeholder="Enter first name" value={d.firstName} onChange={(v) => set({ firstName: v })} onBlur={() => markTouched("firstName")} error={panelErrors.firstName} show={showErr("firstName")} />
+                <VField label="Last Name" required placeholder="Enter last name" value={d.lastName} onChange={(v) => set({ lastName: v })} onBlur={() => markTouched("lastName")} error={panelErrors.lastName} show={showErr("lastName")} />
+              </div>
+              <VField label="Email" required type="email" placeholder="Enter email" value={d.email} onChange={(v) => set({ email: v })} onBlur={() => markTouched("email")} error={panelErrors.email} show={showErr("email")} />
+              <VField label="Confirm Email" required type="email" placeholder="Re-enter email" value={d.confirmEmail} onChange={(v) => set({ confirmEmail: v })} onBlur={() => markTouched("confirmEmail")} error={panelErrors.confirmEmail} show={showErr("confirmEmail")} />
+              <div className="pf row2">
+                <VField label="Title" optional placeholder="Enter title" value={d.title} onChange={(v) => set({ title: v })} />
+                <VField label="Organization" optional placeholder="Enter organization" value={d.org} onChange={(v) => set({ org: v })} />
+              </div>
+              {panel.primary ? null : <VSelect label="Destination Country" required placeholder="Select destination country" options={DEST_COUNTRIES} value={d.destCountry} onChange={(v) => set({ destCountry: v })} onBlur={() => markTouched("destCountry")} error={panelErrors.destCountry} show={showErr("destCountry")} />}
+            </React.Fragment>
+          ) : null}
+
+          {panel.type === "paperRecipient" ? (
+            <React.Fragment>
+              <VField label="Contact Name" required placeholder="Enter contact name" value={d.contactName} onChange={(v) => set({ contactName: v })} onBlur={() => markTouched("contactName")} error={panelErrors.contactName} show={showErr("contactName")} />
+              <VField label="Title &amp; Organization" optional placeholder="Enter title &amp; organization" value={d.titleOrg} onChange={(v) => set({ titleOrg: v })} />
+              <VField label="Email" required type="email" placeholder="Enter email" value={d.email} onChange={(v) => set({ email: v })} onBlur={() => markTouched("email")} error={panelErrors.email} show={showErr("email")} />
+              <VField label="Phone Number" optional type="tel" placeholder="Enter phone number" value={d.phone} onChange={(v) => set({ phone: v })} />
+              <div className="panel-sec"></div>
+              <VField label="Address Line 1" required placeholder="Enter address" value={d.address.line1} onChange={(v) => setAddr({ line1: v })} onBlur={() => markTouched("line1")} error={panelErrors.line1} show={showErr("line1")} />
+              <VField label="Address Line 2" optional placeholder="Enter address" value={d.address.line2} onChange={(v) => setAddr({ line2: v })} />
+              <div className="pf row2">
+                <VSelect label="Country" required placeholder="Select country" options={COUNTRIES} value={d.address.country} onChange={(v) => setAddr({ country: v, state: "" })} onBlur={() => markTouched("country")} error={panelErrors.country} show={showErr("country")} />
+                {d.address.country && !statesFor(d.address.country).length ?
+                <VField label="State / Region" required placeholder="Enter state or region" value={d.address.state} onChange={(v) => setAddr({ state: v })} onBlur={() => markTouched("state")} error={panelErrors.state} show={showErr("state")} /> :
+                <VSelect label="State" required placeholder={d.address.country ? "Select state" : "Select country first"} options={statesFor(d.address.country, d.address.state)} value={d.address.state} onChange={(v) => setAddr({ state: v })} onBlur={() => markTouched("state")} error={panelErrors.state} show={showErr("state")} />}
+              </div>
+              <div className="pf row2" style={{ alignItems: "center" }}>
+                <VField label="City" required placeholder="Enter city" value={d.address.city} onChange={(v) => setAddr({ city: v })} onBlur={() => markTouched("city")} error={panelErrors.city} show={showErr("city")} />
+                <VField label="Zip Code" required placeholder="Enter zip code" value={d.address.zip} onChange={(v) => setAddr({ zip: v })} onBlur={() => markTouched("zip")} error={panelErrors.zip} show={showErr("zip")} />
+              </div>
+            </React.Fragment>
+          ) : null}
+
+          {panel.type === "return" ? (
+            <React.Fragment>
+              <VField label="Recipient Name" required placeholder="Enter recipient name" value={d.name} onChange={(v) => set({ name: v })} onBlur={() => markTouched("name")} error={panelErrors.name} show={showErr("name")} />
+              <VField label="Address Line 1" optional placeholder="Enter address" value={d.address.line1} onChange={(v) => setAddr({ line1: v })} />
+              <div className="pf row2">
+                <VSelect label="Country" required placeholder="Select country" options={COUNTRIES} value={d.address.country} onChange={(v) => setAddr({ country: v, state: "" })} onBlur={() => markTouched("country")} error={panelErrors.country} show={showErr("country")} />
+                {d.address.country && !statesFor(d.address.country).length ?
+                <VField label="State / Region" required placeholder="Enter state or region" value={d.address.state} onChange={(v) => setAddr({ state: v })} onBlur={() => markTouched("state")} error={panelErrors.state} show={showErr("state")} /> :
+                <VSelect label="State" required placeholder={d.address.country ? "Select state" : "Select country first"} options={statesFor(d.address.country, d.address.state)} value={d.address.state} onChange={(v) => setAddr({ state: v })} onBlur={() => markTouched("state")} error={panelErrors.state} show={showErr("state")} />}
+              </div>
+              <div className="pf row2">
+                <VField label="City" required placeholder="Enter city" value={d.address.city} onChange={(v) => setAddr({ city: v })} onBlur={() => markTouched("city")} error={panelErrors.city} show={showErr("city")} />
+                <VField label="Zip Code" required placeholder="Enter zip code" value={d.address.zip} onChange={(v) => setAddr({ zip: v })} onBlur={() => markTouched("zip")} error={panelErrors.zip} show={showErr("zip")} />
+              </div>
+              <div className="panel-sec">Return Shipping</div>
+              {!d.prepaidOpen ? (
+                <button className="add-prepaid" onClick={() => set({ prepaidOpen: true })}><i className="bi bi-plus-lg"></i>Add Prepaid Shipping Label</button>
+              ) : (
+                <div className="prepaid-card">
+                  <div className="prepaid-head"><span>Prepaid Shipping Label</span><button className="remove-link" onClick={() => set({ prepaidOpen: false, tracking: "" })}>Remove</button></div>
+                  <VField label="Tracking Number" optional placeholder="e.g. 9400 1234 5678 9012 3456 78" value={d.tracking} onChange={(v) => set({ tracking: v })} />
+                </div>
+              )}
+            </React.Fragment>
+          ) : null}
+        </SlidePanel>
+      ) : null}
+
+      {/* ---- Resend modal ---- */}
+      {resend ? <ResendModal recipients={resend} onClose={() => setResend(null)} onConfirm={doResend} /> : null}
+
+      {/* ---- Confirmation popup ---- */}
+      {confirm ? <ConfirmModal data={confirm} onClose={() => setConfirm(null)} /> : null}
+
+      <div className="toast-wrap">
+        {toasts.map((t) => (
+          <div className={"toast " + (t.kind || "success")} key={t.id} role="status">
+            <i className={"toast-ic bi " + (t.kind === "error" ? "bi-exclamation-circle-fill" : "bi-check-circle")}></i>
+            <div className="toast-txt">
+              <div className="toast-title">{t.title}</div>
+              {t.body ? <div className="toast-body">{t.body}</div> : null}
+              <div className="toast-acts">
+                <button className="toast-link" onClick={() => dismissToast(t.id)}>Dismiss</button>
+                {t.onRetry ? <button className="toast-link retry" onClick={() => { dismissToast(t.id); t.onRetry(); }}>Try Again</button> : null}
+              </div>
+            </div>
+            <button className="toast-x" aria-label="Close notification" onClick={() => dismissToast(t.id)}><i className="bi bi-x-lg"></i></button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>

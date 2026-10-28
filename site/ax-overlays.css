@@ -1,0 +1,86 @@
+/* ==========================================================================
+   ApostilleXpress — Overlay Standards (SINGLE SOURCE OF TRUTH)
+   Canonical styling for every modal / dialog / confirmation and every
+   toast / notification in the product. Load this sheet BEFORE the page's
+   own <style> block; pages must not redefine any selector below.
+
+   Modal anatomy      .ax-scrim > .ax-modal
+                        .ax-modal-head  (title left, close X right, divider under)
+                        .ax-modal-body  (scrolls, consistent padding)
+                        .ax-modal-foot  (divider over, secondary then primary, right-aligned)
+   Widths             .ax-modal.sm 480 · (default) 560 · .lg 720 · .xl 880 · .full custom
+   Toast anatomy      .ax-toasts > .ax-toast.<success|error|warning|info>
+                        i.ax-toast-ic  (haloed status icon)
+                        .ax-toast-b > .ax-toast-t / .ax-toast-m / .ax-toast-acts
+                        button.ax-toast-x
+   Legacy aliases are declared alongside each canonical selector so existing
+   markup inherits the standard; new code must use the .ax-* names.
+   ========================================================================== */
+
+/* ---------- scrim ---------- */
+.ax-scrim,.scrim{position:fixed;inset:0;background:rgba(9,16,29,.55);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);display:flex;align-items:center;justify-content:center;padding:24px;z-index:80;animation:axFade .14s ease}
+@keyframes axFade{from{opacity:0}to{opacity:1}}
+
+/* ---------- modal shell ---------- */
+.ax-modal,.scrim>.modal,.scrim>.confirm{--ax-modal-w:560px;background:var(--ax-surface-card,#fff);border-radius:16px;box-shadow:0 24px 48px -12px rgba(10,13,18,.25);width:100%;max-width:var(--ax-modal-w);max-height:92vh;padding:0;display:flex;flex-direction:column;overflow:hidden;animation:axModalIn .16s ease}
+@keyframes axModalIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.ax-modal.sm,.scrim>.modal.sm{--ax-modal-w:480px}
+.ax-modal.md,.scrim>.modal.md{--ax-modal-w:560px}
+.ax-modal.lg,.scrim>.modal.lg{--ax-modal-w:720px}
+.ax-modal.xl,.scrim>.modal.xl{--ax-modal-w:880px}
+/* .full — for viewer-style dialogs that size themselves (document preview, etc.);
+   the page may then set its own width/height on the modal element. */
+.ax-modal.full,.scrim>.modal.full{--ax-modal-w:none;width:min(1120px,95vw);max-height:93vh}
+.scrim>.modal.cmodal{--ax-modal-w:520px}
+
+/* ---------- header ---------- */
+.ax-modal-head,.modal-head,.cmodal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:24px 28px 20px;border-bottom:1px solid var(--ax-border-subtle,#e9ecef);flex-shrink:0}
+.ax-modal-title,.ax-modal-head h2,.modal-head h2,.cmodal-head h2,.modal-title{font-size:24px;font-weight:700;line-height:1.25;letter-spacing:-.01em;color:var(--ax-text-primary,#212529);margin:0}
+.ax-modal-head p,.modal-head p,.cmodal-head p,.ax-modal-sub{font-size:15px;color:var(--ax-text-tertiary,#6c757d);line-height:1.45;margin:6px 0 0}
+.ax-modal-x,.modal-x{width:36px;height:36px;flex-shrink:0;margin:-6px -8px 0 0;background:none;border:none;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:18px;line-height:1;color:var(--ax-text-tertiary,#6c757d);cursor:pointer;transition:background .12s ease,color .12s ease}
+.ax-modal-x:hover,.modal-x:hover{background:var(--ax-gray-50,#f8f9fa);color:var(--ax-text-primary,#212529)}
+
+/* ---------- body ---------- */
+.ax-modal-body,.modal-body,.cmodal-body{flex:1;min-height:0;overflow-y:auto;padding:24px 28px;margin:0;font-size:16px;line-height:1.5;color:var(--ax-text-secondary,#495057)}
+.ax-modal-body>p:first-child,.modal-body>p:first-child{margin-top:0}
+.ax-modal-body>p:last-child,.modal-body>p:last-child{margin-bottom:0}
+.ax-modal-body>*+*{margin-top:18px}
+.ax-modal-body .field,.modal-body .field{margin-bottom:18px}
+.ax-modal-body .field:last-child,.modal-body .field:last-child{margin-bottom:0}
+
+/* ---------- footer ---------- */
+.ax-modal-foot,.modal-foot,.confirm-foot{display:flex;align-items:center;justify-content:flex-end;gap:12px;padding:18px 28px 20px;margin:0;border-top:1px solid var(--ax-border-subtle,#e9ecef);flex-shrink:0}
+.ax-modal-foot .grow{margin-right:auto}
+
+/* ---------- toasts ---------- */
+.ax-toasts,.toast-wrap,.toasts{position:fixed;top:88px;right:28px;bottom:auto;left:auto;z-index:120;display:flex;flex-direction:column;gap:12px;width:420px;max-width:calc(100vw - 40px)}
+.ax-toast,.toast{display:flex;align-items:flex-start;gap:14px;width:100%;background:var(--ax-surface-card,#fff);border:1px solid var(--ax-border-subtle,#e9ecef);border-radius:14px;box-shadow:0 16px 32px -10px rgba(10,13,18,.18);padding:18px 20px;animation:axToastIn .16s ease}
+/* bottom-right placement variant */
+.ax-toasts.bottom-right,.toast-wrap.bottom-right,.toasts.bottom-right{top:auto;bottom:28px;right:28px}
+.ax-toasts.bottom-right .ax-toast,.toast-wrap.bottom-right .ax-toast,.toast-wrap.bottom-right .toast{animation:axToastInUp .18s ease}
+@keyframes axToastIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@keyframes axToastInUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.ax-toast-ic,.toast-ic,.toast>i,.toast .t-ico{width:38px;height:38px;flex-shrink:0;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin:0;font-size:0;color:transparent;background:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='38' height='38' viewBox='0 0 38 38' fill='none'%3E%3Cg opacity='0.3'%3E%3Cpath d='M19 6C26.1797 6 32 11.8203 32 19C32 26.1797 26.1797 32 19 32C11.8203 32 6 26.1797 6 19C6 11.8203 11.8203 6 19 6Z' stroke='%23198754' stroke-width='2'/%3E%3C/g%3E%3Cg opacity='0.1'%3E%3Cpath d='M19 1C28.9411 1 37 9.05887 37 19C37 28.9411 28.9411 37 19 37C9.05887 37 1 28.9411 1 19C1 9.05887 9.05887 1 19 1Z' stroke='%23198754' stroke-width='2'/%3E%3C/g%3E%3Cpath d='M15.2474 18.9993L17.7474 21.4993L22.7474 16.4993M27.3307 18.9993C27.3307 23.6017 23.5998 27.3327 18.9974 27.3327C14.395 27.3327 10.6641 23.6017 10.6641 18.9993C10.6641 14.397 14.395 10.666 18.9974 10.666C23.5998 10.666 27.3307 14.397 27.3307 18.9993Z' stroke='%23198754' stroke-width='1.66667' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/38px 38px no-repeat;box-shadow:none}
+.ax-toast.error .ax-toast-ic,.toast.error>i,.toast.error .t-ico,.toast.err .toast-ic{width:34px;height:34px;font-size:19px;background-image:none;color:var(--ax-danger-600,#e33b32);background-color:var(--ax-danger-50,#fdecea);box-shadow:0 0 0 5px rgba(227,59,50,.10)}
+.ax-toast.warning .ax-toast-ic,.toast.warn>i,.toast.warn .toast-ic{width:34px;height:34px;font-size:19px;background-image:none;color:var(--ax-warning-700,#b26a08);background-color:var(--ax-warning-50,#fdf4e3);box-shadow:0 0 0 5px rgba(239,162,47,.12)}
+.ax-toast.info .ax-toast-ic,.toast.info>i,.toast.info .toast-ic{width:34px;height:34px;font-size:19px;background-image:none;color:var(--ax-info-700,#00558f);background-color:var(--ax-info-50,#e8f2fb);box-shadow:0 0 0 5px rgba(0,116,194,.10)}
+.ax-toast-b,.toast-b,.toast-txt,.toast .t-body{flex:1;min-width:0}
+.ax-toast-t,.toast-t,.toast-title,.toast .t-title{font-size:16px;font-weight:700;line-height:1.35;color:var(--ax-text-primary,#212529)}
+.ax-toast-m,.toast-m,.toast-body,.toast .t-msg{font-size:15px;line-height:1.45;color:var(--ax-text-secondary,#495057);margin-top:3px}
+.ax-toast-m b,.toast-m b,.toast-body b{font-weight:700;color:var(--ax-text-primary,#212529)}
+.ax-toast-acts,.toast-acts,.toast .t-links{display:flex;flex-direction:row;align-items:center;gap:18px;margin-top:12px}
+.ax-toast-act,.toast-act,.toast-link,.toast .t-links button{background:none;border:none;padding:0;font-family:inherit;font-size:15px;font-weight:700;color:var(--ax-text-primary,#212529);cursor:pointer;text-decoration:none;white-space:nowrap}
+.ax-toast-act.link,.toast-act:not(.plain),.toast-link.retry,.toast .t-retry{color:var(--ax-sea-depths,#0d5257)}
+.ax-toast-act:hover,.toast-act:hover,.toast-link:hover,.toast .t-links button:hover{text-decoration:underline}
+.ax-toast-x,.toast-x,.toast .t-x{width:30px;height:30px;flex-shrink:0;margin:-4px -6px 0 0;background:none;border:none;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;font-size:15px;line-height:1;color:var(--ax-text-tertiary,#6c757d);cursor:pointer;transition:background .12s ease,color .12s ease}
+.ax-toast-x:hover,.toast-x:hover,.toast .t-x:hover{background:var(--ax-gray-50,#f8f9fa);color:var(--ax-text-primary,#212529)}
+
+@media (max-width:640px){
+  .ax-scrim,.scrim{padding:16px}
+  .ax-modal-head,.modal-head,.cmodal-head{padding:20px 20px 16px}
+  .ax-modal-title,.ax-modal-head h2,.modal-head h2,.modal-title{font-size:20px}
+  .ax-modal-body,.modal-body,.cmodal-body{padding:20px}
+  .ax-modal-foot,.modal-foot,.confirm-foot{padding:16px 20px;flex-wrap:wrap}
+  .ax-toasts,.toast-wrap,.toasts{top:76px;right:16px;left:16px;width:auto}
+  .ax-toasts.bottom-right,.toast-wrap.bottom-right,.toasts.bottom-right{top:auto;bottom:16px}
+}

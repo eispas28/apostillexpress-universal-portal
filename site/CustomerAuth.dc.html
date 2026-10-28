@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Customer Auth" description="Login, registration (Individual / Agent / Organization), Google sign-in & MFA — split-screen, mobile responsive." --><helmet><script src="./ds-base.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"><style>*{box-sizing:border-box}body{margin:0}.root{font-family:var(--ax-font-base);color:var(--ax-text-primary)}
+.auth{display:grid;grid-template-columns:1fr 1fr;min-height:100vh}
+.hero{position:relative;overflow:hidden;background:url('./hero-buildings.png') center/cover no-repeat;color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:64px 72px}
+.hero-grain{position:absolute;inset:0;background:linear-gradient(157deg,rgba(17,102,108,.9) 0%,rgba(13,82,87,.93) 53%,rgba(9,66,71,.96) 100%);pointer-events:none}
+.hero-content{position:relative;z-index:1}
+.welcome{font-size:62px;line-height:1.02;font-weight:700;margin:0;letter-spacing:-.01em}
+.tagline{font-size:30px;line-height:1.28;font-weight:300;margin:26px 0 0;color:rgba(255,255,255,.94)}
+.hero-foot{position:absolute;left:0;right:0;bottom:0;z-index:1;display:flex;justify-content:space-between;align-items:center;padding:28px 72px;font-size:15px;color:rgba(255,255,255,.9)}
+.hero-foot a{color:#fff;font-weight:500;text-decoration:none}
+.hero-foot a:hover{text-decoration:underline}
+.pane{position:relative;background:var(--ax-surface-page);display:flex;flex-direction:column}
+.pane-top{display:flex;justify-content:flex-end;align-items:center;padding:30px 52px;font-size:18px;color:var(--ax-text-primary)}
+.pane-top-split{display:flex;justify-content:space-between;align-items:center;padding:30px 52px;font-size:18px;color:var(--ax-text-primary)}
+.backbtn{display:inline-flex;align-items:center;gap:8px;background:none;border:none;cursor:pointer;font-family:inherit;font-size:18px;color:var(--ax-text-primary)}
+.backbtn:hover{color:var(--ax-sea-depths)}
+.link{color:var(--ax-text-link);font-weight:600;text-decoration:none;cursor:pointer}
+.link:hover{text-decoration:underline}
+.body-center{flex:1;display:flex;align-items:center;justify-content:center;padding:0 52px 52px}
+.body-top{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:8px 52px 52px}
+.card{width:100%;max-width:520px;background:var(--ax-surface-card);border:1px solid var(--ax-border-subtle);border-radius:14px;box-shadow:var(--ax-shadow-md);padding:40px}
+.card.center{text-align:center}
+.card-logo{display:flex;justify-content:center;margin-bottom:18px}
+.h-title{font-size:32px;font-weight:700;line-height:1.18;margin:0;color:var(--ax-text-primary)}
+.h-title.sm{font-size:28px}
+.h-sub{font-size:16px;color:var(--ax-text-tertiary);margin:8px 0 0;line-height:1.45}
+.form{margin-top:26px;display:flex;flex-direction:column;gap:18px;text-align:left}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px 16px}
+.row-between{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.ordiv{display:flex;align-items:center;gap:16px;color:var(--ax-text-tertiary);font-size:14px}
+.hr{flex:1;height:1px;background:var(--ax-border)}
+.gbtn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;height:48px;background:var(--ax-surface-card);border:1px solid var(--ax-border);border-radius:8px;box-shadow:var(--ax-shadow-xs);font-family:inherit;font-size:16px;font-weight:500;color:var(--ax-text-primary);cursor:pointer;transition:background .15s ease,border-color .15s ease}
+.gbtn:hover{background:var(--ax-surface-hover);border-color:var(--ax-border-strong)}
+.panel{width:100%;max-width:540px}
+.types{display:flex;flex-direction:column;gap:16px;margin-top:26px}
+.tcard{display:flex;align-items:center;gap:18px;width:100%;text-align:left;background:var(--ax-surface-card);border:1px solid var(--ax-border-subtle);border-radius:12px;box-shadow:var(--ax-shadow-xs);padding:18px 20px;cursor:pointer;font-family:inherit;transition:border-color .15s ease,box-shadow .15s ease}
+.tcard:hover{border-color:var(--ax-teal-300);box-shadow:var(--ax-shadow-md)}
+.ticon{flex-shrink:0;width:48px;height:48px;border-radius:50%;background:var(--ax-teal-50);color:var(--ax-sea-depths);display:flex;align-items:center;justify-content:center;font-size:22px}
+.tbody{flex:1}
+.tname{font-size:16px;font-weight:600;color:var(--ax-text-primary)}
+.tdesc{font-size:14px;color:var(--ax-text-tertiary);margin-top:4px;line-height:1.45}
+.tarrow{color:var(--ax-text-primary);font-size:18px;flex-shrink:0}
+.terms{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--ax-border-subtle);border-radius:10px;padding:14px 16px}
+.terms-txt{font-size:13px;line-height:1.5;color:var(--ax-text-secondary)}
+.terms-txt b{font-weight:700;color:var(--ax-text-primary)}
+.tlink{color:var(--ax-sea-depths);font-weight:700;text-decoration:underline;cursor:pointer}
+.terms-short{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--ax-text-secondary)}
+.mfa-input{margin-top:22px}
+.resend{font-size:13px;color:var(--ax-text-tertiary);margin-top:10px}
+.vbtn{display:inline-flex;align-items:center;gap:10px;background:var(--ax-sea-depths);color:#fff;border:none;border-radius:8px;padding:12px 22px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;margin-top:20px;transition:background .15s ease}
+.vbtn:hover{background:var(--ax-teal-700)}
+.spin{width:18px;height:18px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:axspin .7s linear infinite}
+@keyframes axspin{to{transform:rotate(360deg)}}
+.succ-ic{width:60px;height:60px;border-radius:50%;background:var(--ax-success-50);color:var(--ax-success-600);display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 18px}
+.gscreen{min-height:100vh;background:var(--ax-surface-card);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:40px}
+.gcard{width:100%;max-width:460px;border:1px solid var(--ax-border-subtle);border-radius:8px;overflow:hidden;background:#fff}
+.gcard-head{display:flex;align-items:center;gap:10px;padding:15px 20px;border-bottom:1px solid var(--ax-border-subtle);font-size:15px;color:var(--ax-text-secondary)}
+.gcard-body{padding:22px 24px 16px}
+.gwave{width:44px;height:44px;border-radius:8px;background:#fde9e3;display:flex;align-items:center;justify-content:center;font-size:22px;margin:6px auto 0}
+.gtitle{font-size:24px;color:var(--ax-text-primary);text-align:center;margin-top:18px;font-weight:400}
+.gsub{text-align:center;color:var(--ax-text-secondary);margin-top:8px;font-size:15px}
+.gblue{color:#1a73e8}
+.gaccts{margin-top:20px}
+.gacct{display:flex;align-items:center;gap:16px;padding:13px 4px;border-top:1px solid var(--ax-border-subtle);cursor:pointer;transition:background .12s ease}
+.gacct:hover{background:var(--ax-gray-50)}
+.gavatar{width:36px;height:36px;border-radius:50%;background:#7b1fa2;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:500;flex-shrink:0}
+.guse-ic{width:36px;height:36px;display:flex;align-items:center;justify-content:center;color:var(--ax-gray-600);font-size:26px;flex-shrink:0}
+.gacct-name{font-weight:500;color:var(--ax-text-primary);font-size:15px}
+.gacct-mail{font-size:13px;color:var(--ax-text-tertiary)}
+.gdisc{font-size:13px;color:var(--ax-text-secondary);line-height:1.5;padding:20px 4px 6px}
+.gfoot{display:flex;align-items:center;gap:24px;font-size:13px;color:var(--ax-text-tertiary);max-width:460px;width:100%;padding:0 6px}
+.gfoot-link{color:var(--ax-text-tertiary);text-decoration:none;cursor:pointer}
+.gfoot-link:hover{color:var(--ax-text-primary)}
+.fp{min-height:100vh;background:var(--ax-surface-page);display:flex;align-items:center;justify-content:center;padding:40px 20px}
+.fp-card{width:100%;max-width:560px;background:var(--ax-surface-card);border:1px solid var(--ax-border-subtle);border-radius:14px;box-shadow:var(--ax-shadow-lg);padding:44px 52px}
+.fp-title{font-size:30px;font-weight:700;text-align:center;margin:0;color:var(--ax-text-primary)}
+.fp-sub{font-size:16px;color:var(--ax-text-tertiary);text-align:center;margin:12px auto 0;max-width:440px;line-height:1.45}
+.fp-form{margin-top:26px;display:flex;flex-direction:column;gap:16px;text-align:left}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:6px}
+.fbtn{height:46px;border-radius:8px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s ease,border-color .15s ease}
+.fbtn.ghost{background:var(--ax-surface-card);border:1px solid var(--ax-border);color:var(--ax-text-primary);box-shadow:var(--ax-shadow-xs)}
+.fbtn.ghost:hover{background:var(--ax-surface-hover)}
+.fbtn.solid{background:var(--ax-sea-depths);border:1px solid var(--ax-sea-depths);color:#fff;box-shadow:var(--ax-shadow-xs)}
+.fbtn.solid:hover{background:var(--ax-teal-700)}
+.fbtn.solid:disabled{background:var(--ax-gray-100);border-color:var(--ax-gray-200);color:var(--ax-gray-500);cursor:not-allowed;box-shadow:none}
+.fp-resend{font-size:13px;color:var(--ax-text-tertiary);margin-top:-2px}
+.pwwrap{display:flex;align-items:center;gap:8px;background:var(--ax-surface-card);border:1px solid var(--ax-border);border-radius:8px;padding:10px 14px;box-shadow:var(--ax-shadow-xs)}
+.pwwrap:focus-within{border-color:var(--ax-aqua);box-shadow:var(--ax-focus-ring)}
+.pwinput{flex:1;border:none;outline:none;background:transparent;font-family:inherit;font-size:16px;color:var(--ax-text-primary);min-width:0}
+.pweye{background:none;border:none;cursor:pointer;color:var(--ax-text-tertiary);display:inline-flex;align-items:center;font-size:18px;padding:0}
+.rules{display:flex;flex-direction:column;gap:8px;margin-top:2px}
+.rule{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--ax-text-tertiary)}
+.rule i{color:var(--ax-gray-400);font-size:16px}
+.rule.ok{color:var(--ax-text-primary)}
+.rule.ok i{color:var(--ax-success-600)}
+.fp-done-row{display:flex;align-items:center;justify-content:center;gap:12px}
+.done-badge{width:34px;height:34px;border-radius:50%;background:var(--ax-success-600);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.fp-login{margin-top:24px;display:flex;justify-content:center}
+.fp-login-btn{background:var(--ax-sea-depths);color:#fff;border:none;border-radius:8px;padding:12px 30px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;box-shadow:var(--ax-shadow-xs);transition:background .15s ease}
+.fp-login-btn:hover{background:var(--ax-teal-700)}
+@media (max-width:880px){.auth{grid-template-columns:1fr}.hero{min-height:auto;padding:38px 26px 30px}.hero-content{padding-bottom:8px}.welcome{font-size:38px}.tagline{font-size:19px;margin-top:16px}.hero-foot{position:static;padding:24px 0 0}.pane-top,.pane-top-split{padding:20px 22px;font-size:16px}.body-center,.body-top{padding:6px 18px 36px}.card{padding:26px 20px}.fgrid{grid-template-columns:1fr}.h-title{font-size:26px}}</style><link rel="stylesheet" href="ax-responsive.css"><script src="./ax-mobile-nav.js"></script></helmet><div class="root"><sc-if value="{{ isSplit }}" hint-placeholder-val="{{ true }}"><div class="auth"><div class="hero"><div class="hero-grain"></div><div class="hero-content"><div class="welcome">Welcome to</div><img src="assets/logos/ax-wordmark-white.png" alt="ApostilleXpress" style="height:56px;width:auto;display:block;margin:14px auto 0"><p class="tagline">Fast. Secure.<br>Compliant Apostille Services,<br>Wherever You Are.</p></div><div class="hero-foot"><span>© @Gov 2025</span><a href="#" onClick="{{ noop }}">Contact Us</a></div></div><div class="pane"><sc-if value="{{ isLogin }}" hint-placeholder-val="{{ true }}"><div class="pane-top"><span>Don’t have an account? <a class="link" onClick="{{ goType }}">Register</a></span></div><div class="body-center" data-screen-label="Login"><div class="card center"><div class="card-logo"><img src="assets/logos/ax-wordmark.png" alt="ApostilleXpress" style="height:34px;width:auto;display:block"></div><h1 class="h-title">Login to your account</h1><p class="h-sub">Welcome back! Please enter your details.</p><div class="form"><x-import component-from-global-scope="ApostilleXpressDesignSystem_141fbe.FormField" label="Email" required="{{ true }}" hint-size="100%,72px"><x-import component-from-global-scope="ApostilleXpressDesignSystem_141fbe.Input" type="email" placeholder="Enter your email" hint-size="100%,44px"></x-import></x-import><x-import component-from-global-scope="ApostilleXpressDesignSystem_141fbe.FormField" label="Password" required="{{ true }}" hint-size="100%,72px"><x-import component-from-global-scope="ApostilleXpressDesignSystem_141fbe.Input" type="password" placeholder="Enter your password" hint-size="100%,44px"></x-import></x-import><div class="row-between"><x-import component-from-global-scope="ApostilleXpressDesignSystem_141fbe.Checkbox" label="Remember me" size="sm" checked="{{ rememberMe }}" onChange="{{ toggleRemember }}" hint-size="120px,20px"></x-import><a class="link" onClick="{{ goForgot }}">Forgot Password?</a></div><x-import component-from-global-scope="ApostilleXpressDesignSystem_141fbe.Button" variant="primary" size="lg" full-width="{{ true }}" onClick="{{ goMfa }}" hint-size="100%,44px">Login</x-import><div class="ordiv"><span class="hr"></span>OR<span class="hr"></span></div><button class="gbtn" onClick="{{ goGoogle }}"><svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path></svg>Login with Google</button></div></div></div></sc-if><sc-if value="{{ isType }}" hint-placeholder-val="{{ false }}"><div class="pane-top"><span>Already have an account? <a class="link" onClick="{{ goLogin }}">Login</a></span></div><div class="body-top" data-screen-label="Register — Account Type"><div class="panel"><h1 class="h-title">Join Us!</h1><p class="h-sub">To begin this journey, tell us what type of account you’d be opening.</p><div class="types"><button class="tcard" onClick="{{ selIndividual }}"><span class="ticon"><i class="bi bi-person-fill"></i></span><div class="tbody"><div class="tname">Individual</div><div class="tdesc">Member of the public that wants to submit a request for themselves, close friends, or family members.</div></div><span class="tarrow"><i class="bi bi-arrow-right"></i></span></button><button class="tcard" onClick="{{ selAgent }}"><span class="ticon"><i class="bi bi-person-badge-fill"></i></span><div class="tbody"><div class="tname">Agent</div><div class="tdesc">Submitting requests on behalf of someone else.</div></div><span class="tarrow"><i class="bi bi-arrow-right"></i></span></button><button class="tcard" onClick="{{ selOrg }}"><span class="ticon"><i class="bi bi-diagram-3-fill"></i></span><div class="tbody"><div class="tname">Organization</div><div class="tdesc">Submitting requests on behalf of their own company.</div></div><span class="tarrow"><i class="bi bi-arrow-right"></i></span></button></div></div></div></sc-if><sc-if value="{{ isRegister }}" hint-placeholder-val="{{ false }}"><div class="pane-top-split"><button class="backbtn" onClick="{{ goType }}"><i class="bi bi-arrow-left"></i>Back</button><span>Already have an account? <a class="link" onClick="{{ goLogin }}">Login</a></span></div><div class="body-center" data-screen-label="Registration Form"><div class="card"><h1 class="h-title">{{ regTitle }}</h1><p class="h-sub">Let’s learn more about you.</p><div class="form"><div class="fgrid"><sc-for list="{{ fields }}" as="f" hint-placeholder-count="6"><x-import component-from-global-scope="ApostilleXpressDesignSystem_141fbe.FormField" label="{{ f.label }}" required="{{ f.req }}" hint-size="100%,72px"><x-import component-from-global-scope="ApostilleXpressDesignSystem_141fbe.Input" type="{{ f.type }}" placeholder="{{ f.ph }}" hint-size="100%,44px"></x-import></x-import></sc-for></div><sc-if value="{{ longTerms }}" hint-placeholder-val="{{ true }}"><div class="terms"><x-import component-from-global-scope="ApostilleXpressDesignSystem_141fbe.Checkbox" size="sm" checked="{{ agreeTerms }}" onChange="{{ toggleTerms }}" hint-size="20px,20px"></x-import><div class="terms-txt">By checking this box, you agree to our <a class="tlink" onClick="{{ noop }}">Terms</a> and <a class="tlink" onClick="{{ noop }}">Privacy Policy</a>. By using the platform, <b>you explicitly agree that you recognize the legitimacy of the relevant competent authorities and other state and Federal Government Agencies of the United States of America.</b></div></div></sc-if><sc-if value="{{ shortTerms }}" hint-placeholder-val="{{ false }}"><div class="terms-short"><x-import component-from-global-scope="ApostilleXpressDesignSystem_141fbe.Checkbox" size="sm" checked="{{ agreeTerms }}" onChange="{{ toggleTerms }}" hint-size="20px,20px"></x-import><span>I accept the <a class="tlink" onClick="{{ noop }}">Terms</a> and <a class="tlink" onClick="{{ noop }}">Privacy Policy</a>.</span></div></sc-if><x-import component-from-global-scope="ApostilleXpressDesignSystem_141fbe.Button" variant="primary" size="lg" full-width="{{ true }}" onClick="{{ goMfa }}" hint-size="100%,44px">Register Account</x-import><div class="ordiv"><span class="hr"></span>OR<span class="hr"></span></div><button class="gbtn" onClick="{{ goGoogle }}"><svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path></svg>Continue with Google</button></div></div></div></sc-if><sc-if value="{{ isMfa }}" hint-placeholder-val="{{ false }}"><div class="pane-top"></div><div class="body-center" data-screen-label="Multi-Factor Authentication"><div class="card"><h1 class="h-title sm">Multi-Factor Authentication</h1><p class="h-sub">Please enter the code we sent to {{ maskedEmail }}.</p><div class="mfa-input"><x-import component-from-global-scope="ApostilleXpressDesignSystem_141fbe.Input" value="{{ code }}" onChange="{{ onCodeChange }}" inputmode="numeric" placeholder="Enter your 6-digit code" hint-size="100%,44px"></x-import></div><p class="resend">Didn’t get a code? <a class="link" onClick="{{ noop }}">Click to resend</a></p><button class="vbtn" onClick="{{ verify }}"><sc-if value="{{ verifying }}" hint-placeholder-val="{{ false }}"><span class="spin"></span></sc-if>Verify code</button></div></div></sc-if><sc-if value="{{ isSuccess }}" hint-placeholder-val="{{ false }}"><div class="pane-top"></div><div class="body-center" data-screen-label="Verified"><div class="card center"><div class="succ-ic"><i class="bi bi-check-lg"></i></div><h1 class="h-title">You’re all set</h1><p class="h-sub">Your identity has been verified. Welcome to ApostilleXpress.</p><div class="form"><x-import component-from-global-scope="ApostilleXpressDesignSystem_141fbe.Button" variant="primary" size="lg" full-width="{{ true }}" onClick="{{ goDashboard }}" hint-size="100%,44px">Continue to Dashboard</x-import></div></div></div></sc-if></div></div></sc-if><sc-if value="{{ isGoogle }}" hint-placeholder-val="{{ false }}"><div class="gscreen" data-screen-label="Google Sign-In"><div class="gcard"><div class="gcard-head"><svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path></svg>Sign in with Google</div><div class="gcard-body"><div class="gwave">✌️</div><div class="gtitle">Choose an account</div><div class="gsub">to continue to <span class="gblue">ApostilleXpress</span></div><div class="gaccts"><div class="gacct" onClick="{{ goMfa }}"><div class="gavatar">M</div><div class="gacct-body"><div class="gacct-name">Maria Rodriguez</div><div class="gacct-mail">maria.rodriguez@gmail.com</div></div></div><div class="gacct" onClick="{{ goMfa }}"><span class="guse-ic"><i class="bi bi-person-circle"></i></span><div class="gacct-name">Use another account</div></div></div><div class="gdisc">To continue, Google will share your name, email address, language preference, and profile picture with ApostilleXpress. Before using this app, you can review ApostilleXpress’s <a class="gblue" onClick="{{ noop }}">privacy policy</a> and <a class="gblue" onClick="{{ noop }}">terms of service</a>.</div></div></div><div class="gfoot"><span>English (United States) ▾</span><span style="flex:1"></span><a class="gfoot-link" onClick="{{ noop }}">Help</a><a class="gfoot-link" onClick="{{ noop }}">Privacy</a><a class="gfoot-link" onClick="{{ noop }}">Terms</a></div></div></sc-if><sc-if value="{{ isForgot }}" hint-placeholder-val="{{ false }}"><div class="fp" data-screen-label="Forgot Password"><div class="fp-card"><h1 class="fp-title">Forgot Password?</h1><p class="fp-sub">No worries, we will send you instructions to reset your password.</p><div class="fp-form"><x-import component-from-global-scope="ApostilleXpressDesignSystem_141fbe.FormField" label="Email" required="{{ true }}" hint-size="100%,72px"><x-import component-from-global-scope="ApostilleXpressDesignSystem_141fbe.Input" type="email" placeholder="Enter your email" value="{{ fpEmail }}" onChange="{{ onFpEmail }}" hint-size="100%,44px"></x-import></x-import><div class="frow"><button class="fbtn ghost" onClick="{{ goLogin }}">Cancel</button><button class="fbtn solid" disabled="{{ sendDisabled }}" onClick="{{ sendCode }}">Send verification code</button></div></div></div></div></sc-if><sc-if value="{{ isCheckEmail }}" hint-placeholder-val="{{ false }}"><div class="fp" data-screen-label="Check Your Email"><div class="fp-card"><h1 class="fp-title">Please Check your Email</h1><p class="fp-sub">We’ve sent a code to {{ fpEmailShown }}</p><div class="fp-form"><x-import component-from-global-scope="ApostilleXpressDesignSystem_141fbe.FormField" label="Email" required="{{ true }}" hint-size="100%,72px"><x-import component-from-global-scope="ApostilleXpressDesignSystem_141fbe.Input" type="email" placeholder="Enter your email" value="{{ fpEmail }}" onChange="{{ onFpEmail }}" hint-size="100%,44px"></x-import></x-import><x-import component-from-global-scope="ApostilleXpressDesignSystem_141fbe.Input" placeholder="Enter verification code" value="{{ fpCode }}" onChange="{{ onFpCode }}" inputmode="numeric" hint-size="100%,44px"></x-import><p class="fp-resend">Didn’t get a code? <a class="link" onClick="{{ noop }}">Click to resend</a></p><div class="frow"><button class="fbtn ghost" onClick="{{ goLogin }}">Cancel</button><button class="fbtn solid" disabled="{{ verifyDisabled }}" onClick="{{ goSetPw }}">Verify code</button></div></div></div></div></sc-if><sc-if value="{{ isSetPw }}" hint-placeholder-val="{{ false }}"><div class="fp" data-screen-label="Set New Password"><div class="fp-card"><h1 class="fp-title">Set New Password</h1><p class="fp-sub">Your Password must be different from your previously used password.</p><div class="fp-form"><x-import component-from-global-scope="ApostilleXpressDesignSystem_141fbe.FormField" label="Type New Password" required="{{ true }}" hint-size="100%,72px"><div class="pwwrap"><input class="pwinput" type="{{ pw1Type }}" placeholder="Enter your password" value="{{ npw }}" onChange="{{ onNpw }}"><button class="pweye" onClick="{{ togglePw1 }}"><i class="bi {{ eye1 }}"></i></button></div></x-import><x-import component-from-global-scope="ApostilleXpressDesignSystem_141fbe.FormField" label="Re-Type New Password" required="{{ true }}" hint-size="100%,72px"><div class="pwwrap"><input class="pwinput" type="{{ pw2Type }}" placeholder="Enter your password" value="{{ npw2 }}" onChange="{{ onNpw2 }}"><button class="pweye" onClick="{{ togglePw2 }}"><i class="bi {{ eye2 }}"></i></button></div></x-import><div class="rules"><sc-for list="{{ rules }}" as="r" hint-placeholder-count="5"><div class="rule {{ r.cls }}"><i class="bi bi-check-lg"></i>{{ r.label }}</div></sc-for></div><div class="frow"><button class="fbtn ghost" onClick="{{ goLogin }}">Cancel</button><button class="fbtn solid" disabled="{{ continueDisabled }}" onClick="{{ finishReset }}">Continue</button></div></div></div></div></sc-if><sc-if value="{{ isPwUpdated }}" hint-placeholder-val="{{ false }}"><div class="fp" data-screen-label="Password Updated"><div class="fp-card fp-done"><div class="fp-done-row"><span class="done-badge"><i class="bi bi-check-lg"></i></span><h1 class="fp-title">Password Updated!</h1></div><p class="fp-sub">Your password has been successfully changed! Please login again.</p><div class="fp-login"><button class="fp-login-btn" onClick="{{ goLogin }}">Login</button></div></div></div></sc-if></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;startScreen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;login&quot;,&quot;register-type&quot;,&quot;register&quot;,&quot;mfa&quot;,&quot;google&quot;,&quot;success&quot;,&quot;forgot&quot;,&quot;check-email&quot;,&quot;set-password&quot;,&quot;pw-updated&quot;],&quot;default&quot;:&quot;login&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;defaultAccountType&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;individual&quot;,&quot;agent&quot;,&quot;organization&quot;],&quot;default&quot;:&quot;individual&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      screen: 'login', // always start on Login, regardless of persisted tweak state
+      accountType: props.defaultAccountType || 'individual',
+      rememberMe: false,
+      agreeTerms: true,
+      code: '',
+      verifying: false,
+      fpEmail: '',
+      fpCode: '',
+      npw: '',
+      npw2: '',
+      showPw1: false,
+      showPw2: false,
+    };
+  }
+  go(screen) { this.setState({ screen }); }
+  selectType(t) { this.setState({ accountType: t, screen: 'register', agreeTerms: true }); }
+  renderVals() {
+    const s = this.state;
+    const t = s.accountType;
+    const base = [
+      { label: 'First Name', ph: 'Enter your first name', req: true, type: 'text' },
+      { label: 'Last Name', ph: 'Enter your last name', req: true, type: 'text' },
+    ];
+    const org = [
+      { label: 'Company', ph: 'Enter company', req: false, type: 'text' },
+      { label: 'Title', ph: 'Enter title', req: false, type: 'text' },
+    ];
+    const rest = [
+      { label: 'Email', ph: 'Enter your email', req: true, type: 'email' },
+      { label: 'Confirm Email', ph: 'Enter your email', req: true, type: 'email' },
+      { label: 'Password', ph: 'Enter your password', req: true, type: 'password' },
+      { label: 'Confirm Password', ph: 'Enter your password', req: true, type: 'password' },
+    ];
+    const fields = t === 'individual' ? [...base, ...rest] : [...base, ...org, ...rest];
+    const titles = { individual: 'Individual Registration', agent: 'Agent Registration', organization: 'Organization Registration' };
+    const npw = s.npw, npw2 = s.npw2;
+    const mkRule = (ok, label) => ({ label, cls: ok ? 'ok' : '' });
+    const rLower = /[a-z]/.test(npw);
+    const rUpper = /[A-Z]/.test(npw);
+    const rNum = /[0-9]/.test(npw);
+    const rSpec = /[^A-Za-z0-9]/.test(npw);
+    const rLen = npw.length >= 11;
+    const pwValid = rLower && rUpper && rNum && rSpec && rLen;
+    const pwMatch = npw.length > 0 && npw === npw2;
+    const fpScreens = ['forgot', 'check-email', 'set-password', 'pw-updated'];
+    const isFp = fpScreens.indexOf(s.screen) !== -1;
+    return {
+      isSplit: !isFp && s.screen !== 'google',
+      isGoogle: s.screen === 'google',
+      isForgot: s.screen === 'forgot',
+      isCheckEmail: s.screen === 'check-email',
+      isSetPw: s.screen === 'set-password',
+      isPwUpdated: s.screen === 'pw-updated',
+      fpEmail: s.fpEmail,
+      fpEmailShown: s.fpEmail || 'email@gmail.com',
+      fpCode: s.fpCode,
+      npw: s.npw,
+      npw2: s.npw2,
+      pw1Type: s.showPw1 ? 'text' : 'password',
+      pw2Type: s.showPw2 ? 'text' : 'password',
+      eye1: s.showPw1 ? 'bi-eye' : 'bi-eye-slash',
+      eye2: s.showPw2 ? 'bi-eye' : 'bi-eye-slash',
+      rules: [mkRule(rLower, 'One lowercase character'), mkRule(rUpper, 'One uppercase character'), mkRule(rNum, 'One number character'), mkRule(rSpec, 'One special character'), mkRule(rLen, '11+ characters')],
+      sendDisabled: !s.fpEmail.trim(),
+      verifyDisabled: !s.fpCode.trim(),
+      continueDisabled: !(pwValid && pwMatch),
+      isLogin: s.screen === 'login',
+      isType: s.screen === 'register-type',
+      isRegister: s.screen === 'register',
+      isMfa: s.screen === 'mfa',
+      isSuccess: s.screen === 'success',
+      regTitle: titles[t] || 'Registration',
+      fields,
+      longTerms: t !== 'organization',
+      shortTerms: t === 'organization',
+      rememberMe: s.rememberMe,
+      agreeTerms: s.agreeTerms,
+      code: s.code,
+      verifying: s.verifying,
+      maskedEmail: 'e******@gmail.com',
+      goLogin: () => this.go('login'),
+      goDashboard: () => { window.location.href = 'Orders.dc.html'; },
+      goType: () => this.go('register-type'),
+      goGoogle: () => this.go('google'),
+      goMfa: () => this.go('mfa'),
+      selIndividual: () => this.selectType('individual'),
+      selAgent: () => this.selectType('agent'),
+      selOrg: () => this.selectType('organization'),
+      toggleRemember: () => this.setState((p) => ({ rememberMe: !p.rememberMe })),
+      toggleTerms: () => this.setState((p) => ({ agreeTerms: !p.agreeTerms })),
+      onCodeChange: (e) => this.setState({ code: e.target.value }),
+      verify: () => {
+        if (this.state.verifying) return;
+        this.setState({ verifying: true });
+        setTimeout(() => {
+          // Mark this session as a freshly-created account so the dashboard can
+          // show the one-time "Complete Your Profile" onboarding banner.
+          try { localStorage.setItem('ax_new_account', '1'); } catch (e) {}
+          this.setState({ verifying: false, screen: 'success' });
+        }, 1300);
+      },
+      goForgot: () => this.setState({ screen: 'forgot', fpEmail: '', fpCode: '', npw: '', npw2: '', showPw1: false, showPw2: false }),
+      onFpEmail: (e) => this.setState({ fpEmail: e.target.value }),
+      onFpCode: (e) => this.setState({ fpCode: e.target.value }),
+      sendCode: () => this.go('check-email'),
+      goSetPw: () => this.go('set-password'),
+      onNpw: (e) => this.setState({ npw: e.target.value }),
+      onNpw2: (e) => this.setState({ npw2: e.target.value }),
+      togglePw1: () => this.setState((p) => ({ showPw1: !p.showPw1 })),
+      togglePw2: () => this.setState((p) => ({ showPw2: !p.showPw2 })),
+      finishReset: () => this.go('pw-updated'),
+      noop: () => {},
+    };
+  }
+}
+</script>
+</body>
+</html>

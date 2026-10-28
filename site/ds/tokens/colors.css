@@ -1,0 +1,108 @@
+/* ApostilleXpress — Color tokens
+   Extracted from "Design System 2.0" Figma Variables.
+   Three layers: (1) primitive palettes, (2) brand + patriot accents,
+   (3) semantic aliases that components consume. Always prefer the
+   semantic aliases (--ax-text-*, --ax-surface-*, --ax-border-*) in UI. */
+
+:root {
+  /* ---- Brand: AX teal ---------------------------------------------- */
+  --ax-sea-depths: #0d5257;   /* primary — deep teal (logo base) */
+  --ax-aqua:       #00b6bd;   /* primary light — bright aqua (logo top) */
+  --ax-aqua-bright: #00b0be;  /* logo gradient stop */
+  --ax-teal-700:   #094b50;
+  --ax-teal-600:   #0d5257;
+  --ax-teal-500:   #117e85;
+  --ax-teal-400:   #2a9aa1;
+  --ax-teal-300:   #63adb3;
+  --ax-teal-200:   #a6e9d5;
+  --ax-teal-100:   #d2f4ea;
+  --ax-teal-50:    #ebfbfc;   /* pale cyan wash */
+
+  /* ---- Patriot accents (government / apostille trust signals) ------ */
+  --ax-freedom-blue:   #0074c2;
+  --ax-integrity-blue: #0086c4;
+  --ax-patriot-red:    #f36f6f;
+  --ax-midnight-blue:  #09101d;
+
+  /* ---- Neutral / gray ramp (Bootstrap-aligned) -------------------- */
+  --ax-white:    #ffffff;
+  --ax-gray-25:  #fdfdfd;
+  --ax-gray-50:  #f8f9fa;
+  --ax-gray-100: #f1f3f5;
+  --ax-gray-200: #e9ecef;
+  --ax-gray-300: #dee2e6;
+  --ax-gray-400: #ced4da;
+  --ax-gray-500: #adb5bd;
+  --ax-gray-600: #6c757d;
+  --ax-gray-700: #495057;
+  --ax-gray-800: #343a40;
+  --ax-gray-900: #212529;
+  --ax-gray-950: #181818;
+  --ax-black:    #000000;
+
+  /* ---- Semantic status palettes ----------------------------------- */
+  --ax-success-700: #1f945c;
+  --ax-success-600: #1f945c;
+  --ax-success-500: #27b973;
+  --ax-success-200: #a9e3c7;
+  --ax-success-50:  #e9f8f1;
+
+  --ax-warning-700: #b9831e;
+  --ax-warning-600: #dc9d24;
+  --ax-warning-500: #efa22f;
+  --ax-warning-200: #f9daac;
+  --ax-warning-50:  #fdf6ea;
+
+  --ax-danger-700: #db3a33;
+  --ax-danger-600: #e33b32;
+  --ax-danger-500: #ef4444;
+  --ax-danger-200: #fea19b;
+  --ax-danger-50:  #ffefee;
+
+  --ax-info-700: #0a58ca;
+  --ax-info-600: #0074c2;
+  --ax-info-500: #0d6efd;
+  --ax-info-200: #9ec5fe;
+  --ax-info-50:  #ecf4fc;
+
+  /* ===== SEMANTIC ALIASES (use these in components) ================ */
+  /* Text */
+  --ax-text-primary:    var(--ax-gray-900);   /* #212529 body */
+  --ax-text-secondary:  var(--ax-gray-700);
+  --ax-text-tertiary:   var(--ax-gray-600);
+  --ax-text-disabled:   var(--ax-gray-500);
+  --ax-text-placeholder: var(--ax-gray-500);
+  --ax-text-brand:      var(--ax-sea-depths);
+  --ax-text-on-brand:   var(--ax-white);
+  --ax-text-error:      var(--ax-danger-600);
+  --ax-text-success:    var(--ax-success-600);
+  --ax-text-link:       var(--ax-sea-depths);
+
+  /* Surfaces / backgrounds */
+  --ax-surface-page:      var(--ax-gray-50);
+  --ax-surface-card:      var(--ax-white);
+  --ax-surface-sunken:    var(--ax-gray-100);
+  --ax-surface-hover:     var(--ax-gray-50);
+  --ax-surface-disabled:  var(--ax-gray-200);
+  --ax-surface-brand:     var(--ax-sea-depths);
+  --ax-surface-brand-hover: var(--ax-teal-700);
+  --ax-surface-brand-subtle: var(--ax-teal-50);
+  --ax-surface-inverse:   var(--ax-midnight-blue);
+
+  /* Borders */
+  --ax-border:          var(--ax-gray-300);
+  --ax-border-subtle:   var(--ax-gray-200);
+  --ax-border-strong:   var(--ax-gray-400);
+  --ax-border-brand:    var(--ax-sea-depths);
+  --ax-border-focus:    var(--ax-aqua);
+  --ax-border-error:    var(--ax-danger-500);
+
+  /* Status surfaces (subtle fills for alerts/badges) */
+  --ax-fill-success: var(--ax-success-50);
+  --ax-fill-warning: var(--ax-warning-50);
+  --ax-fill-danger:  var(--ax-danger-50);
+  --ax-fill-info:    var(--ax-info-50);
+
+  /* Focus ring */
+  --ax-focus-ring: 0 0 0 4px rgba(0, 182, 189, 0.35);
+}

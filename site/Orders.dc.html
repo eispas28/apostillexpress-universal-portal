@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><script src="./ds-base.js"></script><script src="./orderData.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"><style>
+*{box-sizing:border-box}body{margin:0}
+.root{font-family:var(--ax-font-base);color:var(--ax-text-primary);background:var(--ax-surface-page);min-height:100vh}
+/* ---- Top bar ---- */
+.topbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:36px;height:72px;padding:0 40px;background:var(--ax-surface-card);border-bottom:1px solid var(--ax-border-subtle)}
+.tb-logo{display:flex;align-items:center;flex-shrink:0}
+.tb-nav{display:flex;align-items:center;gap:28px;flex:1}
+.tb-link{display:inline-flex;align-items:center;gap:8px;font-size:16px;font-weight:500;color:var(--ax-text-tertiary);text-decoration:none;background:none;border:none;font-family:inherit;cursor:pointer;padding:0;transition:color .15s ease}
+.tb-link i{font-size:18px}
+.tb-link:hover,.tb-link.active{color:var(--ax-gray-700,#414651)}.tb-link.active{font-weight:600}.tb-link,.tb-link:focus,.tb-link:focus-visible,.tb-link.active{outline:none;box-shadow:none;border:none}
+/* ---- Profile menu ---- */
+.profile{position:relative;flex-shrink:0}
+.profile-btn{display:inline-flex;align-items:center;gap:10px;background:none;border:none;font-family:inherit;font-size:16px;font-weight:500;color:var(--ax-text-primary);cursor:pointer;padding:8px 6px;border-radius:8px;transition:background .15s ease}
+.profile-btn:hover{background:var(--ax-surface-hover)}
+.profile-btn:focus-visible{outline:none;box-shadow:var(--ax-focus-ring)}
+.profile-btn i.bi-person-circle{font-size:22px;color:var(--ax-text-tertiary)}
+.profile-btn .chev{font-size:14px;color:var(--ax-text-tertiary);transition:transform .15s ease}
+.profile-btn[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.menu{position:absolute;top:calc(100% + 8px);right:0;min-width:208px;background:var(--ax-surface-card);border:1px solid var(--ax-border-subtle);border-radius:10px;box-shadow:var(--ax-shadow-md);padding:6px;z-index:40}
+.menu-item{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:none;font-family:inherit;font-size:15px;color:var(--ax-text-primary);padding:11px 14px;border-radius:7px;cursor:pointer;text-decoration:none;transition:background .12s ease}
+.menu-item i{font-size:18px;color:var(--ax-text-tertiary);width:20px}
+.menu-item:hover,.menu-item:focus-visible{background:var(--ax-surface-hover);outline:none}
+.menu-sep{height:1px;background:var(--ax-border-subtle);margin:6px 8px}
+/* ---- Page ---- */
+.page{max-width:1180px;margin:0 auto;padding:38px 40px 60px}
+.page-head{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:24px}
+.page-title{font-size:32px;font-weight:700;line-height:1.15;margin:0;letter-spacing:-.01em}
+.page-sub{font-size:16px;color:var(--ax-text-tertiary);margin:8px 0 0}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--ax-sea-depths);color:#fff;border:none;border-radius:8px;padding:13px 22px;font-family:inherit;font-size:16px;font-weight:600;cursor:pointer;white-space:nowrap;box-shadow:var(--ax-shadow-xs);transition:background .15s ease}
+.btn-primary:hover{background:var(--ax-teal-700)}
+.btn-primary:active{transform:translateY(.5px)}
+.btn-primary:focus-visible{outline:none;box-shadow:var(--ax-focus-ring)}
+/* ---- New-account onboarding banner (shown once after sign-up) ---- */
+.cp-banner{display:flex;align-items:center;gap:14px;background:var(--ax-warning-50);color:var(--ax-warning-700);border-radius:12px;padding:16px 22px;margin-bottom:24px;font-size:16px;line-height:1.4}
+.cp-banner b{font-weight:700}
+.cp-banner a{color:var(--ax-warning-700);font-weight:700;text-decoration:underline;text-underline-offset:2px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;white-space:nowrap}
+.cp-banner .x{margin-left:auto;background:none;border:none;cursor:pointer;color:inherit;font-size:18px;line-height:1;padding:2px;display:inline-flex;flex-shrink:0;opacity:.7}
+.cp-banner .x:hover{opacity:1}
+/* ---- Table card ---- */
+.tcard{background:var(--ax-surface-card);border:1px solid var(--ax-border-subtle);border-radius:12px;box-shadow:var(--ax-shadow-xs);overflow:hidden}
+.tscroll{overflow-x:auto}
+.otable{width:100%;border-collapse:collapse;min-width:760px}
+.otable th{text-align:left;font-size:16px;font-weight:600;color:var(--ax-text-primary);padding:22px 18px 18px;border-bottom:1px solid var(--ax-border-subtle);white-space:nowrap}
+.otable th:first-child,.otable td:first-child{padding-left:30px}
+.otable th:last-child,.otable td:last-child{padding-right:30px}
+.th-inner{display:inline-flex;align-items:center;gap:8px;cursor:pointer;user-select:none}
+.th-inner .bi{font-size:15px;color:var(--ax-text-tertiary)}
+.th-inner .bi.on{color:var(--ax-sea-depths)}
+.th-num{justify-content:center}
+.th-right{justify-content:flex-end}
+.col-cost,.col-status{text-align:left}
+.col-docs{text-align:center}
+.otable td{font-size:16px;color:var(--ax-text-primary);padding:17px 18px;border-bottom:1px solid var(--ax-border-subtle);white-space:nowrap}
+.otable tbody tr:last-child td{border-bottom:none}
+.otable tbody tr{transition:background .12s ease}
+.otable tbody tr.orow{cursor:pointer}
+.otable tbody tr:hover{background:var(--ax-gray-50)}
+.docpill{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:24px;padding:0 8px;border-radius:999px;background:var(--ax-info-50);color:var(--ax-info-700);font-size:13px;font-weight:600}
+.spill{display:inline-flex;align-items:center;padding:4px 12px;border-radius:6px;font-size:13px;font-weight:600;line-height:1.2}
+.spill.new{background:var(--ax-info-50);color:var(--ax-info-700)}
+.spill.draft{background:var(--ax-gray-100);color:var(--ax-gray-700)}
+/* ---- Toolbar: search + status filter ---- */
+.tbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:18px 30px;border-bottom:1px solid var(--ax-border-subtle)}
+.tsearch{position:relative;flex:1 1 280px;max-width:420px}
+.tsearch i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ax-text-tertiary);font-size:15px;pointer-events:none}
+.tsearch input{width:100%;font-family:inherit;font-size:15px;color:var(--ax-text-primary);border:1px solid var(--ax-border);border-radius:8px;padding:10px 36px 10px 40px;background:var(--ax-surface-card);box-shadow:var(--ax-shadow-xs);transition:border-color .12s ease,box-shadow .12s ease}
+.tsearch input::placeholder{color:var(--ax-text-placeholder)}
+.tsearch input:hover{border-color:var(--ax-border-strong)}
+.tsearch input:focus{outline:none;border-color:var(--ax-aqua);box-shadow:var(--ax-focus-ring)}
+.tsearch .clr{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--ax-text-tertiary);padding:4px;display:inline-flex;border-radius:6px}
+.tsearch .clr:hover{color:var(--ax-text-primary);background:var(--ax-surface-hover)}
+.tfilter{display:flex;align-items:center;gap:10px;font-size:15px;color:var(--ax-text-secondary)}
+.tfilter-wrap{position:relative}
+.tfilter select{appearance:none;-webkit-appearance:none;font-family:inherit;font-size:15px;color:var(--ax-text-primary);border:1px solid var(--ax-border);border-radius:8px;padding:10px 38px 10px 14px;background:var(--ax-surface-card);box-shadow:var(--ax-shadow-xs);cursor:pointer;min-width:180px}
+.tfilter select:hover{border-color:var(--ax-border-strong)}
+.tfilter select:focus-visible{outline:none;border-color:var(--ax-aqua);box-shadow:var(--ax-focus-ring)}
+.tfilter-wrap i{position:absolute;right:14px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--ax-text-tertiary);font-size:13px}
+.tbar-clear{background:none;border:none;font-family:inherit;font-size:15px;font-weight:500;color:var(--ax-sea-depths);cursor:pointer;padding:6px 4px;text-decoration:none}
+.tbar-clear:hover{color:var(--ax-teal-700)}
+.spill.issued{background:var(--ax-success-50);color:var(--ax-success-700)}
+.spill.pending{background:var(--ax-warning-50);color:var(--ax-warning-700)}
+.spill.cancelled,.spill.rejected,.spill.revoked{background:var(--ax-danger-50);color:var(--ax-danger-700)}
+.cost{font-variant-numeric:tabular-nums}
+/* ---- States ---- */
+.state{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:64px 24px;text-align:center}
+.state-row{display:flex;align-items:center;gap:12px;font-size:18px;color:var(--ax-text-secondary)}
+.spin{width:22px;height:22px;border:2.5px solid var(--ax-gray-200);border-top-color:var(--ax-sea-depths);border-radius:50%;animation:axspin .7s linear infinite}
+@keyframes axspin{to{transform:rotate(360deg)}}
+.empty-ic{width:64px;height:64px;border-radius:50%;background:var(--ax-gray-100);color:var(--ax-text-tertiary);display:flex;align-items:center;justify-content:center;font-size:30px}
+.empty-title{font-size:20px;font-weight:600;color:var(--ax-text-primary)}
+.empty-sub{font-size:15px;color:var(--ax-text-tertiary);margin-top:-6px}
+/* skeleton rows */
+.sk{display:block;height:14px;border-radius:5px;background:linear-gradient(90deg,var(--ax-gray-100) 25%,var(--ax-gray-200) 37%,var(--ax-gray-100) 63%);background-size:400% 100%;animation:sksh 1.4s ease infinite}
+@keyframes sksh{0%{background-position:100% 50%}100%{background-position:0% 50%}}
+/* ---- Footer / pagination ---- */
+.tfoot{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:16px 30px;border-top:1px solid var(--ax-border-subtle)}
+.tfoot-total{font-size:15px;color:var(--ax-text-secondary)}
+.pager{display:flex;align-items:center;border:1px solid var(--ax-border);border-radius:8px;overflow:hidden}
+.pgbtn{min-width:42px;height:40px;display:inline-flex;align-items:center;justify-content:center;background:var(--ax-surface-card);border:none;border-right:1px solid var(--ax-border);font-family:inherit;font-size:15px;color:var(--ax-text-secondary);cursor:pointer;padding:0 6px;transition:background .12s ease}
+.pgbtn:last-child{border-right:none}
+.pgbtn:hover:not(:disabled):not(.dots){background:var(--ax-gray-50)}
+.pgbtn.active{background:var(--ax-gray-100);color:var(--ax-text-primary);font-weight:600}
+.pgbtn.dots{cursor:default;color:var(--ax-text-tertiary)}
+.pgbtn:disabled{color:var(--ax-gray-400);cursor:not-allowed}
+.pgbtn:focus-visible{outline:none;box-shadow:inset 0 0 0 2px var(--ax-aqua)}
+.perpage{display:flex;align-items:center;gap:12px;font-size:15px;color:var(--ax-text-secondary)}
+.perpage select{font-family:inherit;font-size:15px;color:var(--ax-text-primary);border:1px solid var(--ax-border);border-radius:8px;padding:9px 12px;background:var(--ax-surface-card);cursor:pointer}
+.perpage select:focus-visible{outline:none;box-shadow:var(--ax-focus-ring);border-color:var(--ax-aqua)}
+@media (max-width:760px){
+  .tbar{padding:16px 18px}
+  .tsearch{max-width:none}
+  .tfilter,.tfilter-wrap,.tfilter select{width:100%}
+  .topbar{padding:0 18px;gap:18px}
+  .tb-nav{gap:16px}
+  .tb-link span{display:none}
+  .page{padding:24px 18px 48px}
+  .page-head{flex-direction:column}
+  .page-title{font-size:26px}
+  .btn-primary{width:100%;justify-content:center}
+  .tfoot{justify-content:center}
+}
+</style><link rel="stylesheet" href="ax-responsive.css"><script src="./ax-mobile-nav.js"></script></helmet>
+<div class="root">
+  <!-- ============ TOP BAR ============ -->
+  <header class="topbar">
+    <div class="tb-logo">
+      <a class="tb-logo-link" href="Orders.dc.html" aria-label="ApostilleXpress — go to Orders"><img src="assets/logos/ax-wordmark.png" alt="ApostilleXpress" style="height:30px;width:auto;display:block"></a>
+    </div>
+    <nav class="tb-nav">
+      <a class="tb-link active" href="#" onClick="{{ noop }}"><i class="bi bi-list-task"></i><span>Orders</span></a>
+      <a class="tb-link" href="CreateOrder.html"><i class="bi bi-plus-square"></i><span>Create New Order</span></a>
+      <a class="tb-link" href="TeamManagement.html"><i class="bi bi-people"></i><span>Team</span></a>
+    </nav>
+    <div class="profile">
+      <button class="profile-btn" aria-haspopup="true" aria-expanded="{{ menuExpanded }}" onClick="{{ toggleMenu }}" onKeyDown="{{ onBtnKey }}">
+        <i class="bi bi-person-circle"></i>
+        <span>{{ userName }}</span>
+        <i class="bi bi-chevron-down chev"></i>
+      </button>
+      <sc-if value="{{ menuOpen }}">
+        <div class="menu" role="menu">
+          <a class="menu-item" role="menuitem" href="Profile.html"><i class="bi bi-person"></i>My Profile</a>
+          <a class="menu-item" role="menuitem" href="https://www.gov-secure.com/apostille-xpress/" target="_blank" rel="noopener"><i class="bi bi-question-circle"></i>FAQ</a>
+          <div class="menu-sep"></div>
+          <a class="menu-item" role="menuitem" href="CustomerAuth.dc.html"><i class="bi bi-box-arrow-right"></i>Log Out</a>
+        </div>
+      </sc-if>
+    </div>
+  </header>
+
+  <!-- ============ PAGE ============ -->
+  <main class="page">
+    <sc-if value="{{ showNewAcctBanner }}">
+      <div class="cp-banner">
+        <span><b>Complete Your Profile</b> — Add a default address to your profile to speed up future orders.</span>
+        <a onClick="{{ goProfile }}">Go to Profile <i class="bi bi-arrow-right"></i></a>
+        <button class="x" aria-label="Dismiss" onClick="{{ dismissBanner }}"><i class="bi bi-x-lg"></i></button>
+      </div>
+    </sc-if>
+    <div class="page-head">
+      <div>
+        <h1 class="page-title">Create and Manage Orders</h1>
+        <p class="page-sub">Submit, track, and handle your apostille requests.</p>
+      </div>
+      <button class="btn-primary" onClick="{{ goCreate }}"><i class="bi bi-plus-lg"></i>Create New Order</button>
+    </div>
+
+    <div class="tcard">
+      <sc-if value="{{ showToolbar }}">
+        <div class="tbar">
+          <div class="tsearch">
+            <i class="bi bi-search"></i>
+            <input type="text" placeholder="Search by order ID, date, or status" aria-label="Search orders" value="{{ query }}" onInput="{{ onQuery }}">
+            <sc-if value="{{ hasQuery }}"><button class="clr" aria-label="Clear search" onClick="{{ clearQuery }}"><i class="bi bi-x-lg" style="position:static;transform:none"></i></button></sc-if>
+          </div>
+          <label class="tfilter">
+            <span>Status</span>
+            <span class="tfilter-wrap">
+              <select aria-label="Filter by status" value="{{ statusFilter }}" onChange="{{ onStatus }}">
+                <sc-for list="{{ statusOptions }}" as="o"><option value="{{ o.value }}" selected="{{ o.sel }}">{{ o.label }}</option></sc-for>
+              </select>
+              <i class="bi bi-chevron-down"></i>
+            </span>
+          </label>
+          <sc-if value="{{ hasFilters }}"><button class="tbar-clear" onClick="{{ clearFilters }}">Clear filters</button></sc-if>
+        </div>
+      </sc-if>
+      <div class="tscroll">
+        <table class="otable">
+          <thead>
+            <tr>
+              <th onClick="{{ sortId }}"><span class="th-inner">Order ID <i class="{{ iconId }}"></i></span></th>
+              <th class="col-docs" onClick="{{ sortDocs }}"><span class="th-inner th-num">Documents <i class="{{ iconDocs }}"></i></span></th>
+              <th onClick="{{ sortDate }}"><span class="th-inner">Date Submitted <i class="{{ iconDate }}"></i></span></th>
+              <sc-if value="{{ showSubmittedBy }}"><th onClick="{{ sortBy }}"><span class="th-inner">Submitted by <i class="{{ iconBy }}"></i></span></th></sc-if>
+              <th class="col-cost" onClick="{{ sortCost }}"><span class="th-inner">Total Cost <i class="{{ iconCost }}"></i></span></th>
+              <th class="col-status" onClick="{{ sortStatus }}"><span class="th-inner">Status <i class="{{ iconStatus }}"></i></span></th>
+            </tr>
+          </thead>
+          <sc-if value="{{ isLoaded }}">
+            <tbody>
+              <sc-for list="{{ rows }}" as="r">
+                <tr class="orow" onClick="{{ r.open }}">
+                  <td>{{ r.id }}</td>
+                  <td class="col-docs"><span class="docpill">{{ r.docs }}</span></td>
+                  <td>{{ r.date }}</td>
+                  <sc-if value="{{ showSubmittedBy }}"><td>{{ r.by }}</td></sc-if>
+                  <td class="col-cost cost">{{ r.cost }}</td>
+                  <td class="col-status"><span class="spill {{ r.statusClass }}">{{ r.status }}</span></td>
+                </tr>
+              </sc-for>
+            </tbody>
+          </sc-if>
+          <sc-if value="{{ isLoading }}">
+            <tbody>
+              <sc-for list="{{ skeletons }}" as="s">
+                <tr>
+                  <td><span class="sk" style="width:108px"></span></td>
+                  <td class="col-docs"><span class="sk" style="width:30px;margin:0 auto"></span></td>
+                  <td><span class="sk" style="width:88px"></span></td>
+                  <sc-if value="{{ showSubmittedBy }}"><td><span class="sk" style="width:120px"></span></td></sc-if>
+                  <td class="col-cost"><span class="sk" style="width:56px;margin-left:auto"></span></td>
+                  <td class="col-status"><span class="sk" style="width:64px;margin-left:auto"></span></td>
+                </tr>
+              </sc-for>
+            </tbody>
+          </sc-if>
+        </table>
+        <sc-if value="{{ isLoading }}">
+          <div class="state"><div class="state-row"><span class="spin"></span> Loading results…</div></div>
+        </sc-if>
+        <sc-if value="{{ noMatches }}">
+          <div class="state">
+            <div class="empty-ic"><i class="bi bi-search"></i></div>
+            <div class="empty-title">No matching orders</div>
+            <div class="empty-sub">Try a different search term or status.</div>
+            <button class="tbar-clear" onClick="{{ clearFilters }}">Clear filters</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{ isEmpty }}">
+          <div class="state">
+            <div class="empty-ic"><i class="bi bi-inbox"></i></div>
+            <div class="empty-title">No orders found</div>
+            <div class="empty-sub">Once you submit an apostille request, it will show up here.</div>
+            <button class="btn-primary" style="margin-top:8px" onClick="{{ goCreate }}"><i class="bi bi-plus-lg"></i>Create New Order</button>
+          </div>
+        </sc-if>
+      </div>
+
+      <sc-if value="{{ showFooter }}">
+        <div class="tfoot">
+          <span class="tfoot-total">Total {{ totalItems }} items</span>
+          <div class="pager" role="navigation" aria-label="Pagination">
+            <button class="pgbtn" onClick="{{ firstPage }}" aria-label="First page"><i class="bi bi-chevron-bar-left"></i></button>
+            <button class="pgbtn" onClick="{{ prevPage }}" aria-label="Previous page"><i class="bi bi-chevron-left"></i></button>
+            <sc-for list="{{ pages }}" as="p">
+              <sc-if value="{{ p.dots }}"><button class="pgbtn dots" disabled>…</button></sc-if>
+              <sc-if value="{{ p.num }}"><button class="pgbtn {{ p.cls }}" onClick="{{ p.go }}">{{ p.n }}</button></sc-if>
+            </sc-for>
+            <button class="pgbtn" onClick="{{ nextPage }}" aria-label="Next page"><i class="bi bi-chevron-right"></i></button>
+            <button class="pgbtn" onClick="{{ lastPage }}" aria-label="Last page"><i class="bi bi-chevron-bar-right"></i></button>
+          </div>
+          <div class="perpage">
+            <span>Items per page</span>
+            <select value="{{ perPage }}" onChange="{{ onPerPage }}">
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+            </select>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;tableState&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;loaded&quot;,&quot;loading&quot;,&quot;empty&quot;],&quot;default&quot;:&quot;loaded&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;accountType&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;business&quot;,&quot;individual&quot;],&quot;default&quot;:&quot;business&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      state: props.tableState || 'loaded',
+      accountType: props.accountType || 'business',
+      menuOpen: false,
+      page: 1,
+      perPage: '10',
+      sortKey: null,
+      sortDir: 1,
+      query: '',
+      statusFilter: 'all',
+      newAcct: (() => { try { return localStorage.getItem('ax_new_account') === '1'; } catch (e) { return false; } })(),
+    };
+  }
+  componentDidMount() {
+    this._onDoc = (e) => {
+      if (!this.state.menuOpen) return;
+      if (e.target.closest && e.target.closest('.profile')) return;
+      this.setState({ menuOpen: false });
+    };
+    this._onEsc = (e) => { if (e.key === 'Escape' && this.state.menuOpen) this.setState({ menuOpen: false }); };
+    document.addEventListener('click', this._onDoc, true);
+    document.addEventListener('keydown', this._onEsc);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('click', this._onDoc, true);
+    document.removeEventListener('keydown', this._onEsc);
+  }
+  renderVals() {
+    const s = this.state;
+    // Every row comes from the shared model. Documents = children.length and
+    // the Customer Status badge are both COMPUTED — never stored separately —
+    // so the list count always equals the rows shown on Order Overview.
+    const parents = (window.AXOrders ? window.AXOrders.getOrders() : []);
+    const rows = parents.map((o) => {
+      const st = window.AXOrders.parentStatus(o.children);
+      return {
+        id: (() => { const k = (o.children || [])[0] || {}; const c = k.issuingStateCode || (k.issuingStateShort ? k.issuingStateShort.replace(/[^A-Za-z]/g, '').slice(0, 2).toUpperCase() : 'DM'); return c + '-' + String(o.number).replace(/^(\d{6})(?=\d)/, (m) => m + '-') + '_000'; })(), docs: (o.children || []).length, date: o.placedOn, by: 'Maria Rodriguez',
+        dateNum: Date.parse(o.placedOn) || 0,
+        costNum: window.AXOrders.orderTotal(o.children),
+        cost: window.AXOrders.formatMoney(window.AXOrders.orderTotal(o.children)),
+        status: window.AXOrders.parentLabel(st), statusClass: window.AXOrders.parentClass(st),
+        open: () => { window.location.href = 'OrderOverview.html?order=' + encodeURIComponent(o.number); },
+      };
+    });
+
+    // Status filter options come from the statuses actually present.
+    const ORDER = ['Draft', 'New', 'In Process', 'In Review', 'Flagged', 'Pending Print', 'Printed', 'Issued', 'Completed', 'Cancelled', 'Rejected', 'Revoked'];
+    const present = Array.from(new Set(rows.map((r) => r.status))).sort((a, b) => {
+      const ia = ORDER.indexOf(a), ib = ORDER.indexOf(b);
+      return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+    });
+    const statusOptions = [{ value: 'all', label: 'All Statuses' }, ...present.map((x) => ({ value: x, label: x }))].map((o) => ({ ...o, sel: o.value === s.statusFilter }));
+
+    // Search (order ID, date, status, cost) + status filter, before sort/pagination.
+    const q = (s.query || '').trim().toLowerCase();
+    const qDigits = q.replace(/[^0-9]/g, '');
+    const filtered = rows.filter((r) => {
+      if (s.statusFilter !== 'all' && r.status !== s.statusFilter) return false;
+      if (!q) return true;
+      if (qDigits && String(r.id).indexOf(qDigits) !== -1) return true;
+      return [r.id, r.date, r.status, r.cost].some((v) => String(v).toLowerCase().indexOf(q) !== -1);
+    });
+    rows.length = 0; filtered.forEach((r) => rows.push(r));
+    const hasFilters = !!q || s.statusFilter !== 'all';
+
+    // Column sorting over the full result set (before pagination).
+    const SORT_GET = {
+      id: (r) => r.id, docs: (r) => r.docs, date: (r) => r.dateNum,
+      by: (r) => r.by, cost: (r) => r.costNum, status: (r) => r.status,
+    };
+    if (s.sortKey && SORT_GET[s.sortKey]) {
+      const g = SORT_GET[s.sortKey];
+      rows.sort((a, b) => {
+        const av = g(a), bv = g(b);
+        const cmp = (typeof av === 'number' && typeof bv === 'number')
+          ? av - bv
+          : String(av).localeCompare(String(bv), undefined, { numeric: true, sensitivity: 'base' });
+        return cmp * s.sortDir;
+      });
+    }
+
+    const isLoaded = s.state === 'loaded';
+    const isLoading = s.state === 'loading';
+    const isEmpty = s.state === 'empty';
+    const noMatches = isLoaded && hasFilters && rows.length === 0;
+    const showSubmittedBy = s.accountType !== 'individual';
+    const iconFor = (key) => 'bi ' + (s.sortKey === key ? (s.sortDir === 1 ? 'bi-chevron-up on' : 'bi-chevron-down on') : 'bi-chevron-expand');
+    const mkSort = (key) => () => this.setState((p) => ({ sortKey: key, sortDir: p.sortKey === key ? -p.sortDir : 1, page: 1 }));
+
+    // Real pagination over the computed parent rows.
+    const perPage = parseInt(s.perPage, 10) || 10;
+    const totalItems = rows.length;
+    const totalPages = Math.max(1, Math.ceil(totalItems / perPage));
+    const cur = Math.min(s.page, totalPages);
+    const pageRows = rows.slice((cur - 1) * perPage, cur * perPage);
+    const mkPage = (n) => ({ num: true, n: String(n), cls: n === cur ? 'active' : '', go: () => this.setState({ page: n }) });
+    let pages;
+    if (totalPages <= 9) {
+      pages = []; for (let i = 1; i <= totalPages; i++) pages.push(mkPage(i));
+    } else {
+      const mid = []; for (let i = Math.max(2, cur - 2); i <= Math.min(totalPages - 1, cur + 2); i++) mid.push(i);
+      pages = [mkPage(1)];
+      if (mid[0] > 2) pages.push({ dots: true });
+      mid.forEach((n) => pages.push(mkPage(n)));
+      if (mid[mid.length - 1] < totalPages - 1) pages.push({ dots: true });
+      pages.push(mkPage(totalPages));
+    }
+
+    return {
+      userName: 'Maria Rodriguez',
+      menuOpen: s.menuOpen,
+      menuExpanded: s.menuOpen ? 'true' : 'false',
+      isLoaded, isLoading, isEmpty,
+      showSubmittedBy,
+      showFooter: !isEmpty && !noMatches,
+      showToolbar: !isEmpty,
+      noMatches,
+      query: s.query, hasQuery: !!s.query, hasFilters,
+      statusFilter: s.statusFilter, statusOptions,
+      onQuery: (e) => this.setState({ query: e.target.value, page: 1 }),
+      onStatus: (e) => this.setState({ statusFilter: e.target.value, page: 1 }),
+      clearQuery: () => this.setState({ query: '', page: 1 }),
+      clearFilters: () => this.setState({ query: '', statusFilter: 'all', page: 1 }),
+      rows: pageRows,
+      skeletons: [0,1,2,3,4,5,6,7,8,9],
+      totalItems, pages,
+      perPage: s.perPage,
+      toggleMenu: () => this.setState((p) => ({ menuOpen: !p.menuOpen })),
+      onBtnKey: (e) => { if (e.key === 'ArrowDown' && !this.state.menuOpen) { e.preventDefault(); this.setState({ menuOpen: true }); } },
+      firstPage: () => this.setState({ page: 1 }),
+      prevPage: () => this.setState((p) => ({ page: Math.max(1, p.page - 1) })),
+      nextPage: () => this.setState((p) => ({ page: Math.min(totalPages, p.page + 1) })),
+      lastPage: () => this.setState({ page: totalPages }),
+      onPerPage: (e) => this.setState({ perPage: e.target.value }),
+      sortId: mkSort('id'), sortDocs: mkSort('docs'), sortDate: mkSort('date'),
+      sortBy: mkSort('by'), sortCost: mkSort('cost'), sortStatus: mkSort('status'),
+      iconId: iconFor('id'), iconDocs: iconFor('docs'), iconDate: iconFor('date'),
+      iconBy: iconFor('by'), iconCost: iconFor('cost'), iconStatus: iconFor('status'),
+      goCreate: () => { window.location.href = 'CreateOrder.html'; },
+      showNewAcctBanner: s.newAcct,
+      goProfile: () => { try { localStorage.removeItem('ax_new_account'); } catch (e) {} window.location.href = 'Profile.html'; },
+      dismissBanner: () => { try { localStorage.removeItem('ax_new_account'); } catch (e) {} this.setState({ newAcct: false }); },
+      noop: (e) => { if (e && e.preventDefault) e.preventDefault(); },
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Order Overview — ApostilleXpress</title>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="ds/tokens/fonts.css">
+<link rel="stylesheet" href="ds/tokens/colors.css">
+<link rel="stylesheet" href="ds/tokens/typography.css">
+<link rel="stylesheet" href="ds/tokens/spacing.css">
+<link rel="stylesheet" href="ds/tokens/shadows.css">
+<link rel="stylesheet" href="ds/tokens/base.css">
+<link rel="stylesheet" href="ds/components.css">
+<link rel="stylesheet" href="ds/styles.css">
+<script src="ds/_ds_bundle.js"></script>
+<script src="./orderData.js"></script>
+<link rel="stylesheet" href="ax-overlays.css">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:var(--ax-font-base);color:var(--ax-text-primary);background:var(--ax-surface-page);min-height:100vh}
+/* ---- Top bar ---- */
+.topbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:36px;height:72px;padding:0 40px;background:var(--ax-surface-card);border-bottom:1px solid var(--ax-border-subtle)}
+.tb-logo{display:flex;align-items:center;flex-shrink:0}
+.tb-nav{display:flex;align-items:center;gap:28px;flex:1}
+.tb-link{display:inline-flex;align-items:center;gap:8px;font-size:16px;font-weight:500;color:var(--ax-text-tertiary);text-decoration:none;background:none;border:none;font-family:inherit;cursor:pointer;padding:0;transition:color .15s ease}
+.tb-link i{font-size:18px}
+.tb-link:hover,.tb-link.active{color:var(--ax-gray-700,#414651)}.tb-link.active{font-weight:600}.tb-link,.tb-link:focus,.tb-link:focus-visible,.tb-link.active{outline:none;box-shadow:none;border:none}
+.tb-profile-wrap{position:relative;flex-shrink:0}
+.tb-profile-btn{display:inline-flex;align-items:center;gap:10px;font-size:16px;font-weight:500;color:var(--ax-text-primary);background:none;border:none;font-family:inherit;cursor:pointer;padding:6px 8px;border-radius:8px;transition:background .12s ease}
+.tb-profile-btn:hover{background:var(--ax-gray-50)}
+.tb-profile-btn i.bi-person-circle{font-size:22px;color:var(--ax-text-tertiary)}
+.tb-profile-btn i.bi-chevron-down{font-size:14px;color:var(--ax-text-tertiary);transition:transform .15s ease}
+.tb-profile-btn[aria-expanded="true"] i.bi-chevron-down{transform:rotate(180deg)}
+.tb-menu{position:absolute;top:calc(100% + 10px);right:0;min-width:240px;background:var(--ax-surface-card);border:1px solid var(--ax-border-subtle);border-radius:12px;box-shadow:0 12px 24px -8px rgba(10,13,18,.18);padding:8px;z-index:40}
+.tb-menu-item{display:flex;align-items:center;gap:13px;width:100%;padding:12px 14px;border-radius:8px;font-size:16px;font-weight:500;color:var(--ax-text-primary);text-decoration:none;background:none;border:none;font-family:inherit;cursor:pointer;text-align:left;transition:background .12s ease}
+.tb-menu-item:hover{background:var(--ax-gray-50)}
+.tb-menu-item i{font-size:18px;color:var(--ax-text-tertiary);width:20px;flex-shrink:0}
+.tb-menu-sep{border:none;border-top:1px solid var(--ax-border-subtle);margin:6px 6px}
+/* ---- Page ---- */
+.page{max-width:1180px;margin:0 auto;padding:30px 40px 64px}
+/* ---- Breadcrumb ---- */
+.crumbs{display:flex;align-items:center;gap:8px;font-size:15px;margin-bottom:20px;flex-wrap:wrap}
+.crumb{color:var(--ax-text-tertiary);text-decoration:none;padding:5px 12px;border-radius:7px;font-weight:600;transition:background .12s ease,color .12s ease}
+a.crumb:hover{color:var(--ax-text-primary);background:var(--ax-gray-50)}
+.crumb.active{background:var(--ax-gray-100);color:var(--ax-text-primary)}
+.crumb-sep{color:var(--ax-text-tertiary);font-size:13px}
+/* ---- Title block ---- */
+.od-title{font-size:32px;font-weight:700;line-height:1.15;margin:0;letter-spacing:-.01em}
+.od-head{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap}.ov-qr{display:inline-flex;align-items:center;gap:14px;background:var(--ax-surface-card);border:1px solid var(--ax-border-subtle);border-radius:12px;padding:10px 18px 10px 10px;box-shadow:var(--ax-shadow-xs)}.ov-qr svg{display:block}.ov-qr .qc{font-size:13px;line-height:1.4;color:var(--ax-text-tertiary)}.ov-qr .qc b{display:block;font-size:15px;color:var(--ax-text-primary)}
+.wi-banner{display:flex;align-items:center;gap:16px;margin-top:24px;padding:18px 24px;border-radius:12px;background:var(--ax-info-50);border:1px solid rgba(0,116,194,.28)}.wi-banner>i{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;background:none;border:0;font-size:24px;color:var(--ax-info-700)}.wi-banner p{margin:0}.wb-t{font-size:18px;font-weight:700;color:var(--ax-info-700);margin-bottom:4px!important}.wb-b{font-size:15px;line-height:1.5;color:#0B3A5E}.wi-banner>div{flex:1;min-width:0}
+.od-meta{display:flex;align-items:center;gap:16px;margin-top:12px}
+.qr-btn{margin-left:auto;padding:9px 16px}.qr-scrim{position:fixed;inset:0;z-index:200;background:rgba(10,24,54,.55);backdrop-filter:blur(2px);display:flex;align-items:center;justify-content:center;padding:16px}.qr-modal{position:relative;background:#fff;border-radius:16px;box-shadow:var(--ax-shadow-2xl);padding:32px 40px;text-align:center;max-width:380px;width:100%}.qr-modal h2{margin:0 0 20px;font-size:22px;font-weight:700}.qr-modal p{margin:6px 0 0;font-size:16px;color:var(--ax-text-tertiary)}.qr-big{border:1px solid var(--ax-border-subtle);border-radius:12px;padding:12px;display:inline-block}.qr-big svg{display:block}.qr-num{font-size:20px;font-weight:700;margin-top:16px}.qr-x{position:absolute;top:14px;right:14px;background:none;border:none;font-size:18px;color:var(--ax-text-tertiary);cursor:pointer}
+.od-meta .sep{width:1px;height:18px;background:var(--ax-border)}
+.placed{font-size:16px;color:var(--ax-text-tertiary)}
+.placed b{color:var(--ax-text-primary);font-weight:600}
+.sbadge{display:inline-flex;align-items:center;padding:5px 13px;border-radius:6px;font-size:14px;font-weight:600;line-height:1.2}
+.sbadge.new{background:var(--ax-info-50);color:var(--ax-info-700)}
+.sbadge.draft{background:var(--ax-gray-100);color:var(--ax-gray-700)}
+.sbadge.pending{background:var(--ax-warning-50);color:var(--ax-warning-700)}
+.sbadge.issued{background:var(--ax-success-50);color:var(--ax-success-700)}
+.sbadge.cancelled,.sbadge.rejected,.sbadge.revoked{background:var(--ax-danger-50);color:var(--ax-danger-700)}
+/* ---- Cards ---- */
+.card{background:var(--ax-surface-card);border:1px solid var(--ax-border-subtle);border-radius:14px;box-shadow:var(--ax-shadow-xs)}
+.card-head{padding:24px 28px;border-bottom:1px solid var(--ax-border-subtle)}
+.card-head h2{font-size:22px;font-weight:700;margin:0}
+.pay-body{padding:26px 28px;display:flex;flex-direction:column;gap:22px}
+.pay-field .lbl{font-size:15px;color:var(--ax-text-tertiary);margin-bottom:9px}
+.doc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}\n@media(max-width:760px){.doc-grid{grid-template-columns:1fr}}
+.doc-row{display:flex;align-items:center;gap:14px;border:1px solid var(--ax-border-subtle);border-radius:10px;padding:14px 16px;background:var(--ax-surface-card);transition:background .12s ease}
+.doc-row:hover,.doc-row.busy,.doc-row.done{background:var(--ax-gray-50,#F8F9FA)}
+.doc-ico{flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;width:34px;height:38px;border-radius:5px;background:var(--ax-danger-600);color:#fff;font-size:10px;font-weight:800;letter-spacing:.02em}
+.doc-meta{flex:1;min-width:0}
+.doc-name{font-size:15px;font-weight:600;color:var(--ax-text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.doc-sub{font-size:13px;color:var(--ax-text-tertiary);margin-top:2px}
+.doc-sub.active{color:var(--ax-sea-depths);font-weight:500}
+.doc-dl{position:relative;flex-shrink:0;width:38px;height:38px;border:1px solid var(--ax-border);border-radius:8px;background:var(--ax-surface-card);color:var(--ax-text-secondary);display:inline-flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer;transition:background .12s ease,border-color .12s ease,color .12s ease}
+.doc-dl:hover{border-color:var(--ax-border-strong);color:var(--ax-text-primary)}
+.doc-dl:focus-visible{outline:none;box-shadow:0 0 0 4px rgba(0,182,189,.35)}
+.doc-dl.done{color:var(--ax-sea-depths)}
+.doc-dl .spin{width:17px;height:17px;border:2px solid var(--ax-sea-depths);border-right-color:transparent;border-radius:50%;animation:dlspin .7s linear infinite}
+@keyframes dlspin{to{transform:rotate(360deg)}}
+.doc-tip{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#101828;color:#fff;font-size:12px;font-weight:600;padding:6px 10px;border-radius:7px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .12s ease}
+.doc-dl:hover .doc-tip{opacity:1}
+.dl-toast{position:fixed;top:88px;right:28px;z-index:80;display:flex;align-items:flex-start;gap:12px;background:#fff;border:1px solid var(--ax-border-subtle);border-radius:12px;box-shadow:var(--ax-shadow-lg,0 12px 28px rgba(10,13,18,.12));padding:16px 18px;max-width:360px}
+.dl-toast .tk{color:var(--ax-success-600);font-size:20px;line-height:1}
+.dl-toast .tt{font-size:15px;font-weight:600;color:var(--ax-text-primary)}
+.dl-toast .ts{font-size:14px;color:var(--ax-text-tertiary);margin-top:2px}
+.dl-toast .tx{background:none;border:none;color:var(--ax-text-tertiary);font-size:16px;cursor:pointer;padding:0;line-height:1}
+.dl-toast .tdismiss{margin-top:10px;background:none;border:none;padding:0;font-size:14px;font-weight:700;color:var(--ax-text-primary);cursor:pointer}
+.pay-method-val{display:flex;align-items:center;gap:12px;font-size:18px;font-weight:600;color:var(--ax-text-primary)}
+.cc-visa{display:inline-flex;align-items:center;justify-content:center;height:24px;min-width:38px;padding:0 7px;border:1px solid var(--ax-border);border-radius:5px;font-size:11px;font-weight:800;letter-spacing:.02em;color:#1434CB;background:#fff}
+.btn-secondary{display:inline-flex;align-items:center;gap:10px;background:var(--ax-surface-card);color:var(--ax-text-primary);border:1px solid var(--ax-border);border-radius:8px;padding:11px 18px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;box-shadow:var(--ax-shadow-xs);transition:background .12s ease,border-color .12s ease;align-self:flex-start}
+.btn-secondary:hover{background:var(--ax-gray-50)}
+.btn-secondary:active{transform:translateY(.5px)}
+.btn-secondary:focus-visible{outline:none;box-shadow:var(--ax-focus-ring)}
+.btn-secondary i{font-size:17px;color:var(--ax-text-secondary)}
+/* ---- Child table ---- */
+.tcard{margin-top:24px;background:var(--ax-surface-card);border:1px solid var(--ax-border-subtle);border-radius:14px;box-shadow:var(--ax-shadow-xs);overflow:hidden}
+.tcard-head{padding:22px 28px 0}
+.tcard-head h2{font-size:20px;font-weight:700;margin:0}
+.tcard-head p{font-size:15px;color:var(--ax-text-tertiary);margin:6px 0 0}
+.tscroll{overflow:auto;max-height:430px}
+.ctable{width:100%;border-collapse:collapse;min-width:820px}
+.ctable thead th{position:sticky;top:0;z-index:2;background:var(--ax-surface-card)}
+.ctable th{text-align:left;font-size:16px;font-weight:700;color:var(--ax-text-primary);padding:18px 18px 16px;border-bottom:1px solid var(--ax-border-subtle);white-space:nowrap}
+.ctable th:first-child,.ctable td:first-child{padding-left:22px}
+.ctable th:last-child,.ctable td:last-child{padding-right:22px}
+.ctable td{font-size:16px;color:var(--ax-text-primary);padding:18px;border-bottom:1px solid var(--ax-border-subtle);white-space:nowrap}
+.ctable tbody tr{cursor:pointer;transition:background .12s ease}
+.ctable tbody tr:hover{background:var(--ax-gray-50)}
+.ctable tbody tr:last-child td{border-bottom:none}
+.ctable tbody tr:focus-visible{outline:none;background:var(--ax-gray-50);box-shadow:inset 3px 0 0 var(--ax-sea-depths)}
+.ctable th.sortable{cursor:pointer;user-select:none}
+.ctable .th-inner{display:inline-flex;align-items:center;gap:8px}
+.ctable .th-inner .bi{font-size:15px;color:var(--ax-text-tertiary)}
+.ctable .th-inner .bi.on{color:var(--ax-sea-depths)}
+.rt{display:inline-flex;align-items:center;gap:8px;color:#064B50;text-decoration:underline;text-underline-offset:3px;cursor:pointer;transition:color .12s ease}
+.rt:hover{color:#033437}
+.rt:hover i{color:#033437}
+.rt i{color:var(--ax-text-tertiary);font-size:16px}
+@media (max-width:760px){
+  .topbar{padding:0 18px;gap:18px}
+  .tb-nav{gap:16px}
+  .tb-link span{display:none}
+  .page{padding:22px 18px 48px}
+  .od-title{font-size:25px}
+}
+</style>
+<link rel="stylesheet" href="ax-responsive.css">
+<script src="./ax-mobile-nav.js" defer></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+const { useState, useEffect, useRef } = React;
+
+function TopBar() {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+  useEffect(() => {
+    const onDoc = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
+    const onEsc = (e) => { if (e.key === "Escape") setOpen(false); };
+    document.addEventListener("click", onDoc, true);
+    document.addEventListener("keydown", onEsc);
+    return () => { document.removeEventListener("click", onDoc, true); document.removeEventListener("keydown", onEsc); };
+  }, []);
+  return (
+    <header className="topbar">
+      <div className="tb-logo"><a className="tb-logo-link" href="Orders.dc.html" aria-label="ApostilleXpress — go to Orders"><img src="assets/logos/ax-wordmark.png" alt="ApostilleXpress" style={{ height: 30, width: "auto", display: "block" }} /></a></div>
+      <nav className="tb-nav">
+        <a className="tb-link active" href="Orders.dc.html"><i className="bi bi-list-task"></i><span>Orders</span></a>
+        <a className="tb-link" href="CreateOrder.html"><i className="bi bi-plus-square"></i><span>Create New Order</span></a>
+        <a className="tb-link" href="TeamManagement.html"><i className="bi bi-people"></i><span>Team</span></a>
+      </nav>
+      <div className="tb-profile-wrap" ref={ref}>
+        <button className="tb-profile-btn" aria-haspopup="true" aria-expanded={open ? "true" : "false"} onClick={() => setOpen((o) => !o)}>
+          <i className="bi bi-person-circle"></i><span>Maria Rodriguez</span><i className="bi bi-chevron-down"></i>
+        </button>
+        {open ? (
+          <div className="tb-menu" role="menu">
+            <a className="tb-menu-item" role="menuitem" href="Profile.html"><i className="bi bi-person"></i>My Profile</a>
+            <a className="tb-menu-item" role="menuitem" href="https://www.gov-secure.com/apostille-xpress/" target="_blank" rel="noopener"><i className="bi bi-question-circle"></i>FAQ</a>
+            <hr className="tb-menu-sep" />
+            <a className="tb-menu-item" role="menuitem" href="CustomerAuth.dc.html"><i className="bi bi-box-arrow-right"></i>Log Out</a>
+          </div>
+        ) : null}
+      </div>
+    </header>
+  );
+}
+
+function DocRow({ name, size, onDone }) {
+  const [state, setState] = useState("idle");
+  const start = () => {
+    if (state !== "idle") return;
+    setState("busy");
+    setTimeout(() => { setState("done"); onDone(name); setTimeout(() => setState("idle"), 2000); }, 1400);
+  };
+  return (
+    <div className={"doc-row " + state}>
+      <span className="doc-ico">PDF</span>
+      <div className="doc-meta">
+        <div className="doc-name">{name}</div>
+        <div className={"doc-sub" + (state === "idle" ? "" : " active")}>{state === "busy" ? "Preparing downloading\u2026" : state === "done" ? "Downloaded" : size}</div>
+      </div>
+      <button className={"doc-dl " + state} onClick={start} aria-label={"Download " + name}>
+        {state === "busy" ? <span className="spin"></span> : state === "done" ? <i className="bi bi-check2"></i> : <React.Fragment><i className="bi bi-download"></i><span className="doc-tip">Download</span></React.Fragment>}
+      </button>
+    </div>
+  );
+}
+
+function OrderQR({ value, size = 88 }) {
+  let svg = "";
+  try {
+    const q = window.qrcode(0, "M"); q.addData(String(value)); q.make();
+    const n = q.getModuleCount(); let p = "";
+    for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) if (q.isDark(r, c)) p += "M" + c + "," + r + "h1v1h-1z";
+    svg = '<svg viewBox="-2 -2 ' + (n + 4) + " " + (n + 4) + '" width="' + size + '" height="' + size + '" shape-rendering="crispEdges" role="img" aria-label="QR code for order ' + value + '"><path d="' + p + '" fill="#212529"/></svg>';
+  } catch (e) {}
+  return <span dangerouslySetInnerHTML={{ __html: svg }}></span>;
+}
+function App() {
+  const params = new URLSearchParams(window.location.search);
+  const order = AXOrders.getOrder(params.get("order"));
+  const parentStatus = AXOrders.parentStatus(order.children);
+  const goChild = (number) => { window.location.href = "OrderDetails.html?order=" + encodeURIComponent(number); };
+
+  const [sort, setSort] = useState({ key: null, dir: 1 });
+  const [toast, setToast] = useState(null);
+  const [qrOpen, setQrOpen] = useState(false);
+  useEffect(() => { if (!qrOpen) return; const k = (e) => { if (e.key === "Escape") setQrOpen(false); }; window.addEventListener("keydown", k); return () => window.removeEventListener("keydown", k); }, [qrOpen]);
+  const paperCount = (order.children || []).filter((c) => /paper/i.test(c.requestType || "")).length;
+  useEffect(() => {
+    if (!toast) return;
+    const t = setTimeout(() => setToast(null), 6000);
+    return () => clearTimeout(t);
+  }, [toast]);
+  const COLS = [
+    { key: "number", label: "Order Number", get: (c) => c.number },
+    { key: "issuingState", label: "Issuing State", get: (c) => c.issuingState },
+    { key: "requestType", label: "Request Type", get: (c) => c.requestType },
+    { key: "serviceType", label: "Service Type", get: (c) => c.serviceType },
+    { key: "referenceName", label: "Reference Name", get: (c) => c.referenceName || "—" },
+    { key: "status", label: "Status", get: (c) => AXOrders.universalLabel(c.status) },
+  ];
+  const toggleSort = (key) => setSort((s) => (s.key === key ? { key, dir: -s.dir } : { key, dir: 1 }));
+  const sortedChildren = React.useMemo(() => {
+    if (!sort.key) return order.children;
+    const col = COLS.find((c) => c.key === sort.key);
+    return order.children.slice().sort((a, b) => {
+      const av = String(col.get(a) == null ? "" : col.get(a));
+      const bv = String(col.get(b) == null ? "" : col.get(b));
+      return av.localeCompare(bv, undefined, { numeric: true, sensitivity: "base" }) * sort.dir;
+    });
+  }, [order.children, sort]);
+
+  const isWalkIn = order.orderOption === "walkin";
+  const mixedWalk = order.orderOption === "mixed" && (order.children || []).some((c) => c.status === "Draft");
+  const showQR = isWalkIn || mixedWalk || paperCount > 0;
+  const formCount = isWalkIn ? Math.max((order.children || []).length, 1) : paperCount;
+  const wiBanner = isWalkIn || mixedWalk ? AXOrders.banner({ status: "Draft", deliveryFlow: ((order.children || [])[0] || {}).deliveryFlow }) : null;
+  const qrCap = isWalkIn || mixedWalk ? "Show this code at your appointment" : "Include with your documents";
+  return (
+    <div>
+      <TopBar />
+      <main className="page" data-screen-label="Order Overview">
+        <nav className="crumbs" aria-label="Breadcrumb">
+          <a className="crumb" href="Orders.dc.html">Orders</a>
+          <i className="bi bi-chevron-right crumb-sep"></i>
+          <span className="crumb active" aria-current="page">Order Overview</span>
+        </nav>
+
+        <h1 className="od-title">Order Overview #{order.number}</h1>
+        <div className="od-meta">
+          <span className={"sbadge " + AXOrders.parentClass(parentStatus)}>{parentStatus}</span>
+          <span className="sep"></span>
+          <span className="placed">Placed on <b>{order.placedOn}</b></span>
+        </div>
+        {(isWalkIn || mixedWalk) && wiBanner ? <div className="wi-banner"><i className="bi bi-info-circle-fill"></i><div><p className="wb-t">{wiBanner.title}</p><p className="wb-b">{wiBanner.body}</p></div></div> : null}
+
+        <div className="card" style={{ marginTop: 24 }}>
+          <div className="card-head"><h2>Payment Information</h2></div>
+          <div className="pay-body">
+            <div className="pay-field">
+              <div className="lbl">Payment method</div>
+              {order.payment.method === "walkin" ?
+              <div className="pay-method-val">Payment will be collected at your appointment.</div> :
+              <div className="pay-method-val"><span className="cc-visa">VISA</span>{order.payment.brand} ending in {order.payment.last4}</div>}{order.payment.method === "mixed" ? <div className="pay-method-val" style={{ marginTop: 6 }}>Remaining balance due at your appointment.</div> : null}
+            </div>
+            {order.payment.fees ? <div className="pay-field">
+              <div className="lbl">Fees</div>
+              {[["State Fee", order.payment.fees.state], ["State Service Fee", order.payment.fees.service], ["International Fee", order.payment.fees.intl], ["AX Fee", order.payment.fees.ax]].map((r) => <div key={r[0]} style={{ display: "flex", justifyContent: "space-between", gap: 24, maxWidth: 360, padding: "3px 0" }}><span style={{ color: "var(--ax-text-secondary)" }}>{r[0]}</span><span>{AXOrders.formatMoney(r[1])}</span></div>)}
+              <div style={{ display: "flex", justifyContent: "space-between", gap: 24, maxWidth: 360, padding: "8px 0 3px", marginTop: 6, borderTop: "1px solid var(--ax-border-subtle)", fontWeight: 700 }}><span>{order.payment.method === "walkin" ? "Estimated Total" : order.payment.method === "mixed" ? "Order Total" : "Total Paid"}</span><span>{AXOrders.formatMoney(order.payment.fees.total)}</span></div>
+              {order.payment.method === "mixed" ? <React.Fragment><div style={{ display: "flex", justifyContent: "space-between", gap: 24, maxWidth: 360, padding: "3px 0" }}><span style={{ color: "var(--ax-text-secondary)" }}>Paid today</span><span>{AXOrders.formatMoney(order.payment.fees.dueNow)}</span></div><div style={{ display: "flex", justifyContent: "space-between", gap: 24, maxWidth: 360, padding: "3px 0" }}><span style={{ color: "var(--ax-text-secondary)" }}>Due at appointment</span><span>{AXOrders.formatMoney(order.payment.fees.dueLater)}</span></div></React.Fragment> : null}
+            </div> : null}
+            <div className="pay-field">
+              <div className="lbl">Documents</div>
+              <div className="doc-grid">
+                <DocRow name="Order Receipt.pdf" size="45 KB" onDone={setToast} />
+                {formCount > 0 ? <DocRow name={"All Delivery Forms (" + formCount + ").pdf"} size="45 KB" onDone={setToast} /> : null}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="tcard">
+          <div className="tscroll">
+            <table className="ctable">
+              <thead>
+                <tr>
+                  {COLS.map((col) => (
+                    <th key={col.key} className="sortable" onClick={() => toggleSort(col.key)} aria-sort={sort.key === col.key ? (sort.dir === 1 ? "ascending" : "descending") : "none"}>
+                      <span className="th-inner">{col.label}<i className={"bi " + (sort.key === col.key ? (sort.dir === 1 ? "bi-chevron-up on" : "bi-chevron-down on") : "bi-chevron-expand")}></i></span>
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {sortedChildren.length === 0 ? (
+                  <tr>
+                    <td colSpan={COLS.length} style={{ textAlign: "center", padding: "48px 18px", color: "var(--ax-text-tertiary)", cursor: "default" }}>
+                      <div style={{ fontSize: 16, fontWeight: 600, color: "var(--ax-text-primary)" }}>No apostilles in this order</div>
+                      <div style={{ fontSize: 14, marginTop: 4 }}>Documents added to this order will appear here.</div>
+                    </td>
+                  </tr>
+                ) : sortedChildren.map((c) => (
+                  <tr key={c.number} tabIndex={0} onClick={() => goChild(c.number)}
+                    onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); goChild(c.number); } }}>
+                    <td><span className="rt">{c.number}</span></td>
+                    <td>{c.issuingState}</td>
+                    <td>{c.requestType}</td>
+                    <td>{c.serviceType}</td>
+                    <td>{c.referenceName || "—"}</td>
+                    <td><span className={"sbadge " + AXOrders.universalClass(c.status)}>{AXOrders.universalLabel(c.status)}</span></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+      {toast ? (
+        <div className="dl-toast">
+          <i className="bi bi-check-circle tk"></i>
+          <div style={{ flex: 1 }}>
+            <div className="tt">{toast} downloaded</div>
+            <div className="ts">Saved to your device.</div>
+            <button className="tdismiss" onClick={() => setToast(null)}>Dismiss</button>
+          </div>
+          <button className="tx" onClick={() => setToast(null)} aria-label="Close"><i className="bi bi-x-lg"></i></button>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>

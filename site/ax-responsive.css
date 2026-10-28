@@ -1,0 +1,196 @@
+/* ==========================================================================
+   ApostilleXpress — shared responsive layer
+   Adds breakpoint behaviour ONLY. No new colors, type, or components:
+   every value below comes from existing page/design-system tokens.
+   Load AFTER ax-overlays.css and the page's own <style> block.
+   ========================================================================== */
+
+/* ---- global guards: never scroll sideways, never clip media ---- */
+html{-webkit-text-size-adjust:100%}
+body{overflow-x:hidden}
+img,svg,video,canvas{max-width:100%}
+.page,.root{max-width:100%}
+.tscroll,.tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+/* ==========================  MOBILE NAVIGATION  ==========================
+   Hamburger chrome is injected by ax-mobile-nav.js and lives on <body>,
+   so React re-renders of the real top bar never disturb it.               */
+.ax-mnav-btn{display:none;position:fixed;top:0;right:10px;z-index:60;align-items:center;justify-content:center;width:48px;height:72px;padding:0;background:none;border:none;color:var(--ax-text-primary);font-size:26px;line-height:1;cursor:pointer;font-family:inherit}
+.ax-mnav-btn:focus-visible{outline:none;box-shadow:var(--ax-focus-ring)}
+.ax-mnav-scrim{display:block;position:fixed;inset:72px 0 0;z-index:45;background:rgba(16,24,40,.35);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .18s ease,visibility .18s ease}
+.ax-mnav-panel{display:block;position:fixed;top:72px;left:0;right:0;z-index:50;background:var(--ax-surface-card);border-bottom:1px solid var(--ax-border-subtle);box-shadow:var(--ax-shadow-md,0 12px 24px -8px rgba(16,24,40,.14));padding:8px;max-height:calc(100vh - 72px);overflow-y:auto;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-10px);transition:opacity .18s ease,transform .2s cubic-bezier(.4,0,.2,1),visibility .2s ease}
+.ax-mnav-panel.open{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0)}
+.ax-mnav-scrim.open{opacity:1;visibility:visible;pointer-events:auto}
+@media (prefers-reduced-motion:reduce){.ax-mnav-panel,.ax-mnav-scrim{transition:none}}
+.ax-mnav-item{display:flex;align-items:center;gap:13px;width:100%;min-height:48px;padding:12px 14px;border-radius:8px;font-size:16px;font-weight:500;font-family:inherit;color:var(--ax-text-primary);text-decoration:none;background:none;border:none;text-align:left;cursor:pointer}
+.ax-mnav-item i{font-size:19px;color:var(--ax-text-tertiary);width:22px;flex-shrink:0}
+.ax-mnav-item:hover{background:var(--ax-gray-50)}
+.ax-mnav-item.active{color:var(--ax-sea-depths);font-weight:600}
+.ax-mnav-item.active i{color:var(--ax-sea-depths)}
+.ax-mnav-sep{border:none;border-top:1px solid var(--ax-border-subtle);margin:6px}
+
+@media (max-width:860px){
+  body.ax-has-mnav .topbar .tb-nav{display:none!important}
+  body.ax-has-mnav .topbar{gap:10px;padding:0 16px;padding-right:60px;justify-content:space-between}
+  body.ax-has-mnav .topbar .tb-logo{flex:0 1 auto;min-width:0}
+  body.ax-has-mnav .topbar .tb-logo img{max-width:100%}
+  /* mobile header shows only the logo and the hamburger; My Profile and Log Out
+     live inside the hamburger menu */
+  body.ax-has-mnav .topbar .tb-profile-wrap,body.ax-has-mnav .topbar .tb-profile,
+  body.ax-has-mnav .topbar .profile,body.ax-has-mnav .topbar .profile-btn{display:none!important}
+  body.ax-has-mnav .tb-menu{right:0;max-width:calc(100vw - 32px)}
+  body.ax-has-mnav .ax-mnav-btn{display:inline-flex}
+  body.ax-mnav-open{overflow:hidden}
+}
+@media (max-width:420px){
+  body.ax-has-mnav .topbar .tb-logo img{height:26px!important}
+  body.ax-has-mnav .topbar .tb-profile-wrap,body.ax-has-mnav .topbar .tb-profile{max-width:44vw}
+}
+
+/* ==========================  LAYOUT / GRIDS  ============================== */
+@media (max-width:1100px){
+  .page{padding-left:28px;padding-right:28px}
+}
+@media (max-width:980px){
+  .cards,.stats,.cols,.cols2,.pay-cols,.conf-cols{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:760px){
+  .page{padding-left:16px;padding-right:16px}
+  /* every known field/content grid collapses to one column */
+  .fgrid,.dgrid,.rgrid,.rgrid3,.cmp,.cols,.cols2,.pay-cols,.conf-cols,.stats,.cards,
+  .pf.row2,.doc-body,.cust-body,.return-body,.paper-recip{grid-template-columns:1fr!important}
+  /* rows of controls wrap instead of overflowing */
+  .page-head,.searchbar,.actionbar,.footer-row,.srow,.tfoot,.filters,.toolbar{flex-wrap:wrap}
+  /* inputs & selects never exceed the viewport */
+  input,select,textarea,.tinput,.tselect,.ax-input,.ax-select{max-width:100%}
+  /* touch-friendly targets */
+  button,.ax-btn,.btn-primary,.btn-teal,.btn-secondary,.tb-menu-item,.linkbtn,a.ax-btn{min-height:44px}
+  .icon-btn{min-height:40px;min-width:40px}
+  /* tables stay usable: the table itself becomes the scroll region when it
+     is not already inside a .tscroll wrapper */
+  table.otable{max-width:100%}
+  .card>table.otable,.sect-body>table.otable,.card table.otable{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  /* Team Members toolbar: search fills the row from the left, role filter as-is */
+  .tcard-tools{margin-left:0;width:100%;flex-wrap:nowrap}
+  .tcard-tools .searchbox{flex:1 1 auto;min-width:0;max-width:none}
+  .tcard-tools .selwrap{flex:0 0 auto}
+  /* tab rows scroll horizontally instead of pushing the page wide */
+  .tabs{display:flex;max-width:100%;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{flex:0 0 auto}
+  /* prototype-only dock stays inside the viewport */
+  .demo-dock{max-width:calc(100vw - 24px)}
+  /* banners, breadcrumbs, notes wrap rather than clip */
+  .cbanner,.ibanner{padding:14px 16px}
+  .crumbs{row-gap:4px}
+}
+@media (max-width:520px){
+  .page{padding-left:14px;padding-right:14px}
+  .page-title{font-size:24px}
+  /* full-width primary actions on the smallest screens */
+  .page-head .ax-btn,.page-head .btn-primary,.actionbar .ax-btn{width:100%;justify-content:center}
+  .pager,.tfoot{justify-content:center;row-gap:10px}
+}
+
+/* ---- auth screens (login / register / forgot / reset) on small phones ---- */
+@media (max-width:420px){
+  .welcome{font-size:30px}
+  .hero{padding:30px 18px 24px}
+  .body-center .card,.body-top .card{padding:22px 16px}
+  .h-title{font-size:22px}
+}
+
+/* ====================  BILLING & PAYMENT / CONFIRMATION  ================== */
+@media (max-width:760px){
+  /* grid/flex children may shrink below their content's intrinsic width so a
+     wide fee table scrolls inside its wrapper instead of widening the page */
+  .pay-cols>*,.conf-cols>*,.cols>*,.cols2>*,.card.sect>*{min-width:0}
+  /* Order Summary: header, badge and action never spill out of the card */
+  .sum-head{flex-direction:column;align-items:stretch}
+  .sum-title{flex-wrap:wrap;row-gap:6px}
+  .sum-head>.ax-btn,.sum-head button.ax-btn{width:100%;justify-content:center}
+  /* fee tables keep legible column widths and scroll inside their wrapper */
+  .paytable{min-width:640px}
+  .card>div[style*="auto"]{max-width:100%}
+  .row-acts{justify-content:flex-start}
+  /* long values (addresses, emails, card lines) wrap instead of pushing out */
+  .od-block .txt,.od-block .pm,.auth-col .val,.feerow,.sum-sub{overflow-wrap:anywhere}
+  .feerow{gap:16px}
+  /* Order Confirmation: stacked actions, left-aligned authority details */
+  .conf-head{flex-direction:column;align-items:stretch}
+  .conf-actions{flex-direction:column;width:100%}
+  .conf-actions>.ax-btn{width:100%;justify-content:center}
+  .auth-card{flex-direction:column;gap:18px;padding:20px}
+  .auth-card .auth-col,.auth-card .auth-col[style]{text-align:left!important}
+  .banner-success,.auth-banner{padding:14px 18px;align-items:flex-start}
+}
+
+/* ====================  USER PROFILE (team member detail)  ================= */
+@media (max-width:860px){
+  .pf-grid{grid-template-columns:1fr}
+  .pf-grid>*{min-width:0}
+}
+@media (max-width:760px){
+  /* single column: Profile Summary → General Information → Permissions &
+     Preferences → Remove from organization (DOM order preserved) */
+  .pf-side{padding:22px 18px}
+  .pf-main{gap:18px}
+  .pf-fields{grid-template-columns:1fr}
+  .pf-body{padding:18px}
+  .icard-head{padding:16px 18px}
+  .pf-value,.pf-label{overflow-wrap:anywhere}
+  /* Remove From Organization: button drops below the warning, full size */
+  .danger-zone{flex-direction:column;align-items:stretch;gap:16px;padding:18px}
+  .dz-body{max-width:none}
+  .danger-zone .btn-danger{width:100%;flex:0 0 auto;flex-shrink:0;white-space:nowrap;min-height:48px;justify-content:center;padding:12px 18px}
+}
+
+/* ====================  DIGITAL APOSTILLE DOWNLOAD BANNER  ================= */
+@media (max-width:760px){
+  /* action drops to its own full-width line, inset to match the text column */
+  .banner-main{flex-wrap:wrap;row-gap:14px}
+  .banner-action,.banner.dl .banner-action{flex:1 0 100%;width:auto;min-width:0;margin-left:0;padding-left:34px;align-self:stretch}
+  .banner-action .btn-teal{width:100%;justify-content:center}
+  /* no divider above the retention line — content flows into it */
+  .banner-sub,.banner.dl .banner-sub{border-top:none;padding:12px 22px 16px}
+  .banner.dl .banner-main{padding:18px 22px 16px}
+}
+
+/* ==========================  AUTH ON MOBILE  ==============================
+   Phones show only the auth card (logo stays inside it); the hero panel,
+   city image and marketing copy are hidden. Tablet/desktop untouched.      */
+@media (max-width:600px){
+  .auth{grid-template-columns:1fr;min-height:100vh}
+  .auth>.hero{display:none}
+  .auth>.pane,.pane{min-height:100vh;justify-content:center}
+  .pane-top,.pane-top-split{padding:18px 20px;font-size:16px}
+  .body-center,.body-top{flex:1;align-items:center;justify-content:center;padding:0 16px 28px}
+  .body-center .card,.body-top .card{max-width:100%;padding:26px 20px}
+  .body-center .panel,.body-top .panel{max-width:100%}
+  .card-logo{margin-bottom:16px}
+  /* Cards/panels that relied on the hero for branding (register, account type,
+     MFA, forgot / check email / set password) get the wordmark on mobile. */
+  .body-center .card:not(:has(.card-logo))::before,
+  .body-top .card:not(:has(.card-logo))::before,
+  .body-center .panel:not(:has(.card-logo))::before,
+  .body-top .panel:not(:has(.card-logo))::before{content:"";display:block;height:34px;margin:0 auto 18px;background:url('assets/logos/ax-wordmark.png') center center/auto 34px no-repeat}
+}
+
+/* modal footers keep their buttons on one row on mobile */
+@media (max-width:760px){
+  .ax-modal-foot,.modal-foot,.confirm-foot{flex-wrap:nowrap}
+  .ax-modal-foot>button,.modal-foot>button,.confirm-foot>button,
+  .ax-modal-foot>.ax-btn,.modal-foot>.ax-btn,.confirm-foot>.ax-btn{width:auto;flex:0 1 auto;min-width:0;white-space:nowrap}
+}
+
+/* ==========================  OVERLAYS / NOTIFICATIONS  ==================== */
+.ax-toasts,.toast-wrap,.toasts{max-width:calc(100vw - 32px)}
+@media (max-width:640px){
+  .ax-toasts,.toast-wrap,.toasts{max-width:none}
+  .ax-toast,.toast{min-width:0;max-width:none;width:100%}
+  .ax-modal,.modal,.cmodal,.panel{max-width:calc(100vw - 32px)}
+}
+
+/* logo returns to Orders */
+.tb-logo-link{display:flex;align-items:center;text-decoration:none}
