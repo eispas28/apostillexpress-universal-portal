@@ -1,26 +1,17 @@
 (function(){
 var KEY='ax_flags',DKEY='ax_flags_defaults',BAKED={};
 var DEFS=[
-{k:'copyThisOrder',label:'Copy this order button',sub:'Per-card duplicate on the Copy Order page'},
-{k:'smallBadges',label:'Smaller badges',sub:'Copy Order card badges (Digital, Paper, status)'},
-{k:'saveDrafts',label:'Save Draft & Saved Drafts',sub:'Save Draft button and Saved Drafts tab in Orders'},
-{k:'copyOrder',label:'Copy Order',sub:'Duplicate orders from the payment page'},
 {k:'formatUpsell',label:'Add other format at payment',sub:'Add a paper or digital copy of an order from the payment page'},
-{k:'brbFees',label:'In-Person BRB fee schedule',sub:'Payment page and confirmation',def:true},
-{k:'showSignatures',label:'Notary Signatures',sub:'Payment page',def:true},
-{k:'noBoth',label:'Hide Both Formats option',sub:'In-Person and Online orders'},
-{k:'noInPersonReturn',label:'Hide Return Address (In-Person)',sub:'Document Information page'},
-{k:'uploadOnly',label:'Online: Upload Document only',sub:'Hides Mail Documents and other options'},
-{k:'oneState',label:'One state per order',sub:'Add Another Order returns to Choose Product'},
-{k:'customerName',label:'Customer Name on Orders page',sub:'Adds Apostilles tab (agency)'}
+{k:'showSignatures',label:'Notary Signatures',sub:'Payment page',def:true}
 ];
+var FORCED=["copyThisOrder","smallBadges","saveDrafts","copyOrder","brbFees","noBoth","noInPersonReturn","uploadOnly","oneState","customerName"];
 var subs=[];
 function ck(k){var m=document.cookie.match(new RegExp('(?:^|; )'+k+'=([^;]*)'));return m?decodeURIComponent(m[1]):null;}
 function sv(k,s){try{localStorage.setItem(k,s);}catch(e){}try{document.cookie=k+'='+encodeURIComponent(s)+';path=/;max-age=31536000;SameSite=None;Secure';}catch(e){}}
 function rm(k){try{localStorage.removeItem(k);}catch(e){}try{document.cookie=k+'=;path=/;max-age=0;SameSite=None;Secure';}catch(e){}}
 function ld(k){var s=null;try{s=localStorage.getItem(k);}catch(e){}if(s==null)s=ck(k);try{return JSON.parse(s)||{};}catch(e){return {};}}
 function base(){var sd=ld(DKEY),r={};DEFS.forEach(function(d){r[d.k]=sd[d.k]!==undefined?!!sd[d.k]:BAKED[d.k]!==undefined?!!BAKED[d.k]:!!d.def;});return r;}
-function read(){var o=ld(KEY),b=base(),r={};DEFS.forEach(function(d){r[d.k]=o[d.k]===undefined?b[d.k]:!!o[d.k];});return r;}
+function read(){var o=ld(KEY),b=base(),r={};DEFS.forEach(function(d){r[d.k]=o[d.k]===undefined?b[d.k]:!!o[d.k];});FORCED.forEach(function(k){r[k]=true;});return r;}
 function apply(v){document.documentElement.classList.toggle('ax-small-badges',!!v.smallBadges);}
 function emit(){var v=read();apply(v);subs.forEach(function(f){try{f(v);}catch(e){}});}
 window.AXFlags={defs:DEFS,saveDefault:function(){var v=read();sv(DKEY,JSON.stringify(v));sv(KEY,JSON.stringify(v));render();},resetToDefault:function(){rm(KEY);emit();render();},get:read,set:function(k,v){var o=read();o[k]=!!v;sv(KEY,JSON.stringify(o));emit();render();},onChange:function(f){subs.push(f);return function(){subs=subs.filter(function(x){return x!==f;});};}};
