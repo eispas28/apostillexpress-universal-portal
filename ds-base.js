@@ -2,7 +2,7 @@
 // base at the bound DS folder relative to this file (e.g. '_ds/<folder>' at
 // the project root, '../_ds/<folder>' one level down) — one line to edit.
 (() => {
-  const base = '_ds/apostillexpress-design-system-141fbe0d-4b05-4a81-8430-4a44c41ebc9b';
+  const base = 'ds';
   for (const p of ["tokens/fonts.css","tokens/colors.css","tokens/typography.css","tokens/spacing.css","tokens/shadows.css","tokens/base.css","components.css","styles.css"]) {
     const l = document.createElement('link');
     l.rel = 'stylesheet'; l.href = base + '/' + p;
