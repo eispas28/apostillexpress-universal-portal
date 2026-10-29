@@ -12,6 +12,7 @@ The look is **clean government-services SaaS**: a Bootstrap-5 structural foundat
 ## Products represented
 - **Competent Authority Portal** — authorities review order details and issue apostilles (the UI kit recreates this).
 - **Create-an-Order flow** — customers/agents submit documents, recipients, mailing and payment.
+- **ORX** — back-office platform between Utah County's ordering site and ApostilleXpress. Creates, delivers and verifies digital marriage certificates and prepares apostille requests. Internal only — customers never log into ORX, so ORX branding never appears in customer-facing screens.
 - Supporting surfaces: document templates, email templates, profile.
 
 ---
@@ -67,7 +68,7 @@ The system uses **[Bootstrap Icons](https://icons.getbootstrap.com/)** — confi
 - **Usage:** info/help → `info-circle` / `info-circle-fill`; success → `check-circle-fill`; warning → `exclamation-triangle-fill`; error → `x-circle-fill`; documents → `file-earmark-pdf-fill`; nav uses outline glyphs (`grid-1x2`, `clipboard-check`, `gear`, `person`, `plus-square`).
 - **Status dots** in badges are CSS, not icons. **Country flags** use the unicode flag emoji (the only emoji used). Don't hand-draw icons as inline SVG — use the Bootstrap Icons font.
 
-Brand logos live in `assets/logos/` (do not redraw): `ax-mark-*` (monogram), `ax-wordmark-*` (ApostilleXpress), `ax-gov-*` (@Gov lockup), each in `color / dark / white / light`.
+Brand logos live in `assets/logos/` (do not redraw): `ax-mark-*` (monogram), `ax-wordmark-*` (ApostilleXpress), `ax-gov-*` (@Gov lockup), each in `color / dark / white / light`. ORX logos: `orx-mark-color` / `orx-mark-color-tm` / `orx-mark-white-tm` (block mark) and `orx-wordmark-color` / `orx-wordmark-color-tm` / `orx-wordmark-white-tm`. Use the ™ versions on first/primary placement; white versions only on teal or midnight backgrounds.
 
 ---
 
@@ -80,11 +81,16 @@ Brand logos live in `assets/logos/` (do not redraw): `ax-mark-*` (monogram), `ax
 - `tokens-raw/fig-tokens.css` — full raw Figma-variable export (reference only).
 
 **Components** (`components/`, namespace `window.ApostilleXpressDesignSystem_141fbe`)
-- `buttons/` — Button, IconButton, ButtonGroup
-- `forms/` — Input, Textarea, Select, FormField, Checkbox, Radio, RadioGroup, Switch, FileUpload, Datepicker, SearchBox
+
+Naming note — **every component name below is confirmed intentional and is not to be renamed.** Figma kits are attached to this project one at a time and each covers only a slice of the system, so a coverage check run against any single kit will report most names as "not in the kit" — that is expected, not a defect. Names follow ApostilleXpress product vocabulary, not kit layer names. Known kit mappings, where one exists: `Radio group item` → `RadioGroupItem`, `Featured icon` → `FeaturedIcon`, `Payment method icon` → `PaymentMethod`, `checkbox-input` → `Checkbox`, `radio-input` → `Radio`, `Side Menu` / `.Side menu section` / `.Side menu dropdown` / `Stack` / `Item / Subsection variants` / `Notification Counter` → `SideNav` (one component absorbs the whole side-menu family: themes, icon strip, captions, counters, subsections), `Avatar` and `Badge` as named.
+
+Complete component index (all 53 exports, all confirmed): Accordion, Alert, Avatar, AvatarGroup, Badge, Breadcrumb, Button, ButtonGroup, ButtonSpinner, Card, CardBody, CardFooter, CardHeader, Carousel, Checkbox, CloseButton, Datepicker, Divider, Drawer, Dropdown, EmptyState, FeaturedIcon, FileUpload, FormField, IconButton, Input, ListGroup, ListItem, Logo, Modal, Navbar, NotificationItem, Pagination, PaymentMethod, ProgressBar, Radio, RadioGroup, RadioGroupItem, RadioGroupItemGroup, SearchBox, Select, SideNav, Skeleton, Spinner, Stepper, Switch, Table, Tabs, Tag, Textarea, Toast, Tooltip, UtilityButton.
+
+- `buttons/` — Button (+ ButtonSpinner), IconButton, UtilityButton, CloseButton, ButtonGroup. Source: Buttons.fig — `Buttons/Button` & `Buttons/Button danger` → Button (`variant` + `destructive`), `Buttons/Button utility` → UtilityButton, `Buttons/Button close X` → CloseButton, `Buttons/Button loading icon` → ButtonSpinner, `_Button group base` → ButtonGroup segments, `Dropdown` / `_Dropdown list item` / `_Dropdown list header` → overlays/Dropdown.
+- `forms/` — Input, Textarea, Select, FormField, Checkbox, Radio, RadioGroup, RadioGroupItem, RadioGroupItemGroup, Switch, FileUpload, Datepicker, SearchBox
 - `feedback/` — Badge, Tag, Alert, Stepper, Toast, Tooltip, Spinner, ProgressBar, NotificationItem
 - `data-display/` — Card (+Header/Body/Footer), Avatar, AvatarGroup, Table, Accordion, ListGroup/ListItem, Skeleton, EmptyState, Carousel
-- `navigation/` — Tabs, Breadcrumb, Pagination, Navbar
+- `navigation/` — Tabs, Breadcrumb, Pagination, Navbar, SideNav (Competent Authority Portal rail; kit family `Side Menu` / `.Side menu section`)
 - `overlays/` — Modal, Dropdown, Drawer (Offcanvas)
 - `layout/` — Divider, FeaturedIcon
 - `commerce/` — PaymentMethod

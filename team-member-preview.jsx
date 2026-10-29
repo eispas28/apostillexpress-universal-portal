@@ -95,7 +95,7 @@
           </div>
           <a className="btn-primary" href="CreateOrder.html"><i className="bi bi-plus-lg"></i>Create New Order</a>
         </div>
-        <div className="tcard" style={{ marginTop: 24 }}>
+        <div className="tcard" style={{ marginTop: "var(--ax-space-6)" }}>
           <div className="tscroll">
             <table className="otable">
               <thead>
@@ -112,7 +112,7 @@
               </thead>
               <tbody>
                 {sorted.length === 0 ? (
-                  <tr><td colSpan={orderCols(joined).length} style={{ textAlign: "center", color: "var(--ax-text-tertiary)", padding: "28px 18px" }}>No orders found.</td></tr>
+                  <tr><td colSpan={orderCols(joined).length} style={{ textAlign: "center", color: "var(--ax-text-tertiary)", padding: "1.75rem 1.125rem" }}>No orders found.</td></tr>
                 ) : sorted.map((r) => (
                   <tr className="orow" key={r.id} onClick={() => { window.location.href = "OrderOverview.html"; }}>
                     <td>{r.id}</td>

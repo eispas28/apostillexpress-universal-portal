@@ -100,7 +100,7 @@ function CopyOrderScreen({ ctx, form, onCancel, onDone, stateRef, initial }) {
   return (
     <main className="page co-page" data-screen-label="Copy Order">
       <h1 className="page-title">Copy Order</h1>
-      <p className="page-sub" style={{ marginBottom: 20 }}>Everything is copied from your previous order. Change anything that{"\u2019"}s different.</p>
+      <p className="page-sub" style={{ marginBottom: "var(--ax-space-5)" }}>Everything is copied from your previous order. Change anything that{"\u2019"}s different.</p>
       {kids.length > 0 ?
       <div className="co-bar">
         <div><div className="co-bt">Orders being added</div><div className="co-count"><b>{ready} of {kids.length}</b> ready{ctx.isMail ? " \u2022 original documents are sent by mail for each copy" : ""}{ctx.isBoth ? " \u2022 a paper copy is created automatically for each digital copy" : ""}{ctx.upload ? " \u2022 each copy needs its own uploaded document" : ctx.inPerson ? " \u2022 bring the original document for each copy to your appointment" : ""}</div></div><div className="co-mix"><DSBadge color="info" pill size="lg"><b>{kids.filter((k) => k.digital).length}</b> Digital</DSBadge><DSBadge color="warning" pill size="lg"><b>{kids.filter((k) => !k.digital || k.isBoth).length}</b> Paper</DSBadge></div><div className="co-big">{kids.length}<span className="co-of">/35</span></div>
@@ -141,7 +141,7 @@ function CopyOrderScreen({ ctx, form, onCancel, onDone, stateRef, initial }) {
       </div>
       <div className="co-dock">
         {maxErr || kids.length >= maxCopies ? <div className="co-err" role="alert"><i className="bi bi-exclamation-circle-fill"></i>Maximum of 35 orders reached.</div> : null}
-        {sel.length ? <div className="co-bulk" role="region" aria-label="Bulk actions"><span className="co-bulk-n"><b>{sel.length}</b> selected</span><Button variant="tertiary" size="md" onClick={() => setSel(sel.length === kids.length ? [] : kids.map((k) => k.id))}>{sel.length === kids.length ? "Deselect all" : "Select all"}</Button><span className="co-bulk-sp"></span><Button variant="tertiary" size="md" onClick={() => setSel([])}>Clear</Button><Button variant="danger" size="md" onClick={() => setDelMulti(true)}><i className="bi bi-trash" style={{ marginRight: 6 }}></i>{"Delete (" + sel.length + ")"}</Button></div> : null}
+        {sel.length ? <div className="co-bulk" role="region" aria-label="Bulk actions"><span className="co-bulk-n"><b>{sel.length}</b> selected</span><Button variant="tertiary" size="md" onClick={() => setSel(sel.length === kids.length ? [] : kids.map((k) => k.id))}>{sel.length === kids.length ? "Deselect all" : "Select all"}</Button><span className="co-bulk-sp"></span><Button variant="tertiary" size="md" onClick={() => setSel([])}>Clear</Button><Button variant="danger" size="md" onClick={() => setDelMulti(true)}><i className="bi bi-trash" style={{ marginRight: "var(--ax-space-1-5)" }}></i>{"Delete (" + sel.length + ")"}</Button></div> : null}
         <div className="co-dock-in">
           <Button variant="tertiary" size="lg" onClick={onCancel}>Cancel</Button>
           {kids.length > 0 ? <div className="co-dock-mid"><label>Add additional copies</label>
@@ -160,7 +160,7 @@ function CopyOrderScreen({ ctx, form, onCancel, onDone, stateRef, initial }) {
             <button aria-label="Fewer copies" onClick={() => setCopyN((n) => Math.max(1, n - 1))} disabled={copyN <= 1}>{"\u2014"}</button>
             <input className="val co-num" type="text" inputMode="numeric" aria-label="Additional copies" value={copyN} onFocus={(e) => e.target.select()} onChange={(e) => { const v = parseInt(e.target.value.replace(/\D/g, "").slice(0, 3), 10); setCopyN(isNaN(v) ? 1 : Math.max(1, Math.min(room, v))); }} />
             <button aria-label="More copies" onClick={() => setCopyN((n) => Math.min(room, n + 1))} disabled={copyN >= room}>+</button>
-          </div>{copyN >= room ? <div className="co-ferr" role="alert" style={{ display: "flex", alignItems: "center", gap: 8, color: "var(--ax-danger-700)" }}><i className="bi bi-exclamation-circle-fill" style={{ color: "var(--ax-danger-500)" }}></i><span style={{ color: "var(--ax-danger-700)" }}>Maximum of {ctx.isBoth ? 16 : 35} orders reached.</span></div> : null}</div>
+          </div>{copyN >= room ? <div className="co-ferr" role="alert" style={{ display: "flex", alignItems: "center", gap: "var(--ax-space-2)", color: "var(--ax-danger-700)" }}><i className="bi bi-exclamation-circle-fill" style={{ color: "var(--ax-danger-500)" }}></i><span style={{ color: "var(--ax-danger-700)" }}>Maximum of {ctx.isBoth ? 16 : 35} orders reached.</span></div> : null}</div>
       </window.AXModal> : null}
       {delMulti ? <window.DeleteOrderModal count={sel.length} onClose={() => setDelMulti(false)} onConfirm={() => { setKids((a) => a.filter((x) => !sel.includes(x.id))); setSel([]); setDelMulti(false); setMaxErr(false); setTxt(null); }} /> : null}
       {delId ? <window.DeleteOrderModal onClose={() => setDelId(null)} onConfirm={() => { setKids((a) => a.filter((x) => x.id !== delId)); setSel((s) => s.filter((x) => x !== delId)); setDelId(null); setMaxErr(false); setTxt(null); }} /> : null}
@@ -170,7 +170,7 @@ function CopyOrderScreen({ ctx, form, onCancel, onDone, stateRef, initial }) {
 }
 
 const F = ({ label, req, children }) => <FormField label={label} required={!!req}>{children}</FormField>;
-const UpErr = () => <div className="co-ferr" role="alert" style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 8 }}><i className="bi bi-exclamation-circle-fill" style={{ color: "var(--ax-danger-500)" }}></i><span style={{ color: "var(--ax-danger-700)" }}>Document file is missing. Upload a file to continue.</span></div>;
+const UpErr = () => <div className="co-ferr" role="alert" style={{ display: "flex", alignItems: "center", gap: "var(--ax-space-2)", marginTop: "var(--ax-space-2)" }}><i className="bi bi-exclamation-circle-fill" style={{ color: "var(--ax-danger-500)" }}></i><span style={{ color: "var(--ax-danger-700)" }}>Document file is missing. Upload a file to continue.</span></div>;
 const In = ({ v, on, ph, type }) => <Input type={type || "text"} value={v || ""} placeholder={ph} onChange={(e) => on(e.target.value)} />;
 const Sel = ({ v, on, opts, ph }) => <Select value={v || ""} onChange={(e) => on(e.target.value)}><option value="">{ph}</option>{opts.map((o) => <option key={o} value={o}>{o}</option>)}</Select>;
 

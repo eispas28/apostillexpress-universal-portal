@@ -2,7 +2,7 @@
    ApostilleXpress — canonical overlay components (single source of truth)
 
    Load AFTER React and ax-overlays.css, BEFORE page scripts:
-     <link rel="stylesheet" href="ax-overlays.css">
+     <link rel="stylesheet" href="ax-overlays.css?v=rem1">
      <script type="text/babel" src="ax-overlays.jsx"></script>
 
    Exposes on window: AXModal, AXModalFoot, AXToasts, useAXToasts.

@@ -154,7 +154,7 @@ function UpdateProfileDrawer({ user, onClose, onSave }) {
         </div>
         <div className="drawer-foot">
           <button className="btn-sec" onClick={close} disabled={busy}>Cancel</button>
-          <button className="btn-primary" style={{ padding: "11px 20px", fontSize: 15, opacity: dirty && !busy ? 1 : .55, cursor: dirty && !busy ? "pointer" : "not-allowed" }}
+          <button className="btn-primary" style={{ padding: "0.6875rem var(--ax-space-5)", fontSize: "0.9375rem", opacity: dirty && !busy ? 1 : .55, cursor: dirty && !busy ? "pointer" : "not-allowed" }}
             onClick={save} disabled={!dirty || busy}>
             {busy ? <span className="spin sm"></span> : null}{busy ? "Saving…" : "Save Changes"}
           </button>
@@ -162,9 +162,9 @@ function UpdateProfileDrawer({ user, onClose, onSave }) {
       </aside>
       {warn ? (
         <div className="scrim" style={{ zIndex: 120 }} onMouseDown={(e) => { if (e.target === e.currentTarget) setWarn(false); }}>
-          <div className="modal" role="dialog" aria-modal="true" style={{ maxWidth: 460 }}>
+          <div className="modal" role="dialog" aria-modal="true" style={{ maxWidth: "28.75rem" }}>
             <div className="modal-head"><div><h2>Discard unsaved changes?</h2></div></div>
-            <div className="modal-body"><p style={{ margin: 0, fontSize: 16, lineHeight: 1.55, color: "var(--ax-text-secondary)" }}>You have unsaved changes to this profile. If you leave now, they will be lost.</p></div>
+            <div className="modal-body"><p style={{ margin: 0, fontSize: "var(--ax-text-md)", lineHeight: 1.55, color: "var(--ax-text-secondary)" }}>You have unsaved changes to this profile. If you leave now, they will be lost.</p></div>
             <div className="modal-foot">
               <button className="btn-sec" onClick={() => setWarn(false)}>Keep Editing</button>
               <button className="btn-danger" onClick={onClose}>Discard Changes</button>
@@ -197,12 +197,12 @@ function UserProfile({ user, can, removed, seatsLeft, onBack, onUndo, onSaveProf
   if (removed) return (
     <div>
       {crumbs}
-      <div className="tcard" style={{ marginTop: 20 }}>
+      <div className="tcard" style={{ marginTop: "var(--ax-space-5)" }}>
         <div className="state">
           <div className="empty-ic ok"><i className="bi bi-check-circle-fill"></i></div>
           <div className="empty-title">{full} was removed</div>
           <div className="empty-sub">They no longer have access to ApostilleXpress. You can re-invite them at any time.</div>
-          <div style={{ display: "flex", gap: 12, marginTop: 8 }}>
+          <div style={{ display: "flex", gap: "var(--ax-space-3)", marginTop: "var(--ax-space-2)" }}>
             <button className="btn-primary" onClick={onBack}>Back to Team</button>
             <button className="btn-sec" onClick={onUndo}><i className="bi bi-arrow-counterclockwise"></i>Undo</button>
           </div>
@@ -214,7 +214,7 @@ function UserProfile({ user, can, removed, seatsLeft, onBack, onUndo, onSaveProf
   return (
     <div>
       {crumbs}
-      <div className="sec-head" style={{ marginTop: 12 }}>
+      <div className="sec-head" style={{ marginTop: "var(--ax-space-3)" }}>
         <h2>User Profile</h2>
         <p>Manage and monitor user details, permissions, and activities</p>
       </div>
@@ -252,7 +252,7 @@ function UserProfile({ user, can, removed, seatsLeft, onBack, onUndo, onSaveProf
                 <ProfileField label="Email address" value={user.email} />
                 <ProfileField label="Phone number" value={p.phone} />
               </div>
-              <div style={{ marginTop: 18 }}><ProfileField label="Address" value={p.address} /></div>
+              <div style={{ marginTop: "1.125rem" }}><ProfileField label="Address" value={p.address} /></div>
             </div>
           </div>
           <div className="icard">
