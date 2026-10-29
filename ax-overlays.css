@@ -34,14 +34,14 @@
 .scrim>.modal.cmodal{--ax-modal-w:32.5rem}
 
 /* ---------- header ---------- */
-.ax-modal-head,.modal-head,.cmodal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--ax-space-4);padding:var(--ax-space-5) var(--ax-space-6) var(--ax-space-3);flex-shrink:0}
+.ax-modal-head,.modal-head,.cmodal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--ax-space-4);padding:var(--ax-space-5) var(--ax-space-6) var(--ax-space-3);border-bottom:1px solid var(--ax-border-subtle,#e9ecef);flex-shrink:0}
 .ax-modal-title,.ax-modal-head h2,.modal-head h2,.cmodal-head h2,.modal-title{font-family:var(--ax-font-heading);font-size:var(--ax-text-lg);font-weight:var(--ax-fw-semibold,600);line-height:1.3;color:var(--ax-text-primary,#212529);margin:0}
 .ax-modal-head p,.modal-head p,.cmodal-head p,.ax-modal-sub{font-size:var(--ax-text-sm);color:var(--ax-text-tertiary,#6c757d);line-height:1.45;margin:var(--ax-space-1) 0 0}
 .ax-modal-x,.modal-x{width:2.25rem;height:2.25rem;flex-shrink:0;margin:-0.125rem -0.25rem 0 0;background:none;border:none;border-radius:var(--ax-radius-xs);display:inline-flex;align-items:center;justify-content:center;font-size:var(--ax-text-lg);line-height:1;color:var(--ax-text-tertiary,#6c757d);cursor:pointer;transition:background .12s ease,color .12s ease}
 .ax-modal-x:hover,.modal-x:hover{background:var(--ax-gray-50,#f8f9fa);color:var(--ax-text-primary,#212529)}
 
 /* ---------- body ---------- */
-.ax-modal-body,.modal-body,.cmodal-body{flex:1;min-height:0;overflow-y:auto;padding:0 var(--ax-space-6) var(--ax-space-5);margin:0;font-size:var(--ax-text-sm);line-height:1.5;color:var(--ax-text-secondary,#495057)}
+.ax-modal-body,.modal-body,.cmodal-body{flex:1;min-height:0;overflow-y:auto;padding:1.25rem var(--ax-space-6) var(--ax-space-5);margin:0;font-size:var(--ax-text-sm);line-height:1.5;color:var(--ax-text-secondary,#495057)}
 .ax-modal-body>p:first-child,.modal-body>p:first-child{margin-top:0}
 .ax-modal-body>p:last-child,.modal-body>p:last-child{margin-bottom:0}
 .ax-modal-body>*+*{margin-top:1.125rem}
@@ -78,7 +78,7 @@
 @media (max-width:640px){
   .ax-scrim,.scrim{padding:var(--ax-space-4)}
   .ax-modal-head,.modal-head,.cmodal-head{padding:var(--ax-space-4) var(--ax-space-4) 0.625rem}
-  .ax-modal-body,.modal-body,.cmodal-body{padding:0 var(--ax-space-4) var(--ax-space-4)}
+  .ax-modal-body,.modal-body,.cmodal-body{padding:1rem var(--ax-space-4) var(--ax-space-4)}
   .ax-modal-foot,.modal-foot,.confirm-foot{padding:0.875rem var(--ax-space-4);flex-wrap:wrap}
   .ax-toasts,.toast-wrap,.toasts{top:4.75rem;right:1rem;left:1rem;width:auto}
   .ax-toasts.bottom-right,.toast-wrap.bottom-right,.toasts.bottom-right{top:auto;bottom:1rem}
