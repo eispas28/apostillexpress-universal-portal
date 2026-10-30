@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script><script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script><link rel="stylesheet" href="ds/tokens/fonts.css?v=12"><link rel="stylesheet" href="ds/tokens/colors.css?v=12"><link rel="stylesheet" href="ds/tokens/typography.css?v=12"><link rel="stylesheet" href="ds/tokens/spacing.css?v=12"><link rel="stylesheet" href="ds/tokens/shadows.css?v=12"><link rel="stylesheet" href="ds/tokens/base.css?v=12"><link rel="stylesheet" href="ds/components.css?v=12"><link rel="stylesheet" href="ds/styles.css?v=12"><script src="ds/ds-bundle.js?v=12"></script><script src="./orderData.js"></script><script src="./ax-flags.js?v=11"></script><script src="./support.js"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script><script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script><link rel="stylesheet" href="ds/tokens/fonts.css?v=14"><link rel="stylesheet" href="ds/tokens/colors.css?v=14"><link rel="stylesheet" href="ds/tokens/typography.css?v=14"><link rel="stylesheet" href="ds/tokens/spacing.css?v=14"><link rel="stylesheet" href="ds/tokens/shadows.css?v=14"><link rel="stylesheet" href="ds/tokens/base.css?v=14"><link rel="stylesheet" href="ds/components.css?v=14"><link rel="stylesheet" href="ds/styles.css?v=14"><script src="ds/ds-bundle.js?v=14"></script><script src="./orderData.js"></script><script src="./ax-flags.js?v=14"></script><script src="./support.js"></script>
 </head>
-<body><template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0D5257"/><text x="50" y="64" font-size="40" font-family="sans-serif" font-weight="700" fill="#fff" text-anchor="middle">AX</text></svg></template>
+<body><template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="72" height="72" style="display:none"><rect width="100" height="100" fill="#0D5257"/><text x="50" y="64" font-size="40" font-family="sans-serif" font-weight="700" fill="#fff" text-anchor="middle">AX</text></svg></template>
 <x-dc>
 <helmet><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"><style>
 *{box-sizing:border-box}body{margin:0}
@@ -152,7 +152,7 @@
 .tinput.err:focus,.tselect.err:focus{border-color:#F04438;box-shadow:0 0 0 4px rgba(240,68,56,.25)}
 .tinput::placeholder,.tsearch input::placeholder,.searchbox input::placeholder{color:var(--ax-gray-600)}
 .tinput:disabled,.tselect:disabled{background:var(--ax-surface-disabled);cursor:not-allowed}
-</style><link rel="stylesheet" href="ax-responsive.css?v=rem1"><script src="./ax-mobile-nav.js?v=rem1"></script></helmet>
+</style><link rel="stylesheet" href="ax-responsive.css?v=14"><script src="./ax-mobile-nav.js?v=14"></script></helmet>
 <div class="root">
   <!-- ============ TOP BAR ============ -->
   <header class="topbar">
@@ -333,7 +333,7 @@ class Component extends DCLogic {
   constructor(props) {
     super(props);
     this.state = {
-      state: props.tableState || 'loaded',
+      state: props.tableState || 'loading',
       accountType: props.accountType || 'business',
       tab: (() => { try { return /[?&]tab=drafts/.test(location.search) && true ? 'drafts' : 'orders'; } catch (e) { return 'orders'; } })(),
       flag: !!props.customerNameFlag || (() => { try { return /[?&]customerName=1/.test(location.search) || localStorage.getItem('ax_ff_customer_name') === '1'; } catch (e) { return false; } })(),
@@ -348,6 +348,7 @@ class Component extends DCLogic {
     };
   }
   componentDidMount() {
+    if (this.state.state === 'loading' && !this.props.tableState) this._loadT = setTimeout(() => this.setState({ state: 'loaded' }), 900);
     this._onDoc = (e) => {
       if (!this.state.menuOpen) return;
       if (e.target.closest && e.target.closest('.profile')) return;
@@ -359,6 +360,7 @@ class Component extends DCLogic {
     document.addEventListener('keydown', this._onEsc);
   }
   componentWillUnmount() {
+    clearTimeout(this._loadT);
     if (this._offFlags) this._offFlags();
     document.removeEventListener('click', this._onDoc, true);
     document.removeEventListener('keydown', this._onEsc);
@@ -396,7 +398,7 @@ class Component extends DCLogic {
         const cust = c.customerName || (o.children.length > 1 || true ? POOL[(i + String(o.number).length + String(c.number).charCodeAt(String(c.number).length - 1)) % POOL.length] : own);
         rows.push({ id: (c.status === 'Issued' || c.status === 'Printed') ? String(c.number) : '—', parent: String(o.number), cust, date: o.placedOn, dateNum: Date.parse(o.placedOn) || 0, cost: '', costNum: 0, by: '', docs: 0,
           status: c.status, statusClass: window.AXOrders.statusClass(c.status),
-          open: () => { window.location.href = 'OrderOverview.html?order=' + encodeURIComponent(o.number); } });
+          open: () => { window.location.href = 'OrderDetails.html?order=' + encodeURIComponent(c.number); } });
       }));
     }
     // Status filter options come from the statuses actually present.

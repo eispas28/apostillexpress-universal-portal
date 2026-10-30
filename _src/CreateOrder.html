@@ -11,20 +11,20 @@
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-<link rel="stylesheet" href="ds/tokens/fonts.css?v=rem1">
-<link rel="stylesheet" href="ds/tokens/colors.css?v=rem1">
-<link rel="stylesheet" href="ds/tokens/typography.css?v=rem1">
-<link rel="stylesheet" href="ds/tokens/spacing.css?v=rem1">
-<link rel="stylesheet" href="ds/tokens/shadows.css?v=rem1">
-<link rel="stylesheet" href="ds/tokens/base.css?v=rem1">
-<link rel="stylesheet" href="ds/components.css?v=rem1">
-<link rel="stylesheet" href="ds/styles.css?v=rem1">
-<script src="ds/ds-bundle.js?v=rem1"></script>
+<link rel="stylesheet" href="ds/tokens/fonts.css?v=14">
+<link rel="stylesheet" href="ds/tokens/colors.css?v=14">
+<link rel="stylesheet" href="ds/tokens/typography.css?v=14">
+<link rel="stylesheet" href="ds/tokens/spacing.css?v=14">
+<link rel="stylesheet" href="ds/tokens/shadows.css?v=14">
+<link rel="stylesheet" href="ds/tokens/base.css?v=14">
+<link rel="stylesheet" href="ds/components.css?v=14">
+<link rel="stylesheet" href="ds/styles.css?v=14">
+<script src="ds/ds-bundle.js?v=14"></script>
 <script src="./statesData.js"></script>
 <script src="./geoData.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
 <script src="./orderData.js"></script>
-<link rel="stylesheet" href="ax-overlays.css?v=13">
+<link rel="stylesheet" href="ax-overlays.css?v=14">
 <style>.fmt-badges{display:flex;flex-wrap:wrap;gap:var(--ax-space-1-5);margin-top:var(--ax-space-1-5)}.fmt-pill{display:inline-flex;font-size:var(--ax-text-xs);font-weight:600;padding:var(--ax-space-0-5) 0.625rem;border-radius:var(--ax-radius-full);background:var(--ax-info-50,#EFF8FF);color:var(--ax-info-700,#005A99);white-space:nowrap}.fmt-badges .wk-pill{margin:0}.fmt-pill.paper{background:var(--ax-warning-50,#FFF6E5);color:var(--ax-warning-700,#8A5300)}
 *{box-sizing:border-box}
 html,body{margin:0}
@@ -520,9 +520,10 @@ body{font-family:var(--ax-font-base);color:var(--ax-text-primary);background:var
 .tinput:disabled,.tselect:disabled{background:var(--ax-surface-disabled);cursor:not-allowed}
 .cbanner-x.elig li,.cbanner-x.elig li *,.cbanner-x.elig a,.cbanner-x.elig a *{color:#664D03}.cbanner-x.elig .ib-title,.cbanner-x.elig .ib-title *{color:#664D03EB}
 </style>
-<link rel="stylesheet" href="ax-responsive.css?v=rem1">
-<link rel="stylesheet" href="copy-order.css?v=15">
-<script src="./ax-mobile-nav.js?v=rem1" defer></script>
+<link rel="stylesheet" href="ax-responsive.css?v=14">
+<link rel="stylesheet" href="copy-order.css?v=14">
+<script src="./ax-mobile-nav.js?v=14" defer></script>
+<script src="ax-loading.js?v=16"></script>
 </head>
 <body>
 <template id="__bundler_thumbnail">
@@ -540,7 +541,7 @@ body{font-family:var(--ax-font-base);color:var(--ax-text-primary);background:var
   </svg>
 </template>
 <div id="root"></div>
-<script src="ax-flags.js?v=11"></script>
+<script src="ax-flags.js?v=14"></script>
 <script type="text/babel" src="ax-overlays.jsx"></script>
 <script type="text/babel" src="copy-order.jsx"></script>
 <script type="text/babel" src="format-modal.jsx"></script>
@@ -2401,6 +2402,7 @@ function PaymentScreen({ form, update, goTo, onCancel, onPrevious, onSubmit, sho
 
   const addItem = () => setItems((arr) => [...arr, { id: "a" + Date.now(), name: arr[0] && arr[0].name || "Additional Document", docId: docNo("a" + Date.now()) }]);
   const upsellOn = !!(window.AX_F && window.AX_F.formatUpsell);
+  const allWalk = !!brb && items.length > 0 && items.every(itemWalk);
   const canOffer = (it) => upsellOn && !it.both && !itemWalk(it) && items.length < 35;
   const [fmtIt, setFmtIt] = useState(null);
   const addTwin = (it) => setFmtIt(it);
@@ -2593,7 +2595,7 @@ function PaymentScreen({ form, update, goTo, onCancel, onPrevious, onSubmit, sho
               <table className="otable paytable">
                 <thead>
                   <tr>
-                    <th>Description</th><th>State Fee</th><th>State Service Fee</th><th>AX Fee</th>{intlTotal > 0 ? <th>International&nbsp;Fee</th> : null}<th style={{ textAlign: "left" }}>Actions</th>
+                    <th>Description</th>{allWalk ? <th colSpan={4 + (intlTotal > 0 ? 1 : 0)}></th> : <React.Fragment><th>State Fee</th><th>State Service Fee</th><th>AX Fee</th>{intlTotal > 0 ? <th>International&nbsp;Fee</th> : null}<th style={{ textAlign: "left" }}>Actions</th></React.Fragment>}
                   </tr>
                 </thead>
                 <tbody>
@@ -2601,10 +2603,11 @@ function PaymentScreen({ form, update, goTo, onCancel, onPrevious, onSubmit, sho
                     const rf = perItemFees[ix];
                     return (
                     <tr key={it.id}>
-                      <td>{it.docDesc || it.name}<div className="sub">{childNo(it, ix, form)}{it.copyOf ? " · Copy of " + it.copyOf : ""}{it.both ? (it.deliveryMethod === "electronic" ? " · Digital Apostille" : " · Paper Apostille") : ""}</div><div className="fmt-badges"><DSBadge color={(it.deliveryMethod || form.deliveryMethod) === "electronic" ? "info" : "warning"} pill>{(it.deliveryMethod || form.deliveryMethod) === "electronic" ? "Digital" : "Paper"}</DSBadge>{(it.adoption != null ? it.adoption : form.apostilleRequest === "adoption") ? <DSBadge color="info" pill>Adoption</DSBadge> : null}{itemWalk(it) && (!it.stateName || !form.state || it.stateName === form.state.name) ? <DSBadge color="brand" pill>In-Person (Appointment)</DSBadge> : null}</div>{missingUp(it) ? <div style={{ marginTop: "var(--ax-space-1-5)" }}><span className="field-err">Document upload required</span> <Button variant="tertiary" size="sm" style={{ padding: 0 }} onClick={() => setEditIt(it)}><i className="bi bi-upload" style={{ marginRight: "var(--ax-space-1-5)" }}></i>Upload document</Button></div> : null}{canOffer(it) ? <div style={{ marginTop: "var(--ax-space-1-5)" }}><Button variant="tertiary" size="sm" style={{ padding: 0, marginTop: "var(--ax-space-1)" }} onClick={() => addTwin(it)}><i className="bi bi-plus-lg" style={{ marginRight: "var(--ax-space-1-5)" }}></i>{(it.deliveryMethod || form.deliveryMethod) === "electronic" ? "Add Paper Apostille" : "Add Digital Apostille"}</Button></div> : null}</td>
+                      <td>{it.docDesc || it.name}<div className="sub">{childNo(it, ix, form)}{it.copyOf ? " · Copy of " + it.copyOf : ""}{it.both ? (it.deliveryMethod === "electronic" ? " · Digital Apostille" : " · Paper Apostille") : ""}</div><div className="fmt-badges"><DSBadge color={(it.deliveryMethod || form.deliveryMethod) === "electronic" ? "info" : "warning"} pill>{(it.deliveryMethod || form.deliveryMethod) === "electronic" ? "Digital" : "Paper"}</DSBadge>{(it.adoption != null ? it.adoption : form.apostilleRequest === "adoption") ? <DSBadge color="info" pill>Adoption</DSBadge> : null}{itemWalk(it) && (!it.stateName || !form.state || it.stateName === form.state.name) ? <DSBadge color="brand" pill>In-Person (Appointment)</DSBadge> : null}</div>{missingUp(it) ? <div style={{ marginTop: "var(--ax-space-1-5)" }}><span className="field-err">Document upload required</span> <Button variant="tertiary" size="sm" style={{ padding: 0 }} onClick={() => setEditIt(it)}><i className="bi bi-upload" style={{ marginRight: "var(--ax-space-1-5)" }}></i>Upload document</Button></div> : null}{canOffer(it) ? <div style={{ marginTop: "var(--ax-space-1-5)" }}><Button variant="link" size="sm" style={{ padding: 0, marginTop: "var(--ax-space-1)" }} onClick={() => addTwin(it)}><i className="bi bi-plus-lg" style={{ marginRight: "var(--ax-space-1-5)" }}></i>{(it.deliveryMethod || form.deliveryMethod) === "electronic" ? "Add Paper Apostille" : "Add Digital Apostille"}</Button></div> : null}</td>
                       {brb && itemWalk(it) ? <td colSpan={3 + (intlTotal > 0 ? 1 : 0)}>In-Person fee schedule · paid at the counter</td> : <React.Fragment><td>{fmtMoney(rf.stateFee)}</td><td>{fmtMoney(rf.stateServiceFee)}<div className="sub">{form.serviceType === "sameday" ? "Same-Day" : form.serviceType === "express" ? "Express" : "Standard"}</div></td><td>{fmtMoney(rf.axFee)}</td>{intlTotal > 0 ? <td>{fmtMoney(rf.intlFee)}</td> : null}</React.Fragment>}
                       <td>
                         <div className="row-acts">
+                          {canOffer(it) ? (() => { const lbl = (it.deliveryMethod || form.deliveryMethod) === "electronic" ? "Add Paper Apostille" : "Add Digital Apostille"; return <span className="co-tip" data-tip={lbl}><DS.IconButton className="co-ib" variant="secondary" size="sm" label={lbl} icon={<i className="bi bi-plus-lg"></i>} onClick={() => addTwin(it)} /></span>; })() : null}
                           {window.AX_COPY ? <span className="co-tip" data-tip={items.length >= 35 ? "Maximum copies reached" : "Copy this order"}><DS.IconButton className="co-ib" variant="secondary" size="sm" label="Copy this order" icon={<i className="bi bi-copy"></i>} disabled={items.length >= 35} onClick={() => window.AX_startCopy({ origin: "payment", item: it, parentNo: ix + 1 })} /></span> : null}
                           <span className="co-tip" data-tip="Edit order"><DS.IconButton className="co-ib" variant="secondary" size="sm" label="Edit order" icon={<i className="bi bi-pencil-square"></i>} onClick={() => (window.AX_COPY ? setEditIt(it) : goTo("docs"))} /></span>
                           <span className="co-tip" data-tip="Delete order"><DS.IconButton className="co-ib del" variant="secondary" size="sm" label="Delete order" icon={<i className="bi bi-trash"></i>} disabled={items.length <= 1} onClick={() => setDelIt(it)} /></span>
