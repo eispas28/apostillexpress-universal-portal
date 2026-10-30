@@ -144,7 +144,7 @@ function CopyOrderScreen({ ctx, form, onCancel, onDone, stateRef, initial }) {
         {sel.length ? <div className="co-bulk" role="region" aria-label="Bulk actions"><span className="co-bulk-n"><b>{sel.length}</b> selected</span><Button variant="tertiary" size="md" onClick={() => setSel(sel.length === kids.length ? [] : kids.map((k) => k.id))}>{sel.length === kids.length ? "Deselect all" : "Select all"}</Button><span className="co-bulk-sp"></span><Button variant="tertiary" size="md" onClick={() => setSel([])}>Clear</Button><Button variant="danger" size="md" onClick={() => setDelMulti(true)}><i className="bi bi-trash" style={{ marginRight: "var(--ax-space-1-5)" }}></i>{"Delete (" + sel.length + ")"}</Button></div> : null}
         <div className="co-dock-in">
           <Button variant="tertiary" size="lg" onClick={onCancel}>Cancel</Button>
-          {kids.length > 0 ? <div className="co-dock-mid"><label>Add additional copies</label>
+          {kids.length > 0 ? <div className="co-dock-mid"><label>Create additional copies</label>
             <div className="stepper">
               <button aria-label="Fewer copies" onClick={() => setKids((a) => a.slice(0, -1))} disabled={kids.length <= 1}>{"\u2014"}</button>
               <input className="val co-num" type="text" inputMode="numeric" aria-label="Additional Apostille Copies" value={kids.length} onFocus={(e) => e.target.select()} onChange={(e) => { const v = parseInt(e.target.value.replace(/\D/g, "").slice(0, 3), 10); if (isNaN(v)) return; const n = Math.max(1, Math.min(maxCopies, v)); if (n > kids.length) dupKid(kids[kids.length - 1].id, n - kids.length); else setKids((a) => a.slice(0, n)); }} />
