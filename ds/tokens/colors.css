@@ -158,8 +158,8 @@
   /* ===== SEMANTIC ALIASES (use these in components) ================ */
   /* Text */
   --ax-text-primary:    var(--ax-gray-900);   /* #212529 body */
-  --ax-text-secondary:  var(--ax-gray-700);
-  --ax-text-tertiary:   var(--ax-gray-600);
+  --ax-text-secondary:  #495057;
+  --ax-text-tertiary:   var(--ax-gray-700);
   --ax-text-disabled:   var(--ax-gray-500);
   --ax-text-placeholder: var(--ax-gray-500);
   --ax-text-brand:      var(--ax-sea-depths);

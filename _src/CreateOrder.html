@@ -1016,13 +1016,12 @@ function ChooseProductScreen({ form, update, onCancel, onPrevious, onContinue })
       <h1 className="page-title">Choose Product and Service Type</h1>
       <p className="page-sub">Select digital or paper apostille and processing type.</p>
 
-      <div className="banner">
-        <i className="bi bi-info-circle-fill"></i>
-        <div className="banner-body">
+      <Banner kind="info" style={{ marginTop: 0, marginBottom: "1.625rem" }}>
+        <div>
           <span><b>Please note:</b> Certain document types, including Birth and Death Certificates, may be required by state law to be mailed for processing. Please review your state’s requirements before submitting your order.</span>
           <a className="banner-link" href="#" onClick={(e) => e.preventDefault()}>View Best Practices Guide <i className="bi bi-box-arrow-up-right"></i></a>
         </div>
-      </div>
+      </Banner>
 
       <div className="card p3-card">
         {/* Section 1 — Order Option (first choice; only when the CA offers Walk-In) */}
@@ -1333,7 +1332,7 @@ function CustomerInfoScreen({ form, update, onCancel, onPrevious, onContinue }) 
   const c = form.customer;
   const isTraditional = form.deliveryMethod === "traditional" || form.deliveryMethod === "both";
   // Traditional delivery needs a mailing address up front; electronic hides it.
-  const [addressOpen, setAddressOpen] = useState(isTraditional);
+  const [addressOpen, setAddressOpen] = useState(false);
   const [banner, setBanner] = useState(null); // {kind:'warn'|'err', text}
   const [errors, setErrors] = useState({});
 
@@ -1364,7 +1363,7 @@ function CustomerInfoScreen({ form, update, onCancel, onPrevious, onContinue }) 
     update({ customer: { firstName: "", lastName: "", phone: "", email: "", organization: "", title: "", addr1: "", addr2: "", country: "", state: "", city: "", zip: "", notes: "", reference: "" } });
     setBanner(null);
     setErrors({});
-    if (!isTraditional) setAddressOpen(false);
+    setAddressOpen(false);
   };
 
   const canContinue = c.firstName.trim() && c.lastName.trim() && c.email.trim();
@@ -1379,7 +1378,7 @@ function CustomerInfoScreen({ form, update, onCancel, onPrevious, onContinue }) 
     if (Object.keys(e).length === 0) onContinue();
   };
 
-  const showAddress = isTraditional || addressOpen;
+  const showAddress = addressOpen;
 
   return (
     <main className="page" data-screen-label="Customer Information">
@@ -1416,7 +1415,7 @@ function CustomerInfoScreen({ form, update, onCancel, onPrevious, onContinue }) 
         {showAddress ?
         <React.Fragment>
             <hr className="cust-divider" />
-            <AddressBlock c={c} set={set} removable={!isTraditional} onRemove={() => {setAddressOpen(false);set({ addr1: "", addr2: "", country: "", state: "", city: "", zip: "" });}} />
+            <AddressBlock c={c} set={set} removable onRemove={() => {setAddressOpen(false);set({ addr1: "", addr2: "", country: "", state: "", city: "", zip: "" });}} />
             <SaveProfileAddress section="customer" addr={c} label="address" />
           </React.Fragment> :
         null}
@@ -1574,7 +1573,7 @@ function ReturnAddressSection({ d, setD, customer, subtitle, errors, compact }) 
     <div className="card sect">
       {compact ? null : <div className="sect-head">
         <h2>Return Address</h2>
-        <p className="ra-note">{subtitle}</p>
+        <Banner kind="elig" style={{ marginTop: "var(--ax-space-3)", marginBottom: 0 }}><span>{subtitle}</span></Banner>
       </div>}
       <div className="sect-body">
         {compact ?
