@@ -37,8 +37,8 @@ a{color:var(--ax-sea-depths)}a:hover{color:var(--ax-teal-700)}
 /* ---- Page ---- */
 .page{max-width:none;margin:0 10.3125rem;padding:2.375rem var(--ax-space-10) 3.75rem}
 .page-head{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--ax-space-6);margin-bottom:1.375rem}
-.page-title{font-size:var(--ax-h4);font-weight:700;line-height:1.15;margin:0;letter-spacing:-.01em}
-.page-sub{font-size:var(--ax-text-md);color:var(--ax-text-tertiary);margin:var(--ax-space-2) 0 0}
+.page-title{font-weight:700;line-height:1.15;margin:0;letter-spacing:-.01em}
+.page-sub{color:var(--ax-text-tertiary);margin:var(--ax-space-2) 0 0}
 .btn-primary{display:inline-flex;align-items:center;gap:0.625rem;background:var(--ax-sea-depths);color:#fff;border:none;border-radius:var(--ax-radius-md);padding:0.8125rem 1.375rem;font-family:inherit;font-size:var(--ax-text-md);font-weight:600;cursor:pointer;white-space:nowrap;box-shadow:var(--ax-shadow-xs);transition:background .15s ease}
 .btn-primary:hover{background:var(--ax-teal-700)}
 .btn-primary:active{transform:translateY(0.03125rem)}
@@ -1330,8 +1330,8 @@ function App() {
       <main className="page" data-screen-label="Team — User Management">
         <div className="page-head" style={profileView ? { display: "none" } : null}>
           <div>
-            <h1 className="page-title">User Management</h1>
-            <p className="page-sub">Here you can see manage all users, create new roles, and set permissions</p>
+            <h1 className="page-title ax-heading-sm">User Management</h1>
+            <p className="page-sub ax-text-body-md">Here you can see manage all users, create new roles, and set permissions</p>
           </div>
           {can("inviteUsers") ? <button className="btn-primary" onClick={() => setInvite(true)}><i className="bi bi-person-plus"></i>Invite User</button> : null}
         </div>

@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="ds/tokens/fonts.css?v=14">
 <link rel="stylesheet" href="ds/tokens/colors.css?v=14">
-<link rel="stylesheet" href="ds/tokens/typography.css?v=14">
+<link rel="stylesheet" href="ds/tokens/typography.css?v=15">
 <link rel="stylesheet" href="ds/tokens/spacing.css?v=14">
 <link rel="stylesheet" href="ds/tokens/shadows.css?v=14">
 <link rel="stylesheet" href="ds/tokens/base.css?v=14">
@@ -53,8 +53,8 @@ body{font-family:var(--ax-font-base);color:var(--ax-text-primary);background:var
 /* ---- Page ---- */
 .page{max-width:none;margin:0 10.3125rem;padding:2.375rem var(--ax-space-10) 3.75rem}
 .draft-bar{position:absolute;top:5.75rem;right:12.8125rem;z-index:20}@media (max-width:1100px){.draft-bar{position:static;display:flex;justify-content:flex-end;padding:0.875rem 1.125rem 0}}
-.page-title{font-size:var(--ax-h4);font-weight:700;line-height:1.15;margin:0;letter-spacing:-.01em}
-.page-sub{font-size:var(--ax-text-md);color:var(--ax-text-tertiary);margin:var(--ax-space-2) 0 1.75rem}
+.page-title{font-weight:700;line-height:1.15;margin:0;letter-spacing:-.01em}
+.page-sub{color:var(--ax-text-tertiary);margin:var(--ax-space-2) 0 1.75rem}
 .card{background:var(--ax-surface-card);border:1px solid var(--ax-border-subtle);border-radius:0.875rem;box-shadow:var(--ax-shadow-xs)}
 /* ---- Screen 1 steps ---- */
 .steps{padding:0.875rem 2.25rem}
@@ -519,7 +519,7 @@ body{font-family:var(--ax-font-base);color:var(--ax-text-primary);background:var
 .tinput::placeholder,.tsearch input::placeholder,.searchbox input::placeholder{color:var(--ax-gray-600)}
 .tinput:disabled,.tselect:disabled{background:var(--ax-surface-disabled);cursor:not-allowed}
 .cbanner-x.elig li,.cbanner-x.elig li *,.cbanner-x.elig a,.cbanner-x.elig a *{color:#664D03}.cbanner-x.elig .ib-title,.cbanner-x.elig .ib-title *{color:#664D03EB}
-</style>
+@media (max-width:1100px){.draft-bar{display:none!important}.draft-clone{display:block;margin:0 0 1.25rem}.draft-clone{width:100%}.draft-clone button{width:100%!important;display:flex!important;justify-content:center;box-sizing:border-box}}@media (min-width:1101px){.draft-clone{display:none}}@media (max-width:640px){.pv-modal{width:calc(100vw - 1.5rem);height:calc(100dvh - 1.5rem);border-radius:var(--ax-radius-xl)}.pv-head{padding:var(--ax-space-4) var(--ax-space-5);gap:var(--ax-space-3)}.pv-head h2{font-size:var(--ax-h5)}.pv-head p{font-size:var(--ax-text-sm);margin-top:var(--ax-space-1)}.pv-toolbar{padding:var(--ax-space-3);gap:var(--ax-space-2)}.pv-tname{width:100%}.pv-tname span:first-child{flex:1;min-width:0}.pv-tools{width:100%;gap:var(--ax-space-2);justify-content:space-between;flex-wrap:nowrap}.pv-fit{display:none}.pv-ic{width:1.875rem;height:2rem}.pv-readout{min-width:2.5rem;padding:0 var(--ax-space-1)}.pv-hint{left:0.5rem;right:0.5rem;bottom:0.5rem;justify-content:center;font-size:0.75rem}.pv-note{left:0.5rem;right:0.5rem;bottom:2.75rem;justify-content:center;text-align:center}.pv-foot{padding:var(--ax-space-4)}.pv-foot>div:first-child{display:none}.pv-foot-actions{flex-direction:column-reverse;width:100%}.pv-foot-actions .ax-btn{width:100%;justify-content:center}}@media(max-width:820px){.tm{overflow-y:auto;max-height:calc(100dvh - 2rem);-webkit-overflow-scrolling:touch}.tm-body{grid-template-rows:none;grid-auto-rows:auto}.tm-card{grid-template-rows:none;grid-row:auto;display:flex;flex-direction:column}}.tm{overflow-y:auto;max-height:calc(100dvh - 2rem);-webkit-overflow-scrolling:touch}.modal.tm{overflow-y:auto;overflow-x:hidden;max-height:calc(100dvh - 2rem);overscroll-behavior:contain}.modal.tm>.tm-head,.modal.tm>.tm-body{flex-shrink:0}</style>
 <link rel="stylesheet" href="ax-responsive.css?v=14">
 <link rel="stylesheet" href="copy-order.css?v=14">
 <script src="./ax-mobile-nav.js?v=14" defer></script>
@@ -612,8 +612,8 @@ function IntroScreen({ onStart, onCancel }) {
   const [hide, setHide] = useState(() => { try { return localStorage.getItem("ax_skip_intro") === "1"; } catch (e) { return false; } });
   return (
     <main className="page" data-screen-label="Your Apostille Application">
-      <h1 className="page-title">Your Apostille Application</h1>
-      <p className="page-sub">Follow these steps to ensure your documents are certified quickly and efficiently.</p>
+      <h1 className="page-title ax-heading-sm">Your Apostille Application</h1>
+      <p className="page-sub ax-text-body-md">Follow these steps to ensure your documents are certified quickly and efficiently.</p>
       <div className="card">
         <div className="steps">
           {STEPS.map((s, i) =>
@@ -750,8 +750,8 @@ function SelectStateScreen({ onCancel, onPrevious, onSelectState }) {
 
   return (
     <main className="page" data-screen-label="Select State to Request Certification">
-      <h1 className="page-title">Select State to Request Certification</h1>
-      <p className="page-sub">Select the state where the document was notarized or issued.</p>
+      <h1 className="page-title ax-heading-sm">Select State to Request Certification</h1>
+      <p className="page-sub ax-text-body-md">Select the state where the document was notarized or issued.</p>
       <div className="card s2-card">
         <div className="searchbar">
           <div className="searchfield">
@@ -1013,8 +1013,8 @@ function ChooseProductScreen({ form, update, onCancel, onPrevious, onContinue })
 
   return (
     <main className="page" data-screen-label="Choose Product and Service Type">
-      <h1 className="page-title">Choose Product and Service Type</h1>
-      <p className="page-sub">Select digital or paper apostille and processing type.</p>
+      <h1 className="page-title ax-heading-sm">Choose Product and Service Type</h1>
+      <p className="page-sub ax-text-body-md">Select digital or paper apostille and processing type.</p>
 
       <Banner kind="info" style={{ marginTop: 0, marginBottom: "1.625rem" }}>
         <div>
@@ -1382,8 +1382,8 @@ function CustomerInfoScreen({ form, update, onCancel, onPrevious, onContinue }) 
 
   return (
     <main className="page" data-screen-label="Customer Information">
-      <h1 className="page-title">Customer Information</h1>
-      <p className="page-sub">Please provide contact details for order processing and communication.</p>
+      <h1 className="page-title ax-heading-sm">Customer Information</h1>
+      <p className="page-sub ax-text-body-md">Please provide contact details for order processing and communication.</p>
 
       <div className="card s2-card">
         <div className="actionbar">
@@ -1979,8 +1979,8 @@ function ProvideDocumentationScreen({ form, update, onCancel, onPrevious, onCont
 
   return (
     <main className="page" data-screen-label="Provide Documentation">
-      <h1 className="page-title">Provide Documentation</h1>
-      <p className="page-sub">{isWalkIn ? "Enter the details of the document you'll bring to your appointment." : "Upload digital documents or follow instructions for submitting paper documents."}</p>
+      <h1 className="page-title ax-heading-sm">Provide Documentation</h1>
+      <p className="page-sub ax-text-body-md">{isWalkIn ? "Enter the details of the document you'll bring to your appointment." : "Upload digital documents or follow instructions for submitting paper documents."}</p>
 
       {isWalkIn ?
       <React.Fragment>
@@ -2117,12 +2117,12 @@ function DigitalRecipients({ form, update, onCancel, onPrevious, onContinue }) {
 
   return (
     <main className="page" data-screen-label="Digital Recipients">
-      <h1 className="page-title">Digital Recipients</h1>
-      <p className="page-sub">Provide recipient details for delivery of certified documents.</p>
+      <h1 className="page-title ax-heading-sm">Digital Recipients</h1>
+      <p className="page-sub ax-text-body-md">Provide recipient details for delivery of certified documents.</p>
 
       <div className="card s2-card">
         <div className="sec-head" style={{ margin: 0 }}><h2>Recipient Information</h2></div>
-        <p className="page-sub" style={{ margin: "0.4375rem 0 1.375rem" }}>Add up to 10 recipients, with at least 1 required. You are the primary recipient by default.</p>
+        <p className="page-sub ax-text-body-md" style={{ margin: "0.4375rem 0 1.375rem" }}>Add up to 10 recipients, with at least 1 required. You are the primary recipient by default.</p>
 
         {recipients.map((r, idx) => {
           const name = (r.firstName + " " + r.lastName).trim();
@@ -2215,8 +2215,8 @@ function MailingInfo({ form, update, onCancel, onPrevious, onContinue }) {
 
   return (
     <main className="page" data-screen-label="Mailing Information">
-      <h1 className="page-title">Mailing Information</h1>
-      <p className="page-sub">Provide details for who will receive the documents.</p>
+      <h1 className="page-title ax-heading-sm">Mailing Information</h1>
+      <p className="page-sub ax-text-body-md">Provide details for who will receive the documents.</p>
 
       <div className="card s2-card">
         <div className="actionbar">
@@ -2571,8 +2571,8 @@ function PaymentScreen({ form, update, goTo, onCancel, onPrevious, onSubmit, sho
 
   return (
     <main className="page" data-screen-label="Billing and Payment">
-      <h1 className="page-title">{isWalkIn ? "Review and Submit" : "Billing and Payment"}</h1>
-      <p className="page-sub">{mixed ? "Pay for your standard orders now. In-Person fees are collected at your appointment." : isWalkIn ? "Review your order before submitting. Payment will be collected at your appointment." : "Securely complete your payment by reviewing your order and providing billing details."}</p>
+      <h1 className="page-title ax-heading-sm">{isWalkIn ? "Review and Submit" : "Billing and Payment"}</h1>
+      <p className="page-sub ax-text-body-md">{mixed ? "Pay for your standard orders now. In-Person fees are collected at your appointment." : isWalkIn ? "Review your order before submitting. Payment will be collected at your appointment." : "Securely complete your payment by reviewing your order and providing billing details."}</p>
 
       <div className="pay-cols">
         <div>
@@ -2840,8 +2840,8 @@ function ConfirmationScreen({ form, onDone }) {
       </div></div> : null}
       <div className="conf-head">
         <div>
-          <h1 className="page-title">Order Confirmed!</h1>
-          <p className="page-sub" style={{ margin: "var(--ax-space-2) 0 0" }}>An order confirmation has been sent to {email}</p>
+          <h1 className="page-title ax-heading-sm">Order Confirmed!</h1>
+          <p className="page-sub ax-text-body-md" style={{ margin: "var(--ax-space-2) 0 0" }}>An order confirmation has been sent to {email}</p>
         </div>
         <div className="conf-actions">
           <Button variant="secondary" size="lg" onClick={onDone}><i className="bi bi-arrow-left" style={{ marginRight: "var(--ax-space-2)" }}></i>Back to Orders</Button>
@@ -3227,7 +3227,7 @@ function App() {
     <PAContext.Provider value={paApi}>
     <div style={{ position: "relative" }}>
       <TopBar />
-      {window.AX_F.saveDrafts && screen !== "intro" && screen !== "confirmation" && screen !== "payment" ? <div className="draft-bar"><Button variant="secondary" size="md" onClick={() => setShowDraft(true)}><i className="bi bi-bookmark" style={{ marginRight: "var(--ax-space-2)" }}></i>Save Draft</Button></div> : null}
+      {window.AX_F.saveDrafts && screen !== "intro" && screen !== "confirmation" && screen !== "payment" ? <div className="draft-bar"><Button variant="secondary" size="md" onClick={() => setShowDraft(true)}>Save Draft</Button></div> : null}
       {screen === "intro" ?
       <IntroScreen onStart={() => setScreen("select")} onCancel={requestCancel} /> :
       screen === "select" ?
@@ -3309,5 +3309,5 @@ function App() {
 Object.assign(window, { fmtSize, USER_PROFILE, PROFILE_ADDRESS, COUNTRIES, StateField, FULFILMENT, FulfilmentCard, DeleteOrderModal, ReturnAddressSection, RecipientForm, blankRecipient, AddressBlock, PreviewModal, DOC_TYPES, DEST_COUNTRIES, fmtSize, docNo });
 ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 </script>
-</body>
+<script>(function(){function sync(){var bar=document.querySelector(".draft-bar button"),sub=document.querySelector("main.page > .page-sub"),c=document.querySelector(".draft-clone");if(!bar||!sub){if(c)c.remove();return}if(c&&c.previousElementSibling===sub)return;if(c)c.remove();c=document.createElement("div");c.className="draft-clone";var b=bar.cloneNode(true);b.onclick=function(){var o=document.querySelector(".draft-bar button");o&&o.click()};c.appendChild(b);sub.after(c)}new MutationObserver(sync).observe(document.body,{childList:true,subtree:true});sync()})()</script></body>
 </html>

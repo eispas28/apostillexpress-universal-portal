@@ -1,51 +1,86 @@
 /* ApostilleXpress — Typography tokens
    Brand typeface: Roboto. Heading scale follows Bootstrap (h1 40 → h6 16);
-   display scale 40→80. Body default 16px / Regular. */
+   display scale 40→80. Body default 1rem / Regular.
+   Named text styles (.ax-display-*, .ax-heading-*, .ax-text-*) are defined at the bottom of this file;
+   each sets font-family, font-size, font-weight, line-height and letter-spacing from the tokens below. */
 
 :root {
   /* Families */
-  --ax-font-base: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  --ax-font-heading: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-  --ax-font-condensed: "Roboto Condensed", "Roboto", sans-serif;
+  --ax-font-base: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif; /* Roboto – body, UI, forms */
+  --ax-font-heading: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; /* Roboto – headings, display */
+  --ax-font-condensed: "Roboto Condensed", "Roboto", sans-serif; /* Roboto Condensed – masthead, dense table/eyebrow labels */
 
   /* Weights */
-  --ax-fw-light: 300; /* @kind other */
-  --ax-fw-regular: 400; /* @kind other */
-  --ax-fw-medium: 500; /* @kind other */
-  --ax-fw-semibold: 600; /* @kind other */
-  --ax-fw-bold: 700; /* @kind other */
+  --ax-fw-light: 300; /* @kind other */ /* Light – large display only */
+  --ax-fw-regular: 400; /* @kind other */ /* Regular – body copy */
+  --ax-fw-medium: 500; /* @kind other */ /* Medium – labels, nav, eyebrows */
+  --ax-fw-semibold: 600; /* @kind other */ /* Semibold – headings, buttons, emphasis */
+  --ax-fw-bold: 700; /* @kind other */ /* Bold – page titles, strong emphasis */
 
-  /* Display scale (px) */
-  --ax-display-1: 80px;
-  --ax-display-2: 72px;
-  --ax-display-3: 64px;
-  --ax-display-4: 56px;
-  --ax-display-5: 48px;
-  --ax-display-6: 40px;
+  /* Display line-height 120%; headings/body auto (Bootstrap 1.2 / 1.5) */
+  --ax-lh-display: 1.2; /* @kind other */ /* 120% – display type */
+  --ax-lh-heading: 1.2; /* @kind other */ /* 120% – headings */
 
-  /* Heading scale (Bootstrap, px) */
-  --ax-h1: 40px;
-  --ax-h2: 32px;
-  --ax-h3: 28px;
-  --ax-h4: 24px;
-  --ax-h5: 20px;
-  --ax-h6: 16px;
+  /* Lead paragraph 1.25rem; p 1rem; small 0.875rem (weights 300/400/600/700) */
+  --ax-lead: 1.25rem; /* 20px – lead paragraph */
+  --ax-p: 1rem; /* 16px – paragraph */
+  --ax-small: 0.875rem; /* 14px – small print */
 
-  /* Body / text scale (px) */
-  --ax-text-xl: 20px;
-  --ax-text-lg: 18px;
-  --ax-text-md: 16px;   /* base */
-  --ax-text-sm: 14px;
-  --ax-text-xs: 12px;
+  /* Display scale (rem; 1rem = 16px) */
+  --ax-display-1: 5rem; /* 80px – display 1 */
+  --ax-display-2: 4.5rem; /* 72px – display 2 */
+  --ax-display-3: 4rem; /* 64px – display 3 */
+  --ax-display-4: 3.5rem; /* 56px – display 4 */
+  --ax-display-5: 3rem; /* 48px – display 5 */
+  --ax-display-6: 2.5rem; /* 40px – display 6 */
+
+  /* Heading scale (Bootstrap, rem) */
+  --ax-h1: 2.5rem; /* 40px – h1, hero title */
+  --ax-h2: 2rem; /* 32px – h2, section title */
+  --ax-h3: 1.75rem; /* 28px – h3, modal / large card title */
+  --ax-h4: 1.5rem; /* 24px – h4, page title */
+  --ax-h5: 1.25rem; /* 20px – h5, card section title */
+  --ax-h6: 1rem; /* 16px – h6, small heading */
+
+  /* Body / text scale (rem) */
+  --ax-text-xl: 1.25rem; /* 20px – body extra large, lead */
+  --ax-text-lg: 1.125rem; /* 18px – body large */
+  --ax-text-md: 1rem;   /* 16px – body base */
+  --ax-text-sm: 0.875rem; /* 14px – body small, labels, table cells */
+  --ax-text-xs: 0.75rem; /* 12px – caption, helper text, badges */
 
   /* Line heights */
-  --ax-lh-tight: 1.2; /* @kind other */
-  --ax-lh-snug: 1.35; /* @kind other */
-  --ax-lh-base: 1.5; /* @kind other */
-  --ax-lh-relaxed: 1.65; /* @kind other */
+  --ax-lh-tight: 1.2; /* @kind other */ /* 120% – headings */
+  --ax-lh-snug: 1.35; /* @kind other */ /* 135% – compact multi-line (cards, subtitles) */
+  --ax-lh-base: 1.5; /* @kind other */ /* 150% – body copy */
+  --ax-lh-relaxed: 1.65; /* @kind other */ /* 165% – long-form reading */
 
   /* Letter spacing */
-  --ax-tracking-tight: -0.01em; /* @kind other */
-  --ax-tracking-normal: 0; /* @kind other */
-  --ax-tracking-wide: 0.04em; /* @kind other */
+  --ax-tracking-tight: -0.01em; /* @kind other */ /* −0.01em – large headings */
+  --ax-tracking-normal: 0; /* @kind other */ /* 0 – default */
+  --ax-tracking-wide: 0.04em; /* @kind other */ /* +0.04em – uppercase eyebrows */
 }
+
+/* ---- Named text styles ----
+   Apply as class="ax-heading-sm" etc. Each class sets family, size, weight, line-height and letter-spacing. */
+.ax-display-1{font-family:var(--ax-font-heading);font-size:var(--ax-display-1);font-weight:var(--ax-fw-semibold);line-height:var(--ax-lh-display);letter-spacing:var(--ax-tracking-normal)} /* 80px / 600 */
+.ax-display-2{font-family:var(--ax-font-heading);font-size:var(--ax-display-2);font-weight:var(--ax-fw-semibold);line-height:var(--ax-lh-display);letter-spacing:var(--ax-tracking-normal)} /* 72px / 600 */
+.ax-display-3{font-family:var(--ax-font-heading);font-size:var(--ax-display-3);font-weight:var(--ax-fw-semibold);line-height:var(--ax-lh-display);letter-spacing:var(--ax-tracking-normal)} /* 64px / 600 */
+.ax-display-4{font-family:var(--ax-font-heading);font-size:var(--ax-display-4);font-weight:var(--ax-fw-semibold);line-height:var(--ax-lh-display);letter-spacing:var(--ax-tracking-normal)} /* 56px / 600 */
+.ax-display-5{font-family:var(--ax-font-heading);font-size:var(--ax-display-5);font-weight:var(--ax-fw-semibold);line-height:var(--ax-lh-display);letter-spacing:var(--ax-tracking-normal)} /* 48px / 600 */
+.ax-display-6{font-family:var(--ax-font-heading);font-size:var(--ax-display-6);font-weight:var(--ax-fw-semibold);line-height:var(--ax-lh-display);letter-spacing:var(--ax-tracking-normal)} /* 40px / 600 */
+.ax-heading-xl{font-family:var(--ax-font-heading);font-size:var(--ax-h1);font-weight:var(--ax-fw-semibold);line-height:var(--ax-lh-heading);letter-spacing:var(--ax-tracking-normal)} /* h1 – 40px / 600 */
+.ax-heading-lg{font-family:var(--ax-font-heading);font-size:var(--ax-h2);font-weight:var(--ax-fw-semibold);line-height:var(--ax-lh-heading);letter-spacing:var(--ax-tracking-normal)} /* h2 – 32px / 600 */
+.ax-heading-md{font-family:var(--ax-font-heading);font-size:var(--ax-h3);font-weight:var(--ax-fw-semibold);line-height:var(--ax-lh-heading);letter-spacing:var(--ax-tracking-normal)} /* h3 – 28px / 600 */
+.ax-heading-sm{font-family:var(--ax-font-heading);font-size:var(--ax-h4);font-weight:var(--ax-fw-semibold);line-height:var(--ax-lh-heading);letter-spacing:var(--ax-tracking-normal)} /* h4 – 24px / 600 */
+.ax-heading-xs{font-family:var(--ax-font-heading);font-size:var(--ax-h5);font-weight:var(--ax-fw-semibold);line-height:var(--ax-lh-heading);letter-spacing:var(--ax-tracking-normal)} /* h5 – 20px / 600 */
+.ax-heading-2xs{font-family:var(--ax-font-heading);font-size:var(--ax-h6);font-weight:var(--ax-fw-semibold);line-height:var(--ax-lh-heading);letter-spacing:var(--ax-tracking-normal)} /* h6 – 16px / 600 */
+.ax-text-body-xl{font-family:var(--ax-font-base);font-size:var(--ax-text-xl);font-weight:var(--ax-fw-regular);line-height:var(--ax-lh-base);letter-spacing:var(--ax-tracking-normal)} /* 20px / 400 */
+.ax-text-body-lg{font-family:var(--ax-font-base);font-size:var(--ax-text-lg);font-weight:var(--ax-fw-regular);line-height:var(--ax-lh-base);letter-spacing:var(--ax-tracking-normal)} /* 18px / 400 */
+.ax-text-body-md{font-family:var(--ax-font-base);font-size:var(--ax-text-md);font-weight:var(--ax-fw-regular);line-height:var(--ax-lh-base);letter-spacing:var(--ax-tracking-normal)} /* 16px / 400 */
+.ax-text-body-sm{font-family:var(--ax-font-base);font-size:var(--ax-text-sm);font-weight:var(--ax-fw-regular);line-height:var(--ax-lh-base);letter-spacing:var(--ax-tracking-normal)} /* 14px / 400 */
+.ax-text-body-xs{font-family:var(--ax-font-base);font-size:var(--ax-text-xs);font-weight:var(--ax-fw-regular);line-height:var(--ax-lh-base);letter-spacing:var(--ax-tracking-normal)} /* 12px / 400 */
+.ax-text-label-md{font-family:var(--ax-font-base);font-size:var(--ax-text-md);font-weight:var(--ax-fw-medium);line-height:var(--ax-lh-base);letter-spacing:var(--ax-tracking-normal)} /* 16px / 500 – field & nav labels */
+.ax-text-label-sm{font-family:var(--ax-font-base);font-size:var(--ax-text-sm);font-weight:var(--ax-fw-medium);line-height:var(--ax-lh-base);letter-spacing:var(--ax-tracking-normal)} /* 14px / 500 – small labels */
+.ax-text-eyebrow{font-family:var(--ax-font-base);font-size:var(--ax-text-xs);font-weight:var(--ax-fw-medium);line-height:var(--ax-lh-base);letter-spacing:var(--ax-tracking-wide);text-transform:uppercase} /* 12px / 500 / +0.04em – eyebrow */
+.ax-text-lead{font-family:var(--ax-font-base);font-size:var(--ax-lead);font-weight:var(--ax-fw-light);line-height:var(--ax-lh-base);letter-spacing:var(--ax-tracking-normal)} /* 20px / 300 – lead paragraph */
