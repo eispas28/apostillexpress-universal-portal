@@ -7,7 +7,7 @@
 
 /* ---- global guards: never scroll sideways, never clip media ---- */
 html{-webkit-text-size-adjust:100%}
-body{overflow-x:hidden}
+html,body{overflow-x:clip;height:auto;min-height:100%}body{overflow-y:visible}
 img,svg,video,canvas{max-width:100%}
 .page,.root{max-width:100%}
 .tscroll,.tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
