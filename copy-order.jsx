@@ -99,8 +99,8 @@ function CopyOrderScreen({ ctx, form, onCancel, onDone, stateRef, initial }) {
   const editing = kids.find((k) => k.id === editId);
   return (
     <main className="page co-page" data-screen-label="Copy Order">
-      <h1 className="page-title">Copy Order</h1>
-      <p className="page-sub" style={{ marginBottom: "var(--ax-space-5)" }}>Everything is copied from your previous order. Change anything that{"\u2019"}s different.</p>
+      <h1 className="page-title ax-heading-sm">Copy Order</h1>
+      <p className="page-sub ax-text-body-md" style={{ marginBottom: "var(--ax-space-5)" }}>Everything is copied from your previous order. Change anything that{"\u2019"}s different.</p>
       {kids.length > 0 ?
       <div className="co-bar">
         <div><div className="co-bt">Orders being added</div><div className="co-count"><b>{ready} of {kids.length}</b> ready{ctx.isMail ? " \u2022 original documents are sent by mail for each copy" : ""}{ctx.isBoth ? " \u2022 a paper copy is created automatically for each digital copy" : ""}{ctx.upload ? " \u2022 each copy needs its own uploaded document" : ctx.inPerson ? " \u2022 bring the original document for each copy to your appointment" : ""}</div></div><div className="co-mix"><DSBadge color="info" pill size="lg"><b>{kids.filter((k) => k.digital).length}</b> Digital</DSBadge><DSBadge color="warning" pill size="lg"><b>{kids.filter((k) => !k.digital || k.isBoth).length}</b> Paper</DSBadge></div><div className="co-big">{kids.length}<span className="co-of">/35</span></div>

@@ -90,8 +90,8 @@
       <React.Fragment>
         <div className="page-head">
           <div>
-            <h1 className="page-title">Create and Manage Orders</h1>
-            <p className="page-sub">Submit, track, and handle your apostille requests.</p>
+            <h1 className="page-title ax-heading-sm">Create and Manage Orders</h1>
+            <p className="page-sub ax-text-body-md">Submit, track, and handle your apostille requests.</p>
           </div>
           <a className="btn-primary" href="CreateOrder.html"><i className="bi bi-plus-lg"></i>Create New Order</a>
         </div>
@@ -137,8 +137,8 @@
       <React.Fragment>
         <div className="page-head">
           <div>
-            <h1 className="page-title">My Team</h1>
-            <p className="page-sub">View information about your organization and your role.</p>
+            <h1 className="page-title ax-heading-sm">My Team</h1>
+            <p className="page-sub ax-text-body-md">View information about your organization and your role.</p>
           </div>
         </div>
         <div className="mteam">
@@ -188,8 +188,8 @@
     return (
       <React.Fragment>
         <div className="jhead">
-          <h1 className="page-title">Join Team</h1>
-          <p className="page-sub">Enter the code to join an organization or agency.</p>
+          <h1 className="page-title ax-heading-sm">Join Team</h1>
+          <p className="page-sub ax-text-body-md">Enter the code to join an organization or agency.</p>
         </div>
         <div className="jwrap">
           <div className="jcard">
@@ -216,8 +216,8 @@
     return (
       <React.Fragment>
         <div className="jhead">
-          <h1 className="page-title">Confirm Your Invitation</h1>
-          <p className="page-sub">Review the team details before joining.</p>
+          <h1 className="page-title ax-heading-sm">Confirm Your Invitation</h1>
+          <p className="page-sub ax-text-body-md">Review the team details before joining.</p>
         </div>
         <div className="jwrap">
           <div className="jcard wide">
@@ -250,8 +250,8 @@
     return (
       <React.Fragment>
         <div className="jhead">
-          <h1 className="page-title">Welcome Aboard</h1>
-          <p className="page-sub">You are all set to get started.</p>
+          <h1 className="page-title ax-heading-sm">Welcome Aboard</h1>
+          <p className="page-sub ax-text-body-md">You are all set to get started.</p>
         </div>
         <div className="jwrap">
           <div className="jcard center">
