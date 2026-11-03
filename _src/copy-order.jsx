@@ -1,6 +1,6 @@
 (function(){
 const { useState, useEffect, useRef } = React;
-const { Button, Badge: DSBadge, Alert, Tabs, Drawer, FormField, Input, Select, FileUpload, IconButton } = window.ApostilleXpressDesignSystem_141fbe;
+const { Button, Badge: DSBadge, Alert, Tabs, Drawer, FormField, Input, Select, FileUpload, IconButton, Toast } = window.ApostilleXpressDesignSystem_141fbe;
 const rid = () => Math.random().toString(36).slice(2, 8);
 const svc = (s) => s === "sameday" ? "Same-Day" : s === "express" ? "Express" : "Standard";
 const MAX_DEFAULT = 34;
@@ -55,7 +55,9 @@ function CopyOrderScreen({ ctx, form, onCancel, onDone, stateRef, initial }) {
   const [open, setOpen] = useState(() => initial && initial.kids && initial.kids.length ? { [initial.kids[initial.kids.length - 1].id]: true } : {});
   if (stateRef) stateRef.current = { kids, open };
   useEffect(() => { if (!initial || !initial.kids || initial.kids.length < 2) return; const last = initial.kids[initial.kids.length - 1]; setTimeout(() => { const el = cardRefs.current[last.id]; if (el) window.scrollTo({ top: Math.max(0, el.getBoundingClientRect().top + window.pageYOffset - 96), behavior: "smooth" }); }, 250); }, []);
-  const [editId, setEditId] = useState(null);
+  const [editId, setEditId] = useState(null), [toast, setToast] = useState(null), toastT = useRef(null);
+  const notify = (title) => { clearTimeout(toastT.current); setToast({ title, id: Date.now() }); toastT.current = setTimeout(() => setToast(null), 4000); };
+  useEffect(() => () => clearTimeout(toastT.current), []);
   const [preview, setPreview] = useState(false);
   const [txt, setTxt] = useState(null);
   const [maxErr, setMaxErr] = useState(false);
@@ -165,7 +167,8 @@ function CopyOrderScreen({ ctx, form, onCancel, onDone, stateRef, initial }) {
       {delMulti ? <window.DeleteOrderModal count={sel.length} onClose={() => setDelMulti(false)} onConfirm={() => { if (sel.length >= kids.length) { setDelMulti(false); onCancel(); return; } setKids((a) => a.filter((x) => !sel.includes(x.id))); setSel([]); setDelMulti(false); setMaxErr(false); setTxt(null); }} /> : null}
       {delId ? <window.DeleteOrderModal onClose={() => setDelId(null)} onConfirm={() => { if (kids.length <= 1) { setDelId(null); onCancel(); return; } setKids((a) => a.filter((x) => x.id !== delId)); setSel((s) => s.filter((x) => x !== delId)); setDelId(null); setMaxErr(false); setTxt(null); }} /> : null}
       {preview ? <window.PreviewModal confirmLabel="Checkout" files={kids.map((k, i) => k.file && { ...k.file, name: label(i) + " \u2022 " + (k.docDesc || "Document") + " \u2014 " + k.file.name }).filter(Boolean)} onClose={() => setPreview(false)} onConfirm={() => { setPreview(false); finish(); }} /> : null}
-      {editing ? <EditOrderPanel child={editing} form={form} title={label(kids.indexOf(editing)) + " \u2022 Copied from Document " + ctx.parentNo} inPerson={inPerson} onSave={(c) => { patchKid(c.id, c); setEditId(null); }} onClose={() => setEditId(null)} /> : null}
+      {editing ? <EditOrderPanel child={editing} form={form} title={label(kids.indexOf(editing)) + " \u2022 Copied from Document " + ctx.parentNo} inPerson={inPerson} onSave={(c) => { const nm = label(kids.findIndex((x) => x.id === c.id)); patchKid(c.id, c); setEditId(null); notify(nm + " updated"); }} onClose={() => setEditId(null)} /> : null}
+      {toast ? <div className="ax-toasts bottom-right"><div className="ax-toast success" role="status" key={toast.id} style={{ alignItems: "center" }}><i className="ax-toast-ic" aria-hidden="true"></i><div className="ax-toast-b"><div className="ax-toast-t">{toast.title}</div></div><button className="ax-toast-x" aria-label="Close" onClick={() => setToast(null)}><i className="bi bi-x-lg"></i></button></div></div> : null}
     </main>);
 }
 
