@@ -416,7 +416,7 @@ class Component extends DCLogic {
       if (s.statusFilter !== 'all' && r.status !== s.statusFilter) return false;
       if (!q) return true;
       if (qDigits && String(r.id).indexOf(qDigits) !== -1) return true;
-      return [r.id, r.date, r.status, r.cost, r.parent || '', r.cust || ''].some((v) => String(v).toLowerCase().indexOf(q) !== -1);
+      return [r.id, r.date, r.status, r.cost, r.parent || '', r.cust || '', r.by || ''].some((v) => String(v).toLowerCase().indexOf(q) !== -1);
     });
     rows.length = 0; filtered.forEach((r) => rows.push(r));
     const hasFilters = !!q || s.statusFilter !== 'all';
@@ -471,7 +471,7 @@ class Component extends DCLogic {
       goTabDrafts: () => this.setState({ tab: 'drafts', page: 1, query: '', statusFilter: 'all', sortKey: null }),
       goTabOrders: () => this.setState({ tab: 'orders', page: 1, query: '', statusFilter: 'all', sortKey: null }),
       goTabApos: () => this.setState({ tab: 'apostilles', page: 1, query: '', statusFilter: 'all', sortKey: null }),
-      searchPh: aposOn ? 'Search by apostille #, order ID, customer, or status' : 'Search by order ID, date, or status',
+      searchPh: aposOn ? 'Search by apostille #, order ID, name, or status' : 'Search by order ID, name, date, or status',
       sortAid: mkSort('aid'), sortParent: mkSort('parent'), sortCust: mkSort('cust'),
       iconAid: iconFor('aid'), iconParent: iconFor('parent'), iconCust: iconFor('cust'),
       userName: 'Maria Rodriguez',
