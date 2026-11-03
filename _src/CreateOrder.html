@@ -3269,7 +3269,7 @@ function App() {
         onContinue={() => setScreen("payment")} /> :
 
       screen === "copy" && copyCtx ?
-      <window.CopyOrderScreen ctx={copyCtx} form={form} stateRef={copyStateRef} initial={copyInit.current} onCancel={() => { copyInit.current = null; setScreen("payment"); }} onDone={(k) => { copyInit.current = null; finishCopy(k); }} /> :
+      <window.CopyOrderScreen ctx={copyCtx} form={form} stateRef={copyStateRef} initial={copyInit.current} onCancel={() => { copyInit.current = null; setScreen(copyCtx.from && copyCtx.from !== "copy" ? copyCtx.from : "payment"); }} onDone={(k) => { copyInit.current = null; finishCopy(k); }} /> :
 
       screen === "payment" ?
       <PaymentScreen
