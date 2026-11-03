@@ -68,7 +68,7 @@
 .spill{display:inline-flex;align-items:center;padding:var(--ax-space-1) var(--ax-space-3);border-radius:var(--ax-radius-sm);font-size:0.8125rem;font-weight:600;line-height:1.2}
 .spill.new{background:var(--ax-info-50);color:var(--ax-info-700)}
 .spill.draft{background:var(--ax-gray-100);color:var(--ax-gray-700)}
-.otabs{display:inline-flex;border:1px solid var(--ax-border-strong,#CED4DA);border-radius:var(--ax-radius-md);overflow:hidden;box-shadow:var(--ax-shadow-xs);background:var(--ax-surface-card);flex-shrink:0}.otab{background:none;border:none;border-right:1px solid var(--ax-border-strong,#CED4DA);padding:0.6875rem var(--ax-space-5);font-family:inherit;font-size:0.9375rem;font-weight:600;color:var(--ax-text-primary);cursor:pointer;transition:background .12s ease}.otab:last-child{border-right:none}.otab-n{color:var(--ax-gray-500,#8A929B);font-weight:500}.otab:hover{background:var(--ax-gray-100)}.otab.active{background:var(--ax-gray-100)}.otab:focus-visible{outline:none;box-shadow:var(--ax-focus-ring)}
+.otabs{display:inline-flex;border:1px solid var(--ax-border-strong,#CED4DA);border-radius:var(--ax-radius-md);overflow:hidden;box-shadow:var(--ax-shadow-xs);background:var(--ax-surface-card);flex-shrink:0}.otab{background:none;border:none;border-right:1px solid var(--ax-border-strong,#CED4DA);padding:0.6875rem var(--ax-space-5);font-family:inherit;font-size:0.9375rem;font-weight:600;color:var(--ax-text-primary);cursor:pointer;transition:background .12s ease}.otab:last-child{border-right:none}.otab:has(.otab-n){display:inline-flex;align-items:center;gap:var(--ax-space-2)}.otab-n{display:inline-flex;align-items:center;justify-content:center;min-width:1.5rem;height:1.5rem;padding:0 var(--ax-space-1-5);box-sizing:border-box;border-radius:var(--ax-radius-full);background:color-mix(in srgb,var(--ax-freedom-blue) 8%,#fff);border:1px solid color-mix(in srgb,var(--ax-freedom-blue) 28%,#fff);color:var(--ax-freedom-blue);font-size:0.8125rem;font-weight:700;line-height:1}.otab-n:empty{display:none}.otab:hover{background:var(--ax-gray-100)}.otab.active{background:var(--ax-gray-100)}.otab:focus-visible{outline:none;box-shadow:none;background:var(--ax-gray-100)}
 /* ---- Toolbar: search + status filter ---- */
 .tbar{display:flex;align-items:center;gap:var(--ax-space-3);flex-wrap:wrap;padding:1.125rem 1.875rem;border-bottom:1px solid var(--ax-border-subtle)}
 .tsearch{position:relative;flex:1 1 17.5rem;max-width:26.25rem}
@@ -467,7 +467,7 @@ class Component extends DCLogic {
 
     return {
       showTabs: flagOn, showOrders: !aposOn, showApos: aposOn,
-      tabOrdersCls: s.tab === 'orders' ? 'active' : '', tabAposCls: aposOn ? 'active' : '', showDraftTab: draftsOn, openingDraft: !!s.openingDraft, tabDraftCls: s.tab === 'drafts' ? 'active' : '', draftCountLabel: draftRows.length ? ' (' + draftRows.length + ')' : '',
+      tabOrdersCls: s.tab === 'orders' ? 'active' : '', tabAposCls: aposOn ? 'active' : '', showDraftTab: draftsOn, openingDraft: !!s.openingDraft, tabDraftCls: s.tab === 'drafts' ? 'active' : '', draftCountLabel: draftRows.length ? String(draftRows.length) : '',
       goTabDrafts: () => this.setState({ tab: 'drafts', page: 1, query: '', statusFilter: 'all', sortKey: null }),
       goTabOrders: () => this.setState({ tab: 'orders', page: 1, query: '', statusFilter: 'all', sortKey: null }),
       goTabApos: () => this.setState({ tab: 'apostilles', page: 1, query: '', statusFilter: 'all', sortKey: null }),
