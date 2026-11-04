@@ -329,13 +329,13 @@
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;tableState&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;loaded&quot;,&quot;loading&quot;,&quot;empty&quot;],&quot;default&quot;:&quot;loaded&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;customerNameFlag&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;accountType&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;business&quot;,&quot;individual&quot;],&quot;default&quot;:&quot;business&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
-class Component extends DCLogic {
+const AXDLO={m:{orders:'',drafts:'drafts',apostilles:'apostilles'},from:function(){var h=location.hash.replace('#/','');for(var k in this.m){if(h&&this.m[k]===h)return k}return null},sync:function(c){if(!c.__axl){c.__axl=1;var f=function(){c.setState({tab:AXDLO.from()||'orders'})};window.addEventListener('popstate',f);window.addEventListener('hashchange',f)}var w=this.m[c.state.tab];if(w===undefined)return;w=w?'#/'+w:'';if(w!==location.hash&&!(!w&&!location.hash)){history[c.__axf?'pushState':'replaceState'](null,'',location.pathname+location.search+w)}c.__axf=1}};class Component extends DCLogic {
   constructor(props) {
     super(props);
     this.state = {
-      state: props.tableState || 'loading',
+      state: props.tableState || (AXDLO.from() ? 'loaded' : 'loading'),
       accountType: props.accountType || 'business',
-      tab: (() => { try { return /[?&]tab=drafts/.test(location.search) && true ? 'drafts' : 'orders'; } catch (e) { return 'orders'; } })(),
+      tab: AXDLO.from() || (() => { try { return /[?&]tab=drafts/.test(location.search) && true ? 'drafts' : 'orders'; } catch (e) { return 'orders'; } })(),
       flag: !!props.customerNameFlag || (() => { try { return /[?&]customerName=1/.test(location.search) || localStorage.getItem('ax_ff_customer_name') === '1'; } catch (e) { return false; } })(),
       menuOpen: false,
       page: 1,
@@ -365,7 +365,7 @@ class Component extends DCLogic {
     document.removeEventListener('click', this._onDoc, true);
     document.removeEventListener('keydown', this._onEsc);
   }
-  renderVals() {
+  renderVals() { AXDLO.sync(this);
     const s = this.state;
     // Every row comes from the shared model. Documents = children.length and
     // the Customer Status badge are both COMPUTED — never stored separately —
