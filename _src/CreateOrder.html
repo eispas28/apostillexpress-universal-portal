@@ -25,7 +25,7 @@
 <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
 <script src="./orderData.js"></script>
 <link rel="stylesheet" href="ax-overlays.css?v=14">
-<style>.fmt-badges{display:flex;flex-wrap:wrap;gap:var(--ax-space-1-5);margin-top:var(--ax-space-1-5)}.fmt-pill{display:inline-flex;font-size:var(--ax-text-xs);font-weight:600;padding:var(--ax-space-0-5) 0.625rem;border-radius:var(--ax-radius-full);background:var(--ax-info-50,#EFF8FF);color:var(--ax-info-700,#005A99);white-space:nowrap}.fmt-badges .wk-pill{margin:0}.fmt-pill.paper{background:var(--ax-warning-50,#FFF6E5);color:var(--ax-warning-700,#8A5300)}
+<style>.fmt-inperson{display:inline-flex;align-items:center;font-size:var(--ax-text-xs);font-weight:500;line-height:1.25rem;padding:0 0.625rem;border:1px solid #C7D7FE;background:#EEF4FF;color:#3538CD;border-radius:var(--ax-radius-full);white-space:nowrap}.fmt-fmt{display:inline-flex;align-items:center;font-size:var(--ax-text-xs);font-weight:500;line-height:1.25rem;padding:0 0.625rem;border:1px solid;border-radius:var(--ax-radius-full);white-space:nowrap}.fmt-fmt.dig{background:#F0F9FF;border-color:#B9E6FE;color:#026AA2}.fmt-fmt.pap{background:#F9F5FF;border-color:#E9D7FE;color:#6941C6}.fmt-badges{display:flex;flex-direction:row;flex-wrap:wrap;gap:var(--ax-space-1-5);margin-top:var(--ax-space-1-5)}.fmt-pill{display:inline-flex;font-size:var(--ax-text-xs);font-weight:600;padding:var(--ax-space-0-5) 0.625rem;border-radius:var(--ax-radius-full);background:var(--ax-info-50,#EFF8FF);color:var(--ax-info-700,#005A99);white-space:nowrap}.fmt-badges .wk-pill{margin:0}.fmt-pill.paper{background:var(--ax-warning-50,#FFF6E5);color:var(--ax-warning-700,#8A5300)}
 *{box-sizing:border-box}
 html,body{margin:0}
 body{font-family:var(--ax-font-base);color:var(--ax-text-primary);background:var(--ax-surface-page);min-height:100vh}
@@ -290,7 +290,7 @@ body{font-family:var(--ax-font-base);color:var(--ax-text-primary);background:var
 .otable td{font-size:0.9375rem;color:var(--ax-text-primary);padding:0.875rem var(--ax-space-3);border-bottom:1px solid var(--ax-border-subtle);vertical-align:top}
 .otable .sub{font-size:0.8125rem;color:var(--ax-text-tertiary);margin-top:var(--ax-space-0-5)}
 .otable .num{white-space:nowrap}
-.row-acts{display:flex;gap:0.625rem;justify-content:flex-end}.row-acts .co-ib{transition:background .15s,border-color .15s,color .15s}.row-acts .co-ib:hover:not(:disabled){background:var(--ax-gray-50)!important;border-color:var(--ax-border-strong)!important;color:var(--ax-text-primary)!important}.row-acts .co-ib.del:hover:not(:disabled){background:var(--ax-danger-50,#FEF3F2)!important;border-color:var(--ax-danger-300,#FDA29B)!important;color:var(--ax-danger-600)!important}
+.row-acts{display:flex;gap:0.625rem;justify-content:flex-end}.row-acts .co-ib{transition:background .15s,border-color .15s,color .15s}.row-acts .co-ib:hover:not(:disabled){background:var(--ax-gray-50)!important;border-color:var(--ax-border-strong)!important;color:var(--ax-text-primary)!important}
 .icon-btn{background:none;border:none;cursor:pointer;color:var(--ax-text-tertiary);font-size:1.0625rem;padding:0.1875rem;display:inline-flex}
 .icon-btn:hover{color:var(--ax-text-primary)}
 .icon-btn.del:hover{color:var(--ax-danger-600)}
@@ -435,7 +435,7 @@ body{font-family:var(--ax-font-base);color:var(--ax-text-primary);background:var
 .pv-file .pfm{min-width:0;flex:1;display:flex;flex-direction:column}
 .pv-file .pfn{font-size:0.9375rem;font-weight:600;color:var(--ax-text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
 .pv-file .pfs{font-size:0.8125rem;color:var(--ax-text-tertiary);margin-top:0.1875rem;display:block}
-.pv-view{flex:1;min-width:0;display:flex;flex-direction:column;background:var(--ax-gray-100)}
+.pv-view{flex:1;min-width:0;display:flex;flex-direction:column;background:var(--ax-gray-100);margin:var(--ax-space-6) var(--ax-space-6) var(--ax-space-6) 1rem;border:1px solid var(--ax-border);border-radius:var(--ax-radius-xl);overflow:hidden}
 .pv-toolbar{display:flex;align-items:center;justify-content:space-between;gap:var(--ax-space-4);padding:var(--ax-space-3) 1.125rem;background:var(--ax-surface-card);border-bottom:1px solid var(--ax-border-subtle);flex-wrap:wrap}
 .pv-tname{font-size:0.9375rem;font-weight:600;color:var(--ax-text-primary);display:flex;align-items:center;gap:0.625rem;min-width:0}
 .pv-tname .tag{font-size:var(--ax-text-xs);font-weight:600;color:var(--ax-text-tertiary);background:var(--ax-gray-100);border-radius:0.3125rem;padding:0.1875rem 0.5625rem;white-space:nowrap}
@@ -518,6 +518,7 @@ body{font-family:var(--ax-font-base);color:var(--ax-text-primary);background:var
 .tinput.err:focus,.tselect.err:focus{border-color:#F04438;box-shadow:0 0 0 4px rgba(240,68,56,.25)}
 .tinput::placeholder,.tsearch input::placeholder,.searchbox input::placeholder{color:var(--ax-gray-600)}
 .tinput:disabled,.tselect:disabled{background:var(--ax-surface-disabled);cursor:not-allowed}
+.cbanner-x.cb-blue{background:#E7F1FF!important;border-color:#B6D4FE!important}.cbanner-x.cb-blue span,.cbanner-x.cb-blue div,.cbanner-x.cb-blue i,.cbanner-x.cb-blue b{color:#084298!important}
 .cbanner-x.elig li,.cbanner-x.elig li *,.cbanner-x.elig a,.cbanner-x.elig a *{color:#664D03}.cbanner-x.elig .ib-title,.cbanner-x.elig .ib-title *{color:#664D03EB}
 @media (max-width:1100px){.draft-bar{display:none!important}.draft-clone{display:block;margin:0 0 1.25rem}.draft-clone{width:100%}.draft-clone button{width:100%!important;display:flex!important;justify-content:center;box-sizing:border-box}}@media (min-width:1101px){.draft-clone{display:none}}@media (max-width:640px){.pv-modal{width:calc(100vw - 1.5rem);height:calc(100dvh - 1.5rem);border-radius:var(--ax-radius-xl)}.pv-head{padding:var(--ax-space-4) var(--ax-space-5);gap:var(--ax-space-3)}.pv-head h2{font-size:var(--ax-h5)}.pv-head p{font-size:var(--ax-text-sm);margin-top:var(--ax-space-1)}.pv-toolbar{padding:var(--ax-space-3);gap:var(--ax-space-2)}.pv-tname{width:100%}.pv-tname span:first-child{flex:1;min-width:0}.pv-tools{width:100%;gap:var(--ax-space-2);justify-content:space-between;flex-wrap:nowrap}.pv-fit{display:none}.pv-ic{width:1.875rem;height:2rem}.pv-readout{min-width:2.5rem;padding:0 var(--ax-space-1)}.pv-hint{left:0.5rem;right:0.5rem;bottom:0.5rem;justify-content:center;font-size:0.75rem}.pv-note{left:0.5rem;right:0.5rem;bottom:2.75rem;justify-content:center;text-align:center}.pv-foot{padding:var(--ax-space-4)}.pv-foot>div:first-child{display:none}.pv-foot-actions{flex-direction:column-reverse;width:100%}.pv-foot-actions .ax-btn{width:100%;justify-content:center}}@media(max-width:820px){.tm{overflow-y:auto;max-height:calc(100dvh - 2rem);-webkit-overflow-scrolling:touch}.tm-body{grid-template-rows:none;grid-auto-rows:auto}.tm-card{grid-template-rows:none;grid-row:auto;display:flex;flex-direction:column}}.tm{overflow-y:auto;max-height:calc(100dvh - 2rem);-webkit-overflow-scrolling:touch}.modal.tm{overflow-y:auto;overflow-x:hidden;max-height:calc(100dvh - 2rem);overscroll-behavior:contain}.modal.tm>.tm-head,.modal.tm>.tm-body{flex-shrink:0}</style>
 <link rel="stylesheet" href="ax-responsive.css?v=15">
@@ -1785,7 +1786,7 @@ function LivePage({ page, doc }) {
   return <canvas ref={cv} className="pv-live" />;
 }
 
-function PreviewModal({ files, onClose, onConfirm, confirmLabel, backLabel }) {
+function PreviewModal({ files, onClose, onConfirm, confirmLabel, backLabel, confirmBusy }) {
   const ZOOMS = [25, 50, 75, 100, 125, 150, 200, 300, 400];
   const [sel, setSel] = useState(0);
   const [page, setPage] = useState(1);
@@ -1900,8 +1901,8 @@ function PreviewModal({ files, onClose, onConfirm, confirmLabel, backLabel }) {
         <div className="pv-foot">
           <div></div>
           <div className="pv-foot-actions">
-            <Button variant="secondary" size="lg" onClick={onClose}><i className="bi bi-arrow-left" style={{ marginRight: "var(--ax-space-2)" }}></i>{backLabel || "Back to Documents"}</Button>
-            <Button variant="primary" size="lg" onClick={onConfirm}>{confirmLabel || "Confirm Preview & Continue"}</Button>
+            <Button variant="secondary" size="lg" disabled={!!confirmBusy} onClick={onClose}><i className="bi bi-arrow-left" style={{ marginRight: "var(--ax-space-2)" }}></i>{backLabel || "Back to Documents"}</Button>
+            {onConfirm ? <Button variant="primary" size="lg" disabled={!!confirmBusy} onClick={onConfirm}>{confirmBusy ? <span className="dl-spin"></span> : null}{confirmLabel || "Confirm Preview & Continue"}</Button> : null}
           </div>
         </div>
       </div>
@@ -1988,7 +1989,7 @@ function ProvideDocumentationScreen({ form, update, onCancel, onPrevious, onCont
       {isWalkIn ?
       <React.Fragment>
       <Banner kind="info" style={{ marginTop: 0, marginBottom: "var(--ax-space-3)" }}>
-          <span><span className="ib-title"><b style={{ fontFamily: "var(--ax-font-base)" }}>Bring your original documents to your appointment.</b><br /><span style={{ fontFamily: "var(--ax-font-base)", fontWeight: 400 }}>Original documents are required before your request can be processed. If a document exists only as a digital file, it cannot be submitted through an In-Person request and must be submitted through a separate Online order.</span></span></span>
+          <span><span className="ib-title"><b style={{ fontFamily: "var(--ax-font-base)", fontWeight: 600 }}>Bring your original documents to your appointment.</b><br /><span style={{ fontFamily: "var(--ax-font-base)", fontWeight: 400 }}>Original documents are required before your request can be processed. If a document exists only as a digital file, it cannot be submitted through an In-Person request and must be submitted through a separate Online order.</span></span></span>
         </Banner>
       </React.Fragment> :
       null}
@@ -2294,7 +2295,7 @@ function InPersonScheduleCard() {
   return (
     <div className="card sect">
       <div className="sect-head"><h2>In-Person Fee Schedule</h2></div>
-      <Banner kind="info" style={{ marginTop: "var(--ax-space-4)" }}><span>{FEE_NOTE}</span></Banner>
+      <Banner kind="info" className="cb-blue" style={{ marginTop: "var(--ax-space-4)" }}><span>Fees are subject to change after review of your documents and order.</span></Banner>
       <div className="feesum fsched">{FEE_ROWS.map(([t, d, p, u]) => <div className="fs-row" key={t + d}><div><b>{t}</b><span>{d}</span></div><div className="fs-p"><b>{p}</b><span>{u}</span></div></div>)}</div>
     </div>);
 }
@@ -2365,6 +2366,9 @@ function PaymentScreen({ form, update, goTo, onCancel, onPrevious, onSubmit, sho
     return base.length ? base : deriveLineItems(form);
   });
   const [editIt, setEditIt] = useState(null);
+  const [saveToast, setSaveToast] = useState(null), saveToastT = useRef(null);
+  const notifySaved = (title, msg) => { clearTimeout(saveToastT.current); setSaveToast({ title, msg, id: Date.now() }); saveToastT.current = setTimeout(() => setSaveToast(null), 4000); };
+  useEffect(() => () => clearTimeout(saveToastT.current), []);
   const [delIt, setDelIt] = useState(null);
   useEffect(() => { if (form.pendingApostille) update({ pendingApostille: false }); }, []);
   useEffect(() => {update({ apostilles: items });}, [items]);
@@ -2405,23 +2409,24 @@ function PaymentScreen({ form, update, goTo, onCancel, onPrevious, onSubmit, sho
   const addItem = () => setItems((arr) => [...arr, { id: "a" + Date.now(), name: arr[0] && arr[0].name || "Additional Document", docId: docNo("a" + Date.now()) }]);
   const upsellOn = !!(window.AX_F && window.AX_F.formatUpsell);
   const allWalk = !!brb && items.length > 0 && items.every(itemWalk);
-  const canOffer = (it) => upsellOn && !it.both && !itemWalk(it) && items.length < 35;
+  const canOffer = (it) => upsellOn && !it.both && items.length < 35;
   const [fmtIt, setFmtIt] = useState(null);
   const addTwin = (it) => setFmtIt(it);
   const confirmTwin = (it, data) => {
     const dig = (it.deliveryMethod || form.deliveryMethod) === "electronic"; const id = it.id + (dig ? "-p" : "-d");
-    const base = { ...it, id, docId: docNo(id), both: true, deliveryMethod: dig ? "traditional" : "electronic", fulfilmentType: dig ? data.fulfilmentType : "", trackingNumber: "", needsUpload: false, copy: undefined };
+    const base = { ...it, id, docId: docNo(id), both: true, deliveryMethod: dig ? "traditional" : "electronic", fulfilmentType: dig ? data.fulfilmentType : "", trackingNumber: dig ? (data.trackingNumber || "") : "", needsUpload: false, copy: undefined };
     const ed = window.makeEditable(base, form);
     const rec = data.recipients ? data.recipients.map((r, i) => ({ ...window.blankRecipient("r" + Date.now() + i), ...r, collapsed: true })) : ed.recipients;
-    const copy = dig ? { ...ed, digital: false, upload: false, isBoth: false, needsReturn: true, mailing: data.mailing, fulfilmentType: data.fulfilmentType, returnAddr: data.returnAddr, addrSource: data.addrSource, file: null }
-      : { ...ed, digital: true, upload: true, isBoth: false, needsReturn: false, file: data.file, recipients: rec };
-    const twin = { ...base, copy, name: dig ? base.name : (data.file.name.replace(/\.[^.]+$/, "")) };
+    const copy = dig ? { ...ed, digital: false, upload: false, isBoth: false, needsReturn: !itemWalk(it), mailing: data.mailing, fulfilmentType: data.fulfilmentType, returnAddr: data.returnAddr, addrSource: data.addrSource, file: null }
+      : { ...ed, digital: true, upload: !itemWalk(it), isBoth: false, needsReturn: false, file: data.file || null, recipients: rec };
+    const twin = { ...base, copy, name: dig || !data.file ? base.name : (data.file.name.replace(/\.[^.]+$/, "")) };
     setItems((arr) => { const out = []; arr.forEach((x) => { if (x.id === it.id) out.push({ ...x, both: true }, twin); else out.push(x); }); return out.slice(0, 35); });
     setFmtIt(null);
+    notifySaved("Successfully added " + (dig ? "paper" : "digital") + " Apostille", "A " + (dig ? "paper" : "digital") + " Apostille was added to your order.");
   };
   const missingUp = (it) => it.needsUpload && !(it.copy && it.copy.file);
   const offerable = items.filter(canOffer);
-  const delItem = (id) => setItems((arr) => arr.length <= 1 ? arr : arr.filter((it) => it.id !== id));
+  const delItem = (id) => setItems((arr) => { if (arr.length <= 1) return arr; const gone = arr.find((it) => it.id === id); const twinOf = gone && /-[pd]$/.test(gone.id) && gone.both ? gone.id.replace(/-[pd]$/, "") : null; return arr.filter((it) => it.id !== id).map((it) => twinOf && it.id === twinOf ? { ...it, both: false } : it); });
 
   const submit = () => {
     setTouched(true);
@@ -2581,10 +2586,11 @@ function PaymentScreen({ form, update, goTo, onCancel, onPrevious, onSubmit, sho
         <div>
           <div className="card sect">
             {delIt ? <DeleteOrderModal label={delIt.docId ? "Document " + delIt.docId : ""} onClose={() => setDelIt(null)} onConfirm={() => { delItem(delIt.id); setDelIt(null); }} /> : null}
-            {fmtIt ? <window.AddFormatModal item={fmtIt} form={form} onClose={() => setFmtIt(null)} onAdd={(d) => confirmTwin(fmtIt, d)} /> : null}
-            {editIt ? <window.EditOrderPanel orderEditable={!editIt.child} child={editIt.copy || (editIt.needsUpload ? { ...window.makeEditable(editIt, form), upload: true, isBoth: false } : window.makeEditable(editIt, form))} form={form} inPerson={itemWalk(editIt)} title={editIt.child ? "Copy of " + editIt.copyOf : (editIt.docDesc || editIt.name) + " \u2022 " + editIt.docId} onClose={() => setEditIt(null)} onSave={(c) => { setItems((arr) => arr.map((x) => (x.id === editIt.id || (editIt.both && x.child && x.id.replace(/-[pd]$/, "") === editIt.id.replace(/-[pd]$/, ""))) ? { ...x, copy: x.id === editIt.id ? c : x.copy, docDesc: c.docDesc, serviceType: c.serviceType, adoption: !!c.adoption, adoptionAgency: c.adoption ? (c.adoptionAgency || "") : "", deliveryMethod: editIt.both ? x.deliveryMethod : c.digital ? "electronic" : "traditional", fulfilmentType: editIt.both || c.digital ? x.fulfilmentType : (x.fulfilmentType || form.fulfilmentType || "usps"), name: c.file ? c.file.name.replace(/\.[^.]+$/, "") : c.docDesc || x.name } : x)); setEditIt(null); }} /> : null}
+            {fmtIt ? <window.AddFormatModal item={fmtIt} form={form} inPerson={itemWalk(fmtIt)} onClose={() => setFmtIt(null)} onAdd={(d) => confirmTwin(fmtIt, d)} /> : null}
+            {editIt ? <window.EditOrderPanel orderEditable={!editIt.child} child={editIt.copy || (editIt.needsUpload ? { ...window.makeEditable(editIt, form), upload: true, isBoth: false } : window.makeEditable(editIt, form))} form={form} inPerson={itemWalk(editIt)} title={editIt.child ? "Copy of " + editIt.copyOf : (editIt.docDesc || editIt.name) + " \u2022 " + editIt.docId} onClose={() => setEditIt(null)} onSave={(c) => { setItems((arr) => arr.map((x) => (x.id === editIt.id || (editIt.both && x.child && x.id.replace(/-[pd]$/, "") === editIt.id.replace(/-[pd]$/, ""))) ? { ...x, copy: x.id === editIt.id ? c : x.copy, docDesc: c.docDesc, serviceType: c.serviceType, adoption: !!c.adoption, adoptionAgency: c.adoption ? (c.adoptionAgency || "") : "", deliveryMethod: editIt.both ? x.deliveryMethod : c.digital ? "electronic" : "traditional", fulfilmentType: editIt.both || c.digital ? x.fulfilmentType : (x.fulfilmentType || form.fulfilmentType || "usps"), name: c.file ? c.file.name.replace(/\.[^.]+$/, "") : c.docDesc || x.name } : x)); notifySaved("Successfully updated information"); setEditIt(null); }} /> : null}
+            {saveToast ? <div className="ax-toasts"><div className="ax-toast success" role="status" key={saveToast.id}><i className="ax-toast-ic" aria-hidden="true"></i><div className="ax-toast-b"><div className="ax-toast-t">{saveToast.title}</div><div className="ax-toast-m">{saveToast.msg || "Your changes have been saved."}</div><div className="ax-toast-acts"><button className="ax-toast-act plain" onClick={() => setSaveToast(null)}>Dismiss</button></div></div><button className="ax-toast-x" aria-label="Close" onClick={() => setSaveToast(null)}><i className="bi bi-x-lg"></i></button></div></div> : null}
             {upErr && items.some(missingUp) ? <div className="cbanner err" role="alert" style={{ marginTop: 0, marginBottom: "var(--ax-space-4)" }}><i className="bi bi-x-circle-fill"></i><span>Upload the document for each digital Apostille you added before you pay.</span></div> : null}
-            {offerable.length ? <Banner kind="info" style={{ marginTop: 0, marginBottom: "var(--ax-space-4)" }}><span><b>Need both formats?</b> Add a paper Apostille to a digital order, or a digital Apostille to a paper order, before you check out. Use the <b>Add</b> button under any order below.</span></Banner> : null}
+            {offerable.length ? <Banner kind="info" className="cb-blue" style={{ marginTop: 0, marginBottom: "var(--ax-space-4)" }}><span><b>Need both formats?</b> Add a paper Apostille to a digital order, or a digital Apostille to a paper order, before you check out. Use the <b>Add</b> button under any order below.</span></Banner> : null}
             <div className="sum-head">
               <div>
                 <div className="sum-title"><h2>Order Summary</h2><DSBadge color="success" size="lg">{count + " Apostille" + (count === 1 ? "" : "s")}</DSBadge></div>
@@ -2597,7 +2603,7 @@ function PaymentScreen({ form, update, goTo, onCancel, onPrevious, onSubmit, sho
               <table className="otable paytable">
                 <thead>
                   <tr>
-                    <th>Description</th>{allWalk ? <th colSpan={4 + (intlTotal > 0 ? 1 : 0)}></th> : <React.Fragment><th>State Fee</th><th>State Service Fee</th><th>AX Fee</th>{intlTotal > 0 ? <th>International&nbsp;Fee</th> : null}<th style={{ textAlign: "left" }}>Actions</th></React.Fragment>}
+                    <th>Description</th>{allWalk ? <React.Fragment><th colSpan={3 + (intlTotal > 0 ? 1 : 0)}></th><th style={{ textAlign: "left" }}>Actions</th></React.Fragment> : <React.Fragment><th>State Fee</th><th>State Service Fee</th><th>AX Fee</th>{intlTotal > 0 ? <th>International&nbsp;Fee</th> : null}<th style={{ textAlign: "left" }}>Actions</th></React.Fragment>}
                   </tr>
                 </thead>
                 <tbody>
@@ -2605,10 +2611,11 @@ function PaymentScreen({ form, update, goTo, onCancel, onPrevious, onSubmit, sho
                     const rf = perItemFees[ix];
                     return (
                     <tr key={it.id}>
-                      <td>{it.docDesc || it.name}<div className="sub">{childNo(it, ix, form)}{it.copyOf ? " · Copy of " + it.copyOf : ""}{it.both ? (it.deliveryMethod === "electronic" ? " · Digital Apostille" : " · Paper Apostille") : ""}</div><div className="fmt-badges"><DSBadge color={(it.deliveryMethod || form.deliveryMethod) === "electronic" ? "info" : "warning"} pill>{(it.deliveryMethod || form.deliveryMethod) === "electronic" ? "Digital" : "Paper"}</DSBadge>{(it.adoption != null ? it.adoption : form.apostilleRequest === "adoption") ? <DSBadge color="info" pill>Adoption</DSBadge> : null}{itemWalk(it) && (!it.stateName || !form.state || it.stateName === form.state.name) ? <DSBadge color="brand" pill>In-Person (Appointment)</DSBadge> : null}</div>{missingUp(it) ? <div style={{ marginTop: "var(--ax-space-1-5)" }}><span className="field-err">Document upload required</span> <Button variant="tertiary" size="sm" style={{ padding: 0 }} onClick={() => setEditIt(it)}><i className="bi bi-upload" style={{ marginRight: "var(--ax-space-1-5)" }}></i>Upload document</Button></div> : null}{canOffer(it) ? <div style={{ marginTop: "var(--ax-space-1-5)" }}><Button variant="link" size="sm" style={{ padding: 0, marginTop: "var(--ax-space-1)" }} onClick={() => addTwin(it)}><i className="bi bi-plus-lg" style={{ marginRight: "var(--ax-space-1-5)" }}></i>{(it.deliveryMethod || form.deliveryMethod) === "electronic" ? "Add Paper Apostille" : "Add Digital Apostille"}</Button></div> : null}</td>
-                      {brb && itemWalk(it) ? <td colSpan={3 + (intlTotal > 0 ? 1 : 0)}>In-Person fee schedule · paid at the counter</td> : <React.Fragment><td>{fmtMoney(rf.stateFee)}</td><td>{fmtMoney(rf.stateServiceFee)}<div className="sub">{form.serviceType === "sameday" ? "Same-Day" : form.serviceType === "express" ? "Express" : "Standard"}</div></td><td>{fmtMoney(rf.axFee)}</td>{intlTotal > 0 ? <td>{fmtMoney(rf.intlFee)}</td> : null}</React.Fragment>}
+                      <td>{it.docDesc || it.name}<div className="sub">{childNo(it, ix, form)}{it.copyOf ? " · Copy of " + it.copyOf : ""}{it.both ? (it.deliveryMethod === "electronic" ? " · Digital Apostille" : " · Paper Apostille") : ""}</div><div className="fmt-badges">{(it.adoption != null ? it.adoption : form.apostilleRequest === "adoption") ? <DSBadge color="info" pill>Adoption</DSBadge> : null}{itemWalk(it) && (!it.stateName || !form.state || it.stateName === form.state.name) ? <span className="fmt-inperson">In-Person (Appointment)</span> : null}</div>{missingUp(it) ? <div style={{ marginTop: "var(--ax-space-1-5)" }}><span className="field-err">Document upload required</span> <Button variant="tertiary" size="sm" style={{ padding: 0 }} onClick={() => setEditIt(it)}><i className="bi bi-upload" style={{ marginRight: "var(--ax-space-1-5)" }}></i>Upload document</Button></div> : null}{canOffer(it) ? <div style={{ marginTop: "var(--ax-space-1-5)" }}><Button variant="link" size="sm" style={{ padding: 0, marginTop: "var(--ax-space-1)" }} onClick={() => addTwin(it)}><i className="bi bi-plus-lg" style={{ marginRight: "var(--ax-space-1-5)" }}></i>{(it.deliveryMethod || form.deliveryMethod) === "electronic" ? "Add Paper Apostille" : "Add Digital Apostille"}</Button></div> : null}</td>
+                      {brb && itemWalk(it) ? <td colSpan={3 + (intlTotal > 0 ? 1 : 0)}></td> : <React.Fragment><td>{fmtMoney(rf.stateFee)}</td><td>{fmtMoney(rf.stateServiceFee)}<div className="sub">{form.serviceType === "sameday" ? "Same-Day" : form.serviceType === "express" ? "Express" : "Standard"}</div></td><td>{fmtMoney(rf.axFee)}</td>{intlTotal > 0 ? <td>{fmtMoney(rf.intlFee)}</td> : null}</React.Fragment>}
                       <td>
-                        <div className="row-acts">
+                        <div className="row-acts" style={{ alignItems: "center", flexWrap: "wrap" }}>
+                          <span className={"fmt-fmt " + ((it.deliveryMethod || form.deliveryMethod) === "electronic" ? "dig" : "pap")}>{(it.deliveryMethod || form.deliveryMethod) === "electronic" ? "Digital" : "Paper"}</span>
                           {canOffer(it) ? (() => { const lbl = (it.deliveryMethod || form.deliveryMethod) === "electronic" ? "Add Paper Apostille" : "Add Digital Apostille"; return <span className="co-tip" data-tip={lbl}><DS.IconButton className="co-ib" variant="secondary" size="sm" label={lbl} icon={<i className="bi bi-plus-lg"></i>} onClick={() => addTwin(it)} /></span>; })() : null}
                           {window.AX_COPY ? <span className="co-tip" data-tip={items.length >= 35 ? "Maximum copies reached" : "Copy this order"}><DS.IconButton className="co-ib" variant="secondary" size="sm" label="Copy this order" icon={<i className="bi bi-copy"></i>} disabled={items.length >= 35} onClick={() => window.AX_startCopy({ origin: "payment", item: it, parentNo: ix + 1 })} /></span> : null}
                           <span className="co-tip" data-tip="Edit order"><DS.IconButton className="co-ib" variant="secondary" size="sm" label="Edit order" icon={<i className="bi bi-pencil-square"></i>} onClick={() => (window.AX_COPY ? setEditIt(it) : goTo("docs"))} /></span>
@@ -2673,7 +2680,7 @@ function PaymentScreen({ form, update, goTo, onCancel, onPrevious, onSubmit, sho
           {isWalkIn ?
           <div className="card sect pay-method">
             <div className="sect-head"><h2>Payment Method</h2></div>
-            <Banner kind="info" style={{ marginTop: "var(--ax-space-4)" }}>
+            <Banner kind="info" className="cb-blue" style={{ marginTop: "var(--ax-space-4)" }}>
               {brb ? <span><span className="ib-title">Payment will be collected by the Competent Authority at the counter.</span>No online payment is required. After you submit, download or print your Order Delivery Form and present it to the Competent Authority.</span> : <span><span className="ib-title">Payment will be collected at your appointment.</span>No online payment is required to submit this order.</span>}
             </Banner>
             <div className="pay-btn-group">
@@ -2935,10 +2942,10 @@ function ConfirmationScreen({ form, onDone }) {
                   const rf = perItemFees[ix];
                   return (
                 <tr key={it.id}>
-                    <td>{it.docDesc || it.name}<div className="sub">{childNo(it, ix, form)}{it.copyOf ? " · Copy of " + it.copyOf : ""}{it.both ? (it.deliveryMethod === "electronic" ? " · Digital Apostille" : " · Paper Apostille") : ""}</div><div className="fmt-badges">{(it.adoption != null ? it.adoption : form.apostilleRequest === "adoption") ? <DSBadge color="info" pill>Adoption</DSBadge> : null}{itemWalk(it) ? <DSBadge color="brand" pill>In-Person (Appointment)</DSBadge> : null}</div></td>
-                    {brbC && itemWalk(it) ? <React.Fragment><td colSpan={2}>In-Person fee schedule · paid at the counter<div className="sub">{it.stateCd || code || "—"}</div></td><td><div className="fmt-badges" style={{ marginTop: 0 }}><DSBadge color={(it.deliveryMethod || form.deliveryMethod) === "electronic" ? "info" : "warning"} pill>{(it.deliveryMethod || form.deliveryMethod) === "electronic" ? "Digital" : "Paper"}</DSBadge></div></td>{intlTotal > 0 ? <td></td> : null}</React.Fragment> : <React.Fragment>                    <td>{fmtMoney(rf.stateFee)}<div className="sub">{it.stateCd || code || "—"}</div></td>
+                    <td>{it.docDesc || it.name}<div className="sub">{childNo(it, ix, form)}{it.copyOf ? " · Copy of " + it.copyOf : ""}{it.both ? (it.deliveryMethod === "electronic" ? " · Digital Apostille" : " · Paper Apostille") : ""}</div><div className="fmt-badges">{(it.adoption != null ? it.adoption : form.apostilleRequest === "adoption") ? <DSBadge color="info" pill>Adoption</DSBadge> : null}{itemWalk(it) ? <span className="fmt-inperson">In-Person (Appointment)</span> : null}</div></td>
+                    {brbC && itemWalk(it) ? <React.Fragment><td colSpan={2}>In-Person fee schedule · paid at the counter<div className="sub">{it.stateCd || code || "—"}</div></td><td><div className="fmt-badges" style={{ marginTop: 0 }}><span className={"fmt-fmt " + ((it.deliveryMethod || form.deliveryMethod) === "electronic" ? "dig" : "pap")}>{(it.deliveryMethod || form.deliveryMethod) === "electronic" ? "Digital" : "Paper"}</span></div></td>{intlTotal > 0 ? <td></td> : null}</React.Fragment> : <React.Fragment>                    <td>{fmtMoney(rf.stateFee)}<div className="sub">{it.stateCd || code || "—"}</div></td>
                     <td>{fmtMoney(rf.stateServiceFee)}<div className="sub">{form.serviceType === "sameday" ? "Same-Day" : form.serviceType === "express" ? "Express" : "Standard"}</div></td>
-                    <td>{fmtMoney(rf.axFee)}<div className="fmt-badges"><DSBadge color={(it.deliveryMethod || form.deliveryMethod) === "electronic" ? "info" : "warning"} pill>{(it.deliveryMethod || form.deliveryMethod) === "electronic" ? "Digital" : "Paper"}</DSBadge></div></td>
+                    <td>{fmtMoney(rf.axFee)}<div className="fmt-badges"><span className={"fmt-fmt " + ((it.deliveryMethod || form.deliveryMethod) === "electronic" ? "dig" : "pap")}>{(it.deliveryMethod || form.deliveryMethod) === "electronic" ? "Digital" : "Paper"}</span></div></td>
                     {intlTotal > 0 ? <td>{fmtMoney(rf.intlFee)}</td> : null}</React.Fragment>}
                     <td>{itemWalk(it) || (it.deliveryMethod || form.deliveryMethod) !== "electronic" ? <button className="pdf-btn" aria-label="Download delivery form" onClick={() => openDeliveryForms(form)}><svg width="29" height="24" viewBox="0 0 29 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12.7998 0.75H20.7891L27.25 7.20996V20C27.25 21.7949 25.7948 23.2499 24 23.25H12.7998C11.0049 23.25 9.5498 21.7949 9.5498 20V4C9.54981 2.20507 11.0049 0.75 12.7998 0.75Z" stroke="#D5D7DA" strokeWidth="1.5"/><path d="M20.7998 0.300049V3.20005C20.7998 5.40919 22.5907 7.20005 24.7998 7.20005H27.6998" stroke="#D5D7DA" strokeWidth="1.5"/><path d="M0 9.6001C0 8.49553 0.895431 7.6001 2 7.6001H24C25.1046 7.6001 26 8.49553 26 9.6001V21.6001C26 22.7047 25.1046 23.6001 24 23.6001H2C0.89543 23.6001 0 22.7047 0 21.6001V9.6001Z" fill="#D92D20"/><path d="M3.8323 19.6001V12.3274H6.70162C7.25323 12.3274 7.72316 12.4327 8.11142 12.6434C8.49967 12.8518 8.7956 13.1418 8.9992 13.5134C9.20517 13.8828 9.30815 14.3089 9.30815 14.7919C9.30815 15.2748 9.20398 15.7009 8.99565 16.0703C8.78732 16.4396 8.48547 16.7272 8.09011 16.9332C7.69712 17.1392 7.22127 17.2421 6.66255 17.2421H4.83372V16.0099H6.41397C6.7099 16.0099 6.95375 15.959 7.14551 15.8572C7.33964 15.753 7.48405 15.6098 7.57875 15.4275C7.67581 15.2429 7.72434 15.031 7.72434 14.7919C7.72434 14.5504 7.67581 14.3397 7.57875 14.1598C7.48405 13.9775 7.33964 13.8366 7.14551 13.7372C6.95138 13.6354 6.70517 13.5845 6.40687 13.5845H5.36994V19.6001H3.8323ZM12.885 19.6001H10.3069V12.3274H12.9063C13.6379 12.3274 14.2676 12.473 14.7955 12.7642C15.3235 13.053 15.7295 13.4685 16.0136 14.0106C16.3 14.5527 16.4433 15.2014 16.4433 15.9566C16.4433 16.7142 16.3 17.3652 16.0136 17.9098C15.7295 18.4543 15.3211 18.8721 14.7884 19.1633C14.2581 19.4545 13.6237 19.6001 12.885 19.6001ZM11.8445 18.2826H12.8211C13.2757 18.2826 13.658 18.2021 13.9681 18.0411C14.2806 17.8778 14.515 17.6257 14.6713 17.2848C14.8299 16.9415 14.9092 16.4988 14.9092 15.9566C14.9092 15.4192 14.8299 14.9801 14.6713 14.6392C14.515 14.2983 14.2818 14.0473 13.9717 13.8863C13.6615 13.7253 13.2792 13.6448 12.8247 13.6448H11.8445V18.2826ZM17.5823 19.6001V12.3274H22.3976V13.5951H19.1199V15.3281H22.078V16.5958H19.1199V19.6001H17.5823Z" fill="white"/></svg></button> : null}</td>
                   </tr>
@@ -3309,7 +3316,7 @@ function App() {
 
 }
 
-Object.assign(window, { fmtSize, USER_PROFILE, PROFILE_ADDRESS, COUNTRIES, StateField, FULFILMENT, FulfilmentCard, DeleteOrderModal, ReturnAddressSection, RecipientForm, blankRecipient, AddressBlock, PreviewModal, DOC_TYPES, DEST_COUNTRIES, fmtSize, docNo });
+Object.assign(window, { PreviewModal, fmtSize, USER_PROFILE, PROFILE_ADDRESS, COUNTRIES, StateField, FULFILMENT, FulfilmentCard, DeleteOrderModal, ReturnAddressSection, RecipientForm, blankRecipient, AddressBlock, PreviewModal, DOC_TYPES, DEST_COUNTRIES, fmtSize, docNo });
 ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 </script>
 <script>(function(){function sync(){var bar=document.querySelector(".draft-bar button"),sub=document.querySelector("main.page > .page-sub"),c=document.querySelector(".draft-clone");if(!bar||!sub){if(c)c.remove();return}if(c&&c.previousElementSibling===sub)return;if(c)c.remove();c=document.createElement("div");c.className="draft-clone";var b=bar.cloneNode(true);b.onclick=function(){var o=document.querySelector(".draft-bar button");o&&o.click()};c.appendChild(b);sub.after(c)}new MutationObserver(sync).observe(document.body,{childList:true,subtree:true});sync()})()</script></body>

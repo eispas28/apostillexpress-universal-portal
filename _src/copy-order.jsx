@@ -28,7 +28,7 @@ const MAIL_REQ = ["firstName", "lastName", "email", "addr1", "country", "state",
 const needsMail = (k) => (!k.digital || k.isBoth) && (k.fulfilmentType === "usps" || k.fulfilmentType === "international");
 const mailMissing = (k) => needsMail(k) && !MAIL_REQ.every((x) => ((k.mailing || {})[x] || "").trim());
 const RA_REQ = ["firstName", "lastName", "addr1", "country", "state", "city", "zip"];
-const statusOf = (k) => k.upload && !k.file ? "Upload missing" : !(k.docDesc && k.destCountry) || mailMissing(k) || (k.needsReturn && !RA_REQ.every((x) => ((k.returnAddr || {})[x] || "").trim())) ? "Incomplete" : "Ready";
+const statusOf = (k, ip) => k.upload && !k.file ? "Upload missing" : !(k.docDesc && k.destCountry) || (!ip && mailMissing(k)) || (k.needsReturn && !RA_REQ.every((x) => ((k.returnAddr || {})[x] || "").trim())) ? "Incomplete" : "Ready";
 const RA_SUB = "If we can\u2019t process your documents, we\u2019ll mail them back to this address at no cost (unless a prepaid shipping label was provided).";
 const raProps = (k, patch, customer) => ({ d: { addrSource: k.addrSource, returnAddr: k.returnAddr, prepaidOpen: k.prepaidOpen, shippingTracking: k.shippingTracking || "" }, setD: (p) => patch(typeof p === "function" ? p({ returnAddr: k.returnAddr }) : p), customer: customer || {}, subtitle: RA_SUB, errors: {}, compact: true });
 const Badge = ({ s }) => s === "Ready" ?
@@ -41,7 +41,8 @@ const Vals = ({ a }) => <React.Fragment>{a.filter(Boolean).map((x, i) => <span k
 const mkFile = (f) => ({ id: Date.now() + "-" + f.name + Math.random(), name: f.name, size: f.size, pct: 100, url: URL.createObjectURL(f), type: f.type });
 
 const fmtBytes = (n) => !n ? "" : n >= 1048576 ? (n / 1048576).toFixed(1) + " MB" : n >= 1024 ? Math.round(n / 1024) + " KB" : n + " B";
-const UploadField = ({ f, onFile, onRemove }) => <FileUpload hint="PDF, JPEG, TIFF (Files cannot exceed 10MB)" files={f ? [{ name: f.name, size: fmtBytes(f.size), status: "done" }] : []} onSelect={(fl) => { if (fl && fl[0]) onFile(mkFile(fl[0])); }} onRemove={onRemove} />;
+const UploadField = ({ f, onFile, onRemove }) => <UploadFieldBase f={f} onFile={onFile} onRemove={onRemove} />;
+const UploadFieldBase = ({ f, onFile, onRemove }) => <FileUpload hint="PDF, JPEG, TIFF (Files cannot exceed 10MB)" files={f ? [{ name: f.name, size: fmtBytes(f.size), status: "done" }] : []} onSelect={(fl) => { if (fl && fl[0]) onFile(mkFile(fl[0])); }} onRemove={onRemove} />;
 
 function custInfo(form, k) { const c = (k && k.customer) || form.customer || {}; return [((c.firstName || "") + " " + (c.lastName || "")).trim(), c.email, c.organization]; }
 function orderInfo(k, form, inPerson) {
@@ -93,7 +94,7 @@ function CopyOrderScreen({ ctx, form, onCancel, onDone, stateRef, initial }) {
   const isOpen = (id) => id in open ? open[id] : !!(kids[0] && kids[0].id === id);
   const allOpen = kids.length > 0 && kids.every((k) => isOpen(k.id));
   const setAll = (v) => setOpen(Object.fromEntries(kids.map((k) => [k.id, v])));
-  const ready = kids.filter((k) => statusOf(k) === "Ready").length;
+  const ready = kids.filter((k) => statusOf(k, ctx.inPerson) === "Ready").length;
   const can = kids.length > 0 && ready === kids.length;
   const label = (i) => "Document " + (startNo + i + 1);
   const finish = () => onDone(kids.map((k, i) => ({ ...k, no: startNo + i + 1 })));
@@ -111,7 +112,7 @@ function CopyOrderScreen({ ctx, form, onCancel, onDone, stateRef, initial }) {
       <div className="co-list">
         {kids.length === 0 ? <div className="co-more"><b>No copies yet</b>Start over from your previous order to create copies.</div> : null}
         {kids.map((k, i) => {
-          const st = statusOf(k), o = isOpen(k.id);
+          const st = statusOf(k, ctx.inPerson), o = isOpen(k.id);
           const countries = [...new Set([k.destCountry, ...k.recipients.slice(1).map((r) => r.destCountry)].filter(Boolean))];
           const m = k.mailing || {};
           return (
@@ -132,7 +133,7 @@ function CopyOrderScreen({ ctx, form, onCancel, onDone, stateRef, initial }) {
                 <Row label="Order Information"><Vals a={orderInfo(k, form, inPerson)} /></Row>
                 {k.digital ? <Row label="Recipient Information"><Vals a={[k.recipients.length + " Recipient(s)", countries.join(", ")]} /></Row> : null}
                 <div className="co-row" style={{ borderBottom: "1px solid #E9ECEF" }}><div className="co-rl">Document Information</div><div className="co-rv"><Vals a={[k.docType, k.docDesc, k.destCountry]} /></div></div>
-                {needsMail(k) ? <Row label="Mailing Information" badge={mailMissing(k) ? <Badge s="Mailing info missing" /> : null}><Vals a={[((m.firstName || "") + " " + (m.lastName || "")).trim(), m.email, m.organization, [m.city, m.state].filter(Boolean).join(", "), m.country]} /></Row> : null}
+                {needsMail(k) && !ctx.inPerson ? <Row label="Mailing Information" badge={mailMissing(k) ? <Badge s="Mailing info missing" /> : null}><Vals a={[((m.firstName || "") + " " + (m.lastName || "")).trim(), m.email, m.organization, [m.city, m.state].filter(Boolean).join(", "), m.country]} /></Row> : null}
                 {k.upload ?
                 <div className="co-form">
                   <F label="Upload document" req><UploadField f={k.file} onFile={(f) => patchKid(k.id, { file: f })} onRemove={() => patchKid(k.id, { file: null })} />{!k.file ? <UpErr /> : null}</F>
@@ -191,13 +192,16 @@ function makeEditable(it, form) {
 function EditOrderPanel({ child, form, title, inPerson, onSave, onClose, orderEditable }) {
   const [d, setD] = useState(() => ({ ...child, customer: { ...(form.customer || {}), ...(child.customer || {}) }, serviceType: child.serviceType || form.serviceType || "sameday", adoption: child.adoption != null ? child.adoption : form.apostilleRequest === "adoption" }));
   const set = (p) => setD((x) => ({ ...x, ...p }));
-  const showMail = needsMail(d);
+  const showMail = needsMail(d) && !inPerson;
   const tabs = [["ord", "Order Info"], ["cust", "Customer Info"], ["doc", "Document Info"], ...(d.digital ? [["rec", "Recipient Info"]] : []), ...(showMail ? [["mail", "Mailing Info"]] : [])];
   const [tab, setTab] = useState("ord");
-  const [noteOff, setNoteOff] = useState(false), [upOff, setUpOff] = useState(false);
+  const pvRef = useRef(false);
+  const [confirmClose, setConfirmClose] = useState(false);
+  const initJson = useRef(null), rcRef = useRef(null), initMethod = useRef({ digital: !!child.digital, isBoth: !!child.isBoth });
+  const [noteOff, setNoteOff] = useState(false), [upOff, setUpOff] = useState(false), [pvOpen, setPvOpen] = useState(false);
   const goUpload = () => { setTab("doc"); setTimeout(() => { const el = document.getElementById("co-upload"); if (!el) return; let p = el.parentElement; while (p && p.scrollHeight <= p.clientHeight + 1) p = p.parentElement; if (p) p.scrollTo({ top: Math.max(0, el.getBoundingClientRect().top - p.getBoundingClientRect().top + p.scrollTop - 80), behavior: "smooth" }); const b = el.querySelector("button,input"); if (b) b.focus({ preventScroll: true }); }, 80); };
   useEffect(() => { if (tab === "mail" && !showMail) setTab("ord"); }, [showMail]);
-  useEffect(() => { const k = (e) => { if (e.key === "Escape") onClose(); }; document.addEventListener("keydown", k); return () => document.removeEventListener("keydown", k); }, []);
+  useEffect(() => { const k = (e) => { if (e.key === "Escape" && !pvRef.current) rcRef.current(); }; document.addEventListener("keydown", k); return () => document.removeEventListener("keydown", k); }, []);
   const descOpts = d.docType ? (window.DOC_TYPES[d.docType] || []) : [];
   const setRec = (id, p) => set({ recipients: d.recipients.map((r) => r.id === id ? { ...r, ...p } : r) });
   const setMail = (p) => set({ mailing: { ...d.mailing, ...p } });
@@ -207,13 +211,21 @@ function EditOrderPanel({ child, form, title, inPerson, onSave, onClose, orderEd
   const [addrOpen, setAddrOpen] = useState(() => !child.digital || ["addr1", "addr2", "city", "zip", "country", "state"].some((k) => (child.customer && child.customer[k]) || (form.customer && form.customer[k])));
   const addrShown = addrOpen;
   const setCust = (p) => set({ customer: { ...d.customer, ...p } });
-  const addRec = () => d.recipients.length < 11 && set({ recipients: [...d.recipients.map((x) => ({ ...x, collapsed: true })), window.blankRecipient("r" + Date.now() + rid())] });
+  const addRec = () => d.recipients.length < 10 && set({ recipients: [...d.recipients.map((x) => ({ ...x, collapsed: true })), window.blankRecipient("r" + Date.now() + rid())] });
   const setMethod = (v) => set({ digital: v === "electronic", upload: v === "electronic" && !inPerson });
   const raMissing = !!d.needsReturn && !RA_REQ.every((x) => ((d.returnAddr || {})[x] || "").trim());
-  const valid = !raMissing && d.docType && d.docDesc && d.destCountry && !mailMissing(d) && (!d.upload || d.file) && (!d.adoption || (d.adoptionAgency || "").trim()) && !((!d.digital || d.isBoth) && (!d.fulfilmentType || d.fulfilmentType === "prepaid-label" && !(d.trackingNumber || "").trim()) && true) && !((!d.digital || d.isBoth) && d.fulfilmentType === "prepaid-label" && !(d.trackingNumber || "").trim());
-  return (
-    <Drawer open onClose={onClose} width={620} className="co-drawer" title={<span style={{ display: "block" }}>Edit Order<span className="co-sub">{title}</span></span>} footer={<React.Fragment><Button variant="tertiary" size="lg" onClick={onClose}>Cancel</Button><Button variant="primary" size="lg" disabled={!valid} onClick={() => onSave(d)}>Save Changes</Button></React.Fragment>}>
-      <Tabs variant="pill" className="co-tabs" value={tab} onChange={setTab} tabs={tabs.map(([id, l]) => ({ value: id, label: l, icon: ((id === "mail" && mailMissing(d)) || (id === "doc" && d.upload && !d.file)) ? <i className="bi bi-exclamation-circle-fill co-warn" title={id === "doc" ? "Document file is missing" : "Mailing info missing"}></i> : (id === "doc" && raMissing) ? <i className="bi bi-exclamation-circle-fill co-warn" title="Return address missing"></i> : null }))} />
+  const valid = !raMissing && d.docType && d.docDesc && d.destCountry && !(!inPerson && mailMissing(d)) && (!d.upload || d.file) && (!d.adoption || (d.adoptionAgency || "").trim()) && !((!d.digital || d.isBoth) && (!d.fulfilmentType || d.fulfilmentType === "prepaid-label" && !(d.trackingNumber || "").trim()) && true) && !((!d.digital || d.isBoth) && d.fulfilmentType === "prepaid-label" && !(d.trackingNumber || "").trim());
+  if (initJson.current === null) initJson.current = JSON.stringify(d);
+  const dirty = JSON.stringify(d) !== initJson.current;
+  const requestClose = () => dirty ? setConfirmClose(true) : onClose();
+  rcRef.current = requestClose;
+  const feeChange = !!d.digital !== initMethod.current.digital || !!d.isBoth !== initMethod.current.isBoth;
+  pvRef.current = pvOpen || confirmClose;
+  const wantPv = !!(d.upload && window.PreviewModal), canPv = !!(wantPv && d.file);
+  if (pvOpen && canPv) return <window.PreviewModal files={[{ ...d.file, id: d.file.id || "f" }]} onClose={() => setPvOpen(false)} onConfirm={() => onSave(d)} backLabel="Keep Editing" confirmLabel="Save Changes" />;
+  return (<React.Fragment>
+    <Drawer open onClose={requestClose} width={620} className="co-drawer" title={<span style={{ display: "block" }}>Edit Order<span className="co-sub">{title}</span></span>} footer={<React.Fragment><Button variant="tertiary" size="lg" onClick={requestClose}>Cancel</Button><Button variant="primary" size="lg" disabled={!valid} onClick={() => canPv ? setPvOpen(true) : onSave(d)}>{wantPv ? "Preview Document & Continue" : "Save Changes"}</Button></React.Fragment>}>
+      <Tabs variant="pill" className="co-tabs" value={tab} onChange={setTab} tabs={tabs.map(([id, l]) => ({ value: id, label: l, icon: ((id === "mail" && (!inPerson && mailMissing(d))) || (id === "doc" && d.upload && !d.file)) ? <i className="bi bi-exclamation-circle-fill co-warn" title={id === "doc" ? "Document file is missing" : "Mailing info missing"}></i> : (id === "doc" && raMissing) ? <i className="bi bi-exclamation-circle-fill co-warn" title="Return address missing"></i> : null }))} />
         <div className="co-pb" style={tab === "rec" ? { gap: 0 } : undefined}>
           {tab === "doc" ? <React.Fragment>
             <F label="Name on Document or Entity"><In v={d.nameOnDoc} on={(v) => set({ nameOnDoc: v })} ph="Enter name on document" /></F>
@@ -243,9 +255,9 @@ function EditOrderPanel({ child, form, title, inPerson, onSave, onClose, orderEd
               <window.RecipientForm r={r} idx={i} onChange={(p) => setRec(r.id, p)} errors={{}} />
             </div>;
           }) : null}
-          {tab === "rec" ? <button className="addbtn" disabled={d.recipients.length >= 11} onClick={addRec}><i className="bi bi-plus-lg"></i>Add Recipient</button> : null}
+          {tab === "rec" ? <button className="addbtn" disabled={d.recipients.length >= 10} onClick={addRec}><i className="bi bi-plus-lg"></i>Add Recipient</button> : null}
           {tab === "mail" ? <React.Fragment>
-            {mailMissing(d) ? <div className="co-redbar" role="alert"><i className="bi bi-x-circle-fill"></i><div><div className="co-redbar-t">Mailing information is missing.</div><div>Paper apostilles are mailed to this address. Complete the required fields below.</div></div></div> : null}
+            {(!inPerson && mailMissing(d)) ? <div className="co-redbar" role="alert"><i className="bi bi-x-circle-fill"></i><div><div className="co-redbar-t">Mailing information is missing.</div><div>Paper apostilles are mailed to this address. Complete the required fields below.</div></div></div> : null}
             <div className="actionbar"><Button variant="primary" size="md" onClick={copyProfile}>Use My Profile Information</Button><button type="button" className="linkbtn" disabled={!Object.values(m).some((v) => (v || "").toString().trim())} onClick={clearMail}>Clear Fields</button></div>
             <div className="fg2"><F label="First Name" req><In v={m.firstName} on={(v) => setMail({ firstName: v })} ph="Enter first name" /></F><F label="Last Name" req><In v={m.lastName} on={(v) => setMail({ lastName: v })} ph="Enter last name" /></F></div>
             <div className="fg2"><F label="Email" req><In type="email" v={m.email} on={(v) => setMail({ email: v })} ph="Enter email" /></F><F label="Phone Number"><In type="tel" v={m.phone} on={(v) => setMail({ phone: v })} ph="Enter phone number" /></F></div>
@@ -255,11 +267,12 @@ function EditOrderPanel({ child, form, title, inPerson, onSave, onClose, orderEd
             <div className="fg2"><F label="City" req><In v={m.city} on={(v) => setMail({ city: v })} ph="Enter city" /></F><F label="Zip Code" req><In v={m.zip} on={(v) => setMail({ zip: v })} ph="Enter zip code" /></F></div>
           </React.Fragment> : null}
           {tab === "ord" ? <React.Fragment>
+            {feeChange ? <Alert kind="warning" title="Fees may change.">Changing the delivery method can change this order’s fees. Totals update when you save.</Alert> : null}
             {d.upload && !d.file && !upOff ? <div className="co-notice" role="alert"><span className="co-notice-ic"><i className="bi bi-exclamation-circle"></i></span><div className="co-notice-body"><div className="co-notice-t">Document upload needed</div><div className="co-notice-d">Digital (e-Apostille) orders need their own uploaded document before you can continue.</div><div className="co-notice-a"><button type="button" className="co-nbtn" onClick={() => setUpOff(true)}>Dismiss</button><button type="button" className="co-nbtn go" onClick={goUpload}>Upload document</button></div></div><button type="button" className="co-notice-x" aria-label="Dismiss" onClick={() => setUpOff(true)}><i className="bi bi-x-lg"></i></button></div> : null}
-            {mailMissing(d) && !noteOff ? <div className="co-notice" role="alert"><span className="co-notice-ic"><i className="bi bi-exclamation-circle"></i></span><div className="co-notice-body"><div className="co-notice-t">Mailing address needed</div><div className="co-notice-d">{d.isBoth ? "Both Formats" : "Traditional Delivery"} includes a paper apostille, so we need an address to mail it to.</div><div className="co-notice-a"><button type="button" className="co-nbtn" onClick={() => setNoteOff(true)}>Dismiss</button><button type="button" className="co-nbtn go" onClick={() => setTab("mail")}>Add mailing info</button></div></div><button type="button" className="co-notice-x" aria-label="Dismiss" onClick={() => setNoteOff(true)}><i className="bi bi-x-lg"></i></button></div> : null}
+            {(!inPerson && mailMissing(d)) && !noteOff ? <div className="co-notice" role="alert"><span className="co-notice-ic"><i className="bi bi-exclamation-circle"></i></span><div className="co-notice-body"><div className="co-notice-t">Mailing address needed</div><div className="co-notice-d">{d.isBoth ? "Both Formats" : "Traditional Delivery"} includes a paper apostille, so we need an address to mail it to.</div><div className="co-notice-a"><button type="button" className="co-nbtn" onClick={() => setNoteOff(true)}>Dismiss</button><button type="button" className="co-nbtn go" onClick={() => setTab("mail")}>Add mailing info</button></div></div><button type="button" className="co-notice-x" aria-label="Dismiss" onClick={() => setNoteOff(true)}><i className="bi bi-x-lg"></i></button></div> : null}
             <F label="Apostille Request"><Sel v={d.adoption ? "Adoption Document" : "Regular Documents"} on={(v) => set({ adoption: v === "Adoption Document" })} opts={["Regular Documents", "Adoption Document"]} ph="Select" /></F>
             {d.adoption ? <F label="Adoption Agency" req><In v={d.adoptionAgency} on={(v) => set({ adoptionAgency: v })} ph="Enter adoption agency" /></F> : null}
-            <F label="Delivery Method"><Sel v={d.isBoth ? "Both Formats" : d.digital ? "Digital (e-Apostille)" : "Traditional Delivery"} on={(v) => set(v === "Both Formats" ? { isBoth: true, digital: true, upload: false, needsReturn: true, fulfilmentType: d.fulfilmentType || "usps" } : v === "Digital (e-Apostille)" ? { isBoth: false, digital: true, needsReturn: false, upload: !inPerson } : { isBoth: false, digital: false, upload: false, needsReturn: !inPerson, fulfilmentType: d.fulfilmentType || "usps" })} opts={["Digital (e-Apostille)", "Traditional Delivery"].concat(window.AX_F && window.AX_F.noBoth && !d.isBoth ? [] : ["Both Formats"])} ph="Select" /></F>
+            <F label="Delivery Method"><Sel v={d.digital && !d.isBoth ? "Digital (e-Apostille)" : "Traditional Delivery"} on={(v) => set(v === "Both Formats" ? { isBoth: true, digital: true, upload: false, needsReturn: true, fulfilmentType: d.fulfilmentType || "usps" } : v === "Digital (e-Apostille)" ? { isBoth: false, digital: true, needsReturn: false, upload: !inPerson } : { isBoth: false, digital: false, upload: false, needsReturn: !inPerson, fulfilmentType: d.fulfilmentType || "usps" })} opts={["Digital (e-Apostille)", "Traditional Delivery"]} ph="Select" /></F>
             {(!d.digital || d.isBoth) && !inPerson && window.FULFILMENT ? <React.Fragment><F label="Fulfilment Type" req><Sel v={((window.FULFILMENT.find((f) => f.id === d.fulfilmentType)) || {}).title || ""} on={(v) => { const f = window.FULFILMENT.find((x) => x.title === v); set({ fulfilmentType: f ? f.id : "", trackingNumber: f && f.id === "prepaid-label" ? d.trackingNumber : "" }); }} opts={window.FULFILMENT.map((f) => f.title)} ph="Select fulfilment type" /></F>{d.fulfilmentType === "prepaid-label" ? <F label="Tracking Number" req><In v={d.trackingNumber} on={(v) => set({ trackingNumber: v })} ph="e.g. 1Z999AA10123456784" /></F> : null}</React.Fragment> : null}
             <F label="Service Type"><Sel v={svc(d.serviceType)} on={(v) => set({ serviceType: v === "Same-Day" ? "sameday" : v === "Express" ? "express" : "standard" })} opts={["Same-Day"]} ph="Select" /></F>
           </React.Fragment> : null}
@@ -271,7 +284,9 @@ function EditOrderPanel({ child, form, title, inPerson, onSave, onClose, orderEd
             <button className="addbtn" onClick={() => setAddrOpen(true)}><i className="bi bi-plus-lg"></i>Add Address{d.digital ? <span style={{ fontWeight: 400, color: "var(--ax-text-tertiary)" }}> (optional)</span> : null}</button>}
           </React.Fragment> : null}
         </div>
-    </Drawer>);
+    </Drawer>
+    {confirmClose && window.AXModal ? <div style={{ position: "relative", zIndex: 100000 }}><window.AXModal title="Discard changes?" onClose={() => setConfirmClose(false)} footer={<React.Fragment><Button variant="secondary" size="md" onClick={() => setConfirmClose(false)}>Keep Editing</Button><Button variant="danger" size="md" onClick={onClose}>Discard Changes</Button></React.Fragment>}><p style={{ margin: 0, fontSize: "var(--ax-text-md)", lineHeight: 1.5, color: "var(--ax-text-secondary)" }}>You have unsaved changes to this order. If you leave now, they will be lost.</p></window.AXModal></div> : null}
+  </React.Fragment>);
 }
 
 Object.assign(window, { makeEditable, CopyOrderButton, CopyOrderScreen, EditOrderPanel });

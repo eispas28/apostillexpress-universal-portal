@@ -4,53 +4,65 @@ const { Button, Modal, FormField, Input, Select, FileUpload, Alert } = window.Ap
 const F = ({ label, req, children }) => <FormField label={label} required={!!req}>{children}</FormField>;
 const In = ({ v, on, ph, type }) => <Input type={type || "text"} value={v || ""} placeholder={ph} onChange={(e) => on(e.target.value)} />;
 const Sel = ({ v, on, opts, ph }) => <Select value={v || ""} onChange={(e) => on(e.target.value)}><option value="">{ph}</option>{opts.map((o) => <option key={o} value={o}>{o}</option>)}</Select>;
-const g2 = { display: "grid", gridTemplateColumns: "repeat(2,minmax(0,1fr))", gap: "var(--ax-space-4)" };
+const g2 = { display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(13rem,100%),1fr))", gap: "var(--ax-space-4)" };
 const fmtBytes = (n) => !n ? "" : n >= 1048576 ? (n / 1048576).toFixed(1) + " MB" : n >= 1024 ? Math.round(n / 1024) + " KB" : n + " B";
 const MAIL_REQ = ["firstName", "lastName", "email", "addr1", "country", "state", "city", "zip"];
 
-function AddFormatModal({ item, form, onClose, onAdd }) {
+function AddFormatModal({ item, form, onClose, onAdd, inPerson: walkIn }) {
   const dig = (item.deliveryMethod || form.deliveryMethod) === "electronic";
   const toPaper = dig;
+  const inPerson = !!walkIn;
   const [m, setM] = useState(() => ({ ...(form.mailing || {}) }));
   const [ful, setFul] = useState("");
   const [ra, setRa] = useState(() => { const d = form.docs || {}, a = d.returnAddr || {}; const has = a.addr1 && a.city; return { addrSource: has ? (d.addrSource || "profile") : "new", returnAddr: { firstName: "", lastName: "", addr1: "", addr2: "", country: "", state: "", city: "", zip: "", ...a }, prepaidOpen: false, shippingTracking: "" }; });
   const RA_REQ = ["firstName", "lastName", "addr1", "country", "state", "city", "zip"];
   const needsMail = ful === "usps" || ful === "international";
+  const [tried, setTried] = useState(false);
   const raErrors = {}; if (tried) RA_REQ.forEach((k) => { if (!String(ra.returnAddr[k] || "").trim()) raErrors[k] = "Required"; });
   const blank = () => ({ collapsed: false, id: "r" + Date.now() + Math.random().toString(36).slice(2, 6), firstName: "", lastName: "", email: "", title: "", organization: "", destCountry: "" });
   const [recs, setRecs] = useState(() => { const c = form.customer || {}, r0 = (form.recipients || [])[0] || {}; const pick = (k) => c[k] || r0[k] || ""; return [{ ...blank(), collapsed: false, firstName: pick("firstName"), lastName: pick("lastName"), email: pick("email"), title: pick("title"), organization: pick("organization") }]; });
   const setRec = (id, p) => setRecs((a) => a.map((x) => x.id === id ? { ...x, ...p } : x));
   const okEmail = (v) => /\S+@\S+\.\S+/.test(v || "");
   const [file, setFile] = useState(null);
-  const [tried, setTried] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [pvOpen, setPvOpen] = useState(false);
+  const [stepS, setStep] = useState(1);
+  const step = inPerson && !toPaper ? 2 : stepS;
+  const [track, setTrack] = useState("");
   const setMail = (p) => setM((x) => ({ ...x, ...p }));
   const EMPTY = { firstName: "", lastName: "", phone: "", email: "", organization: "", title: "", addr1: "", addr2: "", country: "", state: "", city: "", zip: "" };
-  const [mSrc, setMSrc] = useState("profile");
+  const [mSrc, setMSrc] = useState("customer");
   const profMail = () => { const u = window.USER_PROFILE || {}, a = window.PROFILE_ADDRESS || {}; return { ...EMPTY, firstName: u.firstName || "", lastName: u.lastName || "", email: u.email || "", phone: u.phone || "", organization: u.organization || "", addr1: a.addr1 || "", addr2: a.addr2 || "", country: a.country || "", state: a.state || "", city: a.city || "", zip: a.zip || "" }; };
-  const custMail = () => { const c = form.customer || {}; return { ...EMPTY, firstName: c.firstName || "", lastName: c.lastName || "", email: c.email || "", phone: c.phone || "", organization: c.organization || "", addr1: c.addr1 || "", addr2: c.addr2 || "", country: c.country || "", state: c.state || "", city: c.city || "", zip: c.zip || "" }; };
+  const custMail = () => { const c = (item.copy && item.copy.customer) || item.customer || form.customer || {}; return { ...EMPTY, firstName: c.firstName || "", lastName: c.lastName || "", email: c.email || "", phone: c.phone || "", organization: c.organization || "", addr1: c.addr1 || "", addr2: c.addr2 || "", country: c.country || "", state: c.state || "", city: c.city || "", zip: c.zip || "" }; };
   const pickMSrc = (v) => { setMSrc(v); setM(v === "profile" ? profMail() : v === "customer" ? custMail() : { ...EMPTY }); };
-  useEffect(() => { setM(profMail()); }, []);
+  useEffect(() => { setM(custMail()); }, []);
     const err = (v, msg) => tried && !String(v || "").trim() ? <div className="field-err" style={{ marginTop: "var(--ax-space-1-5)" }}>{msg}</div> : null;
-  const valid = toPaper ? ful && RA_REQ.every((k) => String(ra.returnAddr[k] || "").trim()) && (!needsMail || MAIL_REQ.every((k) => String(m[k] || "").trim())) : (file && recs.every((r, i) => r.firstName.trim() && r.lastName.trim() && okEmail(r.email) && (i === 0 || r.destCountry)));
+  const valid = toPaper && inPerson ? true : toPaper ? ful && (ful !== "prepaid-label" || track.trim()) && RA_REQ.every((k) => String(ra.returnAddr[k] || "").trim()) && (!needsMail || MAIL_REQ.every((k) => String(m[k] || "").trim())) : ((file || inPerson) && recs.every((r, i) => r.firstName.trim() && r.lastName.trim() && okEmail(r.email) && (i === 0 || r.destCountry)));
   const submit = () => {
     setTried(true);
     if (!toPaper) setRecs((x) => x.map((r) => (r.firstName.trim() && r.lastName.trim() && okEmail(r.email) && (r.id === recs[0].id || r.destCountry)) ? r : { ...r, collapsed: false }));
     if (!valid || busy) return;
+    if (!toPaper && file && window.PreviewModal && !pvOpen) { setPvOpen(true); return; }
     setBusy(true);
-    setTimeout(() => onAdd(toPaper ? { mailing: needsMail ? m : (form.mailing || {}), fulfilmentType: ful, returnAddr: ra.returnAddr, addrSource: ra.addrSource } : { recipients: recs, file }), 700);
+    setTimeout(() => onAdd(toPaper ? { mailing: needsMail ? m : (form.mailing || {}), fulfilmentType: inPerson ? "pickup" : ful, trackingNumber: ful === "prepaid-label" ? track.trim() : "", returnAddr: ra.returnAddr, addrSource: ra.addrSource } : { recipients: recs, file }), 700);
   };
+  const step1ok = !!ful && (ful !== "prepaid-label" || !!track.trim()) && (!needsMail || MAIL_REQ.every((k) => String(m[k] || "").trim()));
+  const ok1 = toPaper ? step1ok : !!file;
+  const next = () => { setTried(true); if (ok1) { setTried(false); setStep(2); } };
   const title = toPaper ? "Add a Paper Apostille" : "Add a Digital Apostille";
+  if (pvOpen && file && window.PreviewModal) return <window.PreviewModal files={[{ ...file, id: file.id || "f" }]} onClose={() => { if (!busy) setPvOpen(false); }} onConfirm={submit} confirmBusy={busy} backLabel="Keep Editing" confirmLabel={busy ? "Adding\u2026" : "Add to Order"} />;
   return (
     <Modal open onClose={busy ? () => {} : onClose} width={640} title={title}
-      footer={<React.Fragment><Button variant="secondary" size="lg" disabled={busy} onClick={onClose}>Cancel</Button><Button variant="primary" size="lg" disabled={busy} onClick={submit}>{busy ? "Adding\u2026" : "Add to Order"}</Button></React.Fragment>}>
+      footer={step === 1 && !inPerson ? <React.Fragment><Button variant="secondary" size="lg" onClick={onClose}>Cancel</Button><Button variant="primary" size="lg" disabled={!ok1} onClick={next}>Continue</Button></React.Fragment> : <React.Fragment><Button variant="secondary" size="lg" disabled={busy} onClick={inPerson ? onClose : () => { setTried(false); setStep(1); }}>{inPerson ? "Cancel" : "Back"}</Button><Button variant="primary" size="lg" disabled={busy || !valid} onClick={submit}>{busy ? <span className="dl-spin"></span> : null}{busy ? "Adding\u2026" : !toPaper && !inPerson ? "Preview Document & Continue" : "Add to Order"}</Button></React.Fragment>}>
       <div style={{ display: "flex", flexDirection: "column", gap: "var(--ax-space-4)" }}>
         <p style={{ margin: 0, fontSize: "var(--ax-text-md)", color: "var(--ax-text-secondary)", lineHeight: 1.5 }}>
-          We’ll add a copy of <b style={{ color: "var(--ax-text-primary)" }}>{item.docDesc || item.name}</b> as a {toPaper ? "paper" : "digital"} Apostille. {toPaper ? "Choose how the paper Apostille is fulfilled, then complete the details." : "Upload the document and add up to 10 digital recipients."}
+          We’ll add a copy of <b style={{ color: "var(--ax-text-primary)" }}>{item.docDesc || item.name}</b> as a {toPaper ? "paper" : "digital"} Apostille. {toPaper ? (inPerson ? "This order is handled in person, so no mailing address or return address is needed." : step === 1 ? "Choose how the paper Apostille is fulfilled and where it is mailed." : "Add the return address for this order.") : (step === 1 ? "Upload the document for the digital Apostille." : (inPerson ? "Add up to 10 digital recipients who will receive the e-Apostille. No document upload is needed for in-person orders." : "Add up to 10 digital recipients who will receive the e-Apostille."))}
         </p>
-        {toPaper ? <React.Fragment>
-          <F label="Fulfilment Type" req><Select value={ful} onChange={(e) => setFul(e.target.value)}><option value="">Select fulfilment type</option>{(window.FULFILMENT || []).map((f) => <option key={f.id} value={f.id}>{f.title}</option>)}</Select>{tried && !ful ? <div className="field-err" style={{ marginTop: "var(--ax-space-1-5)" }}>Select a fulfilment type</div> : null}</F>
-          {needsMail ? <React.Fragment>
+        {!inPerson ? <div role="progressbar" aria-valuemin="1" aria-valuemax="2" aria-valuenow={step} aria-label={"Step " + step + " of 2"} style={{ display: "flex", flexDirection: "column", gap: "var(--ax-space-2)" }}><div style={{ display: "flex", gap: "var(--ax-space-2)" }}>{[1, 2].map((n) => <span key={n} style={{ flex: 1, height: "0.5rem", borderRadius: 999, background: n <= step ? "#087990" : "var(--ax-gray-200, #E9ECEF)", transition: "background .15s" }}></span>)}</div><div style={{ fontSize: "var(--ax-text-sm)", fontWeight: 600, color: "var(--ax-text-secondary)" }}>Step {step} of 2 {toPaper ? (step === 1 ? "Mailing Information" : "Return Address") : (step === 1 ? "Upload Document" : "Recipients")}</div></div> : null}
+        {toPaper ? (inPerson ? null : <React.Fragment>
+          {step === 1 ? <F label="Fulfilment Type" req><Select value={ful} onChange={(e) => setFul(e.target.value)}><option value="">Select fulfilment type</option>{(window.FULFILMENT || []).map((f) => <option key={f.id} value={f.id}>{f.title}</option>)}</Select>{tried && !ful ? <div className="field-err" style={{ marginTop: "var(--ax-space-1-5)" }}>Select a fulfilment type</div> : null}</F> : null}
+          {step === 1 && ful === "prepaid-label" ? <F label="Tracking Number" req><In v={track} on={setTrack} ph="Enter tracking number" />{err(track, "Tracking number is required")}</F> : null}
+          {step === 1 && needsMail ? <React.Fragment>
           <div style={{ fontSize: "var(--ax-text-md)", fontWeight: 600, marginTop: "var(--ax-space-1)" }}>Mailing Information</div>
           <F label="Mailing Address"><Select value={mSrc} onChange={(e) => pickMSrc(e.target.value)}><option value="profile">My Profile Address — pre-filled from your profile</option><option value="customer">Customer Address — pre-filled from customer info</option><option value="new">Add New Address — enter manually</option></Select></F>
           <div style={g2}>
@@ -72,17 +84,17 @@ function AddFormatModal({ item, form, onClose, onAdd }) {
             <F label="Zip Code" req><In v={m.zip} on={(v) => setMail({ zip: v })} ph="Enter zip code" />{err(m.zip, "Zip code is required")}</F>
           </div>
                     </React.Fragment> : null}
-          <React.Fragment>
+          {step === 2 ? <React.Fragment>
           <div style={{ fontSize: "var(--ax-text-md)", fontWeight: 600, marginTop: "var(--ax-space-1)" }}>Return Address</div>
           <p style={{ margin: 0, color: "var(--ax-text-secondary)", fontSize: "0.9375rem", lineHeight: 1.5 }}><strong>If we can’t process your documents</strong>, we’ll mail them back to this address at no cost (unless a prepaid shipping label was provided). This can match your apostille return address, or be different.</p>
-          <div className="fmt-ra"><style>{".fmt-ra .card.sect{border:none;box-shadow:none;background:none;border-radius:0;padding:0;margin:0}.fmt-ra .sect-body{padding:0;margin:0}.fmt-ra .sect-body>*:first-child{margin-top:0}"}</style><window.ReturnAddressSection d={ra} setD={(p) => setRa((x) => { const n = typeof p === "function" ? p({ returnAddr: x.returnAddr }) : p; return { ...x, ...n }; })} customer={form.customer || {}} subtitle="" errors={raErrors} compact={true} /></div>
-          </React.Fragment>
-        </React.Fragment> : <React.Fragment>
-          <F label="Upload document" req>
-            <FileUpload hint="PDF, JPEG, TIFF (Files cannot exceed 10MB)" files={file ? [{ name: file.name, size: fmtBytes(file.size), status: "done" }] : []} onSelect={(fl) => { const x = fl && fl[0]; if (x) setFile({ id: "f" + Date.now(), name: x.name, size: x.size, type: x.type }); }} onRemove={() => setFile(null)} />
+          <div className="fmt-ra"><style>{".fmt-ra .card.sect{border:none;box-shadow:none;background:none;border-radius:0;padding:0;margin:0}.fmt-ra .sect-body{padding:0;margin:0}.fmt-ra .sect-body>*:first-child{margin-top:0}@media (max-width:640px){.fmt-ra .fgrid{grid-template-columns:minmax(0,1fr)!important}.fmt-ra .fgrid>*{grid-column:auto!important}}"}</style><window.ReturnAddressSection d={ra} setD={(p) => setRa((x) => { const n = typeof p === "function" ? p({ returnAddr: x.returnAddr }) : p; return { ...x, ...n }; })} customer={form.customer || {}} subtitle="" errors={raErrors} compact={true} /></div>
+          </React.Fragment> : null}
+        </React.Fragment>) : <React.Fragment>
+          {step === 1 ? <F label="Upload document" req>
+            <FileUpload hint="PDF, JPEG, TIFF (Files cannot exceed 10MB)" files={file ? [{ name: file.name, size: fmtBytes(file.size), status: "done" }] : []} onSelect={(fl) => { const x = fl && fl[0]; if (x) setFile({ id: "f" + Date.now(), name: x.name, size: x.size, type: x.type, url: URL.createObjectURL(x) }); }} onRemove={() => setFile(null)} />
             {tried && !file ? <div className="field-err" style={{ marginTop: "var(--ax-space-1-5)" }}>Document upload is required</div> : null}
-          </F>
-          {recs.map((r, i) => {
+          </F> : null}
+          {step === 2 ? <React.Fragment>{recs.map((r, i) => {
             const name = (r.firstName + " " + r.lastName).trim();
             if (r.collapsed) return (
               <div className="rcpt-collapsed" key={r.id} style={{ marginBottom: 0 }} onClick={() => setRec(r.id, { collapsed: false })} role="button" tabIndex={0} onKeyDown={(ev) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); setRec(r.id, { collapsed: false }); } }}>
@@ -112,6 +124,7 @@ function AddFormatModal({ item, form, onClose, onAdd }) {
             <Button variant="secondary" size="md" disabled={busy || recs.length >= 10} onClick={() => setRecs((x) => x.map((y) => ({ ...y, collapsed: true })).concat(blank()))}><i className="bi bi-plus-lg" style={{ marginRight: "var(--ax-space-2)" }}></i>Add Recipient</Button>
             <span style={{ fontSize: "var(--ax-text-sm)", color: "var(--ax-text-tertiary)" }}>{recs.length} of 10 recipients</span>
           </div>
+          </React.Fragment> : null}
         </React.Fragment>}
       </div>
     </Modal>
