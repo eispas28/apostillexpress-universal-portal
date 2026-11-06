@@ -87,7 +87,7 @@ img,svg,video,canvas{max-width:100%}
 }
 @media (max-width:520px){
   .page{padding-left:14px;padding-right:14px}
-  .page-title{font-size:24px}
+  .page-title{font-size:1.5rem!important;font-size:24px}
   /* full-width primary actions on the smallest screens */
   .page-head .ax-btn,.page-head .btn-primary,.actionbar .ax-btn{width:100%;justify-content:center}
   .pager,.tfoot{justify-content:center;row-gap:10px}
