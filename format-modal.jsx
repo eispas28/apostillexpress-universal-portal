@@ -23,7 +23,7 @@ function AddFormatModal({ item, form, onClose, onAdd, inPerson: walkIn }) {
   const [recs, setRecs] = useState(() => { const c = form.customer || {}, r0 = (form.recipients || [])[0] || {}; const pick = (k) => c[k] || r0[k] || ""; return [{ ...blank(), collapsed: false, firstName: pick("firstName"), lastName: pick("lastName"), email: pick("email"), title: pick("title"), organization: pick("organization") }]; });
   const setRec = (id, p) => setRecs((a) => a.map((x) => x.id === id ? { ...x, ...p } : x));
   const okEmail = (v) => /\S+@\S+\.\S+/.test(v || "");
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState(null), [fileErr, setFileErr] = useState("");
   const [busy, setBusy] = useState(false);
   const [pvOpen, setPvOpen] = useState(false);
   const [stepS, setStep] = useState(1);
@@ -91,7 +91,8 @@ function AddFormatModal({ item, form, onClose, onAdd, inPerson: walkIn }) {
           </React.Fragment> : null}
         </React.Fragment>) : <React.Fragment>
           {step === 1 ? <F label="Upload document" req>
-            <FileUpload hint="PDF, JPEG, TIFF (Files cannot exceed 10MB)" files={file ? [{ name: file.name, size: fmtBytes(file.size), status: "done" }] : []} onSelect={(fl) => { const x = fl && fl[0]; if (x) setFile({ id: "f" + Date.now(), name: x.name, size: x.size, type: x.type, url: URL.createObjectURL(x) }); }} onRemove={() => setFile(null)} />
+            <FileUpload hint="PDF, JPEG, TIFF (Files cannot exceed 10MB)" files={file ? [{ name: file.name, size: fmtBytes(file.size), status: "done" }] : []} onSelect={(fl) => { const x = fl && fl[0]; if (!x) return; if (!/\.(pdf|jpe?g|tiff?)$/i.test(x.name)) { setFile(null); setFileErr("Unsupported file type. Upload a PDF, JPEG or TIFF."); return; } if (x.size > 10485760) { setFile(null); setFileErr("File exceeds the 10MB limit."); return; } setFileErr(""); setFile({ id: "f" + Date.now(), name: x.name, size: x.size, type: x.type, url: URL.createObjectURL(x) }); }} onRemove={() => { setFile(null); setFileErr(""); }} />
+            {fileErr ? <div className="field-err" role="alert" style={{ marginTop: "var(--ax-space-1-5)" }}>{fileErr}</div> : null}
             {tried && !file ? <div className="field-err" style={{ marginTop: "var(--ax-space-1-5)" }}>Document upload is required</div> : null}
           </F> : null}
           {step === 2 ? <React.Fragment>{recs.map((r, i) => {

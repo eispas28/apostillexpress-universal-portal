@@ -546,6 +546,7 @@ body{font-family:var(--ax-font-base);color:var(--ax-text-primary);background:var
 </template>
 <div id="root"></div>
 <script src="ax-flags.js?v=14"></script>
+<script src="tiff-support.js"></script>
 <script type="text/babel" src="ax-overlays.jsx"></script>
 <script type="text/babel" src="copy-order.jsx"></script>
 <script type="text/babel" src="format-modal.jsx"></script>
@@ -1766,7 +1767,7 @@ function loadPdfjs() {
   return pdfjsPromise;
 }
 const PDF_DOCS = {};
-const fileKind = (f) => /\.pdf$/i.test(f.name) ? "pdf" : /\.(jpe?g|png)$/i.test(f.name) ? "img" : "other";
+const fileKind = (f) => /\.pdf$/i.test(f.name) ? "pdf" : f.asImg || /\.(jpe?g|png)$/i.test(f.name) ? "img" : "other";
 const loadPdfDoc = (f) => PDF_DOCS[f.id] || (PDF_DOCS[f.id] = loadPdfjs().then((L) => L.getDocument({ url: f.url }).promise));
 
 function LivePage({ page, doc }) {
@@ -1789,7 +1790,10 @@ function LivePage({ page, doc }) {
   return <canvas ref={cv} className="pv-live" />;
 }
 
-function PreviewModal({ files, onClose, onConfirm, confirmLabel, backLabel, confirmBusy }) {
+function PreviewModal({ files: filesIn, onClose, onConfirm, confirmLabel, backLabel, confirmBusy }) {
+  const [tifs, setTifs] = useState({});
+  useEffect(() => {filesIn.forEach((f) => {if (/\.tiff?$/i.test(f.name) && f.url && !tifs[f.id]) window.axTiffPages(f.url).then((u) => setTifs((s) => ({ ...s, [f.id]: u }))).catch(() => setTifs((s) => ({ ...s, [f.id]: [] })));});}, [filesIn]);
+  const files = filesIn.flatMap((f) => {const t = tifs[f.id];return t && t.length ? t.map((u, i) => ({ ...f, id: f.id + "-t" + i, url: u, asImg: true, name: t.length > 1 ? f.name + " (page " + (i + 1) + ")" : f.name })) : [f];});
   const ZOOMS = [25, 50, 75, 100, 125, 150, 200, 300, 400];
   const [sel, setSel] = useState(0);
   const [page, setPage] = useState(1);

@@ -16,12 +16,25 @@
 .ax-btn--link:hover:not(:disabled) { color: var(--ax-teal-700) !important; }
 
 /* ---- Inputs ------------------------------------------------------ */
-.ax-input:focus, .ax-textarea:focus, .ax-select:focus {
+.ax-input:focus, .ax-textarea:focus, .ax-select:focus,
+.ax-input-wrap:focus-within {
   outline: none;
-  border-color: var(--ax-aqua) !important;
-  box-shadow: var(--ax-ring) !important;
+  border-color: var(--ax-focus-control) !important;
+  box-shadow: var(--ax-focus-ring-control) !important;
 }
-.ax-input::placeholder, .ax-textarea::placeholder { color: var(--ax-text-placeholder); }
+/* invalid: #F1AEB5 at rest, #F04438 on focus */
+.ax-input.ax-invalid:focus, .ax-textarea.ax-invalid:focus, .ax-select.ax-invalid:focus,
+.ax-input-wrap.ax-invalid:focus-within {
+  border-color: #F04438 !important;
+  box-shadow: 0 0 0 4px rgba(240, 68, 56, 0.25) !important;
+}
+/* the inner <input> of an adorned field is borderless — the wrapper owns the ring */
+.ax-input-wrap .ax-input:focus, .ax-input-wrap .ax-input.ax-invalid:focus {
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+.ax-input, .ax-textarea, .ax-select, .ax-input-wrap { transition: border-color .12s ease, box-shadow .12s ease; }
+.ax-input::placeholder, .ax-textarea::placeholder { color: var(--ax-gray-600); }
 
 /* ---- Interactive rows / list items ------------------------------ */
 .ax-row--hover:hover { background: var(--ax-gray-50); }
@@ -30,7 +43,7 @@
 .ax-dropdown-item:hover { background: var(--ax-gray-50); }
 
 /* ---- Switch / checkbox focus ------------------------------------ */
-.ax-switch:focus-visible, .ax-check:focus-visible { outline: none; box-shadow: var(--ax-ring); }
+.ax-switch:focus-visible, .ax-check:focus-visible { outline: none; box-shadow: var(--ax-focus-ring-control); }
 
 /* ---- Links in tables/cards -------------------------------------- */
 .ax-link { color: var(--ax-text-link); cursor: pointer; }

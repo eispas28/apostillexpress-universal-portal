@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":4,"namespace":"ApostilleXpressDesignSystem_141fbe","components":[{"name":"Logo","sourcePath":"components/brand/Logo.jsx"},{"name":"ButtonSpinner","sourcePath":"components/buttons/Button.jsx"},{"name":"Button","sourcePath":"components/buttons/Button.jsx"},{"name":"ButtonGroup","sourcePath":"components/buttons/ButtonGroup.jsx"},{"name":"CloseButton","sourcePath":"components/buttons/CloseButton.jsx"},{"name":"IconButton","sourcePath":"components/buttons/IconButton.jsx"},{"name":"UtilityButton","sourcePath":"components/buttons/UtilityButton.jsx"},{"name":"PaymentMethod","sourcePath":"components/commerce/PaymentMethod.jsx"},{"name":"Accordion","sourcePath":"components/data-display/Accordion.jsx"},{"name":"Avatar","sourcePath":"components/data-display/Avatar.jsx"},{"name":"AvatarGroup","sourcePath":"components/data-display/Avatar.jsx"},{"name":"Card","sourcePath":"components/data-display/Card.jsx"},{"name":"CardHeader","sourcePath":"components/data-display/Card.jsx"},{"name":"CardBody","sourcePath":"components/data-display/Card.jsx"},{"name":"CardFooter","sourcePath":"components/data-display/Card.jsx"},{"name":"Carousel","sourcePath":"components/data-display/Carousel.jsx"},{"name":"EmptyState","sourcePath":"components/data-display/EmptyState.jsx"},{"name":"ListGroup","sourcePath":"components/data-display/ListGroup.jsx"},{"name":"ListItem","sourcePath":"components/data-display/ListGroup.jsx"},{"name":"Skeleton","sourcePath":"components/data-display/Skeleton.jsx"},{"name":"Table","sourcePath":"components/data-display/Table.jsx"},{"name":"Alert","sourcePath":"components/feedback/Alert.jsx"},{"name":"Badge","sourcePath":"components/feedback/Badge.jsx"},{"name":"BadgeGroup","sourcePath":"components/feedback/Badge.jsx"},{"name":"Tag","sourcePath":"components/feedback/Badge.jsx"},{"name":"NotificationItem","sourcePath":"components/feedback/NotificationItem.jsx"},{"name":"Spinner","sourcePath":"components/feedback/Spinner.jsx"},{"name":"ProgressBar","sourcePath":"components/feedback/Spinner.jsx"},{"name":"Stepper","sourcePath":"components/feedback/Stepper.jsx"},{"name":"Toast","sourcePath":"components/feedback/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/feedback/Tooltip.jsx"},{"name":"Checkbox","sourcePath":"components/forms/Checkbox.jsx"},{"name":"Datepicker","sourcePath":"components/forms/Datepicker.jsx"},{"name":"FileUpload","sourcePath":"components/forms/FileUpload.jsx"},{"name":"FormField","sourcePath":"components/forms/FormField.jsx"},{"name":"Input","sourcePath":"components/forms/Input.jsx"},{"name":"Textarea","sourcePath":"components/forms/Input.jsx"},{"name":"Radio","sourcePath":"components/forms/Radio.jsx"},{"name":"RadioGroup","sourcePath":"components/forms/Radio.jsx"},{"name":"RadioGroupItem","sourcePath":"components/forms/RadioGroupItem.jsx"},{"name":"RadioGroupItemGroup","sourcePath":"components/forms/RadioGroupItem.jsx"},{"name":"SearchBox","sourcePath":"components/forms/SearchBox.jsx"},{"name":"Select","sourcePath":"components/forms/Select.jsx"},{"name":"Switch","sourcePath":"components/forms/Switch.jsx"},{"name":"Divider","sourcePath":"components/layout/Divider.jsx"},{"name":"FeaturedIcon","sourcePath":"components/layout/FeaturedIcon.jsx"},{"name":"Breadcrumb","sourcePath":"components/navigation/Breadcrumb.jsx"},{"name":"Navbar","sourcePath":"components/navigation/Navbar.jsx"},{"name":"Pagination","sourcePath":"components/navigation/Pagination.jsx"},{"name":"SideNav","sourcePath":"components/navigation/SideNav.jsx"},{"name":"Tabs","sourcePath":"components/navigation/Tabs.jsx"},{"name":"Drawer","sourcePath":"components/overlays/Drawer.jsx"},{"name":"Dropdown","sourcePath":"components/overlays/Dropdown.jsx"},{"name":"Modal","sourcePath":"components/overlays/Modal.jsx"}],"sourceHashes":{"components/brand/Logo.jsx":"00a0b647f42e","components/buttons/Button.jsx":"96d01eead081","components/buttons/ButtonGroup.jsx":"ab626b0dabf7","components/buttons/CloseButton.jsx":"6fb21764f4e9","components/buttons/IconButton.jsx":"5ae585e1d11a","components/buttons/UtilityButton.jsx":"79d42bdca766","components/commerce/PaymentMethod.jsx":"ae8193d7e520","components/data-display/Accordion.jsx":"e15845a4527f","components/data-display/Avatar.jsx":"69cde3b77b99","components/data-display/Card.jsx":"2863261690c8","components/data-display/Carousel.jsx":"b73c2634edf4","components/data-display/EmptyState.jsx":"9682b9cb361a","components/data-display/ListGroup.jsx":"40206742060d","components/data-display/Skeleton.jsx":"f005a3f722c1","components/data-display/Table.jsx":"0f67223e715a","components/feedback/Alert.jsx":"a03fde731cad","components/feedback/Badge.jsx":"adddaa54fc39","components/feedback/NotificationItem.jsx":"b0069cc354e5","components/feedback/Spinner.jsx":"9bb46a4b204c","components/feedback/Stepper.jsx":"0fc2cd4b3859","components/feedback/Toast.jsx":"61f07d174593","components/feedback/Tooltip.jsx":"659c5e08dd77","components/forms/Checkbox.jsx":"3d54479527bf","components/forms/Datepicker.jsx":"1c893bef8def","components/forms/FileUpload.jsx":"ec06acab905a","components/forms/FormField.jsx":"ddfe010846ca","components/forms/Input.jsx":"36139fef9ff0","components/forms/Radio.jsx":"ed5342af2a0b","components/forms/RadioGroupItem.jsx":"6a6c2a0f652e","components/forms/SearchBox.jsx":"b259b1ca01e3","components/forms/Select.jsx":"18740aaf87bf","components/forms/Switch.jsx":"2adc3a0371e0","components/layout/Divider.jsx":"00cf0ad2e023","components/layout/FeaturedIcon.jsx":"fb1af16eebb7","components/navigation/Breadcrumb.jsx":"6ce1efc1e15c","components/navigation/Navbar.jsx":"8f42236ed6e2","components/navigation/Pagination.jsx":"e9239029b7c7","components/navigation/SideNav.jsx":"c56185c68f5b","components/navigation/Tabs.jsx":"a2527ac2080c","components/overlays/Drawer.jsx":"87db0c7be836","components/overlays/Dropdown.jsx":"226548756417","components/overlays/Modal.jsx":"214ac916a141","ui_kits/competent-authority-portal/InfoCard.jsx":"9dd8c6d27735","ui_kits/competent-authority-portal/OrderDetail.jsx":"3a1d1923e4e1","ui_kits/competent-authority-portal/OrderList.jsx":"614cba855536","ui_kits/competent-authority-portal/PortalSidebar.jsx":"a2c8c8e63768","ui_kits/competent-authority-portal/PortalTopBar.jsx":"ffb8cc606fe9"},"inlinedExternals":[],"unexposedExports":[]} */
+/* @ds-bundle: {"format":4,"namespace":"ApostilleXpressDesignSystem_141fbe","components":[{"name":"Logo","sourcePath":"components/brand/Logo.jsx"},{"name":"ButtonSpinner","sourcePath":"components/buttons/Button.jsx"},{"name":"Button","sourcePath":"components/buttons/Button.jsx"},{"name":"ButtonGroup","sourcePath":"components/buttons/ButtonGroup.jsx"},{"name":"CloseButton","sourcePath":"components/buttons/CloseButton.jsx"},{"name":"IconButton","sourcePath":"components/buttons/IconButton.jsx"},{"name":"UtilityButton","sourcePath":"components/buttons/UtilityButton.jsx"},{"name":"PaymentMethod","sourcePath":"components/commerce/PaymentMethod.jsx"},{"name":"Accordion","sourcePath":"components/data-display/Accordion.jsx"},{"name":"Avatar","sourcePath":"components/data-display/Avatar.jsx"},{"name":"AvatarGroup","sourcePath":"components/data-display/Avatar.jsx"},{"name":"Card","sourcePath":"components/data-display/Card.jsx"},{"name":"CardHeader","sourcePath":"components/data-display/Card.jsx"},{"name":"CardBody","sourcePath":"components/data-display/Card.jsx"},{"name":"CardFooter","sourcePath":"components/data-display/Card.jsx"},{"name":"Carousel","sourcePath":"components/data-display/Carousel.jsx"},{"name":"EmptyState","sourcePath":"components/data-display/EmptyState.jsx"},{"name":"ListGroup","sourcePath":"components/data-display/ListGroup.jsx"},{"name":"ListItem","sourcePath":"components/data-display/ListGroup.jsx"},{"name":"Skeleton","sourcePath":"components/data-display/Skeleton.jsx"},{"name":"Table","sourcePath":"components/data-display/Table.jsx"},{"name":"Alert","sourcePath":"components/feedback/Alert.jsx"},{"name":"Badge","sourcePath":"components/feedback/Badge.jsx"},{"name":"BadgeGroup","sourcePath":"components/feedback/Badge.jsx"},{"name":"Tag","sourcePath":"components/feedback/Badge.jsx"},{"name":"NotificationItem","sourcePath":"components/feedback/NotificationItem.jsx"},{"name":"Spinner","sourcePath":"components/feedback/Spinner.jsx"},{"name":"ProgressBar","sourcePath":"components/feedback/Spinner.jsx"},{"name":"Stepper","sourcePath":"components/feedback/Stepper.jsx"},{"name":"Toast","sourcePath":"components/feedback/Toast.jsx"},{"name":"Tooltip","sourcePath":"components/feedback/Tooltip.jsx"},{"name":"Checkbox","sourcePath":"components/forms/Checkbox.jsx"},{"name":"Datepicker","sourcePath":"components/forms/Datepicker.jsx"},{"name":"FileUpload","sourcePath":"components/forms/FileUpload.jsx"},{"name":"FormField","sourcePath":"components/forms/FormField.jsx"},{"name":"Input","sourcePath":"components/forms/Input.jsx"},{"name":"Textarea","sourcePath":"components/forms/Input.jsx"},{"name":"Radio","sourcePath":"components/forms/Radio.jsx"},{"name":"RadioGroup","sourcePath":"components/forms/Radio.jsx"},{"name":"RadioGroupItem","sourcePath":"components/forms/RadioGroupItem.jsx"},{"name":"RadioGroupItemGroup","sourcePath":"components/forms/RadioGroupItem.jsx"},{"name":"SearchBox","sourcePath":"components/forms/SearchBox.jsx"},{"name":"Select","sourcePath":"components/forms/Select.jsx"},{"name":"Switch","sourcePath":"components/forms/Switch.jsx"},{"name":"Divider","sourcePath":"components/layout/Divider.jsx"},{"name":"FeaturedIcon","sourcePath":"components/layout/FeaturedIcon.jsx"},{"name":"Breadcrumb","sourcePath":"components/navigation/Breadcrumb.jsx"},{"name":"Navbar","sourcePath":"components/navigation/Navbar.jsx"},{"name":"Pagination","sourcePath":"components/navigation/Pagination.jsx"},{"name":"SideNav","sourcePath":"components/navigation/SideNav.jsx"},{"name":"Tabs","sourcePath":"components/navigation/Tabs.jsx"},{"name":"Drawer","sourcePath":"components/overlays/Drawer.jsx"},{"name":"Dropdown","sourcePath":"components/overlays/Dropdown.jsx"},{"name":"Modal","sourcePath":"components/overlays/Modal.jsx"}],"sourceHashes":{"components/brand/Logo.jsx":"00a0b647f42e","components/buttons/Button.jsx":"942c6d3b24d1","components/buttons/ButtonGroup.jsx":"398134954970","components/buttons/CloseButton.jsx":"32dfea1a7ee4","components/buttons/IconButton.jsx":"c4b84593edcd","components/buttons/UtilityButton.jsx":"7b31fdd9f179","components/commerce/PaymentMethod.jsx":"98d9f69a39b4","components/data-display/Accordion.jsx":"d466664aceab","components/data-display/Avatar.jsx":"a598ddc4dfeb","components/data-display/Card.jsx":"f6942fe76ccf","components/data-display/Carousel.jsx":"b7c10bf9f997","components/data-display/EmptyState.jsx":"770f33d56673","components/data-display/ListGroup.jsx":"d9ac0f884b41","components/data-display/Skeleton.jsx":"1360a62d036b","components/data-display/Table.jsx":"94623836f776","components/feedback/Alert.jsx":"3aa5f7a7eb54","components/feedback/Badge.jsx":"ccc5be189fb3","components/feedback/NotificationItem.jsx":"ce4e9ba30ccc","components/feedback/Spinner.jsx":"d3a9a2f43b3c","components/feedback/Stepper.jsx":"44720b606054","components/feedback/Toast.jsx":"571554ceb09a","components/feedback/Tooltip.jsx":"a055d90fde8a","components/forms/Checkbox.jsx":"f369822e3e99","components/forms/Datepicker.jsx":"8b0fd0df1fe7","components/forms/FileUpload.jsx":"c6b05a88b797","components/forms/FormField.jsx":"4c484559dab9","components/forms/Input.jsx":"5fb0a4454475","components/forms/Radio.jsx":"aeb68a91310c","components/forms/RadioGroupItem.jsx":"89a62f391589","components/forms/SearchBox.jsx":"bfaf740494bd","components/forms/Select.jsx":"5f722395defc","components/forms/Switch.jsx":"a33e4b691efd","components/layout/Divider.jsx":"1fa329a82f53","components/layout/FeaturedIcon.jsx":"78e3ee64c74c","components/navigation/Breadcrumb.jsx":"ffcfef9c6bb7","components/navigation/Navbar.jsx":"a2a062fa3453","components/navigation/Pagination.jsx":"72a9f129e4a2","components/navigation/SideNav.jsx":"ae5767a1a8e1","components/navigation/Tabs.jsx":"df7a22be19ed","components/overlays/Drawer.jsx":"048019395eac","components/overlays/Dropdown.jsx":"4a91a05a7c5b","components/overlays/Modal.jsx":"fd414dd235e7","ui_kits/competent-authority-portal/InfoCard.jsx":"b07ca3c8140a","ui_kits/competent-authority-portal/OrderDetail.jsx":"ed6a3ea99c4d","ui_kits/competent-authority-portal/OrderList.jsx":"109b0b2fa9e2","ui_kits/competent-authority-portal/PortalSidebar.jsx":"a2c8c8e63768","ui_kits/competent-authority-portal/PortalTopBar.jsx":"926f6d58fc93"},"inlinedExternals":[],"unexposedExports":[]} */
 
 (() => {
 
@@ -62,8 +62,6 @@ Object.assign(__ds_scope, { Logo });
 // components/buttons/Button.jsx
 try { (() => {
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
-const rem = n => `${n / 16}rem`;
-
 // Values transcribed from Buttons.fig — "Buttons/Button" (120 variants) and
 // "Buttons/Button danger" (105 variants). Size × Hierarchy × State × Icon only.
 const SH = "inset 0px 0px 0px 1px rgba(10,13,18,0.18), inset 0px -2px 0px 0px rgba(10,13,18,0.05), 0px 1px 2px 0px rgba(10,13,18,0.05)";
@@ -72,25 +70,25 @@ const ring = c => `0px 0px 0px 2px rgb(255,255,255), 0px 0px 0px 4px ${c}`;
 const TEAL_RING = "rgb(8,121,144)";
 const SIZES = {
   sm: {
-    pad: "0.5rem 0.75rem",
-    icoPad: "0.5rem",
-    fs: "var(--ax-text-sm)",
-    lh: "1.25rem",
-    gap: "var(--ax-space-1)"
+    pad: "8px 12px",
+    icoPad: "8px",
+    fs: 14,
+    lh: "20px",
+    gap: 4
   },
   md: {
-    pad: "0.625rem 0.875rem",
-    icoPad: "0.625rem",
-    fs: "var(--ax-text-sm)",
-    lh: "1.25rem",
-    gap: "var(--ax-space-1)"
+    pad: "10px 14px",
+    icoPad: "10px",
+    fs: 14,
+    lh: "20px",
+    gap: 4
   },
   lg: {
-    pad: "0.625rem 1rem",
-    icoPad: "0.75rem",
-    fs: "var(--ax-text-md)",
-    lh: "1.5rem",
-    gap: "var(--ax-space-1-5)"
+    pad: "10px 16px",
+    icoPad: "12px",
+    fs: 16,
+    lh: "24px",
+    gap: 6
   }
 };
 const DISABLED_SOLID = {
@@ -315,18 +313,18 @@ function ButtonSpinner({
     "aria-hidden": "true",
     style: {
       position: "relative",
-      width: rem(size),
-      height: rem(size),
+      width: size,
+      height: size,
       flexShrink: 0,
       display: "inline-block"
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
       position: "absolute",
-      left: rem(inset),
-      top: rem(inset),
-      width: rem(d),
-      height: rem(d),
+      left: inset,
+      top: inset,
+      width: d,
+      height: d,
       boxSizing: "border-box",
       borderRadius: "50%",
       border: "2px solid currentColor",
@@ -335,10 +333,10 @@ function ButtonSpinner({
   }), /*#__PURE__*/React.createElement("span", {
     style: {
       position: "absolute",
-      left: rem(inset),
-      top: rem(inset),
-      width: rem(d),
-      height: rem(d),
+      left: inset,
+      top: inset,
+      width: d,
+      height: d,
       boxSizing: "border-box",
       borderRadius: "50%",
       border: "2px solid transparent",
@@ -358,13 +356,13 @@ function injectSpin() {
 const iconSlot = node => /*#__PURE__*/React.createElement("span", {
   "aria-hidden": "true",
   style: {
-    width: "1.25rem",
-    height: "1.25rem",
+    width: 20,
+    height: 20,
     flexShrink: 0,
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
-    fontSize: "var(--ax-text-lg)",
+    fontSize: 18,
     lineHeight: 1
   }
 }, node);
@@ -415,7 +413,7 @@ function Button({
     fontSize: s.fs,
     lineHeight: s.lh,
     padding: isLink ? 0 : iconOnly ? s.icoPad : s.pad,
-    borderRadius: isLink ? "var(--ax-radius-xs)" : destructive || variant === "danger" ? "var(--ax-radius-md)" : "var(--ax-radius-sm)",
+    borderRadius: isLink ? 4 : destructive || variant === "danger" ? 8 : 6,
     border: "none",
     appearance: "none",
     background: look.bg,
@@ -472,7 +470,7 @@ function Button({
   }) : leadingIcon ? iconSlot(leadingIcon) : null, /*#__PURE__*/React.createElement("span", {
     style: {
       display: "inline-flex",
-      padding: isLink ? 0 : "0 0.125rem"
+      padding: isLink ? 0 : "0 2px"
     }
   }, children), st !== "loading" && trailingIcon ? iconSlot(trailingIcon) : null);
 }
@@ -497,7 +495,7 @@ function ButtonGroup({
 }) {
   const h = size === "sm" ? 36 : size === "lg" ? 44 : 40;
   const fs = size === "lg" ? 16 : 14;
-  const lh = size === "lg" ? "1.5rem" : "1.25rem";
+  const lh = size === "lg" ? "24px" : "20px";
   return /*#__PURE__*/React.createElement("div", {
     className: `ax-btn-group ${className}`,
     role: "group",
@@ -505,7 +503,7 @@ function ButtonGroup({
       display: "inline-flex",
       flexDirection: "row",
       alignItems: "stretch",
-      borderRadius: "var(--ax-radius-md)",
+      borderRadius: 8,
       overflow: "hidden",
       isolation: "isolate",
       boxShadow: "inset 0 0 0 1px rgb(213,215,218), 0px 1px 2px 0px rgba(10,13,18,0.05)",
@@ -540,7 +538,7 @@ function Segment({
   const dot = !!item.dot;
   const dis = !!item.disabled;
   const lit = !dis && (active || hover);
-  const pad = iconOnly ? "0.5rem 0.75rem" : item.icon ? "0.5rem 1rem 0.5rem 0.875rem" : "0.5rem 1rem";
+  const pad = iconOnly ? "8px 12px" : item.icon ? "8px 16px 8px 14px" : "8px 16px";
   return /*#__PURE__*/React.createElement("button", {
     type: "button",
     "aria-pressed": active,
@@ -562,7 +560,7 @@ function Segment({
     style: {
       display: "inline-flex",
       flexDirection: "row",
-      gap: dot ? "var(--ax-space-2)" : "var(--ax-space-1-5)",
+      gap: dot ? 8 : 6,
       alignItems: "center",
       justifyContent: "center",
       boxSizing: "border-box",
@@ -588,8 +586,8 @@ function Segment({
   }, dot ? /*#__PURE__*/React.createElement("span", {
     "aria-hidden": "true",
     style: {
-      width: "0.625rem",
-      height: "0.625rem",
+      width: 10,
+      height: 10,
       flexShrink: 0,
       display: "inline-flex",
       alignItems: "center",
@@ -597,21 +595,21 @@ function Segment({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      width: "0.5rem",
-      height: "0.5rem",
+      width: 8,
+      height: 8,
       borderRadius: "50%",
       background: dis ? "rgb(164,167,174)" : item.dotColor || "rgb(23,178,106)"
     }
   })) : item.icon ? /*#__PURE__*/React.createElement("span", {
     "aria-hidden": "true",
     style: {
-      width: "1.25rem",
-      height: "1.25rem",
+      width: 20,
+      height: 20,
       flexShrink: 0,
       display: "inline-flex",
       alignItems: "center",
       justifyContent: "center",
-      fontSize: "var(--ax-text-lg)",
+      fontSize: 18,
       lineHeight: 1
     }
   }, item.icon) : null, iconOnly ? null : item.label);
@@ -666,9 +664,9 @@ function CloseButton({
     style: {
       width: box,
       height: box,
-      padding: "var(--ax-space-2)",
+      padding: 8,
       boxSizing: "border-box",
-      borderRadius: "var(--ax-radius-md)",
+      borderRadius: 8,
       display: "inline-flex",
       alignItems: "center",
       justifyContent: "center",
@@ -702,7 +700,7 @@ Object.assign(__ds_scope, { CloseButton });
 // components/buttons/IconButton.jsx
 try { (() => {
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
-// Icon-only Buttons/Button (Icon only=True): sm 8 / md 10 / lg 12 padding, 1.25rem icon, radius 6.
+// Icon-only Buttons/Button (Icon only=True): sm 8 / md 10 / lg 12 padding, 20px icon, radius 6.
 const SH = "inset 0px 0px 0px 1px rgba(10,13,18,0.18), inset 0px -2px 0px 0px rgba(10,13,18,0.05), 0px 1px 2px 0px rgba(10,13,18,0.05)";
 const RING = "0px 0px 0px 2px rgb(255,255,255), 0px 0px 0px 4px rgb(8,121,144)";
 const LOOK = {
@@ -760,8 +758,8 @@ function IconButton({
       alignItems: "center",
       justifyContent: "center",
       boxSizing: "border-box",
-      padding: size === "sm" ? "var(--ax-space-2)" : size === "lg" ? "var(--ax-space-3)" : "0.625rem",
-      borderRadius: "var(--ax-radius-sm)",
+      padding: size === "sm" ? 8 : size === "lg" ? 12 : 10,
+      borderRadius: 6,
       border: "none",
       appearance: "none",
       outline: "none",
@@ -775,12 +773,12 @@ function IconButton({
   }), /*#__PURE__*/React.createElement("span", {
     "aria-hidden": "true",
     style: {
-      width: "1.25rem",
-      height: "1.25rem",
+      width: 20,
+      height: 20,
       display: "inline-flex",
       alignItems: "center",
       justifyContent: "center",
-      fontSize: "var(--ax-text-lg)",
+      fontSize: 18,
       lineHeight: 1
     }
   }, icon));
@@ -791,9 +789,7 @@ Object.assign(__ds_scope, { IconButton });
 // components/buttons/UtilityButton.jsx
 try { (() => {
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
-const rem = n => `${n / 16}rem`;
-
-// Buttons.fig "Buttons/Button utility" — Size xs (1rem icon) | sm (1.25rem icon), Hierarchy secondary | tertiary,
+// Buttons.fig "Buttons/Button utility" — Size xs (16px icon) | sm (20px icon), Hierarchy secondary | tertiary,
 // State default | hover | focused | disabled. Padding 6, radius 6.
 const SH = "inset 0px 0px 0px 1px rgba(10,13,18,0.18), inset 0px -2px 0px 0px rgba(10,13,18,0.05), 0px 1px 2px 0px rgba(10,13,18,0.05)";
 const RING = "0px 0px 0px 2px rgb(255,255,255), 0px 0px 0px 4px rgb(8,121,144)";
@@ -881,8 +877,8 @@ function UtilityButton({
       alignItems: "center",
       justifyContent: "center",
       boxSizing: "border-box",
-      padding: "var(--ax-space-1-5)",
-      borderRadius: "var(--ax-radius-sm)",
+      padding: 6,
+      borderRadius: 6,
       border: "none",
       appearance: "none",
       outline: "none",
@@ -896,12 +892,12 @@ function UtilityButton({
   }), /*#__PURE__*/React.createElement("span", {
     "aria-hidden": "true",
     style: {
-      width: rem(ico),
-      height: rem(ico),
+      width: ico,
+      height: ico,
       display: "inline-flex",
       alignItems: "center",
       justifyContent: "center",
-      fontSize: rem(ico - 2),
+      fontSize: ico - 2,
       lineHeight: 1
     }
   }, icon));
@@ -951,8 +947,8 @@ function PaymentMethod({
     style: {
       display: "flex",
       alignItems: "center",
-      gap: "0.875rem",
-      padding: "0.875rem var(--ax-space-4)",
+      gap: 14,
+      padding: "14px 16px",
       border: `1px solid ${selected ? "var(--ax-sea-depths)" : "var(--ax-border)"}`,
       borderRadius: "var(--ax-radius-lg)",
       background: selected ? "var(--ax-teal-50)" : "var(--ax-surface-card)",
@@ -965,15 +961,15 @@ function PaymentMethod({
       display: "inline-flex",
       alignItems: "center",
       justifyContent: "center",
-      width: "2.875rem",
-      height: "1.875rem",
+      width: 46,
+      height: 30,
       borderRadius: "var(--ax-radius-sm)",
       background: "#fff",
       border: "1px solid var(--ax-border-subtle)",
       color: b.color,
       fontWeight: 800,
       fontStyle: "italic",
-      fontSize: "var(--ax-text-xs)",
+      fontSize: 12,
       flexShrink: 0
     }
   }, b.label), /*#__PURE__*/React.createElement("div", {
@@ -983,20 +979,20 @@ function PaymentMethod({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: "var(--ax-text-sm)",
+      fontSize: 14,
       fontWeight: 600,
       color: "var(--ax-text-primary)"
     }
   }, label || `${brand[0].toUpperCase()}${brand.slice(1)} ending with ${last4}`), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: "0.8125rem",
+      fontSize: 13,
       color: "var(--ax-text-tertiary)"
     }
   }, "Credit Card (CC)")), action || (onSelect ? /*#__PURE__*/React.createElement("span", {
     "aria-hidden": "true",
     style: {
-      width: "1.25rem",
-      height: "1.25rem",
+      width: 20,
+      height: 20,
       borderRadius: "50%",
       border: `2px solid ${selected ? "var(--ax-sea-depths)" : "var(--ax-border-strong)"}`,
       display: "inline-flex",
@@ -1005,8 +1001,8 @@ function PaymentMethod({
     }
   }, selected ? /*#__PURE__*/React.createElement("span", {
     style: {
-      width: "0.625rem",
-      height: "0.625rem",
+      width: 10,
+      height: 10,
       borderRadius: "50%",
       background: "var(--ax-sea-depths)"
     }
@@ -1049,7 +1045,7 @@ function Accordion({
     return /*#__PURE__*/React.createElement("div", {
       key: i,
       style: {
-        borderTop: i === 0 ? "none" : "0.0625rem solid var(--ax-border-subtle)"
+        borderTop: i === 0 ? "none" : "1px solid var(--ax-border-subtle)"
       }
     }, /*#__PURE__*/React.createElement("button", {
       onClick: () => toggle(i),
@@ -1057,10 +1053,10 @@ function Accordion({
       style: {
         display: "flex",
         alignItems: "center",
-        gap: "var(--ax-space-3)",
+        gap: 12,
         width: "100%",
         textAlign: "left",
-        padding: "0.875rem 1.125rem",
+        padding: "14px 18px",
         border: "none",
         background: isOpen ? "var(--ax-gray-25)" : "var(--ax-surface-card)",
         cursor: "pointer"
@@ -1068,7 +1064,7 @@ function Accordion({
     }, /*#__PURE__*/React.createElement("span", {
       style: {
         flex: 1,
-        fontSize: "0.9375rem",
+        fontSize: 15,
         fontWeight: 600,
         color: "var(--ax-text-primary)"
       }
@@ -1093,8 +1089,8 @@ function Accordion({
       strokeLinejoin: "round"
     })))), isOpen ? /*#__PURE__*/React.createElement("div", {
       style: {
-        padding: "0 1.125rem var(--ax-space-4)",
-        fontSize: "var(--ax-text-sm)",
+        padding: "0 18px 16px",
+        fontSize: 14,
         color: "var(--ax-text-secondary)",
         lineHeight: "var(--ax-lh-base)"
       }
@@ -1107,7 +1103,6 @@ Object.assign(__ds_scope, { Accordion });
 // components/data-display/Avatar.jsx
 try { (() => {
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
-const rem = n => `${n / 16}rem`;
 const SIZES = {
   xs: 24,
   sm: 32,
@@ -1145,15 +1140,15 @@ function Avatar({
     style: {
       position: "relative",
       display: "inline-flex",
-      width: rem(px),
-      height: rem(px),
+      width: px,
+      height: px,
       flexShrink: 0,
       ...style
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      width: rem(px),
-      height: rem(px),
+      width: px,
+      height: px,
       borderRadius: square ? "var(--ax-radius-md)" : "50%",
       overflow: "hidden",
       background: "var(--ax-teal-50)",
@@ -1163,7 +1158,7 @@ function Avatar({
       justifyContent: "center",
       fontFamily: "var(--ax-font-base)",
       fontWeight: "var(--ax-fw-semibold)",
-      fontSize: rem(px * 0.4),
+      fontSize: px * 0.4,
       border: "1px solid var(--ax-border-subtle)"
     }
   }, src ? /*#__PURE__*/React.createElement("img", {
@@ -1179,8 +1174,8 @@ function Avatar({
       position: "absolute",
       right: 0,
       bottom: 0,
-      width: rem(dot),
-      height: rem(dot),
+      width: dot,
+      height: dot,
       borderRadius: "50%",
       background: STATUS[status] || STATUS.offline,
       border: "2px solid var(--ax-surface-card)"
@@ -1211,7 +1206,7 @@ function AvatarGroup({
   }, shown.map((a, i) => /*#__PURE__*/React.createElement("span", {
     key: i,
     style: {
-      marginLeft: i === 0 ? 0 : rem(-px * 0.3),
+      marginLeft: i === 0 ? 0 : -px * 0.3,
       borderRadius: "50%",
       boxShadow: "0 0 0 2px var(--ax-surface-card)"
     }
@@ -1219,9 +1214,9 @@ function AvatarGroup({
     size: size
   })))), extra > 0 ? /*#__PURE__*/React.createElement("span", {
     style: {
-      marginLeft: rem(-px * 0.3),
-      width: rem(px),
-      height: rem(px),
+      marginLeft: -px * 0.3,
+      width: px,
+      height: px,
       borderRadius: "50%",
       background: "var(--ax-gray-100)",
       color: "var(--ax-text-secondary)",
@@ -1229,7 +1224,7 @@ function AvatarGroup({
       alignItems: "center",
       justifyContent: "center",
       fontFamily: "var(--ax-font-base)",
-      fontSize: rem(px * 0.34),
+      fontSize: px * 0.34,
       fontWeight: "var(--ax-fw-semibold)",
       boxShadow: "0 0 0 2px var(--ax-surface-card)"
     }
@@ -1242,11 +1237,11 @@ Object.assign(__ds_scope, { Avatar, AvatarGroup });
 try { (() => {
 /**
  * Card — surface container with optional header/footer. White, soft shadow,
- * 0.75rem radius. Compose freely; or use CardHeader / CardBody / CardFooter.
+ * 12px radius. Compose freely; or use CardHeader / CardBody / CardFooter.
  */
 function Card({
   children,
-  padding = "1.25rem",
+  padding = "20px",
   hoverable = false,
   className = "",
   style = {}
@@ -1282,8 +1277,8 @@ function CardHeader({
       display: "flex",
       alignItems: "flex-start",
       justifyContent: "space-between",
-      gap: "var(--ax-space-3)",
-      padding: "var(--ax-space-4) var(--ax-space-5)",
+      gap: "12px",
+      padding: "16px 20px",
       borderBottom: "1px solid var(--ax-border-subtle)",
       ...style
     }
@@ -1294,16 +1289,16 @@ function CardHeader({
   }, title ? /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: "var(--ax-font-heading)",
-      fontSize: "var(--ax-text-md)",
+      fontSize: "16px",
       fontWeight: "var(--ax-fw-semibold)",
       color: "var(--ax-text-primary)"
     }
   }, title) : null, subtitle ? /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: "var(--ax-font-base)",
-      fontSize: "0.8125rem",
+      fontSize: "13px",
       color: "var(--ax-text-tertiary)",
-      marginTop: "var(--ax-space-0-5)"
+      marginTop: 2
     }
   }, subtitle) : null, children), action ? /*#__PURE__*/React.createElement("div", {
     style: {
@@ -1313,7 +1308,7 @@ function CardHeader({
 }
 function CardBody({
   children,
-  padding = "1.25rem",
+  padding = "20px",
   className = "",
   style = {}
 }) {
@@ -1336,8 +1331,8 @@ function CardFooter({
       display: "flex",
       alignItems: "center",
       justifyContent: "flex-end",
-      gap: "0.625rem",
-      padding: "0.875rem var(--ax-space-5)",
+      gap: "10px",
+      padding: "14px 20px",
       borderTop: "1px solid var(--ax-border-subtle)",
       background: "var(--ax-gray-25)",
       ...style
@@ -1377,8 +1372,8 @@ function Carousel({
       top: "50%",
       transform: "translateY(-50%)",
       [dir === "prev" ? "left" : "right"]: 12,
-      width: "2.25rem",
-      height: "2.25rem",
+      width: 36,
+      height: 36,
       borderRadius: "50%",
       border: "none",
       cursor: "pointer",
@@ -1430,12 +1425,12 @@ function Carousel({
   }, s))), n > 1 ? navBtn("prev") : null, n > 1 ? navBtn("next") : null, n > 1 ? /*#__PURE__*/React.createElement("div", {
     style: {
       position: "absolute",
-      bottom: "0.875rem",
+      bottom: 14,
       left: 0,
       right: 0,
       display: "flex",
       justifyContent: "center",
-      gap: "0.4375rem",
+      gap: 7,
       zIndex: 2
     }
   }, slides.map((_, idx) => /*#__PURE__*/React.createElement("button", {
@@ -1443,8 +1438,8 @@ function Carousel({
     onClick: () => setI(idx),
     "aria-label": `Go to slide ${idx + 1}`,
     style: {
-      width: idx === i ? "1.375rem" : "0.5rem",
-      height: "0.5rem",
+      width: idx === i ? 22 : 8,
+      height: 8,
       borderRadius: "var(--ax-radius-full)",
       border: "none",
       cursor: "pointer",
@@ -1477,42 +1472,42 @@ function EmptyState({
       flexDirection: "column",
       alignItems: "center",
       textAlign: "center",
-      gap: "var(--ax-space-1-5)",
-      padding: "2.75rem var(--ax-space-6)",
+      gap: 6,
+      padding: "44px 24px",
       fontFamily: "var(--ax-font-base)",
       ...style
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      width: "3.25rem",
-      height: "3.25rem",
+      width: 52,
+      height: 52,
       borderRadius: "var(--ax-radius-full)",
       background: "var(--ax-teal-50)",
       color: "var(--ax-sea-depths)",
       display: "inline-flex",
       alignItems: "center",
       justifyContent: "center",
-      fontSize: "var(--ax-h4)",
-      marginBottom: "var(--ax-space-1-5)"
+      fontSize: 24,
+      marginBottom: 6
     }
   }, icon || /*#__PURE__*/React.createElement("i", {
     className: "bi bi-inbox"
   })), /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: "var(--ax-font-heading)",
-      fontSize: "var(--ax-text-md)",
+      fontSize: 16,
       fontWeight: 600,
       color: "var(--ax-text-primary)"
     }
   }, title), description ? /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: "var(--ax-text-sm)",
+      fontSize: 14,
       color: "var(--ax-text-tertiary)",
-      maxWidth: "22.5rem"
+      maxWidth: 360
     }
   }, description) : null, action ? /*#__PURE__*/React.createElement("div", {
     style: {
-      marginTop: "var(--ax-space-3)"
+      marginTop: 12
     }
   }, action) : null);
 }
@@ -1564,9 +1559,9 @@ function ListItem({
     style: {
       display: "flex",
       alignItems: "center",
-      gap: "var(--ax-space-3)",
-      padding: "var(--ax-space-3) var(--ax-space-4)",
-      borderTop: _first ? "none" : "0.0625rem solid var(--ax-border-subtle)",
+      gap: 12,
+      padding: "12px 16px",
+      borderTop: _first ? "none" : "1px solid var(--ax-border-subtle)",
       background: active ? "var(--ax-teal-50)" : "transparent",
       cursor: onClick ? "pointer" : "default",
       ...style
@@ -1583,15 +1578,15 @@ function ListItem({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: "var(--ax-text-sm)",
+      fontSize: 14,
       fontWeight: 600,
       color: "var(--ax-text-primary)"
     }
   }, title), subtitle ? /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: "0.8125rem",
+      fontSize: 13,
       color: "var(--ax-text-tertiary)",
-      marginTop: "0.0625rem"
+      marginTop: 1
     }
   }, subtitle) : null), trailing ? /*#__PURE__*/React.createElement("span", {
     style: {
@@ -1621,17 +1616,17 @@ function Skeleton({
   const base = {
     text: {
       width: width || "100%",
-      height: height || "0.75rem",
+      height: height || 12,
       borderRadius: "var(--ax-radius-xs)"
     },
     rect: {
       width: width || "100%",
-      height: height || "5rem",
+      height: height || 80,
       borderRadius: radius || "var(--ax-radius-md)"
     },
     circle: {
-      width: width || "2.5rem",
-      height: height || width || "2.5rem",
+      width: width || 40,
+      height: height || width || 40,
       borderRadius: "50%"
     }
   }[variant];
@@ -1688,8 +1683,8 @@ function Table({
     key: c.key,
     style: {
       textAlign: c.align || "left",
-      padding: "0.625rem var(--ax-space-4)",
-      fontSize: "var(--ax-text-xs)",
+      padding: "10px 16px",
+      fontSize: "12px",
       fontWeight: "var(--ax-fw-semibold)",
       color: "var(--ax-text-tertiary)",
       textTransform: "uppercase",
@@ -1704,14 +1699,14 @@ function Table({
     onClick: onRowClick ? () => onRowClick(row) : undefined,
     style: {
       cursor: onRowClick ? "pointer" : "default",
-      borderBottom: ri === rows.length - 1 ? "none" : "0.0625rem solid var(--ax-border-subtle)"
+      borderBottom: ri === rows.length - 1 ? "none" : "1px solid var(--ax-border-subtle)"
     }
   }, columns.map(c => /*#__PURE__*/React.createElement("td", {
     key: c.key,
     style: {
       textAlign: c.align || "left",
-      padding: "var(--ax-space-3) var(--ax-space-4)",
-      fontSize: "var(--ax-text-sm)",
+      padding: "12px 16px",
+      fontSize: "14px",
       color: "var(--ax-text-primary)",
       verticalAlign: "middle"
     }
@@ -1774,8 +1769,8 @@ function Alert({
     className: `ax-alert ${className}`,
     style: {
       display: "flex",
-      gap: "var(--ax-space-3)",
-      padding: "0.875rem var(--ax-space-4)",
+      gap: "12px",
+      padding: "14px 16px",
       background: k.bg,
       border: `1px solid ${k.bd}`,
       borderRadius: "var(--ax-radius-lg)",
@@ -1787,8 +1782,8 @@ function Alert({
     "aria-hidden": "true",
     style: {
       color: k.fg,
-      fontSize: "var(--ax-text-lg)",
-      lineHeight: "1.375rem",
+      fontSize: "18px",
+      lineHeight: "22px",
       flexShrink: 0
     }
   }, icon || /*#__PURE__*/React.createElement("i", {
@@ -1801,12 +1796,12 @@ function Alert({
   }, title ? /*#__PURE__*/React.createElement("div", {
     style: {
       fontWeight: "var(--ax-fw-semibold)",
-      fontSize: "var(--ax-text-sm)",
-      marginBottom: children ? "var(--ax-space-0-5)" : 0
+      fontSize: "14px",
+      marginBottom: children ? 2 : 0
     }
   }, title) : null, children ? /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: "var(--ax-text-sm)",
+      fontSize: "14px",
       color: "var(--ax-text-secondary)"
     }
   }, children) : null), onDismiss ? /*#__PURE__*/React.createElement("button", {
@@ -1817,7 +1812,7 @@ function Alert({
       background: "transparent",
       color: "var(--ax-text-tertiary)",
       cursor: "pointer",
-      padding: "var(--ax-space-0-5)",
+      padding: 2,
       height: "fit-content"
     }
   }, /*#__PURE__*/React.createElement("svg", {
@@ -1837,8 +1832,6 @@ Object.assign(__ds_scope, { Alert });
 
 // components/feedback/Badge.jsx
 try { (() => {
-const rem = n => `${n / 16}rem`;
-
 // Design system.fig Badge — [bg, border, text, dot/icon, close-x]
 const COLORS = {
   gray: {
@@ -1946,24 +1939,24 @@ const SIZES = {
     v: 2,
     hp: 8,
     hb: 6,
-    fontSize: "var(--ax-text-xs)",
-    lh: "1.125rem",
+    fontSize: "12px",
+    lh: "18px",
     icon: 12
   },
   md: {
     v: 2,
     hp: 10,
     hb: 8,
-    fontSize: "var(--ax-text-sm)",
-    lh: "1.25rem",
+    fontSize: "14px",
+    lh: "20px",
     icon: 12
   },
   lg: {
     v: 4,
     hp: 12,
     hb: 10,
-    fontSize: "var(--ax-text-sm)",
-    lh: "1.25rem",
+    fontSize: "14px",
+    lh: "20px",
     icon: 14
   }
 };
@@ -1999,8 +1992,8 @@ const Close = ({
 }));
 const icoWrap = (s, color) => ({
   display: "inline-flex",
-  width: rem(s),
-  height: rem(s),
+  width: s,
+  height: s,
   flexShrink: 0,
   color,
   alignItems: "center",
@@ -2009,7 +2002,7 @@ const icoWrap = (s, color) => ({
 
 /**
  * Badge — status / count label (Design system.fig "Badge").
- * Shapes: pill (default) · badge (pill={false}, 0.375rem radius) · modern (white fill, #D5D7DA outline, shadow-xs).
+ * Shapes: pill (default) · badge (pill={false}, 6px radius) · modern (white fill, #D5D7DA outline, shadow-xs).
  * Icons: dot · iconLeading · iconTrailing · onClose (x) · iconOnly. 12 colors, sm/md/lg.
  */
 function Badge({
@@ -2034,13 +2027,13 @@ function Badge({
   const lead = showDot || iconLeading;
   const fg = solid ? "#fff" : modern ? "#414651" : c.fg;
   const accent = solid ? "#fff" : c.dot;
-  const padding = iconOnly ? "0.3125rem" : `${rem(s.v)} ${rem(onClose ? h - 5 : iconTrailing ? h - 2 : h)} ${rem(s.v)} ${rem(lead ? h - 2 : h)}`;
+  const padding = iconOnly ? 5 : `${s.v}px ${onClose ? h - 5 : iconTrailing ? h - 2 : h}px ${s.v}px ${lead ? h - 2 : h}px`;
   return /*#__PURE__*/React.createElement("span", {
     className: `ax-badge ${className}`,
     style: {
       display: "inline-flex",
       alignItems: "center",
-      gap: showDot ? "var(--ax-space-1)" : "var(--ax-space-0-5)",
+      gap: showDot ? 4 : 2,
       boxSizing: "border-box",
       padding,
       fontFamily: "var(--ax-font-base)",
@@ -2050,15 +2043,15 @@ function Badge({
       color: fg,
       background: solid ? SOLID[color] : modern ? "#fff" : c.bg,
       boxShadow: solid ? "none" : modern ? "inset 0 0 0 1px #D5D7DA, 0px 1px 2px rgba(10,13,18,0.05)" : `inset 0 0 0 1px ${c.bd}`,
-      borderRadius: pill && !modern ? "var(--ax-radius-full)" : "var(--ax-radius-sm)",
+      borderRadius: pill && !modern ? 9999 : 6,
       whiteSpace: "nowrap",
       ...style
     }
   }, showDot ? /*#__PURE__*/React.createElement("span", {
     style: {
-      width: "0.375rem",
-      height: "0.375rem",
-      margin: "0.0625rem",
+      width: 6,
+      height: 6,
+      margin: 1,
       borderRadius: "50%",
       background: accent,
       flexShrink: 0
@@ -2075,12 +2068,12 @@ function Badge({
     "aria-label": "Remove",
     style: {
       display: "inline-flex",
-      padding: "var(--ax-space-0-5)",
+      padding: 2,
       border: "none",
       background: "transparent",
       cursor: "pointer",
       color: solid ? "#fff" : c.x,
-      borderRadius: pill && !modern ? "var(--ax-radius-full)" : "0.1875rem"
+      borderRadius: pill && !modern ? 9999 : 3
     }
   }, /*#__PURE__*/React.createElement(Close, {
     s: 12
@@ -2118,10 +2111,10 @@ function BadgeGroup({
     style: {
       display: "inline-flex",
       alignItems: "center",
-      gap: "var(--ax-space-2)",
+      gap: 8,
       boxSizing: "border-box",
-      padding: lead ? sm ? "0.125rem 0.5rem 0.125rem 0.125rem" : "0.25rem 0.5rem 0.25rem 0.25rem" : sm ? "0.125rem 0.125rem 0.125rem 0.5rem" : "0.25rem 0.25rem 0.25rem 0.5rem",
-      borderRadius: "var(--ax-radius-full)",
+      padding: lead ? sm ? "2px 8px 2px 2px" : "4px 8px 4px 4px" : sm ? "2px 2px 2px 8px" : "4px 4px 4px 8px",
+      borderRadius: 9999,
       background: modern ? "#fff" : c.bg,
       boxShadow: `inset 0 0 0 1px ${modern ? "#D5D7DA" : c.bd}`,
       fontFamily: "var(--ax-font-base)"
@@ -2130,10 +2123,10 @@ function BadgeGroup({
     style: {
       display: "inline-flex",
       alignItems: "center",
-      gap: "var(--ax-space-1)",
+      gap: 4,
       fontWeight: 500,
-      fontSize: "var(--ax-text-xs)",
-      lineHeight: "1.125rem",
+      fontSize: 12,
+      lineHeight: "18px",
       color: modern ? "var(--ax-gray-700)" : c.fg
     }
   }, children, arrow ? /*#__PURE__*/React.createElement(Arrow, null) : null), lead ? null : inner);
@@ -2155,10 +2148,10 @@ function Tag({
     style: {
       display: "inline-flex",
       alignItems: "center",
-      gap: "var(--ax-space-1-5)",
-      padding: "var(--ax-space-1) var(--ax-space-1-5) var(--ax-space-1) 0.625rem",
+      gap: "6px",
+      padding: "4px 6px 4px 10px",
       fontFamily: "var(--ax-font-base)",
-      fontSize: "0.8125rem",
+      fontSize: "13px",
       color: c.fg,
       background: c.bg,
       border: `1px solid ${c.bd}`,
@@ -2174,8 +2167,8 @@ function Tag({
       background: "transparent",
       color: c.fg,
       cursor: "pointer",
-      padding: "var(--ax-space-0-5)",
-      borderRadius: "0.1875rem",
+      padding: 2,
+      borderRadius: 3,
       opacity: 0.7
     }
   }, /*#__PURE__*/React.createElement("svg", {
@@ -2236,8 +2229,8 @@ function NotificationItem({
     className: `ax-notification ${onClick ? "ax-row--hover" : ""} ${className}`,
     style: {
       display: "flex",
-      gap: "var(--ax-space-3)",
-      padding: "0.8125rem var(--ax-space-4)",
+      gap: 12,
+      padding: "13px 16px",
       background: unread ? "var(--ax-teal-50)" : "transparent",
       cursor: onClick ? "pointer" : "default",
       fontFamily: "var(--ax-font-base)",
@@ -2249,8 +2242,8 @@ function NotificationItem({
     }
   }, avatar) : /*#__PURE__*/React.createElement("span", {
     style: {
-      width: "2.25rem",
-      height: "2.25rem",
+      width: 36,
+      height: 36,
       flexShrink: 0,
       borderRadius: "50%",
       background: "var(--ax-gray-100)",
@@ -2258,7 +2251,7 @@ function NotificationItem({
       display: "inline-flex",
       alignItems: "center",
       justifyContent: "center",
-      fontSize: "var(--ax-text-md)"
+      fontSize: 16
     }
   }, /*#__PURE__*/React.createElement("i", {
     className: `bi bi-${t.icon}`
@@ -2269,7 +2262,7 @@ function NotificationItem({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: "var(--ax-text-sm)",
+      fontSize: 14,
       color: "var(--ax-text-primary)"
     }
   }, /*#__PURE__*/React.createElement("span", {
@@ -2278,24 +2271,24 @@ function NotificationItem({
     }
   }, title)), body ? /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: "0.8125rem",
+      fontSize: 13,
       color: "var(--ax-text-secondary)",
-      marginTop: "0.0625rem"
+      marginTop: 1
     }
   }, body) : null, time ? /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: "var(--ax-text-xs)",
+      fontSize: 12,
       color: "var(--ax-text-tertiary)",
-      marginTop: "0.1875rem"
+      marginTop: 3
     }
   }, time) : null), unread ? /*#__PURE__*/React.createElement("span", {
     style: {
-      width: "0.5rem",
-      height: "0.5rem",
+      width: 8,
+      height: 8,
       borderRadius: "50%",
       background: "var(--ax-sea-depths)",
       flexShrink: 0,
-      marginTop: "var(--ax-space-1-5)"
+      marginTop: 6
     }
   }) : null);
 }
@@ -2304,8 +2297,6 @@ Object.assign(__ds_scope, { NotificationItem });
 
 // components/feedback/Spinner.jsx
 try { (() => {
-const rem = n => `${n / 16}rem`;
-
 /**
  * Spinner — indeterminate loading indicator in brand teal.
  */
@@ -2324,13 +2315,13 @@ function Spinner({
     style: {
       display: "inline-flex",
       alignItems: "center",
-      gap: "var(--ax-space-2)",
+      gap: "8px",
       ...style
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      width: rem(size),
-      height: rem(size),
+      width: size,
+      height: size,
       borderRadius: "50%",
       border: `${thickness}px solid var(--ax-gray-200)`,
       borderTopColor: color,
@@ -2340,7 +2331,7 @@ function Spinner({
   }), label ? /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: "var(--ax-font-base)",
-      fontSize: "var(--ax-text-sm)",
+      fontSize: "14px",
       color: "var(--ax-text-secondary)"
     }
   }, label) : null, /*#__PURE__*/React.createElement("style", null, `@keyframes ax-spin{to{transform:rotate(360deg)}}`));
@@ -2363,7 +2354,7 @@ function ProgressBar({
     style: {
       display: "flex",
       alignItems: "center",
-      gap: "0.625rem",
+      gap: "10px",
       ...style
     }
   }, /*#__PURE__*/React.createElement("div", {
@@ -2385,9 +2376,9 @@ function ProgressBar({
   })), showLabel ? /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: "var(--ax-font-base)",
-      fontSize: "0.8125rem",
+      fontSize: "13px",
       color: "var(--ax-text-secondary)",
-      minWidth: "2.125rem",
+      minWidth: 34,
       textAlign: "right"
     }
   }, pct, "%") : null);
@@ -2440,8 +2431,8 @@ function Stepper({
       }
     }, /*#__PURE__*/React.createElement("span", {
       style: {
-        width: "2rem",
-        height: "2rem",
+        width: 32,
+        height: 32,
         flexShrink: 0,
         borderRadius: "var(--ax-radius-full)",
         background: circleBg,
@@ -2451,7 +2442,7 @@ function Stepper({
         alignItems: "center",
         justifyContent: "center",
         fontFamily: "var(--ax-font-base)",
-        fontSize: "var(--ax-text-sm)",
+        fontSize: "14px",
         fontWeight: "var(--ax-fw-semibold)",
         boxShadow: status === "current" ? "var(--ax-ring)" : "none"
       }
@@ -2468,8 +2459,8 @@ function Stepper({
       strokeLinejoin: "round"
     })) : type === "number" ? i + 1 : /*#__PURE__*/React.createElement("span", {
       style: {
-        width: "0.5rem",
-        height: "0.5rem",
+        width: 8,
+        height: 8,
         borderRadius: "50%",
         background: "currentColor"
       }
@@ -2477,28 +2468,28 @@ function Stepper({
       style: {
         flex: 1,
         height: 2,
-        margin: "0 var(--ax-space-2)",
+        margin: "0 8px",
         background: i < current ? "#087990" : "var(--ax-gray-200)",
-        borderRadius: "0.125rem"
+        borderRadius: 2
       }
     }) : null), /*#__PURE__*/React.createElement("div", {
       style: {
-        paddingTop: "var(--ax-space-2)",
-        paddingRight: "var(--ax-space-3)"
+        paddingTop: 8,
+        paddingRight: 12
       }
     }, /*#__PURE__*/React.createElement("div", {
       style: {
         fontFamily: "var(--ax-font-base)",
-        fontSize: "var(--ax-text-sm)",
+        fontSize: "14px",
         fontWeight: "var(--ax-fw-semibold)",
         color: status === "upcoming" ? "var(--ax-text-tertiary)" : "var(--ax-text-primary)"
       }
     }, step.label), step.description ? /*#__PURE__*/React.createElement("div", {
       style: {
         fontFamily: "var(--ax-font-base)",
-        fontSize: "0.8125rem",
+        fontSize: "13px",
         color: "var(--ax-text-tertiary)",
-        marginTop: "var(--ax-space-0-5)"
+        marginTop: 2
       }
     }, step.description) : null));
   }));
@@ -2546,11 +2537,11 @@ function Toast({
     className: `ax-toast ${className}`,
     style: {
       display: "flex",
-      gap: "var(--ax-space-3)",
+      gap: "12px",
       alignItems: "flex-start",
-      width: "22.5rem",
+      width: 360,
       maxWidth: "100%",
-      padding: "0.875rem var(--ax-space-4)",
+      padding: "14px 16px",
       background: "var(--ax-surface-card)",
       border: "1px solid var(--ax-border-subtle)",
       borderRadius: "var(--ax-radius-lg)",
@@ -2562,8 +2553,8 @@ function Toast({
     "aria-hidden": "true",
     style: {
       color: k.fg,
-      fontSize: "var(--ax-text-lg)",
-      lineHeight: "1.25rem",
+      fontSize: "18px",
+      lineHeight: "20px",
       flexShrink: 0
     }
   }, /*#__PURE__*/React.createElement("i", {
@@ -2576,18 +2567,18 @@ function Toast({
   }, title ? /*#__PURE__*/React.createElement("div", {
     style: {
       fontWeight: "var(--ax-fw-semibold)",
-      fontSize: "var(--ax-text-sm)",
+      fontSize: "14px",
       color: "var(--ax-text-primary)"
     }
   }, title) : null, children ? /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: "0.8125rem",
+      fontSize: "13px",
       color: "var(--ax-text-secondary)",
-      marginTop: "var(--ax-space-0-5)"
+      marginTop: 2
     }
   }, children) : null, action ? /*#__PURE__*/React.createElement("div", {
     style: {
-      marginTop: "0.625rem"
+      marginTop: 10
     }
   }, action) : null), onClose ? /*#__PURE__*/React.createElement("button", {
     onClick: onClose,
@@ -2597,7 +2588,7 @@ function Toast({
       background: "transparent",
       color: "var(--ax-text-tertiary)",
       cursor: "pointer",
-      padding: "var(--ax-space-0-5)"
+      padding: 2
     }
   }, /*#__PURE__*/React.createElement("svg", {
     width: "14",
@@ -2631,25 +2622,25 @@ function Tooltip({
       bottom: "100%",
       left: "50%",
       transform: "translateX(-50%)",
-      marginBottom: "0.5rem"
+      marginBottom: 8
     },
     bottom: {
       top: "100%",
       left: "50%",
       transform: "translateX(-50%)",
-      marginTop: "0.5rem"
+      marginTop: 8
     },
     left: {
       right: "100%",
       top: "50%",
       transform: "translateY(-50%)",
-      marginRight: "0.5rem"
+      marginRight: 8
     },
     right: {
       left: "100%",
       top: "50%",
       transform: "translateY(-50%)",
-      marginLeft: "0.5rem"
+      marginLeft: 8
     }
   }[placement];
   return /*#__PURE__*/React.createElement("span", {
@@ -2668,9 +2659,9 @@ function Tooltip({
       background: "var(--ax-gray-900)",
       color: "#fff",
       fontFamily: "var(--ax-font-base)",
-      fontSize: "var(--ax-text-xs)",
+      fontSize: "12px",
       fontWeight: "var(--ax-fw-medium)",
-      padding: "var(--ax-space-1-5) 0.625rem",
+      padding: "6px 10px",
       borderRadius: "var(--ax-radius-sm)",
       whiteSpace: "nowrap",
       boxShadow: "var(--ax-shadow-md)",
@@ -2712,7 +2703,7 @@ function Checkbox({
     style: {
       display: "inline-flex",
       alignItems: "center",
-      gap: "var(--ax-space-2)",
+      gap: "8px",
       cursor: disabled ? "not-allowed" : "pointer",
       opacity: disabled ? 0.55 : 1,
       ...style
@@ -2776,7 +2767,7 @@ function Checkbox({
   })) : null)), label ? /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: "var(--ax-font-base)",
-      fontSize: "var(--ax-text-sm)",
+      fontSize: "14px",
       color: "var(--ax-text-primary)"
     }
   }, label) : null);
@@ -2836,15 +2827,15 @@ function Datepicker({
     style: {
       display: "inline-flex",
       alignItems: "center",
-      gap: "0.625rem",
-      minWidth: "13.75rem",
-      padding: "0.625rem 0.875rem",
+      gap: 10,
+      minWidth: 220,
+      padding: "10px 14px",
       background: "var(--ax-surface-card)",
       border: "1px solid var(--ax-border)",
       borderRadius: "var(--ax-radius-md)",
       boxShadow: "var(--ax-shadow-xs)",
       cursor: "pointer",
-      fontSize: "var(--ax-text-md)",
+      fontSize: 16,
       color: value ? "var(--ax-text-primary)" : "var(--ax-text-placeholder)"
     }
   }, /*#__PURE__*/React.createElement("i", {
@@ -2860,22 +2851,22 @@ function Datepicker({
   }, value ? `${MONTHS[value.getMonth()]} ${value.getDate()}, ${value.getFullYear()}` : placeholder)), open ? /*#__PURE__*/React.createElement("div", {
     style: {
       position: "absolute",
-      top: "calc(100% + 0.375rem)",
+      top: "calc(100% + 6px)",
       left: 0,
       zIndex: "var(--ax-z-dropdown)",
-      width: "17.5rem",
+      width: 280,
       background: "var(--ax-surface-card)",
       border: "1px solid var(--ax-border-subtle)",
       borderRadius: "var(--ax-radius-lg)",
       boxShadow: "var(--ax-shadow-lg)",
-      padding: "0.875rem"
+      padding: 14
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
-      marginBottom: "0.625rem"
+      marginBottom: 10
     }
   }, /*#__PURE__*/React.createElement("button", {
     onClick: () => setView(new Date(y, m - 1, 1)),
@@ -2885,7 +2876,7 @@ function Datepicker({
     className: "bi bi-chevron-left"
   })), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: "var(--ax-text-sm)",
+      fontSize: 14,
       fontWeight: 600,
       color: "var(--ax-text-primary)"
     }
@@ -2899,23 +2890,23 @@ function Datepicker({
     style: {
       display: "grid",
       gridTemplateColumns: "repeat(7,1fr)",
-      gap: "var(--ax-space-0-5)",
-      marginBottom: "var(--ax-space-1)"
+      gap: 2,
+      marginBottom: 4
     }
   }, DOW.map(d => /*#__PURE__*/React.createElement("div", {
     key: d,
     style: {
       textAlign: "center",
-      fontSize: "0.6875rem",
+      fontSize: 11,
       fontWeight: 600,
       color: "var(--ax-text-tertiary)",
-      padding: "var(--ax-space-1) 0"
+      padding: "4px 0"
     }
   }, d))), /*#__PURE__*/React.createElement("div", {
     style: {
       display: "grid",
       gridTemplateColumns: "repeat(7,1fr)",
-      gap: "var(--ax-space-0-5)"
+      gap: 2
     }
   }, cells.map((d, i) => {
     if (!d) return /*#__PURE__*/React.createElement("div", {
@@ -2930,11 +2921,11 @@ function Datepicker({
         setOpen(false);
       },
       style: {
-        height: "2.125rem",
+        height: 34,
         borderRadius: "var(--ax-radius-sm)",
         border: "none",
         cursor: "pointer",
-        fontSize: "0.8125rem",
+        fontSize: 13,
         background: selected ? "var(--ax-sea-depths)" : "transparent",
         color: selected ? "#fff" : "var(--ax-text-primary)",
         fontWeight: selected || isToday ? 600 : 400,
@@ -2947,8 +2938,8 @@ const navBtn = {
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  width: "1.75rem",
-  height: "1.75rem",
+  width: 28,
+  height: 28,
   border: "1px solid var(--ax-border)",
   borderRadius: "var(--ax-radius-sm)",
   background: "var(--ax-surface-card)",
@@ -2979,7 +2970,7 @@ function FileUpload({
     style: {
       display: "flex",
       flexDirection: "column",
-      gap: "0.875rem",
+      gap: 14,
       fontFamily: "var(--ax-font-base)",
       ...style
     }
@@ -2998,9 +2989,9 @@ function FileUpload({
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      gap: "var(--ax-space-2)",
+      gap: 8,
       textAlign: "center",
-      padding: "1.75rem var(--ax-space-5)",
+      padding: "28px 20px",
       borderRadius: "var(--ax-radius-xl)",
       cursor: "pointer",
       background: "var(--ax-gray-25)",
@@ -3009,21 +3000,21 @@ function FileUpload({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      width: "2.75rem",
-      height: "2.75rem",
+      width: 44,
+      height: 44,
       borderRadius: "50%",
       background: "var(--ax-teal-50)",
       color: "var(--ax-sea-depths)",
       display: "inline-flex",
       alignItems: "center",
       justifyContent: "center",
-      fontSize: "var(--ax-text-xl)"
+      fontSize: 20
     }
   }, /*#__PURE__*/React.createElement("i", {
     className: "bi bi-cloud-arrow-up"
   })), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: "var(--ax-text-sm)"
+      fontSize: 14
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
@@ -3036,7 +3027,7 @@ function FileUpload({
     }
   }, " or drag and drop")), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: "var(--ax-text-xs)",
+      fontSize: 12,
       color: "var(--ax-text-tertiary)"
     }
   }, hint), /*#__PURE__*/React.createElement("input", {
@@ -3052,8 +3043,8 @@ function FileUpload({
       style: {
         display: "flex",
         alignItems: "center",
-        gap: "var(--ax-space-3)",
-        padding: "var(--ax-space-3) 0.875rem",
+        gap: 12,
+        padding: "12px 14px",
         border: `1px solid ${err ? "var(--ax-border-error)" : "var(--ax-border-subtle)"}`,
         borderRadius: "var(--ax-radius-md)",
         background: "var(--ax-surface-card)"
@@ -3062,7 +3053,7 @@ function FileUpload({
       className: "bi bi-file-earmark-pdf-fill",
       style: {
         color: "var(--ax-danger-600)",
-        fontSize: "var(--ax-h4)",
+        fontSize: 24,
         flexShrink: 0
       }
     }), /*#__PURE__*/React.createElement("div", {
@@ -3074,11 +3065,11 @@ function FileUpload({
       style: {
         display: "flex",
         justifyContent: "space-between",
-        gap: "0.625rem"
+        gap: 10
       }
     }, /*#__PURE__*/React.createElement("span", {
       style: {
-        fontSize: "var(--ax-text-sm)",
+        fontSize: 14,
         fontWeight: 500,
         color: "var(--ax-text-primary)",
         whiteSpace: "nowrap",
@@ -3087,14 +3078,14 @@ function FileUpload({
       }
     }, f.name), /*#__PURE__*/React.createElement("span", {
       style: {
-        fontSize: "var(--ax-text-xs)",
+        fontSize: 12,
         color: err ? "var(--ax-danger-600)" : "var(--ax-text-tertiary)",
         flexShrink: 0
       }
     }, err ? "Upload failed" : done ? f.size : `${f.progress || 0}%`)), !done && !err ? /*#__PURE__*/React.createElement("div", {
       style: {
-        marginTop: "var(--ax-space-1-5)",
-        height: "0.375rem",
+        marginTop: 6,
+        height: 6,
         background: "var(--ax-gray-200)",
         borderRadius: "var(--ax-radius-full)",
         overflow: "hidden"
@@ -3108,15 +3099,15 @@ function FileUpload({
       }
     })) : /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: "var(--ax-text-xs)",
+        fontSize: 12,
         color: "var(--ax-text-tertiary)",
-        marginTop: "var(--ax-space-0-5)"
+        marginTop: 2
       }
     }, f.size)), done ? /*#__PURE__*/React.createElement("i", {
       className: "bi bi-check-circle-fill",
       style: {
         color: "var(--ax-success-600)",
-        fontSize: "var(--ax-text-lg)"
+        fontSize: 18
       }
     }) : null, /*#__PURE__*/React.createElement("button", {
       onClick: () => onRemove && onRemove(i),
@@ -3126,7 +3117,7 @@ function FileUpload({
         background: "transparent",
         color: "var(--ax-text-tertiary)",
         cursor: "pointer",
-        padding: "var(--ax-space-0-5)"
+        padding: 2
       }
     }, /*#__PURE__*/React.createElement("svg", {
       width: "14",
@@ -3165,38 +3156,38 @@ function FormField({
     style: {
       display: "flex",
       flexDirection: "column",
-      gap: "var(--ax-space-1-5)",
+      gap: "6px",
       ...style
     }
   }, label ? /*#__PURE__*/React.createElement("label", {
     htmlFor: htmlFor,
     style: {
       display: "flex",
-      gap: "var(--ax-space-0-5)",
+      gap: 2,
       fontFamily: "var(--ax-font-base)",
-      fontSize: "var(--ax-text-md)",
+      fontSize: "16px",
       fontWeight: 400,
-      lineHeight: "1.25rem",
+      lineHeight: "20px",
       color: "var(--ax-gray-700)"
     }
   }, label, required ? /*#__PURE__*/React.createElement("span", {
     style: {
       color: "var(--ax-danger)",
       fontWeight: 500,
-      fontSize: "var(--ax-text-sm)"
+      fontSize: 14
     }
   }, "*") : null) : null, children, error ? /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: "var(--ax-font-base)",
-      fontSize: "var(--ax-text-sm)",
-      lineHeight: "1.25rem",
+      fontSize: "14px",
+      lineHeight: "20px",
       color: "var(--ax-danger)"
     }
   }, error) : hint ? /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: "var(--ax-font-base)",
-      fontSize: "var(--ax-text-sm)",
-      lineHeight: "1.25rem",
+      fontSize: "14px",
+      lineHeight: "20px",
       color: "var(--ax-gray-600)"
     }
   }, hint) : null);
@@ -3209,19 +3200,19 @@ try { (() => {
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 const SIZES = {
   sm: {
-    padding: "var(--ax-space-2) var(--ax-space-3)",
-    fontSize: "var(--ax-text-sm)",
-    lineHeight: "1rem"
+    padding: "8px 12px",
+    fontSize: "14px",
+    lineHeight: "16px"
   },
   md: {
-    padding: "0.625rem 0.875rem",
-    fontSize: "var(--ax-text-md)",
-    lineHeight: "1.25rem"
+    padding: "10px 14px",
+    fontSize: "16px",
+    lineHeight: "20px"
   },
   lg: {
-    padding: "0.625rem 0.875rem",
-    fontSize: "var(--ax-text-md)",
-    lineHeight: "1.5rem"
+    padding: "10px 14px",
+    fontSize: "16px",
+    lineHeight: "24px"
   }
 };
 const FIELD_BORDER = "#CED4DA";
@@ -3245,10 +3236,10 @@ function Input({
   const wrap = {
     display: "flex",
     alignItems: "center",
-    gap: "var(--ax-space-2)",
+    gap: "8px",
     background: disabled ? "var(--ax-surface-disabled)" : "var(--ax-surface-card)",
     border: `1px solid ${invalid ? "#F1AEB5" : FIELD_BORDER}`,
-    borderRadius: "var(--ax-radius-md)",
+    borderRadius: 8,
     padding: s.padding,
     boxShadow: FIELD_SHADOW,
     opacity: disabled ? 0.6 : 1,
@@ -3322,12 +3313,12 @@ function Textarea({
       resize: "vertical",
       background: disabled ? "var(--ax-surface-disabled)" : "var(--ax-surface-card)",
       border: `1px solid ${invalid ? "#F1AEB5" : FIELD_BORDER}`,
-      borderRadius: "var(--ax-radius-md)",
-      padding: "var(--ax-space-3) 0.875rem",
-      minHeight: "9.875rem",
+      borderRadius: 8,
+      padding: "12px 14px",
+      minHeight: 158,
       fontFamily: "var(--ax-font-base)",
-      fontSize: "var(--ax-text-md)",
-      lineHeight: "1.5rem",
+      fontSize: "16px",
+      lineHeight: "24px",
       color: "var(--ax-text-primary)",
       boxShadow: FIELD_SHADOW,
       outline: "none",
@@ -3360,7 +3351,7 @@ function Radio({
     style: {
       display: "inline-flex",
       alignItems: "center",
-      gap: "var(--ax-space-2)",
+      gap: "8px",
       cursor: disabled ? "not-allowed" : "pointer",
       opacity: disabled ? 0.55 : 1,
       ...style
@@ -3382,16 +3373,16 @@ function Radio({
     style: {
       position: "absolute",
       opacity: 0,
-      width: "1.25rem",
-      height: "1.25rem",
+      width: 20,
+      height: 20,
       margin: 0,
       cursor: "inherit"
     }
   }, props)), /*#__PURE__*/React.createElement("span", {
     "aria-hidden": "true",
     style: {
-      width: "1.25rem",
-      height: "1.25rem",
+      width: 20,
+      height: 20,
       borderRadius: "50%",
       border: `1.5px solid ${checked ? "var(--ax-sea-depths)" : "var(--ax-border-strong)"}`,
       background: "var(--ax-surface-card)",
@@ -3402,15 +3393,15 @@ function Radio({
     }
   }, checked ? /*#__PURE__*/React.createElement("span", {
     style: {
-      width: "0.625rem",
-      height: "0.625rem",
+      width: 10,
+      height: 10,
       borderRadius: "50%",
       background: "var(--ax-sea-depths)"
     }
   }) : null)), label ? /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: "var(--ax-font-base)",
-      fontSize: "var(--ax-text-sm)",
+      fontSize: "14px",
       color: "var(--ax-text-primary)"
     }
   }, label) : null);
@@ -3434,7 +3425,7 @@ function RadioGroup({
     style: {
       display: "flex",
       flexDirection: direction,
-      gap: direction === "row" ? "1.25rem" : "0.75rem",
+      gap: direction === "row" ? "20px" : "12px",
       ...style
     }
   }, options.map(o => {
@@ -3458,30 +3449,28 @@ Object.assign(__ds_scope, { Radio, RadioGroup });
 // components/forms/RadioGroupItem.jsx
 try { (() => {
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
-const rem = n => `${n / 16}rem`;
-
 /* RadioGroupItem — selectable card row from the "Radio group item" Figma set.
    Axes: type (radio | checkbox | icon | card | payment | avatar) × size (sm | md)
    × selected × state (default | hover | focused | disabled). */
 
 const SZ = {
   sm: {
-    control: "1rem",
-    media: "2rem",
-    contentGap: "var(--ax-space-3)",
+    control: 16,
+    media: 32,
+    contentGap: 12,
     textGap: 0,
-    subGap: "var(--ax-space-1)",
-    title: "var(--ax-text-sm)",
-    body: "var(--ax-text-sm)"
+    subGap: 4,
+    title: 14,
+    body: 14
   },
   md: {
-    control: "1rem",
-    media: "2.5rem",
-    contentGap: "var(--ax-space-3)",
-    textGap: "var(--ax-space-0-5)",
-    subGap: "var(--ax-space-1-5)",
-    title: "var(--ax-text-sm)",
-    body: "var(--ax-text-sm)"
+    control: 16,
+    media: 40,
+    contentGap: 12,
+    textGap: 2,
+    subGap: 6,
+    title: 14,
+    body: 14
   }
 };
 function Control({
@@ -3494,11 +3483,11 @@ function Control({
   const on = !!selected;
   const accent = disabled ? "var(--ax-border-strong)" : "var(--ax-sea-depths)";
   const shell = {
-    width: rem(d),
-    height: rem(d),
+    width: d,
+    height: d,
     flexShrink: 0,
     boxSizing: "border-box",
-    borderRadius: kind === "radio" ? "50%" : d >= 20 ? "var(--ax-radius-sm)" : "var(--ax-radius-xs)",
+    borderRadius: kind === "radio" ? "50%" : d >= 20 ? 6 : 4,
     border: `1px solid ${on ? accent : "var(--ax-border-strong)"}`,
     background: on ? accent : disabled ? "var(--ax-surface-disabled)" : "var(--ax-surface-card)",
     display: "inline-flex",
@@ -3511,8 +3500,8 @@ function Control({
     style: shell
   }, on && kind === "radio" ? /*#__PURE__*/React.createElement("span", {
     style: {
-      width: rem(d * 0.375),
-      height: rem(d * 0.375),
+      width: d * 0.375,
+      height: d * 0.375,
       borderRadius: "50%",
       background: "var(--ax-white)"
     }
@@ -3551,16 +3540,16 @@ function Media({
   if (type === "payment") {
     return /*#__PURE__*/React.createElement("span", {
       style: {
-        width: "2.875rem",
-        height: "2rem",
+        width: 46,
+        height: 32,
         flexShrink: 0,
-        borderRadius: "var(--ax-radius-xs)",
+        borderRadius: 4,
         background: "var(--ax-surface-card)",
         boxShadow: "inset 0 0 0 1px var(--ax-border), var(--ax-shadow-xs)",
         display: "inline-flex",
         alignItems: "center",
         justifyContent: "center",
-        fontSize: "0.8125rem",
+        fontSize: 13,
         fontWeight: 700,
         letterSpacing: ".02em",
         color: "var(--ax-text-secondary)",
@@ -3573,13 +3562,13 @@ function Media({
       width: s.media,
       height: s.media,
       flexShrink: 0,
-      borderRadius: "var(--ax-radius-md)",
+      borderRadius: 8,
       background: "var(--ax-white)",
       boxShadow: "inset 0 0 0 1px var(--ax-border-strong), var(--ax-shadow-xs)",
       display: "inline-flex",
       alignItems: "center",
       justifyContent: "center",
-      fontSize: size === "md" ? "var(--ax-text-xl)" : "var(--ax-text-md)",
+      fontSize: size === "md" ? 20 : 16,
       color: "var(--ax-text-secondary)"
     }
   }, icon);
@@ -3612,7 +3601,7 @@ function RadioGroupItem({
   const isCard = type === "card";
   const trailing = type === "radio" ? "radio" : "checkbox";
   const textColor = disabled ? "var(--ax-text-disabled)" : "var(--ax-text-secondary)";
-  const ring = focused ? ", 0 0 0 0.125rem var(--ax-white), var(--ax-focus-ring-control)" : "";
+  const ring = focused ? ", 0 0 0 2px var(--ax-white), var(--ax-focus-ring-control)" : "";
   const container = {
     position: "relative",
     boxSizing: "border-box",
@@ -3621,13 +3610,13 @@ function RadioGroupItem({
     fontFamily: "var(--ax-font-base)",
     border: "none",
     appearance: "none",
-    borderRadius: "var(--ax-radius-xl)",
+    borderRadius: 12,
     background: disabled ? "var(--ax-surface-hover)" : hover && !isCard ? "var(--ax-surface-hover)" : "var(--ax-surface-card)",
     boxShadow: `0px 0px 0px 1px #CED4DA${ring}`,
     display: "flex",
     flexDirection: isCard ? "column" : "row",
-    gap: isCard ? 0 : "var(--ax-space-1)",
-    padding: isCard ? 0 : "var(--ax-space-4)",
+    gap: isCard ? 0 : 4,
+    padding: isCard ? 0 : 16,
     alignItems: isCard ? "stretch" : "flex-start",
     cursor: disabled ? "not-allowed" : "pointer",
     transition: "background .12s ease, box-shadow .12s ease",
@@ -3661,16 +3650,16 @@ function RadioGroupItem({
       style: {
         display: "flex",
         alignItems: "center",
-        gap: "var(--ax-space-1)",
-        padding: "var(--ax-space-3) var(--ax-space-5) var(--ax-space-3) var(--ax-space-3)",
-        borderRadius: "var(--ax-radius-xl) var(--ax-radius-xl) 0 0",
+        gap: 4,
+        padding: "12px 20px 12px 12px",
+        borderRadius: "12px 12px 0 0",
         boxShadow: "inset 0 0 0 1px var(--ax-border-subtle)"
       }
     }, /*#__PURE__*/React.createElement("div", {
       style: {
         display: "flex",
         alignItems: "center",
-        gap: "var(--ax-space-3)",
+        gap: 12,
         flexGrow: 1,
         minWidth: 0
       }
@@ -3680,7 +3669,7 @@ function RadioGroupItem({
       icon: icon
     }), /*#__PURE__*/React.createElement("span", {
       style: {
-        fontSize: "var(--ax-text-md)",
+        fontSize: 16,
         fontWeight: 600,
         lineHeight: 1,
         color: disabled ? "var(--ax-text-disabled)" : "var(--ax-text-primary)"
@@ -3694,14 +3683,14 @@ function RadioGroupItem({
       style: {
         display: "flex",
         alignItems: "flex-start",
-        gap: "var(--ax-space-1)",
-        padding: "var(--ax-space-4)"
+        gap: 4,
+        padding: 16
       }
     }, /*#__PURE__*/React.createElement("div", {
       style: {
         display: "flex",
         flexDirection: "column",
-        gap: "var(--ax-space-2)",
+        gap: 8,
         flexGrow: 1,
         minWidth: 0
       }
@@ -3709,20 +3698,20 @@ function RadioGroupItem({
       style: {
         display: "flex",
         alignItems: "flex-end",
-        gap: "var(--ax-space-1)"
+        gap: 4
       }
     }, /*#__PURE__*/React.createElement("span", {
       style: {
-        fontSize: "var(--ax-h3)",
+        fontSize: 28,
         fontWeight: 600,
         lineHeight: 1,
         color: disabled ? "var(--ax-text-disabled)" : "var(--ax-text-primary)"
       }
     }, price || "$10"), /*#__PURE__*/React.createElement("span", {
       style: {
-        fontSize: "var(--ax-text-sm)",
+        fontSize: 14,
         lineHeight: 1,
-        paddingBottom: "0.1875rem",
+        paddingBottom: 3,
         color: textColor
       }
     }, period || "per month")), supportingText ? /*#__PURE__*/React.createElement("span", {
@@ -3745,7 +3734,7 @@ function RadioGroupItem({
     style: {
       display: "flex",
       flexDirection: "row",
-      gap: type === "payment" ? "var(--ax-space-4)" : leadingControl ? size === "md" ? "var(--ax-space-3)" : "var(--ax-space-2)" : s.contentGap,
+      gap: type === "payment" ? 16 : leadingControl ? size === "md" ? 12 : 8 : s.contentGap,
       alignItems: "flex-start",
       flexGrow: 1,
       minWidth: 0
@@ -3753,7 +3742,7 @@ function RadioGroupItem({
   }, leadingControl ? /*#__PURE__*/React.createElement("span", {
     style: {
       display: "inline-flex",
-      padding: "0.0625rem 0",
+      padding: "1px 0",
       flexShrink: 0
     }
   }, /*#__PURE__*/React.createElement(Control, {
@@ -3771,7 +3760,7 @@ function RadioGroupItem({
     style: {
       display: "flex",
       flexDirection: "column",
-      gap: type === "payment" ? "var(--ax-space-3)" : s.textGap,
+      gap: type === "payment" ? 12 : s.textGap,
       flexGrow: 1,
       minWidth: 0
     }
@@ -3779,7 +3768,7 @@ function RadioGroupItem({
     style: {
       display: "flex",
       flexDirection: "column",
-      gap: type === "payment" ? "var(--ax-space-0-5)" : s.textGap
+      gap: type === "payment" ? 2 : s.textGap
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -3790,15 +3779,15 @@ function RadioGroupItem({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: type === "payment" ? {
-      fontSize: "var(--ax-text-md)",
+      fontSize: 16,
       fontWeight: 500,
-      lineHeight: "1.5rem",
+      lineHeight: "24px",
       color: disabled ? "var(--ax-text-disabled)" : "var(--ax-gray-700)"
     } : titleStyle
   }, title), subtext ? /*#__PURE__*/React.createElement("span", {
     style: type === "payment" ? {
-      fontSize: "var(--ax-text-md)",
-      lineHeight: "1.5rem",
+      fontSize: 16,
+      lineHeight: "24px",
       color: textColor
     } : {
       ...bodyStyle,
@@ -3807,14 +3796,14 @@ function RadioGroupItem({
     }
   }, subtext) : null), supportingText ? /*#__PURE__*/React.createElement("span", {
     style: type === "payment" ? {
-      fontSize: "var(--ax-text-md)",
-      lineHeight: "1.5rem",
+      fontSize: 16,
+      lineHeight: "24px",
       color: textColor
     } : bodyStyle
   }, supportingText) : null), actions ? /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
-      gap: "var(--ax-space-3)",
+      gap: 12,
       alignItems: "center"
     }
   }, actions) : null)), !leadingControl ? /*#__PURE__*/React.createElement(Control, {
@@ -3899,8 +3888,8 @@ function SearchBox({
     style: {
       display: "flex",
       alignItems: "center",
-      gap: "var(--ax-space-2)",
-      padding: "0.5625rem var(--ax-space-3)",
+      gap: 8,
+      padding: "9px 12px",
       background: "var(--ax-surface-card)",
       border: "1px solid var(--ax-border)",
       borderRadius: "var(--ax-radius-md)",
@@ -3922,7 +3911,7 @@ function SearchBox({
       border: "none",
       outline: "none",
       background: "transparent",
-      fontSize: "0.9375rem",
+      fontSize: 15,
       color: "var(--ax-text-primary)"
     }
   }), value ? /*#__PURE__*/React.createElement("button", {
@@ -3933,7 +3922,7 @@ function SearchBox({
       background: "transparent",
       color: "var(--ax-text-tertiary)",
       cursor: "pointer",
-      padding: "var(--ax-space-0-5)"
+      padding: 2
     }
   }, /*#__PURE__*/React.createElement("svg", {
     width: "13",
@@ -3948,7 +3937,7 @@ function SearchBox({
   }))) : null), show ? /*#__PURE__*/React.createElement("div", {
     style: {
       position: "absolute",
-      top: "calc(100% + 0.375rem)",
+      top: "calc(100% + 6px)",
       left: 0,
       right: 0,
       zIndex: "var(--ax-z-dropdown)",
@@ -3956,14 +3945,14 @@ function SearchBox({
       border: "1px solid var(--ax-border-subtle)",
       borderRadius: "var(--ax-radius-lg)",
       boxShadow: "var(--ax-shadow-lg)",
-      padding: "var(--ax-space-1-5)",
-      maxHeight: "20rem",
+      padding: 6,
+      maxHeight: 320,
       overflowY: "auto"
     }
   }, loading ? /*#__PURE__*/React.createElement("div", {
     style: {
-      padding: "var(--ax-space-3) 0.625rem",
-      fontSize: "var(--ax-text-sm)",
+      padding: "12px 10px",
+      fontSize: 14,
       color: "var(--ax-text-tertiary)"
     }
   }, "Searching\u2026") : results.map((r, i) => /*#__PURE__*/React.createElement("button", {
@@ -3976,10 +3965,10 @@ function SearchBox({
     style: {
       display: "flex",
       alignItems: "center",
-      gap: "0.625rem",
+      gap: 10,
       width: "100%",
       textAlign: "left",
-      padding: "var(--ax-space-2) 0.625rem",
+      padding: "8px 10px",
       border: "none",
       background: "transparent",
       cursor: "pointer",
@@ -3989,7 +3978,7 @@ function SearchBox({
     style: {
       display: "inline-flex",
       color: "var(--ax-text-tertiary)",
-      width: "1rem"
+      width: 16
     },
     "aria-hidden": "true"
   }, r.icon) : null, /*#__PURE__*/React.createElement("span", {
@@ -4000,14 +3989,14 @@ function SearchBox({
   }, /*#__PURE__*/React.createElement("span", {
     style: {
       display: "block",
-      fontSize: "var(--ax-text-sm)",
+      fontSize: 14,
       color: "var(--ax-text-primary)",
       fontWeight: 500
     }
   }, r.label), r.meta ? /*#__PURE__*/React.createElement("span", {
     style: {
       display: "block",
-      fontSize: "var(--ax-text-xs)",
+      fontSize: 12,
       color: "var(--ax-text-tertiary)"
     }
   }, r.meta) : null)))) : null);
@@ -4019,8 +4008,8 @@ Object.assign(__ds_scope, { SearchBox });
 try { (() => {
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 /**
- * Select — styled native select with a 1.25rem chevron (Design system.fig "Select").
- * md: 2.75rem tall, 10/14 padding, 1rem text. sm: 2.5rem, 0.875rem text. Focus ring #6EA8FE.
+ * Select — styled native select with a 20px chevron (Design system.fig "Select").
+ * md: 44px tall, 10/14 padding, 16px text. sm: 40px, 14px text. Focus ring #6EA8FE.
  */
 function Select({
   size = "md",
@@ -4051,14 +4040,14 @@ function Select({
       WebkitAppearance: "none",
       width: "100%",
       boxSizing: "border-box",
-      height: sm ? "2.5rem" : "2.75rem",
-      padding: sm ? "0.5rem 2.5rem 0.5rem 0.75rem" : "0.625rem 2.625rem 0.625rem 0.875rem",
+      height: sm ? 40 : 44,
+      padding: sm ? "8px 40px 8px 12px" : "10px 42px 10px 14px",
       fontFamily: "var(--ax-font-base)",
-      fontSize: sm ? "0.875rem" : "1rem",
+      fontSize: sm ? "14px" : "16px",
       color: "var(--ax-gray-900)",
       background: disabled ? "var(--ax-surface-disabled)" : "#fff",
       border: `1px solid ${invalid ? "#F1AEB5" : open ? "#6EA8FE" : "#CED4DA"}`,
-      borderRadius: "var(--ax-radius-md)",
+      borderRadius: 8,
       boxShadow: "0px 1px 2px 0px rgba(10,13,18,0.05)",
       outline: "none",
       cursor: disabled ? "not-allowed" : "pointer"
@@ -4067,7 +4056,7 @@ function Select({
     "aria-hidden": "true",
     style: {
       position: "absolute",
-      right: "0.875rem",
+      right: 14,
       top: "50%",
       transform: "translateY(-50%)",
       pointerEvents: "none",
@@ -4093,8 +4082,6 @@ Object.assign(__ds_scope, { Select });
 // components/forms/Switch.jsx
 try { (() => {
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
-const rem = n => `${n / 16}rem`;
-
 /**
  * Switch — on/off toggle. Teal track when on.
  */
@@ -4116,7 +4103,7 @@ function Switch({
     style: {
       display: "inline-flex",
       alignItems: "center",
-      gap: "0.625rem",
+      gap: "10px",
       cursor: disabled ? "not-allowed" : "pointer",
       opacity: disabled ? 0.55 : 1,
       ...style
@@ -4136,16 +4123,16 @@ function Switch({
     style: {
       position: "absolute",
       opacity: 0,
-      width: rem(w),
-      height: rem(h),
+      width: w,
+      height: h,
       margin: 0,
       cursor: "inherit"
     }
   }, props)), /*#__PURE__*/React.createElement("span", {
     "aria-hidden": "true",
     style: {
-      width: rem(w),
-      height: rem(h),
+      width: w,
+      height: h,
       borderRadius: "var(--ax-radius-full)",
       background: checked ? "var(--ax-sea-depths)" : "var(--ax-gray-300)",
       transition: "background .15s ease",
@@ -4155,10 +4142,10 @@ function Switch({
   }, /*#__PURE__*/React.createElement("span", {
     style: {
       position: "absolute",
-      top: "0.1875rem",
-      left: rem(checked ? w - knob - 3 : 3),
-      width: rem(knob),
-      height: rem(knob),
+      top: 3,
+      left: checked ? w - knob - 3 : 3,
+      width: knob,
+      height: knob,
       borderRadius: "50%",
       background: "#fff",
       boxShadow: "var(--ax-shadow-sm)",
@@ -4167,7 +4154,7 @@ function Switch({
   }))), label ? /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: "var(--ax-font-base)",
-      fontSize: "var(--ax-text-sm)",
+      fontSize: "14px",
       color: "var(--ax-text-primary)"
     }
   }, label) : null);
@@ -4177,8 +4164,6 @@ Object.assign(__ds_scope, { Switch });
 
 // components/layout/Divider.jsx
 try { (() => {
-const rem = n => `${n / 16}rem`;
-
 /**
  * Divider — horizontal or vertical rule, optionally with centered label text.
  */
@@ -4198,7 +4183,7 @@ function Divider({
         width: 1,
         alignSelf: "stretch",
         background: "var(--ax-border-subtle)",
-        margin: `0 ${rem(spacing)}`,
+        margin: `0 ${spacing}px`,
         ...style
       }
     });
@@ -4210,8 +4195,8 @@ function Divider({
       style: {
         display: "flex",
         alignItems: "center",
-        gap: "var(--ax-space-3)",
-        margin: `${rem(spacing)} 0`,
+        gap: 12,
+        margin: `${spacing}px 0`,
         ...style
       }
     }, /*#__PURE__*/React.createElement("span", {
@@ -4223,7 +4208,7 @@ function Divider({
     }), /*#__PURE__*/React.createElement("span", {
       style: {
         fontFamily: "var(--ax-font-base)",
-        fontSize: "var(--ax-text-xs)",
+        fontSize: 12,
         fontWeight: 600,
         textTransform: "uppercase",
         letterSpacing: "var(--ax-tracking-wide)",
@@ -4243,7 +4228,7 @@ function Divider({
       border: "none",
       height: 1,
       background: "var(--ax-border-subtle)",
-      margin: `${rem(spacing)} 0`,
+      margin: `${spacing}px 0`,
       ...style
     }
   });
@@ -4253,7 +4238,6 @@ Object.assign(__ds_scope, { Divider });
 
 // components/layout/FeaturedIcon.jsx
 try { (() => {
-const rem = n => `${n / 16}rem`;
 const COLORS = {
   brand: {
     fg: "var(--ax-sea-depths)",
@@ -4324,14 +4308,14 @@ function FeaturedIcon({
   return /*#__PURE__*/React.createElement("span", {
     className: `ax-featured-icon ${className}`,
     style: {
-      width: rem(px),
-      height: rem(px),
+      width: px,
+      height: px,
       flexShrink: 0,
       display: "inline-flex",
       alignItems: "center",
       justifyContent: "center",
       borderRadius: square ? "var(--ax-radius-lg)" : "50%",
-      fontSize: rem(px * 0.45),
+      fontSize: px * 0.45,
       ...look,
       ...style
     },
@@ -4376,12 +4360,12 @@ function Breadcrumb({
       display: "flex",
       alignItems: "center",
       flexWrap: "wrap",
-      gap: "var(--ax-space-2)",
+      gap: "8px",
       listStyle: "none",
       margin: 0,
       padding: 0,
       fontFamily: "var(--ax-font-base)",
-      fontSize: "var(--ax-text-sm)"
+      fontSize: "14px"
     }
   }, items.map((item, i) => {
     const last = i === items.length - 1;
@@ -4390,7 +4374,7 @@ function Breadcrumb({
       style: {
         display: "inline-flex",
         alignItems: "center",
-        gap: "var(--ax-space-2)"
+        gap: "8px"
       }
     }, item.href && !last ? /*#__PURE__*/React.createElement("a", {
       href: item.href,
@@ -4436,9 +4420,9 @@ function Navbar({
     style: {
       display: "flex",
       alignItems: "center",
-      gap: "var(--ax-space-6)",
-      height: "4rem",
-      padding: "0 var(--ax-space-6)",
+      gap: 24,
+      height: 64,
+      padding: "0 24px",
       background: "var(--ax-surface-card)",
       borderBottom: "1px solid var(--ax-border-subtle)",
       fontFamily: "var(--ax-font-base)",
@@ -4454,7 +4438,7 @@ function Navbar({
     style: {
       display: "flex",
       alignItems: "center",
-      gap: "var(--ax-space-1)",
+      gap: 4,
       flex: 1
     }
   }, links.map((l, i) => /*#__PURE__*/React.createElement("a", {
@@ -4462,9 +4446,9 @@ function Navbar({
     href: l.href || "#",
     className: "ax-navlink",
     style: {
-      padding: "var(--ax-space-2) var(--ax-space-3)",
+      padding: "8px 12px",
       borderRadius: "var(--ax-radius-md)",
-      fontSize: "var(--ax-text-sm)",
+      fontSize: 14,
       fontWeight: l.active ? 600 : 500,
       textDecoration: "none",
       color: l.active ? "var(--ax-sea-depths)" : "var(--ax-text-secondary)",
@@ -4474,7 +4458,7 @@ function Navbar({
     style: {
       display: "inline-flex",
       alignItems: "center",
-      gap: "0.625rem",
+      gap: 10,
       flexShrink: 0
     }
   }, actions));
@@ -4520,8 +4504,8 @@ function Pagination({
       display: "inline-flex",
       alignItems: "center",
       justifyContent: "center",
-      width: "2.25rem",
-      height: "2.25rem",
+      width: 36,
+      height: 36,
       borderRadius: "var(--ax-radius-md)",
       border: "1px solid var(--ax-border)",
       background: "var(--ax-surface-card)",
@@ -4549,14 +4533,14 @@ function Pagination({
     style: {
       display: "inline-flex",
       alignItems: "center",
-      gap: "var(--ax-space-1-5)",
+      gap: "6px",
       fontFamily: "var(--ax-font-base)",
       ...style
     }
   }, arrow("prev", page <= 1), items.map((it, i) => it === "…" ? /*#__PURE__*/React.createElement("span", {
     key: `e${i}`,
     style: {
-      width: "2.25rem",
+      width: 36,
       textAlign: "center",
       color: "var(--ax-text-tertiary)"
     }
@@ -4566,15 +4550,15 @@ function Pagination({
     "aria-current": it === page ? "page" : undefined,
     className: `ax-page-num ${it === page ? "ax-page-num--active" : ""}`,
     style: {
-      minWidth: "2.25rem",
-      height: "2.25rem",
-      padding: "0 var(--ax-space-2)",
+      minWidth: 36,
+      height: 36,
+      padding: "0 8px",
       borderRadius: "var(--ax-radius-md)",
       border: `1px solid ${it === page ? "var(--ax-sea-depths)" : "var(--ax-border)"}`,
       background: it === page ? "var(--ax-teal-50)" : "var(--ax-surface-card)",
       color: it === page ? "var(--ax-sea-depths)" : "var(--ax-text-secondary)",
       fontWeight: "var(--ax-fw-semibold)",
-      fontSize: "var(--ax-text-sm)",
+      fontSize: "14px",
       cursor: "pointer"
     }
   }, it)), arrow("next", page >= total));
@@ -4586,8 +4570,8 @@ Object.assign(__ds_scope, { Pagination });
 try { (() => {
 /**
  * SideNav — the Competent Authority Portal's primary left navigation rail.
- * Two forms: expanded (16.0625rem, logo wordmark + labels) and collapsed
- * (5rem, logo mark + icons only). Groups are separated by rules and may
+ * Two forms: expanded (257px, logo wordmark + labels) and collapsed
+ * (80px, logo mark + icons only). Groups are separated by rules and may
  * carry an uppercase caption. Items support an icon, a notification
  * badge, and an expandable list of subsections.
  *
@@ -4679,13 +4663,13 @@ function Counter({
 }) {
   return /*#__PURE__*/React.createElement("span", {
     style: {
-      minWidth: "1.25rem",
-      height: "1.25rem",
-      padding: "0 0.3125rem",
+      minWidth: 20,
+      height: 20,
+      padding: "0 5px",
       borderRadius: "var(--ax-radius-full)",
       background: "var(--ax-sea-depths)",
       color: "#fff",
-      fontSize: "var(--ax-text-xs)",
+      fontSize: 12,
       fontWeight: "var(--ax-fw-semibold)",
       display: "inline-flex",
       alignItems: "center",
@@ -4710,11 +4694,11 @@ function Caption({
 }) {
   return /*#__PURE__*/React.createElement("div", {
     style: {
-      height: collapsed ? "0.75rem" : "2.375rem",
+      height: collapsed ? 12 : 38,
       display: "flex",
       alignItems: "center",
-      padding: "0 1.75rem",
-      fontSize: "var(--ax-text-sm)",
+      padding: "0 28px",
+      fontSize: 14,
       fontWeight: "var(--ax-fw-medium)",
       color: "var(--ax-text-tertiary)",
       letterSpacing: "var(--ax-tracking-wide)",
@@ -4748,17 +4732,17 @@ function Item({
     style: {
       display: "flex",
       alignItems: "center",
-      gap: "var(--ax-space-2)",
-      height: "2.75rem",
+      gap: 8,
+      height: 44,
       flexShrink: 0,
-      padding: collapsed ? "0.75rem 1.6875rem 0.75rem 1.6875rem" : "0.75rem 1.75rem 0.75rem 1.5625rem",
+      padding: collapsed ? "12px 27px 12px 27px" : "12px 28px 12px 25px",
       justifyContent: "flex-start",
       overflow: "hidden",
       boxSizing: "border-box",
       borderLeft: `3px solid ${on ? "var(--ax-sea-depths)" : "transparent"}`,
       background: on ? "var(--ax-teal-50)" : "transparent",
       color: tinted ? "var(--ax-sea-depths)" : "var(--ax-text-secondary)",
-      fontSize: "var(--ax-text-sm)",
+      fontSize: 14,
       fontWeight: "var(--ax-fw-medium)",
       textDecoration: "none",
       whiteSpace: "nowrap",
@@ -4768,7 +4752,7 @@ function Item({
     title: collapsed ? item.label : undefined
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      width: "1.25rem",
+      width: 20,
       display: "inline-flex",
       justifyContent: "center",
       flexShrink: 0
@@ -4781,7 +4765,7 @@ function Item({
       minWidth: 0,
       overflow: "hidden",
       textOverflow: "ellipsis",
-      maxWidth: collapsed ? 0 : "11.25rem",
+      maxWidth: collapsed ? 0 : 180,
       opacity: collapsed ? 0 : 1,
       transition: tr("max-width", "opacity")
     }
@@ -4790,7 +4774,7 @@ function Item({
       display: "inline-flex",
       overflow: "hidden",
       flexShrink: 0,
-      maxWidth: collapsed ? 0 : "3rem",
+      maxWidth: collapsed ? 0 : 48,
       opacity: collapsed ? 0 : 1,
       transition: tr("max-width", "opacity")
     }
@@ -4799,10 +4783,10 @@ function Item({
   })), item.children && /*#__PURE__*/React.createElement("i", {
     className: "bi bi-chevron-down",
     style: {
-      fontSize: "var(--ax-text-md)",
+      fontSize: 16,
       flexShrink: 0,
       display: "block",
-      maxWidth: collapsed ? 0 : "1rem",
+      maxWidth: collapsed ? 0 : 16,
       opacity: collapsed ? 0 : 1,
       overflow: "hidden",
       transition: `transform .18s ease, ${tr("max-width", "opacity")}`,
@@ -4827,12 +4811,12 @@ function SubItem({
     style: {
       display: "flex",
       alignItems: "center",
-      gap: "var(--ax-space-3)",
-      height: "2.375rem",
+      gap: 12,
+      height: 38,
       flexShrink: 0,
-      padding: "0 1.75rem 0 3.5rem",
+      padding: "0 28px 0 56px",
       textDecoration: "none",
-      fontSize: "var(--ax-text-md)",
+      fontSize: 16,
       fontWeight: "var(--ax-fw-medium)",
       whiteSpace: "nowrap",
       cursor: "pointer",
@@ -4840,9 +4824,9 @@ function SubItem({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      width: "0.375rem",
-      height: "0.375rem",
-      borderRadius: "0.0625rem",
+      width: 6,
+      height: 6,
+      borderRadius: 1,
       flexShrink: 0,
       background: tinted ? "var(--ax-sea-depths)" : "var(--ax-gray-400)"
     }
@@ -4891,8 +4875,8 @@ function SideNav({
       boxSizing: "border-box",
       display: "flex",
       flexDirection: "column",
-      gap: "var(--ax-space-4)",
-      padding: "var(--ax-space-6) 0",
+      gap: 16,
+      padding: "24px 0",
       background: "var(--ax-surface-card)",
       borderRight: "1px solid var(--ax-border-subtle)",
       fontFamily: "var(--ax-font-base)",
@@ -4908,16 +4892,16 @@ function SideNav({
       alignItems: "center",
       flexShrink: 0,
       justifyContent: "space-between",
-      padding: collapsed ? "0 1.6875rem" : "0 1.75rem",
-      height: "1.625rem",
+      padding: collapsed ? "0 27px" : "0 28px",
+      height: 26,
       transition: tr("padding")
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
       position: "relative",
       display: "block",
-      height: "1.625rem",
-      width: collapsed ? "1.625rem" : "10rem",
+      height: 26,
+      width: collapsed ? 26 : 160,
       flexShrink: 0,
       transition: tr("width")
     }
@@ -4925,8 +4909,8 @@ function SideNav({
     src: logoMark,
     alt: "ApostilleXpress",
     style: {
-      width: "1.625rem",
-      height: "1.625rem",
+      width: 26,
+      height: 26,
       display: "block",
       position: "absolute",
       left: 0,
@@ -4938,7 +4922,7 @@ function SideNav({
     src: logo,
     alt: "ApostilleXpress",
     style: {
-      height: "1.625rem",
+      height: 26,
       display: "block",
       position: "absolute",
       left: 0,
@@ -4953,13 +4937,13 @@ function SideNav({
     style: {
       ...toggleStyle,
       position: collapsed ? "absolute" : "static",
-      left: collapsed ? "3.625rem" : undefined,
-      top: collapsed ? "1.8125rem" : undefined
+      left: collapsed ? 58 : undefined,
+      top: collapsed ? 29 : undefined
     }
   }, /*#__PURE__*/React.createElement("i", {
     className: "bi bi-chevron-double-left",
     style: {
-      fontSize: "var(--ax-text-md)",
+      fontSize: 16,
       display: "block",
       transform: collapsed ? "rotate(180deg)" : "none",
       transition: `transform ${DUR}ms ${EASE}`
@@ -4968,11 +4952,11 @@ function SideNav({
     style: {
       display: "flex",
       flexDirection: "column",
-      gap: "var(--ax-space-2)",
+      gap: 8,
       flex: 1,
       minHeight: 0,
       overflowY: "auto",
-      paddingBottom: "17rem"
+      paddingBottom: 272
     }
   }, groups.map((g, gi) => /*#__PURE__*/React.createElement(React.Fragment, {
     key: gi
@@ -4980,7 +4964,7 @@ function SideNav({
     style: {
       display: "flex",
       flexDirection: "column",
-      gap: "var(--ax-space-1)",
+      gap: 4,
       alignSelf: "stretch"
     }
   }, g.label && /*#__PURE__*/React.createElement(Caption, {
@@ -5004,20 +4988,20 @@ function SideNav({
       borderBottom: "1px solid var(--ax-border-subtle)",
       display: "flex",
       flexDirection: "column",
-      gap: "var(--ax-space-2)",
+      gap: 8,
       justifyContent: "center",
       alignItems: collapsed ? "center" : "flex-start",
       overflow: "hidden",
-      padding: collapsed ? "1.375rem 1rem" : "0.625rem 1.75rem",
+      padding: collapsed ? "22px 16px" : "10px 28px",
       transition: tr("padding")
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: "var(--ax-text-sm)",
+      fontSize: 14,
       color: "var(--ax-text-tertiary)",
       whiteSpace: "nowrap",
       overflow: "hidden",
-      height: collapsed ? 0 : "1.25rem",
+      height: collapsed ? 0 : 20,
       opacity: collapsed ? 0 : 1,
       transition: tr("height", "opacity")
     }
@@ -5025,14 +5009,14 @@ function SideNav({
     style: {
       display: "flex",
       alignItems: "center",
-      gap: "var(--ax-space-2)"
+      gap: 8
     }
   }, /*#__PURE__*/React.createElement("img", {
     src: flag,
     alt: "",
     style: {
-      width: "1.375rem",
-      height: "1.375rem",
+      width: 22,
+      height: 22,
       borderRadius: "50%",
       objectFit: "cover",
       display: "block",
@@ -5040,19 +5024,19 @@ function SideNav({
     }
   }), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: "var(--ax-text-sm)",
+      fontSize: 14,
       color: "var(--ax-text-tertiary)",
       whiteSpace: "nowrap",
       overflow: "hidden",
-      maxWidth: collapsed ? 0 : "8.75rem",
+      maxWidth: collapsed ? 0 : 140,
       opacity: collapsed ? 0 : 1,
       transition: tr("max-width", "opacity")
     }
   }, country))));
 }
 const toggleStyle = {
-  width: "1rem",
-  height: "1rem",
+  width: 16,
+  height: 16,
   padding: 0,
   border: "none",
   background: "transparent",
@@ -5074,54 +5058,54 @@ try { (() => {
  *
  * type: "underline" | "button-brand" | "button-gray" | "button-white"
  *       | "button-minimal" | "button-border"   ("pill" → button-border)
- * size: "sm" (2.25rem row, 14/20 type) | "md" (2.75rem row, 16/24 type)
+ * size: "sm" (36px row, 14/20 type) | "md" (44px row, 16/24 type)
  */
 
 const SIZE = {
   sm: {
-    h: "2.25rem",
-    font: "var(--ax-text-sm)",
-    line: "1.25rem",
-    badgeFont: "var(--ax-text-xs)",
-    badgeLine: "1.125rem",
-    badgePad: "0.125rem 0.5rem",
-    badgeH: "1.375rem",
-    underlineH: "2rem"
+    h: 36,
+    font: 14,
+    line: "20px",
+    badgeFont: 12,
+    badgeLine: "18px",
+    badgePad: "2px 8px",
+    badgeH: 22,
+    underlineH: 32
   },
   md: {
-    h: "2.75rem",
-    font: "var(--ax-text-md)",
-    line: "1.5rem",
-    badgeFont: "var(--ax-text-sm)",
-    badgeLine: "1.25rem",
-    badgePad: "0.125rem 0.625rem",
-    badgeH: "1.5rem",
-    underlineH: "2.25rem"
+    h: 44,
+    font: 16,
+    line: "24px",
+    badgeFont: 14,
+    badgeLine: "20px",
+    badgePad: "2px 10px",
+    badgeH: 24,
+    underlineH: 36
   }
 };
 
 /* Track (container) geometry per type — exact values from the kit. */
 const TRACK = {
   underline: {
-    gap: "var(--ax-space-3)",
+    gap: 12,
     borderBottom: "1px solid var(--ax-border-subtle)"
   },
   "button-brand": {
-    gap: "var(--ax-space-1)"
+    gap: 4
   },
   "button-gray": {
-    gap: "var(--ax-space-1)"
+    gap: 4
   },
   "button-white": {
-    gap: "var(--ax-space-1)"
+    gap: 4
   },
   "button-minimal": {
-    gap: "var(--ax-space-1)"
+    gap: 4
   },
   "button-border": {
-    gap: "var(--ax-space-1)",
-    padding: "var(--ax-space-1-5)",
-    borderRadius: "var(--ax-radius-xl)",
+    gap: 4,
+    padding: 6,
+    borderRadius: 12,
     background: "var(--ax-gray-50)",
     boxShadow: "inset 0 0 0 1px var(--ax-border-subtle)"
   }
@@ -5139,7 +5123,7 @@ function Badge({
       justifyContent: "center",
       height: s.badgeH,
       padding: s.badgePad,
-      borderRadius: "var(--ax-radius-full)",
+      borderRadius: 9999,
       boxSizing: "border-box",
       background: brand ? "var(--ax-teal-50)" : "var(--ax-gray-50)",
       boxShadow: `inset 0 0 0 1px ${brand ? "var(--ax-teal-100)" : "var(--ax-border-subtle)"}`,
@@ -5160,8 +5144,8 @@ function buttonSkin(type, size, active, hover) {
   const s = SIZE[size];
   const base = {
     height: s.h,
-    padding: "var(--ax-space-2) var(--ax-space-3)",
-    borderRadius: "var(--ax-radius-sm)",
+    padding: "8px 12px",
+    borderRadius: 6,
     border: "none",
     background: "transparent",
     color: "var(--ax-text-tertiary)",
@@ -5171,7 +5155,7 @@ function buttonSkin(type, size, active, hover) {
     case "underline":
       return {
         height: s.underlineH,
-        padding: "0 var(--ax-space-1) var(--ax-space-3)",
+        padding: "0 4px 12px",
         borderRadius: 0,
         border: "none",
         background: "transparent",
@@ -5202,7 +5186,7 @@ function buttonSkin(type, size, active, hover) {
     case "button-minimal":
       return {
         ...base,
-        borderRadius: "var(--ax-radius-md)",
+        borderRadius: 8,
         background: active ? "var(--ax-white)" : hover ? "var(--ax-gray-50)" : "transparent",
         boxShadow: active ? "inset 0 0 0 1px var(--ax-border-strong), 0px 1px 2px 0px rgba(10,13,18,0.05)" : "none",
         color: active || hover ? "var(--ax-text-primary)" : "var(--ax-text-tertiary)"
@@ -5240,7 +5224,7 @@ function Tab({
     style: {
       display: "inline-flex",
       flexDirection: "row",
-      gap: "var(--ax-space-2)",
+      gap: 8,
       alignItems: "center",
       justifyContent: "center",
       boxSizing: "border-box",
@@ -5376,15 +5360,15 @@ function Drawer({
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
-      gap: "var(--ax-space-3)",
-      padding: "1.125rem 1.375rem",
+      gap: 12,
+      padding: "18px 22px",
       borderBottom: "1px solid var(--ax-border-subtle)"
     }
   }, /*#__PURE__*/React.createElement("h2", {
     style: {
       margin: 0,
       fontFamily: "var(--ax-font-heading)",
-      fontSize: "var(--ax-text-lg)",
+      fontSize: 18,
       fontWeight: 600,
       color: "var(--ax-text-primary)"
     }
@@ -5396,7 +5380,7 @@ function Drawer({
       background: "transparent",
       color: "var(--ax-text-tertiary)",
       cursor: "pointer",
-      padding: "var(--ax-space-1)"
+      padding: 4
     }
   }, /*#__PURE__*/React.createElement("svg", {
     width: "18",
@@ -5412,17 +5396,17 @@ function Drawer({
     style: {
       flex: 1,
       overflowY: "auto",
-      padding: "var(--ax-space-5) 1.375rem",
+      padding: "20px 22px",
       color: "var(--ax-text-secondary)",
-      fontSize: "var(--ax-text-sm)",
+      fontSize: 14,
       lineHeight: "var(--ax-lh-base)"
     }
   }, children), footer ? /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
       justifyContent: "flex-end",
-      gap: "0.625rem",
-      padding: "var(--ax-space-4) 1.375rem",
+      gap: 10,
+      padding: "16px 22px",
       borderTop: "1px solid var(--ax-border-subtle)",
       background: "var(--ax-gray-25)"
     }
@@ -5488,19 +5472,19 @@ function ButtonTrigger({
     onMouseEnter: () => setHover(true),
     onMouseLeave: () => setHover(false),
     style: {
-      height: "2.5rem",
+      height: 40,
       boxSizing: "border-box",
       display: "inline-flex",
       alignItems: "center",
-      gap: "var(--ax-space-1)",
-      padding: "0.625rem 0.875rem",
-      borderRadius: "var(--ax-radius-sm)",
+      gap: 4,
+      padding: "10px 14px",
+      borderRadius: 6,
       background: hover ? "rgb(242,242,242)" : "rgb(255,255,255)",
       boxShadow: "inset 0 0 0 1px rgb(206,212,218), " + SH + (open ? ", " + RING : ""),
       fontFamily: "var(--ax-font-base)",
       fontWeight: 600,
-      fontSize: "var(--ax-text-sm)",
-      lineHeight: "1.25rem",
+      fontSize: 14,
+      lineHeight: "20px",
       color: "rgb(73,80,87)",
       cursor: "pointer",
       whiteSpace: "nowrap",
@@ -5509,17 +5493,17 @@ function ButtonTrigger({
   }, icon ? /*#__PURE__*/React.createElement("span", {
     "aria-hidden": "true",
     style: {
-      width: "1.25rem",
-      height: "1.25rem",
+      width: 20,
+      height: 20,
       display: "inline-flex",
       alignItems: "center",
       justifyContent: "center",
-      fontSize: "1.0625rem",
+      fontSize: 17,
       color: "rgb(173,181,189)"
     }
   }, icon) : null, /*#__PURE__*/React.createElement("span", {
     style: {
-      padding: "0 var(--ax-space-0-5)"
+      padding: "0 2px"
     }
   }, label), /*#__PURE__*/React.createElement("span", {
     style: {
@@ -5547,8 +5531,8 @@ function IconTrigger({
       display: "inline-flex",
       alignItems: "center",
       justifyContent: "center",
-      padding: "var(--ax-space-1-5)",
-      borderRadius: "var(--ax-radius-sm)",
+      padding: 6,
+      borderRadius: 6,
       background: open ? "rgb(255,255,255)" : hover ? "rgb(242,242,242)" : "transparent",
       boxShadow: open ? RING : "none",
       color: hover || open ? "rgb(73,80,87)" : "rgb(113,118,128)",
@@ -5568,8 +5552,8 @@ function AvatarTrigger({
     "aria-expanded": open,
     "aria-label": label || "Account menu",
     style: {
-      width: "2.5rem",
-      height: "2.5rem",
+      width: 40,
+      height: 40,
       borderRadius: "50%",
       overflow: "hidden",
       display: "inline-flex",
@@ -5581,7 +5565,7 @@ function AvatarTrigger({
       color: "rgb(113,118,128)",
       fontFamily: "var(--ax-font-base)",
       fontWeight: 600,
-      fontSize: "var(--ax-text-md)"
+      fontSize: 16
     }
   }, typeof avatar === "string" && /[./]/.test(avatar) ? /*#__PURE__*/React.createElement("img", {
     src: avatar,
@@ -5616,7 +5600,7 @@ function Item({
   return /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
-      padding: "0.0625rem var(--ax-space-1-5)"
+      padding: "1px 6px"
     }
   }, /*#__PURE__*/React.createElement("button", {
     type: "button",
@@ -5633,9 +5617,9 @@ function Item({
       flexGrow: 1,
       display: "flex",
       alignItems: "center",
-      gap: "var(--ax-space-3)",
-      padding: "var(--ax-space-2) 0.625rem",
-      borderRadius: "var(--ax-radius-sm)",
+      gap: 12,
+      padding: "8px 10px",
+      borderRadius: 6,
       border: "none",
       appearance: "none",
       textAlign: "left",
@@ -5648,18 +5632,18 @@ function Item({
     style: {
       display: "flex",
       alignItems: "center",
-      gap: "var(--ax-space-2)",
+      gap: 8,
       flexGrow: 1,
       minWidth: 0
     }
   }, it.checkbox ? /*#__PURE__*/React.createElement("span", {
     "aria-hidden": "true",
     style: {
-      width: "1rem",
-      height: "1rem",
+      width: 16,
+      height: 16,
       flexShrink: 0,
       boxSizing: "border-box",
-      borderRadius: "var(--ax-radius-xs)",
+      borderRadius: 4,
       border: "1px solid " + (it.checked ? "rgb(13,82,87)" : "rgb(213,215,218)"),
       background: it.checked ? "rgb(13,82,87)" : "rgb(255,255,255)",
       display: "inline-flex",
@@ -5680,21 +5664,21 @@ function Item({
   })) : null) : it.icon ? /*#__PURE__*/React.createElement("span", {
     "aria-hidden": "true",
     style: {
-      width: "1rem",
-      height: "1rem",
+      width: 16,
+      height: 16,
       flexShrink: 0,
       display: "inline-flex",
       alignItems: "center",
       justifyContent: "center",
-      fontSize: "0.9375rem",
+      fontSize: 15,
       color: dis ? "rgb(164,167,174)" : it.danger ? color : "rgb(113,118,128)"
     }
   }, it.icon) : null, /*#__PURE__*/React.createElement("span", {
     style: {
       flexGrow: 1,
       fontWeight: 600,
-      fontSize: "var(--ax-text-sm)",
-      lineHeight: "1.25rem",
+      fontSize: 14,
+      lineHeight: "20px",
       color,
       whiteSpace: "nowrap",
       overflow: "hidden",
@@ -5703,12 +5687,12 @@ function Item({
   }, it.label)), it.shortcut ? /*#__PURE__*/React.createElement("span", {
     style: {
       flexShrink: 0,
-      borderRadius: "var(--ax-radius-xs)",
+      borderRadius: 4,
       boxShadow: "inset 0 0 0 1px rgb(233,234,235)",
-      padding: "0.0625rem var(--ax-space-1)",
+      padding: "1px 4px",
       fontWeight: 500,
-      fontSize: "var(--ax-text-xs)",
-      lineHeight: "1.125rem",
+      fontSize: 12,
+      lineHeight: "18px",
       color: "rgb(113,118,128)"
     }
   }, it.shortcut) : null));
@@ -5785,13 +5769,13 @@ function Dropdown({
     role: "menu",
     style: {
       position: "absolute",
-      top: "calc(100% + 0.5rem)",
+      top: "calc(100% + 8px)",
       [side]: 0,
       zIndex: "var(--ax-z-dropdown, 1000)",
       width,
       boxSizing: "border-box",
       overflow: "hidden",
-      borderRadius: "var(--ax-radius-md)",
+      borderRadius: 8,
       background: "rgb(255,255,255)",
       boxShadow: "0 0 0 1px rgba(0,0,0,0.08), 0px 12px 16px -4px rgba(10,13,18,0.08), 0px 4px 6px -2px rgba(10,13,18,0.03), 0px 2px 2px -1px rgba(10,13,18,0.04)",
       display: "flex",
@@ -5800,29 +5784,29 @@ function Dropdown({
     }
   }, headerContent ? /*#__PURE__*/React.createElement("div", {
     style: {
-      padding: "var(--ax-space-3)",
+      padding: 12,
       borderBottom: "1px solid rgb(233,236,239)"
     }
   }, headerContent) : header ? /*#__PURE__*/React.createElement("div", {
     style: {
-      padding: "var(--ax-space-3) var(--ax-space-4)",
+      padding: "12px 16px",
       borderBottom: "1px solid rgb(233,236,239)",
       fontWeight: 600,
-      fontSize: "var(--ax-text-sm)",
-      lineHeight: "1.25rem",
+      fontSize: 14,
+      lineHeight: "20px",
       color: "rgb(73,80,87)"
     }
   }, header) : null, /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
       flexDirection: "column",
-      padding: "var(--ax-space-1) 0"
+      padding: "4px 0"
     }
   }, items.map((it, i) => {
     if (it.divider) return /*#__PURE__*/React.createElement("div", {
       key: i,
       style: {
-        padding: "var(--ax-space-1) 0"
+        padding: "4px 0"
       }
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -5833,10 +5817,10 @@ function Dropdown({
     if (it.header) return /*#__PURE__*/React.createElement("div", {
       key: i,
       style: {
-        padding: "var(--ax-space-2) var(--ax-space-4) var(--ax-space-1)",
+        padding: "8px 16px 4px",
         fontWeight: 600,
-        fontSize: "var(--ax-text-xs)",
-        lineHeight: "1.125rem",
+        fontSize: 12,
+        lineHeight: "18px",
         color: "rgb(113,118,128)"
       }
     }, it.header);
@@ -5879,7 +5863,7 @@ function Modal({
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      padding: "var(--ax-space-6)"
+      padding: "24px"
     }
   }, /*#__PURE__*/React.createElement("div", {
     role: "dialog",
@@ -5894,7 +5878,7 @@ function Modal({
       display: "flex",
       flexDirection: "column",
       background: "var(--ax-surface-card)",
-      borderRadius: "var(--ax-radius-xs)",
+      borderRadius: "4px",
       boxShadow: "var(--ax-shadow-2xl)",
       overflow: "hidden",
       fontFamily: "var(--ax-font-base)",
@@ -5905,15 +5889,14 @@ function Modal({
       display: "flex",
       alignItems: "flex-start",
       justifyContent: "space-between",
-      gap: "var(--ax-space-4)",
-      padding: "var(--ax-space-5) var(--ax-space-6) var(--ax-space-3)",
-      borderBottom: "1px solid var(--ax-border-subtle)"
+      gap: "16px",
+      padding: "20px 24px 12px"
     }
   }, /*#__PURE__*/React.createElement("h2", {
     style: {
       margin: 0,
       fontFamily: "var(--ax-font-heading)",
-      fontSize: "var(--ax-text-lg)",
+      fontSize: "18px",
       fontWeight: "var(--ax-fw-semibold)",
       color: "var(--ax-text-primary)"
     }
@@ -5925,8 +5908,8 @@ function Modal({
       background: "transparent",
       color: "var(--ax-text-tertiary)",
       cursor: "pointer",
-      padding: "var(--ax-space-1)",
-      marginTop: "-0.125rem"
+      padding: 4,
+      marginTop: -2
     }
   }, /*#__PURE__*/React.createElement("svg", {
     width: "18",
@@ -5940,20 +5923,18 @@ function Modal({
     strokeLinecap: "round"
   })))) : null, /*#__PURE__*/React.createElement("div", {
     style: {
-      padding: title ? "0 1.5rem 1.25rem" : "1.5rem",
+      padding: title ? "0 24px 20px" : "24px",
       overflowY: "auto",
       color: "var(--ax-text-secondary)",
-      fontSize: "var(--ax-text-sm)",
-      lineHeight: "var(--ax-lh-base)",
-      paddingTop: title ? "1.25rem" : "1.5rem",
-      textAlign: "left"
+      fontSize: "14px",
+      lineHeight: "var(--ax-lh-base)"
     }
   }, children), footer ? /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
       justifyContent: "flex-end",
-      gap: "0.625rem",
-      padding: "var(--ax-space-4) var(--ax-space-6)",
+      gap: "10px",
+      padding: "16px 24px",
       borderTop: "1px solid var(--ax-border-subtle)",
       background: "var(--ax-gray-25)"
     }
@@ -5986,7 +5967,7 @@ function InfoCard({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      width: "0.375rem",
+      width: 6,
       flexShrink: 0,
       background: "linear-gradient(180deg, var(--ax-aqua), var(--ax-sea-depths))"
     }
@@ -6000,21 +5981,21 @@ function InfoCard({
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
-      gap: "var(--ax-space-3)",
-      padding: "var(--ax-space-4) var(--ax-space-5)",
+      gap: 12,
+      padding: "16px 20px",
       borderBottom: "1px solid var(--ax-border-subtle)"
     }
   }, /*#__PURE__*/React.createElement("h3", {
     style: {
       margin: 0,
       fontFamily: "var(--ax-font-heading)",
-      fontSize: "var(--ax-text-md)",
+      fontSize: 16,
       fontWeight: 600,
       color: "var(--ax-text-primary)"
     }
   }, title), action), /*#__PURE__*/React.createElement("div", {
     style: {
-      padding: "var(--ax-space-4) var(--ax-space-5)"
+      padding: "16px 20px"
     }
   }, children)));
 }
@@ -6029,11 +6010,11 @@ function KVRow({
   return /*#__PURE__*/React.createElement("div", {
     style: {
       display: "grid",
-      gridTemplateColumns: "12.5rem 1fr",
-      gap: "var(--ax-space-4)",
-      padding: "0.4375rem 0",
+      gridTemplateColumns: "200px 1fr",
+      gap: 16,
+      padding: "7px 0",
       fontFamily: "var(--ax-font-base)",
-      fontSize: "var(--ax-text-sm)"
+      fontSize: 14
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
@@ -6060,21 +6041,21 @@ function EditPill({
     style: {
       display: "inline-flex",
       alignItems: "center",
-      gap: "0.4375rem",
-      padding: "var(--ax-space-1-5) var(--ax-space-3)",
+      gap: 7,
+      padding: "6px 12px",
       border: "1px solid var(--ax-border)",
       borderRadius: "var(--ax-radius-full)",
       background: "var(--ax-surface-card)",
       color: "var(--ax-text-secondary)",
       fontFamily: "var(--ax-font-base)",
-      fontSize: "0.8125rem",
+      fontSize: 13,
       fontWeight: 600,
       cursor: "pointer"
     }
   }, /*#__PURE__*/React.createElement("i", {
     className: "bi bi-pencil",
     style: {
-      fontSize: "0.8125rem"
+      fontSize: 13
     }
   }), children);
 }
@@ -6097,18 +6078,18 @@ function DocChip({
     style: {
       display: "flex",
       alignItems: "center",
-      gap: "0.625rem",
-      padding: "0.625rem 0.875rem",
+      gap: 10,
+      padding: "10px 14px",
       border: "1px solid var(--ax-border-subtle)",
       borderRadius: "var(--ax-radius-md)",
       background: "var(--ax-surface-card)",
-      minWidth: "12.5rem"
+      minWidth: 200
     }
   }, /*#__PURE__*/React.createElement("i", {
     className: "bi bi-file-earmark-pdf-fill",
     style: {
       color: "var(--ax-danger-600)",
-      fontSize: "1.375rem"
+      fontSize: 22
     }
   }), /*#__PURE__*/React.createElement("div", {
     style: {
@@ -6116,13 +6097,13 @@ function DocChip({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: "var(--ax-text-sm)",
+      fontSize: 14,
       fontWeight: 600,
       color: "var(--ax-text-primary)"
     }
   }, name), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: "var(--ax-text-xs)",
+      fontSize: 12,
       color: "var(--ax-text-tertiary)"
     }
   }, "Uploaded ", ago)));
@@ -6135,8 +6116,8 @@ function Recipient({
     style: {
       display: "flex",
       alignItems: "flex-start",
-      gap: "var(--ax-space-3)",
-      padding: "var(--ax-space-3) 0",
+      gap: 12,
+      padding: "12px 0",
       borderTop: "1px solid var(--ax-border-subtle)"
     }
   }, /*#__PURE__*/React.createElement(NS.Checkbox, null), /*#__PURE__*/React.createElement("div", {
@@ -6146,15 +6127,15 @@ function Recipient({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: "var(--ax-text-sm)",
+      fontSize: 14,
       fontWeight: 600,
       color: "var(--ax-text-primary)"
     }
   }, name), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: "0.8125rem",
+      fontSize: 13,
       color: "var(--ax-text-tertiary)",
-      marginTop: "var(--ax-space-0-5)"
+      marginTop: 2
     }
   }, meta)), /*#__PURE__*/React.createElement(NS.IconButton, {
     icon: /*#__PURE__*/React.createElement("i", {
@@ -6177,8 +6158,8 @@ function OrderDetail({
   }, "Electronic");
   return /*#__PURE__*/React.createElement("div", {
     style: {
-      padding: "1.375rem 1.75rem 1.75rem",
-      maxWidth: "73.75rem"
+      padding: "22px 28px 28px",
+      maxWidth: 1180
     }
   }, /*#__PURE__*/React.createElement(NS.Breadcrumb, {
     items: [{
@@ -6194,14 +6175,14 @@ function OrderDetail({
     style: {
       display: "flex",
       alignItems: "center",
-      gap: "var(--ax-space-3)",
-      margin: "var(--ax-space-3) 0 var(--ax-space-5)"
+      gap: 12,
+      margin: "12px 0 20px"
     }
   }, /*#__PURE__*/React.createElement("h1", {
     style: {
       margin: 0,
       fontFamily: "var(--ax-font-heading)",
-      fontSize: "1.625rem",
+      fontSize: 26,
       fontWeight: 700,
       color: "var(--ax-text-primary)"
     }
@@ -6212,7 +6193,7 @@ function OrderDetail({
     style: {
       display: "grid",
       gridTemplateColumns: "1fr 1fr",
-      gap: "1.125rem"
+      gap: 18
     }
   }, /*#__PURE__*/React.createElement(InfoCard, {
     title: "Document Information",
@@ -6248,13 +6229,13 @@ function OrderDetail({
     title: "Notes / Special Instructions",
     action: /*#__PURE__*/React.createElement(EditPill, null),
     style: {
-      marginTop: "1.125rem"
+      marginTop: 18
     }
   }, /*#__PURE__*/React.createElement("p", {
     style: {
       margin: 0,
       fontFamily: "var(--ax-font-base)",
-      fontSize: "var(--ax-text-sm)",
+      fontSize: 14,
       color: "var(--ax-text-secondary)",
       lineHeight: 1.55
     }
@@ -6268,7 +6249,7 @@ function OrderDetail({
       })
     }, "Add Recipient"),
     style: {
-      marginTop: "1.125rem"
+      marginTop: 18
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -6293,12 +6274,12 @@ function OrderDetail({
   })), /*#__PURE__*/React.createElement(InfoCard, {
     title: "Attached Documents: 2",
     style: {
-      marginTop: "1.125rem"
+      marginTop: 18
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
-      gap: "0.875rem",
+      gap: 14,
       flexWrap: "wrap"
     }
   }, /*#__PURE__*/React.createElement(DocChip, {
@@ -6311,7 +6292,7 @@ function OrderDetail({
     style: {
       display: "flex",
       justifyContent: "space-between",
-      marginTop: "var(--ax-space-6)"
+      marginTop: 24
     }
   }, /*#__PURE__*/React.createElement(NS.Button, {
     variant: "secondary",
@@ -6397,31 +6378,31 @@ function Stat({
       flex: 1,
       display: "flex",
       alignItems: "center",
-      gap: "0.875rem",
+      gap: 14,
       background: "var(--ax-surface-card)",
       border: "1px solid var(--ax-border-subtle)",
       borderRadius: "var(--ax-radius-lg)",
-      padding: "var(--ax-space-4) 1.125rem",
+      padding: "16px 18px",
       boxShadow: "var(--ax-shadow-xs)"
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      width: "2.625rem",
-      height: "2.625rem",
+      width: 42,
+      height: 42,
       borderRadius: "var(--ax-radius-md)",
       background: tint,
       color: "#fff",
       display: "inline-flex",
       alignItems: "center",
       justifyContent: "center",
-      fontSize: "var(--ax-text-lg)"
+      fontSize: 18
     }
   }, /*#__PURE__*/React.createElement("i", {
     className: `bi bi-${icon}`
   })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: "var(--ax-font-heading)",
-      fontSize: "var(--ax-h4)",
+      fontSize: 24,
       fontWeight: 700,
       color: "var(--ax-text-primary)",
       lineHeight: 1.1
@@ -6429,7 +6410,7 @@ function Stat({
   }, value), /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: "var(--ax-font-base)",
-      fontSize: "0.8125rem",
+      fontSize: 13,
       color: "var(--ax-text-tertiary)"
     }
   }, label)));
@@ -6442,7 +6423,7 @@ function OrderList({
   const cols = [{
     key: "id",
     header: "Order",
-    width: "6rem",
+    width: "96px",
     render: v => /*#__PURE__*/React.createElement("span", {
       style: {
         fontWeight: 600,
@@ -6458,7 +6439,7 @@ function OrderList({
       }
     }, v), /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: "var(--ax-text-xs)",
+        fontSize: 12,
         color: "var(--ax-text-tertiary)"
       }
     }, r.type, " \xB7 ", r.country))
@@ -6469,7 +6450,7 @@ function OrderList({
       style: {
         display: "inline-flex",
         alignItems: "center",
-        gap: "var(--ax-space-2)"
+        gap: 8
       }
     }, /*#__PURE__*/React.createElement(NSL.Avatar, {
       name: v,
@@ -6489,35 +6470,35 @@ function OrderList({
     render: v => /*#__PURE__*/React.createElement("span", {
       style: {
         color: "var(--ax-text-tertiary)",
-        fontSize: "0.8125rem"
+        fontSize: 13
       }
     }, v)
   }];
   return /*#__PURE__*/React.createElement("div", {
     style: {
-      padding: "1.375rem 1.75rem 1.75rem",
-      maxWidth: "73.75rem"
+      padding: "22px 28px 28px",
+      maxWidth: 1180
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
       alignItems: "flex-end",
       justifyContent: "space-between",
-      marginBottom: "1.125rem"
+      marginBottom: 18
     }
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", {
     style: {
       margin: 0,
       fontFamily: "var(--ax-font-heading)",
-      fontSize: "1.625rem",
+      fontSize: 26,
       fontWeight: 700,
       color: "var(--ax-text-primary)"
     }
   }, "Order Management"), /*#__PURE__*/React.createElement("p", {
     style: {
-      margin: "var(--ax-space-1) 0 0",
+      margin: "4px 0 0",
       fontFamily: "var(--ax-font-base)",
-      fontSize: "var(--ax-text-sm)",
+      fontSize: 14,
       color: "var(--ax-text-tertiary)"
     }
   }, "Review and process incoming apostille requests.")), /*#__PURE__*/React.createElement(NSL.Button, {
@@ -6527,8 +6508,8 @@ function OrderList({
   }, "Create New Order")), /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
-      gap: "0.875rem",
-      marginBottom: "var(--ax-space-5)"
+      gap: 14,
+      marginBottom: 20
     }
   }, /*#__PURE__*/React.createElement(Stat, {
     label: "Awaiting review",
@@ -6555,8 +6536,8 @@ function OrderList({
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
-      marginBottom: "0.875rem",
-      gap: "var(--ax-space-4)"
+      marginBottom: 14,
+      gap: 16
     }
   }, /*#__PURE__*/React.createElement(NSL.Tabs, {
     value: tab,
@@ -6572,7 +6553,7 @@ function OrderList({
     }]
   }), /*#__PURE__*/React.createElement("div", {
     style: {
-      width: "17.5rem"
+      width: 280
     }
   }, /*#__PURE__*/React.createElement(NSL.Input, {
     leadingIcon: /*#__PURE__*/React.createElement("i", {
@@ -6589,7 +6570,7 @@ function OrderList({
     style: {
       display: "flex",
       justifyContent: "flex-end",
-      marginTop: "1.125rem"
+      marginTop: 18
     }
   }, /*#__PURE__*/React.createElement(NSL.Pagination, {
     page: page,
@@ -6691,33 +6672,33 @@ function PortalTopBar({
 }) {
   return /*#__PURE__*/React.createElement("header", {
     style: {
-      height: "4.5rem",
+      height: 72,
       flexShrink: 0,
       background: "var(--ax-surface-card)",
       borderBottom: "1px solid var(--ax-border-subtle)",
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
-      padding: "0 1.75rem",
+      padding: "0 28px",
       fontFamily: "var(--ax-font-base)"
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
       alignItems: "center",
-      gap: "0.875rem"
+      gap: 14
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      width: "2.375rem",
-      height: "2.375rem",
+      width: 38,
+      height: 38,
       borderRadius: "50%",
       background: "radial-gradient(circle at 50% 40%, #c8a24a, #8a6d2a)",
       display: "inline-flex",
       alignItems: "center",
       justifyContent: "center",
       color: "#fff",
-      fontSize: "0.5625rem",
+      fontSize: 9,
       fontWeight: 700,
       textAlign: "center",
       lineHeight: 1.05,
@@ -6727,7 +6708,7 @@ function PortalTopBar({
     style: {
       fontFamily: "var(--ax-font-condensed)",
       fontWeight: 600,
-      fontSize: "var(--ax-text-lg)",
+      fontSize: 18,
       letterSpacing: ".04em",
       textTransform: "uppercase",
       color: "var(--ax-text-primary)"
@@ -6736,12 +6717,12 @@ function PortalTopBar({
     style: {
       display: "flex",
       alignItems: "center",
-      gap: "0.625rem"
+      gap: 10
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      width: "2.125rem",
-      height: "2.125rem",
+      width: 34,
+      height: 34,
       borderRadius: "50%",
       background: "var(--ax-teal-50)",
       color: "var(--ax-sea-depths)",
@@ -6749,12 +6730,12 @@ function PortalTopBar({
       alignItems: "center",
       justifyContent: "center",
       fontWeight: 600,
-      fontSize: "0.8125rem",
+      fontSize: 13,
       border: "1px solid var(--ax-border-subtle)"
     }
   }, user.split(" ").map(w => w[0]).slice(0, 2).join("")), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: "var(--ax-text-sm)",
+      fontSize: 14,
       fontWeight: 500,
       color: "var(--ax-text-primary)"
     }

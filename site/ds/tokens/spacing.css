@@ -20,6 +20,14 @@
   --ax-space-24: 96px;
   --ax-space-32: 128px;
 
+  /* Spacing primitives (Spacing primitives.pdf): 1 unit = 0.25rem = 4px */
+  --ax-sp-0: 0px; /* @kind spacing */
+  --ax-sp-1: 0.25rem; /* 4px */
+  --ax-sp-2: 0.5rem;  /* 8px */
+  --ax-sp-3: 1rem;    /* 16px */
+  --ax-sp-4: 1.5rem;  /* 24px */
+  --ax-sp-5: 3rem;    /* 48px */
+
   /* Named spacing aliases */
   --ax-gap-xs: var(--ax-space-1);
   --ax-gap-sm: var(--ax-space-2);

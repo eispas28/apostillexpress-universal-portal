@@ -42,7 +42,7 @@ const mkFile = (f) => ({ id: Date.now() + "-" + f.name + Math.random(), name: f.
 
 const fmtBytes = (n) => !n ? "" : n >= 1048576 ? (n / 1048576).toFixed(1) + " MB" : n >= 1024 ? Math.round(n / 1024) + " KB" : n + " B";
 const UploadField = ({ f, onFile, onRemove }) => <UploadFieldBase f={f} onFile={onFile} onRemove={onRemove} />;
-const UploadFieldBase = ({ f, onFile, onRemove }) => <FileUpload hint="PDF, JPEG, TIFF (Files cannot exceed 10MB)" files={f ? [{ name: f.name, size: fmtBytes(f.size), status: "done" }] : []} onSelect={(fl) => { if (fl && fl[0]) onFile(mkFile(fl[0])); }} onRemove={onRemove} />;
+const UploadFieldBase = ({ f, onFile, onRemove }) => { const [err, setErr] = useState(""); return <React.Fragment><FileUpload hint="PDF, JPEG, TIFF (Files cannot exceed 10MB)" files={f ? [{ name: f.name, size: fmtBytes(f.size), status: "done" }] : []} onSelect={(fl) => { const x = fl && fl[0]; if (!x) return; if (!/\.(pdf|jpe?g|tiff?)$/i.test(x.name)) { setErr("Unsupported file type. Upload a PDF, JPEG or TIFF."); return; } if (x.size > 10485760) { setErr("File exceeds the 10MB limit."); return; } setErr(""); onFile(mkFile(x)); }} onRemove={() => { setErr(""); onRemove(); }} />{err ? <div className="field-err" role="alert" style={{ marginTop: "var(--ax-space-1-5)" }}>{err}</div> : null}</React.Fragment>; };
 
 function custInfo(form, k) { const c = (k && k.customer) || form.customer || {}; return [((c.firstName || "") + " " + (c.lastName || "")).trim(), c.email, c.organization]; }
 function orderInfo(k, form, inPerson) {
@@ -285,7 +285,7 @@ function EditOrderPanel({ child, form, title, inPerson, onSave, onClose, orderEd
           </React.Fragment> : null}
         </div>
     </Drawer>
-    {confirmClose && window.AXModal ? <div style={{ position: "relative", zIndex: 100000 }}><window.AXModal title="Discard changes?" onClose={() => setConfirmClose(false)} footer={<React.Fragment><Button variant="secondary" size="md" onClick={() => setConfirmClose(false)}>Keep Editing</Button><Button variant="danger" size="md" onClick={onClose}>Discard Changes</Button></React.Fragment>}><p style={{ margin: 0, fontSize: "var(--ax-text-md)", lineHeight: 1.5, color: "var(--ax-text-secondary)" }}>You have unsaved changes to this order. If you leave now, they will be lost.</p></window.AXModal></div> : null}
+    {confirmClose && window.AXModal ? ReactDOM.createPortal(<div style={{ position: "relative", zIndex: 100000 }}><window.AXModal title="Discard changes?" onClose={() => setConfirmClose(false)} footer={<React.Fragment><Button variant="secondary" size="md" onClick={() => setConfirmClose(false)}>Keep Editing</Button><Button variant="danger" size="md" onClick={onClose}>Discard Changes</Button></React.Fragment>}><p style={{ margin: 0, fontSize: "var(--ax-text-md)", lineHeight: 1.5, color: "var(--ax-text-secondary)" }}>You have unsaved changes to this order. If you leave now, they will be lost.</p></window.AXModal></div>, document.body) : null}
   </React.Fragment>);
 }
 

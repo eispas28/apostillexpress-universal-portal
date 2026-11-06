@@ -234,18 +234,21 @@
       (o.children || []).forEach(function (c) { if (!c.status || c.status === "New") c.status = "Draft"; });
     });
     // Canonical numbering: parent = digits only (shown as #<digits>); each child
-    // = <STATE CODE>-<parent digits>_<3-digit sequence from 000> (e.g. DM-711450120_000).
+    // = <7 digits>-<6 digits>_<4-digit sequence from 0001>; parent = <STATE CODE>-<7>-<6> (e.g. DM-3638286-460082, child 3638286-460082_0001).
     // Applied here so seeds and created orders always render the same scheme, and
     // so routing (which matches child.number verbatim) stays consistent.
     for (var a = 0; a < list.length; a++) {
       var o = list[a];
-      var pnum = String(o.number).replace(/\D/g, "") || String(o.number);
-      o.number = pnum;
+      var raw = String(o.number);
+      var d = raw.replace(/\D/g, "") || raw;
+      d = (d + d.split("").reverse().join("") + "0000000000000").slice(0, 13);
+      var core = d.slice(0, 7) + "-" + d.slice(7);
       var kids = o.children || [];
+      var pm = raw.match(/^[A-Za-z]{2}(?=-)/);
+      var pcode = pm ? pm[0].toUpperCase() : (o.issuingStateCode || (kids[0] && (kids[0].issuingStateCode || (kids[0].issuingStateShort ? kids[0].issuingStateShort.replace(/[^A-Za-z]/g, "").slice(0, 2).toUpperCase() : ""))) || "DM");
+      o.number = pcode + "-" + core;
       for (var b = 0; b < kids.length; b++) {
-        var kcode = kids[b].issuingStateCode ||
-          (kids[b].issuingStateShort ? kids[b].issuingStateShort.replace(/[^A-Za-z]/g, "").slice(0, 2).toUpperCase() : "XX");
-        kids[b].number = kcode + "-" + pnum.replace(/^(\d{6})(?=\d)/, function (m) { return m + "-"; }) + "_" + ("000" + b).slice(-3);
+        kids[b].number = core + "_" + ("0000" + (b + 1)).slice(-4);
       }
     }
     var seen = {}, out = [];
@@ -271,6 +274,7 @@
     "Reissued": { cls: "issued" },
     "Rejected": { cls: "rejected" },
     "Cancelled": { cls: "cancelled" },
+    "Canceled": { cls: "cancelled" },
     "Revoked & Cancelled": { cls: "revoked" },
     "Revoked and Cancelled": { cls: "revoked" }
   };
@@ -293,7 +297,7 @@
     "Reissued": "Issued",
     "Revoked & Cancelled": "Revoked"
   };
-  function universalLabel(status) { return UNIVERSAL_MAP[status] || status; }
+  function universalLabel(status) { return status === "Cancelled" ? "Canceled" : (UNIVERSAL_MAP[status] || status); }
   function universalClass(status) { return statusClass(universalLabel(status)); }
 
   // Tooltip text explaining why an action is unavailable in the current status.
@@ -347,7 +351,7 @@
     var isPaper = matrixGroup(child.deliveryFlow) === "paper";
     switch (status) {
       case "Draft":
-        return { kind: "info", icon: "bi-info-circle-fill", title: "Submitted - Walk-In Appointment", body: "Bring your printed delivery form and original documents. Your order shows as Incomplete until your appointment, where payment will be collected." };
+        return { kind: "info", icon: "bi-info-circle-fill", title: "Submitted In-Person Appointment", body: "Bring your printed delivery form and original documents. Your order shows as Incomplete until your appointment, where payment will be collected." };
       case "New":
         return null;
       case "In Process":
@@ -364,7 +368,7 @@
       case "Cancelled":
         return { kind: "danger", icon: "bi-exclamation-circle-fill", title: "Order Cancelled", lines: [["Reason:", child.cancelReason || "Customer requested cancellation."], child.unpaid ? ["Refund:", "No refund applies — this incomplete order was canceled before payment."] : ["Refund:", "A refund has already been processed."]] };
       case "Revoked & Cancelled":
-        return { kind: "danger", icon: "bi-exclamation-circle-fill", title: "Order DM-" + child.number + " Revoked & Cancelled", body: "Your Apostille Certificate has been revoked and cancelled.", lines: [["Reason:", child.revokeReason || "Illegible"]] };
+        return { kind: "danger", icon: "bi-exclamation-circle-fill", title: "Order #" + child.number + " Revoked & Cancelled", body: "Your Apostille Certificate has been revoked and cancelled.", lines: [["Reason:", child.revokeReason || "Illegible"]] };
       default:
         return null;
     }
@@ -403,7 +407,7 @@
     if (anyFlagged && !allFlagged) return "In Review";             // 0.2 — a flag on a subset escalates the whole order
 
     // Step 1 — uniform (all children share one status)
-    if (all("Draft")) return "Draft";                              // Walk-In (Appointment) awaiting the CA
+    if (all("Draft")) return "Incomplete";                              // Walk-In (Appointment) awaiting the CA
     if (all("New")) return "New";                                  // 3
     if (all("In Process")) return "In Process";                    // 4
     if (allFlagged) return "Flagged";                              // 5
@@ -432,13 +436,14 @@
   //   new (blue/teal) · pending (yellow) · issued (green) · cancelled/rejected/revoked (red)
   var PARENT_META = {
     "Draft": "draft",
+    "Incomplete": "incomplete",
     "New": "new",
-    "In Process": "pending", "In Review": "pending", "Pending Print": "pending", "Incomplete": "pending", "Flagged": "pending",
+    "In Process": "pending", "In Review": "pending", "Pending Print": "pending", "Flagged": "pending",
     "Issued": "issued", "Printed": "issued", "Completed": "issued",
     "Cancelled": "cancelled", "Rejected": "rejected", "Revoked": "revoked"
   };
   function parentClass(status) { return PARENT_META[status] || "new"; }
-  function parentLabel(status) { return status; }
+  function parentLabel(status) { return status === "Cancelled" ? "Canceled" : status; }
 
   // ---- Pricing --------------------------------------------------------
   // Per-apostille fees (from the Create-Order fee schedule):
