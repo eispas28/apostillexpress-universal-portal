@@ -865,8 +865,8 @@ function TraditionalModal({ onSwitchDigital, onContinuePaper }) {
         <div className="tm-head">
           <div>
             <h2 className="tm-title">Digital Apostille - <span>The New International Standard</span></h2>
-            <p>Get the same official Apostille, recognized worldwide – delivered in minutes, not days.</p>
-          </div>
+              <p>Get the same official Apostille, recognized worldwide. Once processed by the Competent Authority, your digital Apostille will be delivered in minutes.</p>
+            </div>
           <button className="modal-x" aria-label="Close" onClick={onContinuePaper}><i className="bi bi-x-lg"></i></button>
         </div>
         <div className="tm-body">
@@ -1557,7 +1557,7 @@ function ReturnAddressSection({ d, setD, customer, subtitle, errors }) {
         <SaveProfileAddress section="return" addr={a} label="return address" />
 
         {!d.prepaidOpen ?
-        <button className="addbtn" onClick={() => setD({ prepaidOpen: true })}><i className="bi bi-plus-lg"></i>Add Prepaid Shipping Label</button> :
+        <button className="addbtn" style={{ marginTop: "1rem" }} onClick={() => setD({ prepaidOpen: true })}><i className="bi bi-plus-lg"></i>Add Prepaid Shipping Label</button> :
 
         <div className="ship-card">
             <div className="ship-head">
@@ -1612,7 +1612,7 @@ function DocumentInfoSection({ d, setD, errors, walkInPaper, walkIn }) {
           </div>
         </div>
         <div className="fgrid" style={{ marginTop: 20 }}>
-          <SelectFieldReq label="Document Type" required value={d.docType} onChange={(v) => setD({ docType: v, docDesc: "" })} placeholder="Select document type" options={Object.keys(DOC_TYPES)} error={errors.docType} />
+          <SelectFieldReq label="Document Type" required value={d.docType} onChange={(v) => { const o = DOC_TYPES[v] || []; setD({ docType: v, docDesc: v === d.docType ? d.docDesc : o.includes(d.docDesc) ? d.docDesc : o.length === 1 ? o[0] : "" }); }} placeholder="Select document type" options={Object.keys(DOC_TYPES)} error={errors.docType} />
           {d.docType === "Other" ?
           <TextField label="Document Description" required value={d.docDesc} onChange={(v) => setD({ docDesc: v })} placeholder={"Enter \u201cOther\u201d description"} error={errors.docDesc} /> :
           <SelectFieldReq label="Document Description" required value={d.docDesc} onChange={(v) => setD({ docDesc: v })} placeholder={d.docType ? "Select description" : "Select document type first"} options={descOptions} error={errors.docDesc} />}

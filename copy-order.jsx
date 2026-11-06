@@ -57,7 +57,7 @@ function CopyOrderScreen({ ctx, form, onCancel, onDone, stateRef, initial }) {
   if (stateRef) stateRef.current = { kids, open };
   useEffect(() => { if (!initial || !initial.kids || initial.kids.length < 2) return; const last = initial.kids[initial.kids.length - 1]; setTimeout(() => { const el = cardRefs.current[last.id]; if (el) window.scrollTo({ top: Math.max(0, el.getBoundingClientRect().top + window.pageYOffset - 96), behavior: "smooth" }); }, 250); }, []);
   const [editId, setEditId] = useState(null), [toast, setToast] = useState(null), toastT = useRef(null);
-  const notify = (title) => { clearTimeout(toastT.current); setToast({ title, id: Date.now() }); toastT.current = setTimeout(() => setToast(null), 4000); };
+  const notify = (title, body) => { clearTimeout(toastT.current); setToast({ title, body, id: Date.now() }); toastT.current = setTimeout(() => setToast(null), 4000); };
   useEffect(() => () => clearTimeout(toastT.current), []);
   const [preview, setPreview] = useState(false);
   const [txt, setTxt] = useState(null);
@@ -123,7 +123,7 @@ function CopyOrderScreen({ ctx, form, onCancel, onDone, stateRef, initial }) {
                 <div className="co-acts" onClick={(e) => e.stopPropagation()}>
                   <Tip t={room < 1 ? "Maximum copies reached" : "Copy this order"}><IconButton className="co-ib" variant="secondary" size="sm" label="Copy this order" icon={<i className="bi bi-copy"></i>} disabled={room < 1} onClick={() => { setCopyN(1); setCopyId(k.id); }} /></Tip>
                   <Tip t="Edit order"><IconButton className="co-ib" variant="secondary" size="sm" label="Edit order" icon={<i className="bi bi-pencil-square"></i>} onClick={() => setEditId(k.id)} /></Tip>
-                  <Tip t="Delete order"><IconButton className="co-ib del" variant="secondary" size="sm" label="Delete order" icon={<i className="bi bi-trash"></i>} onClick={() => setDelId(k.id)} /></Tip>
+                  <Tip t="Delete order"><IconButton className="co-ib del" variant="secondary" size="sm" label="Delete order" icon={<i className="bi bi-trash"></i>} disabled={sel.length > 0} onClick={() => setDelId(k.id)} /></Tip>
                 </div>
                 <div className="co-chevwrap" onClick={(e) => e.stopPropagation()}><Tip t={o ? "Collapse" : "Expand"}><IconButton className="co-ib" variant="tertiary" size="sm" label={o ? "Collapse" : "Expand"} icon={<i className="bi bi-chevron-up co-chev" style={{ transform: o ? "none" : "rotate(180deg)" }}></i>} onClick={() => toggle(k.id)} /></Tip></div>
               </div>
@@ -165,11 +165,11 @@ function CopyOrderScreen({ ctx, form, onCancel, onDone, stateRef, initial }) {
             <button aria-label="More copies" onClick={() => setCopyN((n) => Math.min(room, n + 1))} disabled={copyN >= room}>+</button>
           </div>{copyN >= room ? <div className="co-ferr" role="alert" style={{ display: "flex", alignItems: "center", gap: "var(--ax-space-2)", color: "var(--ax-danger-700)" }}><i className="bi bi-exclamation-circle-fill" style={{ color: "var(--ax-danger-500)" }}></i><span style={{ color: "var(--ax-danger-700)" }}>Maximum of {ctx.isBoth ? 16 : 35} orders reached.</span></div> : null}</div>
       </window.AXModal> : null}
-      {delMulti ? <window.DeleteOrderModal count={sel.length} onClose={() => setDelMulti(false)} onConfirm={() => { if (sel.length >= kids.length) { setDelMulti(false); onCancel(); return; } setKids((a) => a.filter((x) => !sel.includes(x.id))); setSel([]); setDelMulti(false); setMaxErr(false); setTxt(null); }} /> : null}
-      {delId ? <window.DeleteOrderModal onClose={() => setDelId(null)} onConfirm={() => { if (kids.length <= 1) { setDelId(null); onCancel(); return; } setKids((a) => a.filter((x) => x.id !== delId)); setSel((s) => s.filter((x) => x !== delId)); setDelId(null); setMaxErr(false); setTxt(null); }} /> : null}
+      {delMulti ? <window.DeleteOrderModal count={sel.length} onClose={() => setDelMulti(false)} onConfirm={() => { if (sel.length >= kids.length) { setDelMulti(false); onCancel(); return; } const n = sel.length; setKids((a) => a.filter((x) => !sel.includes(x.id))); setSel([]); setDelMulti(false); setMaxErr(false); setTxt(null); notify(n > 1 ? "Documents removed" : "Document removed", n > 1 ? n + " documents have been removed." : "The document has been removed."); }} /> : null}
+      {delId ? <window.DeleteOrderModal onClose={() => setDelId(null)} onConfirm={() => { if (kids.length <= 1) { setDelId(null); onCancel(); return; } setKids((a) => a.filter((x) => x.id !== delId)); setSel((s) => s.filter((x) => x !== delId)); setDelId(null); setMaxErr(false); setTxt(null); notify("Document removed", "The document has been removed."); }} /> : null}
       {preview ? <window.PreviewModal confirmLabel="Checkout" files={kids.map((k, i) => k.file && { ...k.file, name: label(i) + " \u2022 " + (k.docDesc || "Document") + " \u2014 " + k.file.name }).filter(Boolean)} onClose={() => setPreview(false)} onConfirm={() => { setPreview(false); finish(); }} /> : null}
       {editing ? <EditOrderPanel child={editing} form={form} title={label(kids.indexOf(editing)) + " \u2022 Copied from Document " + ctx.parentNo} inPerson={inPerson} onSave={(c) => { const nm = label(kids.findIndex((x) => x.id === c.id)); patchKid(c.id, c); setEditId(null); notify(nm + " updated"); }} onClose={() => setEditId(null)} /> : null}
-      {toast ? <div className="ax-toasts bottom-right"><div className="ax-toast success" role="status" key={toast.id} style={{ alignItems: "center" }}><i className="ax-toast-ic" aria-hidden="true"></i><div className="ax-toast-b"><div className="ax-toast-t">{toast.title}</div></div><button className="ax-toast-x" aria-label="Close" onClick={() => setToast(null)}><i className="bi bi-x-lg"></i></button></div></div> : null}
+      {toast ? <div className="ax-toasts bottom-right"><div className="ax-toast success" role="status" key={toast.id} style={{ alignItems: "center" }}><i className="ax-toast-ic" aria-hidden="true"></i><div className="ax-toast-b"><div className="ax-toast-t">{toast.title}</div>{toast.body ? <div className="ax-toast-m">{toast.body}</div> : null}</div><button className="ax-toast-x" aria-label="Close" onClick={() => setToast(null)}><i className="bi bi-x-lg"></i></button></div></div> : null}
     </main>);
 }
 
@@ -230,7 +230,7 @@ function EditOrderPanel({ child, form, title, inPerson, onSave, onClose, orderEd
           {tab === "doc" ? <React.Fragment>
             <F label="Name on Document or Entity"><In v={d.nameOnDoc} on={(v) => set({ nameOnDoc: v })} ph="Enter name on document" /></F>
             <div className="fg2">
-              <F label="Document Type" req><Sel v={d.docType} on={(v) => set({ docType: v, docDesc: "" })} opts={Object.keys(window.DOC_TYPES)} ph="Select document type" /></F>
+              <F label="Document Type" req><Sel v={d.docType} on={(v) => { const o = window.DOC_TYPES[v] || []; set({ docType: v, docDesc: v === d.docType ? d.docDesc : o.includes(d.docDesc) ? d.docDesc : o.length === 1 ? o[0] : "" }); }} opts={Object.keys(window.DOC_TYPES)} ph="Select document type" /></F>
               <F label="Document Description" req>{d.docType === "Other" ? <In v={d.docDesc} on={(v) => set({ docDesc: v })} ph="Enter description" /> : <Sel v={d.docDesc} on={(v) => set({ docDesc: v })} opts={descOpts} ph={d.docType ? "Select description" : "Select type first"} />}</F>
             </div>
             <F label="Destination Country" req><Sel v={d.destCountry} on={(v) => set({ destCountry: v })} opts={window.DEST_COUNTRIES} ph="Select Country" /></F>

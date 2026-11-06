@@ -150,3 +150,6 @@
 
 .co-drawer{max-width:100vw}
 @media(max-width:640px){.co-drawer{width:100vw!important;max-width:100vw}.co-drawer>div:nth-child(1){padding:var(--ax-space-3) var(--ax-space-4)!important}.co-drawer>div:nth-child(2){padding:var(--ax-space-4)!important}.co-drawer>div:nth-child(3){display:grid!important;grid-template-columns:1fr 1fr;gap:var(--ax-space-3)!important;padding:var(--ax-space-3) var(--ax-space-4)!important}.co-drawer>div:nth-child(3) .ax-btn{width:100%;min-width:0;justify-content:center;white-space:normal;text-align:center}.co-pb .rgrid3,.co-pb .fgrid{grid-template-columns:minmax(0,1fr)!important}.co-pb .fgrid>*{grid-column:auto!important}.co-pb .rcpt-card{padding:var(--ax-space-4)}}
+
+.ax-toast-m{font-size:.875rem;line-height:1.4;margin-top:2px;font-weight:400}
+.co-ib.del:disabled{opacity:.4;cursor:not-allowed}
