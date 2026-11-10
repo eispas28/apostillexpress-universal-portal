@@ -2839,7 +2839,8 @@ function ConfirmationScreen({ form, onDone }) {
   const showQR = (isWalkIn || isMailIn) && !!window.qrcode;
   const brbC = !!window.AX_BRB && walkCount > 0;
   const bsC = (k) => brbC && mixed ? perItemFees.reduce((t, f, ix) => itemWalk(items[ix]) ? t : t + f[k], 0) : sumFee(k);
-  const paperCopy = items.some((i) => i.child && i.deliveryMethod === "traditional");
+  const paperCopy = items.some((i) => (i.deliveryMethod || form.deliveryMethod) === "traditional" || (i.deliveryMethod || form.deliveryMethod) === "both" || i.both) || form.deliveryMethod === "traditional" || form.deliveryMethod === "both";
+  const paperN = items.filter((i) => { const m = i.deliveryMethod || form.deliveryMethod; return m === "traditional" || m === "both"; }).length || items.length;
   const [notice, setNotice] = useState((!!window.AX_BRB && walkCount > 0) || paperCopy || isMailIn);
   const [dlBusy, setDlBusy] = useState(false);
   const downloadAll = () => { if (dlBusy) return; setDlBusy(true); openDeliveryForms(form); setTimeout(() => { setDlBusy(false); setNotice(false); }, 1600); };
@@ -2851,7 +2852,7 @@ function ConfirmationScreen({ form, onDone }) {
         <div style={{ padding: "var(--ax-space-6) var(--ax-space-8)", color: "var(--ax-text-secondary, #495057)", fontSize: "var(--ax-text-md)", lineHeight: 1.5, display: "grid", gap: "var(--ax-space-4)" }}>
           <p style={{ margin: 0 }}>Please download the delivery forms.</p><p style={{ margin: "var(--ax-space-3) 0 0" }}>{isMailIn ? "Print each form and include it with your original documents when you mail them to the Competent Authority. The QR code on the form lets staff find your order at check-in." : "Print each form and bring it with your original documents to your appointment. The QR code on the form lets staff find your order at check-in."}</p>
         </div>
-        <div className="modal-foot" style={{ padding: "var(--ax-space-4) var(--ax-space-8) var(--ax-space-5)", borderTop: "1px solid #DEE2E6" }}><Button variant="primary" size="md" disabled={dlBusy} onClick={downloadAll}>{dlBusy ? <DSSpinner size={16} thickness={2} color="#fff" style={{ marginRight: "var(--ax-space-2)" }} /> : <i className="bi bi-download" style={{ marginRight: "var(--ax-space-2)" }}></i>}{dlBusy ? "Preparing forms…" : "Download All Delivery Forms" + (walkCount > 0 ? " (" + walkCount + ")" : "")}</Button></div>
+        <div className="modal-foot" style={{ padding: "var(--ax-space-4) var(--ax-space-8) var(--ax-space-5)", borderTop: "1px solid #DEE2E6" }}><Button variant="primary" size="md" disabled={dlBusy} onClick={downloadAll}>{dlBusy ? <DSSpinner size={16} thickness={2} color="#fff" style={{ marginRight: "var(--ax-space-2)" }} /> : <i className="bi bi-download" style={{ marginRight: "var(--ax-space-2)" }}></i>}{dlBusy ? "Preparing forms…" : "Download All Delivery Forms (" + (walkCount > 0 ? walkCount : paperN) + ")"}</Button></div>
       </div></div> : null}
       <div className="conf-head">
         <div>
@@ -2880,8 +2881,8 @@ function ConfirmationScreen({ form, onDone }) {
           <React.Fragment>Send your documents to the Issuing Authority. Please see the <a href="#delivery" onClick={(e) => e.preventDefault()}>Delivery Form</a> for more information.</React.Fragment>}
         </span>
         </span>
-        {!isElectronic || walkCount > 0 ? (
-        <span className="ab-btn"><Button variant="primary" onClick={() => openDeliveryForms(form)}><i className="bi bi-download" style={{ marginRight: "var(--ax-space-2)" }}></i>Download Delivery Form ({walkCount > 0 ? walkCount : items.length})</Button></span>
+        {!isElectronic || walkCount > 0 || paperCopy ? (
+        <span className="ab-btn"><Button variant="primary" onClick={() => openDeliveryForms(form)}><i className="bi bi-download" style={{ marginRight: "var(--ax-space-2)" }}></i>Download All Delivery Forms ({walkCount > 0 ? walkCount : paperN})</Button></span>
         ) : null}
       </div>
       <div className="auth-card">
