@@ -153,3 +153,5 @@
 
 .ax-toast-m{font-size:.875rem;line-height:1.4;margin-top:2px;font-weight:400}
 .co-ib.del:disabled{opacity:.4;cursor:not-allowed}
+
+@media(max-width:640px){.co-drawer>div:last-child{display:flex!important;flex-direction:column-reverse;align-items:stretch;gap:var(--ax-space-3)!important;padding:var(--ax-space-3) var(--ax-space-4)!important}.co-drawer>div:last-child>.ax-btn,.co-drawer>div:last-child>button{width:100%!important;flex:0 0 auto!important;min-width:0!important;max-width:100%;justify-content:center;white-space:normal!important;text-align:center;margin:0!important}}
