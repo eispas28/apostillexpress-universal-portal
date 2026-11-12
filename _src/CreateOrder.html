@@ -521,6 +521,9 @@ body{font-family:var(--ax-font-base);color:var(--ax-text-primary);background:var
 .tinput.err:focus,.tselect.err:focus{border-color:#F04438;box-shadow:0 0 0 4px rgba(240,68,56,.25)}
 .tinput::placeholder,.tsearch input::placeholder,.searchbox input::placeholder{color:var(--ax-gray-600)}
 .tinput:disabled,.tselect:disabled{background:var(--ax-surface-disabled);cursor:not-allowed}
+.cbanner-x.cb-dark{background:#343A40!important;border-color:#343A40!important}.cbanner-x.cb-dark,.cbanner-x.cb-dark span,.cbanner-x.cb-dark li,.cbanner-x.cb-dark div,.cbanner-x.cb-dark i,.cbanner-x.cb-dark b{color:#fff!important}
+.cbanner-x.cb-blue.cb-intl{border-radius:0.375rem!important;border:1px solid #E7F1FF!important;background:rgba(231,241,255,.4)!important}
+.cbanner-x.cb-blue.cb-intl,.cbanner-x.cb-blue.cb-intl span,.cbanner-x.cb-blue.cb-intl div,.cbanner-x.cb-blue.cb-intl i,.cbanner-x.cb-blue.cb-intl b,.cbanner-x.cb-blue.cb-intl li{color:#343A40!important}
 .cbanner-x.cb-blue{background:#E7F1FF!important;border-color:#B6D4FE!important}.cbanner-x.cb-blue span,.cbanner-x.cb-blue div,.cbanner-x.cb-blue i,.cbanner-x.cb-blue b{color:#084298!important}
 .cbanner-x.elig li,.cbanner-x.elig li *,.cbanner-x.elig a,.cbanner-x.elig a *{color:#664D03}.cbanner-x.elig .ib-title,.cbanner-x.elig .ib-title *{color:#664D03EB}.cbanner-x.elig span,.cbanner-x.elig strong{color:#664D03!important}.cbanner-x.elig .ib-title,.cbanner-x.elig .ib-title *{color:#664D03EB!important}
 @media (max-width:1100px){.draft-bar{display:none!important}.draft-clone{display:block;margin:0 0 1.25rem}.draft-clone{width:100%}.draft-clone button{width:100%!important;display:flex!important;justify-content:center;box-sizing:border-box}}@media (min-width:1101px){.draft-clone{display:none}}@media (max-width:640px){.pv-modal{width:calc(100vw - 1.5rem);height:calc(100dvh - 1.5rem);border-radius:var(--ax-radius-xl)}.pv-head{padding:var(--ax-space-4) var(--ax-space-5);gap:var(--ax-space-3)}.pv-head h2{font-size:var(--ax-h5)}.pv-head p{font-size:var(--ax-text-sm);margin-top:var(--ax-space-1)}.pv-toolbar{padding:var(--ax-space-3);gap:var(--ax-space-2)}.pv-tname{width:100%}.pv-tname span:first-child{flex:1;min-width:0}.pv-tools{width:100%;gap:var(--ax-space-2);justify-content:space-between;flex-wrap:nowrap}.pv-fit{display:none}.pv-ic{width:1.875rem;height:2rem}.pv-readout{min-width:2.5rem;padding:0 var(--ax-space-1)}.pv-hint{left:0.5rem;right:0.5rem;bottom:0.5rem;justify-content:center;font-size:0.75rem}.pv-note{left:0.5rem;right:0.5rem;bottom:2.75rem;justify-content:center;text-align:center}.pv-foot{padding:var(--ax-space-4)}.pv-foot>div:first-child{display:none}.pv-foot-actions{flex-direction:column-reverse;width:100%}.pv-foot-actions .ax-btn{width:100%;justify-content:center}}@media(max-width:820px){.tm{overflow-y:auto;max-height:calc(100dvh - 2rem);-webkit-overflow-scrolling:touch}.tm-body{grid-template-rows:none;grid-auto-rows:auto}.tm-card{grid-template-rows:none;grid-row:auto;display:flex;flex-direction:column}}.tm{overflow-y:auto;max-height:calc(100dvh - 2rem);-webkit-overflow-scrolling:touch}.modal.tm{overflow-y:auto;overflow-x:hidden;max-height:calc(100dvh - 2rem);overscroll-behavior:contain}.modal.tm>.tm-head,.modal.tm>.tm-body{flex-shrink:0}</style>
@@ -859,7 +862,7 @@ const FULFILMENT = [
 { id: "usps", title: "Mailed to the provided address via USPS", sub: "No tracking provided" },
 { id: "prepaid-label", title: "Pre-paid Shipping Label", sub: "Enter your tracking number below" },
 { id: "prepaid-envelope", title: "Pre-paid Envelope", sub: "Include your pre-paid envelope with your documents" },
-{ id: "international", title: "International Shipping", sub: "" }];
+{ id: "international", title: "International Shipping", sub: "$10.00" }];
 
 
 function FulfilmentCard({ form, update }) {
@@ -877,6 +880,9 @@ function FulfilmentCard({ form, update }) {
               <div className="rcard-sub">{f.sub}</div>
             </div>
           </div>
+          {f.id === "international" && form.fulfilmentType === "international" ?
+        <Banner kind="info" className="cb-blue cb-intl" style={{ marginTop: "0", marginLeft: "calc(-1 * var(--ax-space-1))" }}><span><span className="ib-title">International shipments are handled by U.S. Mail Service.</span><ul style={{ margin: "var(--ax-space-1) 0 0", paddingLeft: "1.25rem" }}><li>No tracking number</li><li>No signature</li><li>No proof of delivery</li></ul></span></Banner> :
+        null}
           {f.id === "prepaid-label" && form.fulfilmentType === "prepaid-label" ?
         <div className="fopt-track">
               <label className="flabel">Tracking number <span className="req">*</span></label>
