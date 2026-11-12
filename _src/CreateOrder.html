@@ -548,6 +548,7 @@ body{font-family:var(--ax-font-base);color:var(--ax-text-primary);background:var
 <script src="ax-flags.js?v=14"></script>
 <script src="tiff-support.js"></script>
 <script type="text/babel" src="ax-overlays.jsx"></script>
+<script src="mail-source.js"></script>
 <script type="text/babel" src="copy-order.jsx"></script>
 <script type="text/babel" src="format-modal.jsx"></script>
 <script type="text/babel">
@@ -2181,6 +2182,7 @@ function MailingInfo({ form, update, onCancel, onPrevious, onContinue }) {
   const addressMandatory = form.fulfilmentType === "usps" || form.fulfilmentType === "international";
   const [addressOpen, setAddressOpen] = useState(addressMandatory);
   const [errors, setErrors] = useState({});
+  const [mSrc, setMSrc] = useState(form.mailingSrc || null);
 
   const profileApplied = PROFILE_FIELDS.some((k) => m[k] === USER_PROFILE[k] && USER_PROFILE[k]);
   const isEmpty = PROFILE_FIELDS.every((k) => !m[k]) && !m.addr1 && !m.addr2 && !m.country && !m.state && !m.city && !m.zip;
@@ -2228,10 +2230,7 @@ function MailingInfo({ form, update, onCancel, onPrevious, onContinue }) {
       <p className="page-sub ax-text-body-md">Provide details for who will receive the documents.</p>
 
       <div className="card s2-card">
-        <div className="actionbar">
-          <Button variant="primary" size="md" disabled={profileApplied} onClick={useProfile}>Use My Profile Information</Button>
-          <button className="linkbtn" disabled={isEmpty} onClick={clearFields}>Clear Fields</button>
-        </div>
+        <window.MailSourcePicker value={mSrc} customer={form.customer} onPick={(s, p) => {setMSrc(s);update((f) => ({ mailingSrc: s, mailing: { ...f.mailing, ...p } }));setAddressOpen(true);setErrors({});}} />
 
         <div className="fgrid">
           <TextField label="First Name" required value={m.firstName} onChange={(v) => set({ firstName: v })} placeholder="Enter first name" error={errors.firstName} />
@@ -3214,8 +3213,8 @@ function App() {
     const c = copyCtx, f = form, root = c.parentItems[0];
     const newItems = kids.flatMap((k) => c.parentItems.flatMap((pi, j) => {
       const id = k.id + (j ? "-f" + j : ""), dig = !!k.digital;
-      const d = { ...pi, id, docId: docNo(id), name: k.file ? k.file.name.replace(/\.[^.]+$/, "") : k.docDesc || pi.name, docDesc: k.docDesc || pi.docDesc, child: true, copyOf: "Document " + c.parentNo, parentId: root.id, copy: k, deliveryMethod: dig ? "electronic" : "traditional", adoption: !!k.adoption, both: !!c.isBoth, fulfilmentType: dig ? (c.isBoth ? pi.fulfilmentType || f.fulfilmentType || "" : "") : (c.inPerson ? "" : (pi.fulfilmentType || f.fulfilmentType || "usps")) };
-      return c.isBoth ? [d, { ...d, id: id + "-p", docId: docNo(id + "-p"), deliveryMethod: "traditional", fulfilmentType: f.fulfilmentType || "usps" }] : [d];
+      const d = { ...pi, id, docId: docNo(id), name: k.file ? k.file.name.replace(/\.[^.]+$/, "") : k.docDesc || pi.name, docDesc: k.docDesc || pi.docDesc, child: true, copyOf: "Document " + c.parentNo, parentId: root.id, copy: k, deliveryMethod: dig ? "electronic" : "traditional", adoption: !!k.adoption, both: !!c.isBoth, fulfilmentType: dig ? (c.isBoth ? k.fulfilmentType || pi.fulfilmentType || f.fulfilmentType || "" : "") : (c.inPerson ? "" : (k.fulfilmentType || pi.fulfilmentType || f.fulfilmentType || "usps")) };
+      return c.isBoth ? [d, { ...d, id: id + "-p", docId: docNo(id + "-p"), deliveryMethod: "traditional", fulfilmentType: k.fulfilmentType || f.fulfilmentType || "usps" }] : [d];
     }));
     const merged = [...(form.apostilles || []), ...(c.item ? [] : c.parentAll), ...newItems].slice(0, 35);
     const paper = c.isBoth || !c.digital;
@@ -3322,7 +3321,7 @@ function App() {
 
 }
 
-Object.assign(window, { PreviewModal, fmtSize, USER_PROFILE, PROFILE_ADDRESS, COUNTRIES, StateField, FULFILMENT, FulfilmentCard, DeleteOrderModal, ReturnAddressSection, RecipientForm, blankRecipient, AddressBlock, PreviewModal, DOC_TYPES, DEST_COUNTRIES, fmtSize, docNo });
+Object.assign(window, { PreviewModal, fmtSize, USER_PROFILE, PROFILE_ADDRESS, RadioCard, COUNTRIES, StateField, FULFILMENT, FulfilmentCard, DeleteOrderModal, ReturnAddressSection, RecipientForm, blankRecipient, AddressBlock, PreviewModal, DOC_TYPES, DEST_COUNTRIES, fmtSize, docNo });
 ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 </script>
 <script>(function(){function sync(){var bar=document.querySelector(".draft-bar button"),sub=document.querySelector("main.page > .page-sub"),c=document.querySelector(".draft-clone");if(!bar||!sub){if(c)c.remove();return}if(c&&c.previousElementSibling===sub)return;if(c)c.remove();c=document.createElement("div");c.className="draft-clone";var b=bar.cloneNode(true);b.onclick=function(){var o=document.querySelector(".draft-bar button");o&&o.click()};c.appendChild(b);sub.after(c)}new MutationObserver(sync).observe(document.body,{childList:true,subtree:true});sync()})()</script></body>
