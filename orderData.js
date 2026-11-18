@@ -157,8 +157,8 @@
       parent("710-350-000", "04/20/2026", bigKids),
       // Walk-In (Appointment): submitted without payment → Draft until the CA completes it at the counter
       parent("711-450-120", "04/24/2026", [
-        child("711-450-120-01", "paper-to-digital", "Draft", { placedOn: "04/24/2026", ref: "RO711" }),
-        child("711-450-120-02", "paper-to-paper", "Draft", { placedOn: "04/24/2026", ref: "RO711" })
+        child("711-450-120-01", "paper-to-digital", "Incomplete", { placedOn: "04/24/2026", ref: "RO711" }),
+        child("711-450-120-02", "paper-to-paper", "Incomplete", { placedOn: "04/24/2026", ref: "RO711" })
       ], { orderOption: "walkin", payment: { method: "walkin", brand: "", last4: "" } }),
       // 1 — New: all children New
       parent("701-100-200", "04/02/2026", [
@@ -231,7 +231,7 @@
     // Walk-In (Appointment) orders stay in Draft until the CA submits them.
     list.forEach(function (o) {
       if (o.orderOption !== "walkin") return;
-      (o.children || []).forEach(function (c) { if (!c.status || c.status === "New") c.status = "Draft"; });
+      (o.children || []).forEach(function (c) { if (!c.status || c.status === "New") c.status = "Incomplete"; else if (c.status === "Draft") c.status = "Incomplete"; });
     });
     // Canonical numbering: parent = digits only (shown as #<digits>); each child
     // = <7 digits>-<6 digits>_<4-digit sequence from 0001>; parent = <STATE CODE>-<7>-<6> (e.g. DM-3638286-460082, child 3638286-460082_0001).
@@ -265,7 +265,9 @@
   // Revoked & Cancelled, Rejected, Cancelled. Paper group: New, In Process,
   // Cancelled, Rejected, Reissued, Revoked & Cancelled, Pending Print, Printed.
   var STATUS_META = {
-    "Draft": { cls: "draft" },
+    "Incomplete": { cls: "incomplete" },
+    "Draft": { cls: "incomplete" },
+    "Incomplete": { cls: "incomplete" },
     "New": { cls: "new" },
     "In Process": { cls: "pending" },
     "Pending Print": { cls: "pending" },
@@ -291,6 +293,8 @@
   // customer-facing labels. Internal status keys are kept for banner +
   // action-matrix logic; only the displayed label is mapped.
   var UNIVERSAL_MAP = {
+    "Draft": "Incomplete",
+    "Incomplete": "Incomplete",
     "Flagged": "In Process",
     "Pending Print": "Issued",
     "Printed": "Issued",
@@ -320,7 +324,7 @@
   // addRecipient, resend, downloadApostille }. deleteRecipient additionally
   // respects a minimum of one recipient (enforced at the component level).
   function permissions(status, deliveryFlow) {
-    if (status === "Draft") status = "New"; // Draft (Walk-In) is editable like New
+    if (status === "Incomplete") status = "New"; // Draft (Walk-In) is editable like New
     var group = matrixGroup(deliveryFlow);
     var p;
     if (group === "paper") {
@@ -350,7 +354,7 @@
     var status = child.status;
     var isPaper = matrixGroup(child.deliveryFlow) === "paper";
     switch (status) {
-      case "Draft":
+      case "Incomplete":
         return { kind: "info", icon: "bi-info-circle-fill", title: "Submitted In-Person Appointment", body: "Bring your printed delivery form and original documents. Your order shows as Incomplete until your appointment, where payment will be collected." };
       case "New":
         return null;
@@ -407,7 +411,7 @@
     if (anyFlagged && !allFlagged) return "In Review";             // 0.2 — a flag on a subset escalates the whole order
 
     // Step 1 — uniform (all children share one status)
-    if (all("Draft")) return "Incomplete";                              // Walk-In (Appointment) awaiting the CA
+    if (all("Incomplete")) return "Incomplete";                              // Walk-In (Appointment) awaiting the CA
     if (all("New")) return "New";                                  // 3
     if (all("In Process")) return "In Process";                    // 4
     if (allFlagged) return "Flagged";                              // 5
@@ -435,7 +439,7 @@
   // Badge color class for a parent Customer Status.
   //   new (blue/teal) · pending (yellow) · issued (green) · cancelled/rejected/revoked (red)
   var PARENT_META = {
-    "Draft": "draft",
+    "Incomplete": "draft",
     "Incomplete": "incomplete",
     "New": "new",
     "In Process": "pending", "In Review": "pending", "Pending Print": "pending", "Flagged": "pending",

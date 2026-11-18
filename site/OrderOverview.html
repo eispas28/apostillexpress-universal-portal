@@ -241,10 +241,10 @@ function App() {
   }, [order.children, sort]);
 
   const isWalkIn = order.orderOption === "walkin";
-  const mixedWalk = order.orderOption === "mixed" && (order.children || []).some((c) => c.status === "Draft");
+  const mixedWalk = order.orderOption === "mixed" && (order.children || []).some((c) => c.status === "Incomplete");
   const showQR = isWalkIn || mixedWalk || paperCount > 0;
   const formCount = isWalkIn ? Math.max((order.children || []).length, 1) : paperCount;
-  const wiBanner = isWalkIn || mixedWalk ? AXOrders.banner({ status: "Draft", deliveryFlow: ((order.children || [])[0] || {}).deliveryFlow }) : null;
+  const wiBanner = isWalkIn || mixedWalk ? AXOrders.banner({ status: "Incomplete", deliveryFlow: ((order.children || [])[0] || {}).deliveryFlow }) : null;
   const qrCap = isWalkIn || mixedWalk ? "Show this code at your appointment" : "Include with your documents";
   return (
     <div>
@@ -282,7 +282,7 @@ function App() {
             <div className="pay-field">
               <div className="lbl">Documents</div>
               <div className="doc-grid">
-                <DocRow name="Order Receipt.pdf" size="45 KB" onDone={setToast} />
+                {parentStatus !== "Incomplete" ? <DocRow name="Order Receipt.pdf" size="45 KB" onDone={setToast} /> : null}
                 {formCount > 0 ? <DocRow name={"All Delivery Forms (" + formCount + ").pdf"} size="45 KB" onDone={setToast} /> : null}
               </div>
             </div>

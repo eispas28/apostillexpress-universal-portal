@@ -524,7 +524,7 @@ function ResendModal({ recipients, onClose, onConfirm }) {
 
 function Banner({ child, onDownload, downloading }) {
   const b = AXOrders.banner(child);
-  if (!b || child.status === "Draft") return null;
+  if (!b || child.status === "Incomplete") return null;
   return (
     <div className={"banner " + b.kind + (b.adobeNotice ? " dl" : "")}>
       <div className="banner-main">
@@ -681,7 +681,7 @@ function App() {
 
   const group = AXOrders.matrixGroup(deliveryFlow);
   const baseStatuses = group === "paper" ? AXOrders.STATUSES_PAPER : AXOrders.STATUSES_DIGITAL;
-  const validStatuses = order.orderOption === "walkin" ? ["Draft"].concat(baseStatuses) : baseStatuses;
+  const validStatuses = order.orderOption === "walkin" ? ["Incomplete"].concat(baseStatuses) : baseStatuses;
   useEffect(() => {
     if (validStatuses.indexOf(status) === -1) setStatus(validStatuses[0]);
   }, [deliveryFlow]);

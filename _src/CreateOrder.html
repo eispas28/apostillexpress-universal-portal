@@ -530,7 +530,7 @@ body{font-family:var(--ax-font-base);color:var(--ax-text-primary);background:var
 <link rel="stylesheet" href="ax-responsive.css?v=15">
 <link rel="stylesheet" href="copy-order.css?v=15">
 <script src="./ax-mobile-nav.js?v=14" defer></script>
-<script src="ax-loading.js?v=16"></script>
+<script src="ax-loading.js?v=17"></script>
 </head>
 <body>
 <template id="__bundler_thumbnail">
@@ -2549,7 +2549,7 @@ function PaymentScreen({ form, update, goTo, onCancel, onPrevious, onSubmit, sho
       ch.returnAddress = needsReturn ? returnAddressForOrder : null;
       if (itemWalk(it)) {
         const iEl = (it.deliveryMethod || form.deliveryMethod) === "electronic";
-        ch.status = "Draft";
+        ch.status = "Incomplete";
         ch.orderOption = iEl ? "Walk-In (Online)" : "Walk-In (Appointment)";
         ch.appointmentAcknowledged = true;
         ch.bringOriginals = iEl;

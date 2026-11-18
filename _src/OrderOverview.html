@@ -151,7 +151,7 @@ a.crumb:hover{color:var(--ax-text-primary);background:var(--ax-gray-100)}
 </style>
 <link rel="stylesheet" href="ax-responsive.css?v=15">
 <script src="./ax-mobile-nav.js?v=14" defer></script>
-<script src="ax-loading.js?v=16"></script>
+<script src="ax-loading.js?v=17"></script>
 </head>
 <body>
 <div id="root"></div>
@@ -227,7 +227,7 @@ function OrderQR({ value, size = 88 }) {
 const BUSY = ["In Process", "Pending Print", "Printed", "Issued", "Flagged"];
 const CX_REASONS = ["Ordered by mistake", "Duplicate order", "Incorrect documents", "Incorrect issuing state or service", "No longer needed", "Other"];
 function CancelModal({ order, allRows, onKeep, onConfirm }) {
-  const isElig = (c) => c.status === "New" || c.status === "Draft";
+  const isElig = (c) => c.status === "New" || c.status === "Incomplete";
   const rows = allRows.filter(isElig);
   const blocked = allRows.filter((c) => !isElig(c) && BUSY.includes(c.status)).length;
   const [sel, setSel] = useState(() => new Set());
@@ -258,7 +258,7 @@ function CancelModal({ order, allRows, onKeep, onConfirm }) {
                 <tr key={c.number} className={el ? "" : "dis"} onClick={() => el && toggle(c.number)}>
                   <td><input className="cx-cb" type="checkbox" disabled={!el} checked={el && sel.has(c.number)} onChange={() => toggle(c.number)} onClick={(e) => e.stopPropagation()} aria-label={"Select " + c.number} /></td>
                   <td style={{ fontWeight: 700 }}>#{c.number}</td><td>{isPaper(c) ? "Paper" : "Digital"}</td><td>{c.issuingState}</td><td>{c.serviceType}</td>
-                  <td><span className={"sbadge " + AXOrders.universalClass(c.status)}>{AXOrders.universalLabel(c.status === "Draft" ? "New" : c.status)}</span></td>
+                  <td><span className={"sbadge " + AXOrders.universalClass(c.status)}>{AXOrders.universalLabel(c.status)}</span></td>
                 </tr>); })}</tbody>
             </table></div>
             <div className="cx-foot-sel"><span className="cx-count">{picked.length}</span><span style={{ flex: 1 }}>Document(s) selected</span><button className="cx-lnk" onClick={() => setSel(new Set(rows.map((c) => c.number)))}>Select All</button><button className="cx-lnk" onClick={() => setSel(new Set())}><i className="bi bi-x-lg"></i> Clear Selection</button></div>
@@ -285,7 +285,7 @@ function App() {
   const [cxToast, setCxToast] = useState(null);
   const order = React.useMemo(() => Object.assign({}, baseOrder, { children: baseOrder.children.map((c) => cancelled.includes(c.number) ? Object.assign({}, c, { status: "Cancelled" }) : c) }), [baseOrder, cancelled]);
   const parentStatus = AXOrders.parentStatus(order.children);
-  const cxRows = order.children.filter((c) => c.status === "New" || c.status === "Draft");
+  const cxRows = order.children.filter((c) => c.status === "New" || c.status === "Incomplete");
   const canCancel = cxRows.length > 0;
   const noCancelBanner = !canCancel && order.children.some((c) => ["In Process", "Pending Print", "Printed", "Issued", "Flagged"].includes(c.status));
   useEffect(() => { if (!cxToast) return; const t = setTimeout(() => setCxToast(null), 6000); return () => clearTimeout(t); }, [cxToast]);
@@ -321,10 +321,10 @@ function App() {
   }, [order.children, sort]);
 
   const isWalkIn = order.orderOption === "walkin";
-  const mixedWalk = order.orderOption === "mixed" && (order.children || []).some((c) => c.status === "Draft");
+  const mixedWalk = order.orderOption === "mixed" && (order.children || []).some((c) => c.status === "Incomplete");
   const showQR = isWalkIn || mixedWalk || paperCount > 0;
   const formCount = isWalkIn ? Math.max((order.children || []).length, 1) : paperCount;
-  const wiBanner = isWalkIn || mixedWalk ? AXOrders.banner({ status: "Draft", deliveryFlow: ((order.children || [])[0] || {}).deliveryFlow }) : null;
+  const wiBanner = isWalkIn || mixedWalk ? AXOrders.banner({ status: "Incomplete", deliveryFlow: ((order.children || [])[0] || {}).deliveryFlow }) : null;
   const qrCap = isWalkIn || mixedWalk ? "Show this code at your appointment" : "Include with your documents";
   return (
     <div>
@@ -361,7 +361,7 @@ function App() {
             <div className="pay-field">
               <div className="lbl">Documents</div>
               <div className="doc-grid">
-                <DocRow name="Order Receipt.pdf" size="45 KB" onDone={setToast} />
+                {parentStatus !== "Incomplete" ? <DocRow name="Order Receipt.pdf" size="45 KB" onDone={setToast} /> : null}
                 {formCount > 0 ? <DocRow name={"All Delivery Forms (" + formCount + ").pdf"} size="45 KB" onDone={setToast} /> : null}
               </div>
             </div>
